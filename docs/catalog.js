@@ -41,7 +41,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "8GB LPDDR5-4800 MT/s (Soldered Onboard, Single-Channel, Non-Upgradable)",
     "ports_io": "2x USB-C 3.2 Gen 1 (Power Delivery & DP 1.4), 1x USB-A 3.2 Gen 1, 1x MicroSD Slot, 3.5mm Headphone Jack",
     "webcam_biometrics": "1080p FHD Webcam with Physical Privacy Shutter; Dual Array Mics; No Fingerprint/IR",
-    "thermals_acoustics": "Single Active Heatpipe Blower Fan, Whisper-Quiet (<28 dBA at full load)"
+    "thermals_acoustics": "Single Active Heatpipe Blower Fan, Whisper-Quiet (<28 dBA at full load)",
+    "stores": [
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/lenovo-ideapad-slim-3i-chromebook-plus-14-fhd-laptop-intel-core-i3-n305-8gb-memory-128gb-emmc-abyss-blue/6550736.p",
+        "badge": "In Stock & Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Lenovo Official",
+        "url": "https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/ideapad-slim-3i-chromebook-plus-gen-8-14-inch-intel/len101i0088",
+        "badge": "Direct OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+IdeaPad+Slim+3i+Chromebook+Plus+14",
+        "badge": "Prime Shipping",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+IdeaPad+Slim+3i+Chromebook+Plus",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Walmart",
+        "url": "https://www.walmart.com/search?q=Lenovo+IdeaPad+Slim+3i+Chromebook+Plus",
+        "badge": "Rollback Deal",
+        "icon": "\ud83d\uded2"
+      }
+    ]
   },
   {
     "id": "c-acer-aspire-3",
@@ -84,7 +116,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "16GB LPDDR5-5500 MT/s (Dual-Channel Soldered, Low-Power High-Bandwidth, Non-Upgradable)",
     "ports_io": "1x USB-C 3.2 Gen 2, 2x USB-A 3.2 Gen 1, 1x HDMI 2.1 (Up to 4K @ 60Hz), 3.5mm Headphone Jack, Barrel Power",
     "webcam_biometrics": "720p HD Webcam with Acer PurifiedVoice Temporal Noise Reduction; No Windows Hello",
-    "thermals_acoustics": "Single Blower Fan with Rear Exhaust, Balanced Acoustic Profile (~32 dBA under load)"
+    "thermals_acoustics": "Single Blower Fan with Rear Exhaust, Balanced Acoustic Profile (~32 dBA under load)",
+    "stores": [
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/dp/B0BS4BP8FB",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Acer Official",
+        "url": "https://store.acer.com/en-us/laptops/aspire",
+        "badge": "Direct OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Acer+Aspire+3+Ryzen+5",
+        "badge": "Store Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Acer+Aspire+3+A315-24P",
+        "badge": "Verified Seller",
+        "icon": "\ud83d\udcbb"
+      },
+      {
+        "store": "Walmart",
+        "url": "https://www.walmart.com/search?q=Acer+Aspire+3+A315-24P",
+        "badge": "Value Deal",
+        "icon": "\ud83d\uded2"
+      }
+    ]
   },
   {
     "id": "c-macbook-air-m2",
@@ -127,7 +191,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "8GB Unified Memory (LPDDR5-6400, Shared CPU/GPU Unified Pool, 100GB/s Bandwidth, Soldered)",
     "ports_io": "2x Thunderbolt 3 / USB4 (Up to 40Gbps), 1x MagSafe 3 Charging Port, 1x 3.5mm Jack with High-Impedance Headphone Support",
     "webcam_biometrics": "1080p FaceTime HD Camera with Advanced Image Signal Processor; Touch ID Fingerprint Sensor on Keyboard",
-    "thermals_acoustics": "Fanless Passive Cooling (Zero Acoustic Noise, 0.0 dBA completely silent under all workloads)"
+    "thermals_acoustics": "Fanless Passive Cooling (Zero Acoustic Noise, 0.0 dBA completely silent under all workloads)",
+    "stores": [
+      {
+        "store": "Apple Official",
+        "url": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-m2",
+        "badge": "Official Apple Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/dp/B0B3C57XLR",
+        "badge": "Prime Deal",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/apple-macbook-air-13-6-laptop-m2-chip-8gb-memory-256gb-ssd-midnight/6509650.p",
+        "badge": "Totaltech & Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+MacBook+Air+13+M2",
+        "badge": "Payboo 0% Tax",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Costco",
+        "url": "https://www.costco.com/CatalogSearch?keyword=MacBook+Air+M2",
+        "badge": "Member Warranty",
+        "icon": "\ud83d\udcb3"
+      }
+    ]
   },
   {
     "id": "c-macbook-air-m3-16",
@@ -170,7 +266,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "16GB Unified Memory (LPDDR5-6400 Unified Memory Architecture, Soldered, High-Efficiency Multi-Tasking)",
     "ports_io": "2x Thunderbolt / USB4 (40Gbps), 1x MagSafe 3 Fast-Charging (0 to 50% in 30 min), 3.5mm Studio Jack",
     "webcam_biometrics": "1080p FaceTime HD Camera with Computational Video; Touch ID Integrated Power Key",
-    "thermals_acoustics": "Fanless Passive Thermal Architecture (100% Zero Noise, 0.0 dBA Silent Operation)"
+    "thermals_acoustics": "Fanless Passive Thermal Architecture (100% Zero Noise, 0.0 dBA Silent Operation)",
+    "stores": [
+      {
+        "store": "Apple Official",
+        "url": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-m3",
+        "badge": "Official Apple Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/dp/B0CX23V2ZP",
+        "badge": "Prime 1-Day",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=MacBook+Air+13+M3+16GB",
+        "badge": "Same-Day Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=MacBook+Air+13+M3+16GB",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=macbook+air+m3+16gb",
+        "badge": "VIP Rewards",
+        "icon": "\ud83d\udcf8"
+      }
+    ]
   },
   {
     "id": "c-asus-zenbook-14-oled",
@@ -213,7 +341,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "16GB LPDDR5X-7467 MT/s (Ultra High-Speed Low-Latency Soldered, Dual-Channel)",
     "ports_io": "2x Thunderbolt 4 (DisplayPort / Power Delivery 40Gbps), 1x USB-A 3.2 Gen 1, 1x HDMI 2.1 TMDS, 3.5mm Combo Jack",
     "webcam_biometrics": "1080p FHD IR Camera with Windows Hello Facial Recognition & Ambient Light Sensor; Physical Camera Privacy Shutter",
-    "thermals_acoustics": "ASUS IceBlade Dual Heatpipe Thermal System with Whisper Mode (<22 dBA in Whisper, 36 dBA in Performance)"
+    "thermals_acoustics": "ASUS IceBlade Dual Heatpipe Thermal System with Whisper Mode (<22 dBA in Whisper, 36 dBA in Performance)",
+    "stores": [
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/asus-zenbook-14-oled-14-wuxga-touch-laptop-intel-core-ultra-7-16gb-memory-512gb-ssd-jasper-gray/6568761.p",
+        "badge": "Exclusive Retail Deal",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "ASUS Official",
+        "url": "https://www.asus.com/us/laptops/for-home/zenbook/asus-zenbook-14-oled-ux3405/",
+        "badge": "Direct OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+Zenbook+14+OLED+UX3405",
+        "badge": "Prime Eligible",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ASUS+Zenbook+14+OLED+UX3405",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ASUS+Zenbook+14+OLED+UX3405",
+        "badge": "Fast Shipping",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
   },
   {
     "id": "c-hp-envy-x360",
@@ -256,7 +416,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "16GB LPDDR5-6400 MT/s (High-Efficiency Dual-Channel Soldered)",
     "ports_io": "1x Thunderbolt 4 / USB4 40Gbps (PD, DP 2.1), 1x USB-C 10Gbps, 2x USB-A 10Gbps (HP Sleep and Charge), 1x HDMI 2.1, 3.5mm",
     "webcam_biometrics": "5MP Wide-Vision IR Camera with Windows Hello Face Unlock, Temporal Noise Reduction, and Manual Privacy Shutter Switch",
-    "thermals_acoustics": "Dual Copper Heatpipes with Fluid Dynamic Bearing Fan, Intelligent Thermal Mode Switcher (~31 dBA quiet office)"
+    "thermals_acoustics": "Dual Copper Heatpipes with Fluid Dynamic Bearing Fan, Intelligent Thermal Mode Switcher (~31 dBA quiet office)",
+    "stores": [
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/hp-envy-2-in-1-14-wide-ultra-xga-touch-screen-laptop-amd-ryzen-7-8840hs-16gb-memory-512gb-ssd-glacier-silver/6571087.p",
+        "badge": "Top Rated Retailer",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "HP Official",
+        "url": "https://www.hp.com/us-en/shop/mdp/laptops/envy-x360-14",
+        "badge": "Direct OEM Configurator",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=HP+Envy+x360+14+8840HS",
+        "badge": "Prime Shipping",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=HP+Envy+x360+14",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=HP+Envy+x360+14",
+        "badge": "Online Deals",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
   },
   {
     "id": "c-surface-pro-11",
@@ -299,7 +491,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "16GB LPDDR5X-8448 MT/s (High-Bandwidth 135 GB/s Bus Soldered Memory)",
     "ports_io": "2x USB4 / USB-C (DisplayPort 1.4a & Fast Charging), 1x Surface Connect Port, 1x Surface Pro Keyboard Magnetic Port",
     "webcam_biometrics": "Front Quad HD 1440p Studio Camera with Windows Hello Face ID; 10.5MP Ultra HD Rear Autofocus Camera",
-    "thermals_acoustics": "Custom Ultra-Thin Vapor Chamber with Whisper Radial Fan, Sub-25 dBA Acoustic Profile"
+    "thermals_acoustics": "Custom Ultra-Thin Vapor Chamber with Whisper Radial Fan, Sub-25 dBA Acoustic Profile",
+    "stores": [
+      {
+        "store": "Microsoft Official",
+        "url": "https://www.microsoft.com/en-us/d/surface-pro-11th-edition/8vg44331vf3w",
+        "badge": "Official Microsoft Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/microsoft-surface-pro-copilot-pc-13-oled-touch-screen-snapdragon-x-elite-16gb-memory-512gb-ssd-device-only-platinum/6582827.p",
+        "badge": "In-Store Demo & Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Microsoft+Surface+Pro+11th+Edition",
+        "badge": "Prime In Stock",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Microsoft+Surface+Pro+11th+Edition",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Microsoft+Surface+Pro+11th+Edition",
+        "badge": "Express Delivery",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
   },
   {
     "id": "c-thinkpad-t14s-gen6",
@@ -337,12 +561,44 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Lenovo Store direct price with standard e-coupon savings for AMD Ryzen AI 7 PRO 360 / 32GB RAM / 1TB SSD.",
     "cpu_details": "AMD Ryzen AI 7 PRO 360 (8 Cores / 16 Threads, 4nm Zen 5 Architecture up to 5.0 GHz Boost, 50 TOPS XDNA 2 NPU, Enterprise AMD PRO Security)",
     "cpu_benchmark_score": "PassMark: 29,800 | Geekbench 6: 12,850 Multi / 2,680 Single | Cinebench 2024: 1,080 Multi",
-    "cpu_independent_review": "Grade: A+ (Zen 5 Architecture & 50 TOPS AI NPU) • Cutting-edge 4nm Zen 5 silicon with enterprise hardware security and a dedicated 50 TOPS NPU. Incredible sustained compiler throughput and all-day 17+ hour battery efficiency.",
+    "cpu_independent_review": "Grade: A+ (Zen 5 Architecture & 50 TOPS AI NPU) \u2022 Cutting-edge 4nm Zen 5 silicon with enterprise hardware security and a dedicated 50 TOPS NPU. Incredible sustained compiler throughput and all-day 17+ hour battery efficiency.",
     "gpu_details": "AMD Radeon 880M (12 RDNA 3.5 CUs, Dual DisplayPort 2.1 MST Hub Support)",
     "ram_details": "32GB LPDDR5X-7500 MT/s (High-Speed Low-Power Memory)",
     "ports_io": "2x USB4 / Thunderbolt 4 (Power Delivery 3.0 & DP 2.1), 2x USB-A 3.2 Gen 1 (1 Always On), 1x HDMI 2.1 (4K@60Hz), 3.5mm Headphone Jack, Nano-SIM (optional)",
     "webcam_biometrics": "5MP + IR Discrete Webcam with Windows Hello Face Login & Web Privacy Shutter; Match-on-Chip Fingerprint Reader on Power Button",
-    "thermals_acoustics": "Dual-Intake Owl-Blade Low-Noise Cooling Fan, MIL-STD-810H Certified Chassis (<26 dBA Whisper Quiet)"
+    "thermals_acoustics": "Dual-Intake Owl-Blade Low-Noise Cooling Fan, MIL-STD-810H Certified Chassis (<26 dBA Whisper Quiet)",
+    "stores": [
+      {
+        "store": "Lenovo Official",
+        "url": "https://www.lenovo.com/us/en/p/laptops/thinkpad/thinkpadt/lenovo-thinkpad-t14s-gen-6-14-inch-amd-laptop/len101t0109",
+        "badge": "Direct OEM / Custom Build",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+ThinkPad+T14s+Gen+6",
+        "badge": "Corporate Authorized",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=ThinkPad+T14s+Gen+6",
+        "badge": "Check Retail Stock",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+ThinkPad+T14s+Gen+6",
+        "badge": "Prime Verified",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Lenovo+ThinkPad+T14s+Gen+6",
+        "badge": "Business Marketplace",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
   },
   {
     "id": "c-dell-xps-16",
@@ -385,7 +641,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "32GB LPDDR5X-7467 MT/s (Dual-Channel Low-Power Memory, Soldered Motherboard Configuration)",
     "ports_io": "3x Thunderbolt 4 (Type-C with Power Delivery and DisplayPort), 1x Full-Size MicroSD v6.0 Card Reader, 1x 3.5mm Headphone/Mic Combo",
     "webcam_biometrics": "1080p FHD IR Camera with Windows Hello Face Detection & Presence Sensing; Windows Hello Fingerprint Reader on Seamless Glass Deck",
-    "thermals_acoustics": "Dual Opposite Outlet (DOO) Fans with GORE Thermal Insulation, Vapor Chamber Architecture (~39 dBA under full GPU load)"
+    "thermals_acoustics": "Dual Opposite Outlet (DOO) Fans with GORE Thermal Insulation, Vapor Chamber Architecture (~39 dBA under full GPU load)",
+    "stores": [
+      {
+        "store": "Dell Official",
+        "url": "https://www.dell.com/en-us/shop/cty/spd/xps-16-9640-laptop",
+        "badge": "Direct OEM Configurator",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+XPS+16+9640",
+        "badge": "Store Stock & Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+XPS+16+9640",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+XPS+16+9640",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Micro Center",
+        "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Dell+XPS+16",
+        "badge": "In-Store & Online",
+        "icon": "\ud83c\udfec"
+      }
+    ]
   },
   {
     "id": "c-macbook-pro-16-m4pro",
@@ -423,12 +711,44 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Apple Store MSRP $2,499 for 14-Core CPU / 20-Core GPU / 24GB Unified Memory / 512GB SSD.",
     "cpu_details": "Apple M4 Pro (14 Cores: 10 Performance Cores + 4 Efficiency Cores, 273 GB/s Memory Bandwidth, 16-Core Neural Engine)",
     "cpu_benchmark_score": "Geekbench 6: 22,800 Multi / 3,920 Single | Cinebench 2024: 1,720 Multi",
-    "cpu_independent_review": "Grade: A+ (World-Leading Single-Core & Neural Engine) • Unrivaled 3,900+ Geekbench single-core speed, 273 GB/s unified memory bandwidth, and full hardware ray-tracing with Thunderbolt 5 support.",
+    "cpu_independent_review": "Grade: A+ (World-Leading Single-Core & Neural Engine) \u2022 Unrivaled 3,900+ Geekbench single-core speed, 273 GB/s unified memory bandwidth, and full hardware ray-tracing with Thunderbolt 5 support.",
     "gpu_details": "Apple 20-Core GPU (Dynamic Caching, Hardware-Accelerated Ray Tracing, AV1 Decode Engine, Dual ProRes Encoders)",
     "ram_details": "24GB Unified Memory (LPDDR5X Unified High-Bandwidth Architecture 273 GB/s, Shared System Pool)",
     "ports_io": "3x Thunderbolt 5 (Up to 120Gbps), 1x HDMI 2.1 (Up to 8K @ 60Hz or 4K @ 240Hz), 1x SDXC Card Slot, 1x MagSafe 3 Port, 1x 3.5mm Studio Jack",
     "webcam_biometrics": "12MP Center Stage Camera with Desk View support; Studio Mics (3-Mic Array with Beamforming); Touch ID Key",
-    "thermals_acoustics": "Dual High-Efficiency Thermal Fans (Whisper-Quiet under heavy 8K video rendering, 0 dBA idle, max 30 dBA)"
+    "thermals_acoustics": "Dual High-Efficiency Thermal Fans (Whisper-Quiet under heavy 8K video rendering, 0 dBA idle, max 30 dBA)",
+    "stores": [
+      {
+        "store": "Apple Official",
+        "url": "https://www.apple.com/shop/buy-mac/macbook-pro/16-inch",
+        "badge": "Official Apple Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=MacBook+Pro+16+M4+Pro",
+        "badge": "Fast In-Store Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=MacBook+Pro+16+M4+Pro",
+        "badge": "Prime 1-Day",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+MacBook+Pro+16+M4+Pro",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=apple+macbook+pro+16+m4+pro",
+        "badge": "VIP Pro Rewards",
+        "icon": "\ud83d\udcf8"
+      }
+    ]
   },
   {
     "id": "c-mac-studio-m2max",
@@ -471,7 +791,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "32GB Unified Memory (LPDDR5 Unified Architecture with massive 400 GB/s System Bus Bandwidth)",
     "ports_io": "Rear: 4x Thunderbolt 4, 2x USB-A (5Gbps), 1x HDMI 2.1, 1x 10Gb Ethernet, 3.5mm Jack; Front: 2x USB-C (10Gbps), 1x SDXC Slot",
     "webcam_biometrics": "Requires External Webcam / Studio Display; Supports Apple Touch ID Wireless Magic Keyboard",
-    "thermals_acoustics": "Dual Centrifugal Blower System with Massive Circular Aluminum Heatsink, Barely Audible (<15 dBA continuous)"
+    "thermals_acoustics": "Dual Centrifugal Blower System with Massive Circular Aluminum Heatsink, Barely Audible (<15 dBA continuous)",
+    "stores": [
+      {
+        "store": "Apple Official",
+        "url": "https://www.apple.com/shop/buy-mac/mac-studio",
+        "badge": "Official Apple Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+Mac+Studio+M2+Max",
+        "badge": "Instant Savings & In Stock",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/apple-mac-studio-apple-m2-max-with-12-core-cpu-and-30-core-gpu-32gb-memory-512gb-ssd-silver/6545199.p",
+        "badge": "Verified In Stock",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Apple+Mac+Studio+M2+Max",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=mac+studio+m2+max",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf8"
+      }
+    ]
   },
   {
     "id": "c-lenovo-legion-pro-5i",
@@ -509,12 +861,44 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Lenovo Store direct price for SKU 83F300BBUS with Core Ultra 7 251HX / 32GB RAM / 1TB SSD / RTX 5070 (12GB GDDR7).",
     "cpu_details": "Intel Core Ultra 7 251HX (16 Cores / 24 Threads: P-cores up to 5.10 GHz + E-cores up to 4.50 GHz, Intel AI Boost NPU)",
     "cpu_benchmark_score": "PassMark: 39,400 | Geekbench 6: 16,800 Multi / 2,920 Single | Cinebench 2024: 1,350 Multi",
-    "cpu_independent_review": "Grade: A+ (Next-Gen Hybrid Silicon with Dedicated NPU) • Massive 24-thread mobile workstation compute with 5.1 GHz boost and 245W power ceiling. Built for heavy multi-threaded simulations, video pipelines, and high-FPS gaming.",
+    "cpu_independent_review": "Grade: A+ (Next-Gen Hybrid Silicon with Dedicated NPU) \u2022 Massive 24-thread mobile workstation compute with 5.1 GHz boost and 245W power ceiling. Built for heavy multi-threaded simulations, video pipelines, and high-FPS gaming.",
     "gpu_details": "NVIDIA GeForce RTX 5070 Laptop GPU (12GB GDDR7 Dedicated Memory, Advanced Optimus, DLSS 4 & Full Ray Tracing)",
     "ram_details": "32GB DDR5-5600 MT/s (2x 16GB Dual-Channel SODIMM, User-Upgradable up to 64GB DDR5)",
     "ports_io": "1x Thunderbolt 4 / USB-C (DisplayPort 2.1), 1x USB-C 3.2 Gen 2 (140W Power Delivery), 4x USB-A 3.2 Gen 1 (1 Always On), 1x HDMI 2.1 (Up to 8K/60Hz), 1x RJ-45 Gigabit LAN, 3.5mm",
     "webcam_biometrics": "5.0MP Camera with Dual-Microphone Array and E-Shutter Privacy Switch",
-    "thermals_acoustics": "Legion Coldfront Hyper Dual Fan System with Vapor Chamber & Phase-Change Thermal Interface (Whisper mode <28 dBA, Full Turbo 46 dBA)"
+    "thermals_acoustics": "Legion Coldfront Hyper Dual Fan System with Vapor Chamber & Phase-Change Thermal Interface (Whisper mode <28 dBA, Full Turbo 46 dBA)",
+    "stores": [
+      {
+        "store": "Lenovo Official",
+        "url": "https://www.lenovo.com/us/en/p/laptops/legion-laptops/legion-pro-series/legion-pro-5i-gen-10-16-inch-intel/83f300bbus",
+        "badge": "Direct OEM / Custom Build",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Lenovo+Legion+Pro+5i+Gen+10",
+        "badge": "Gaming Dept In Stock",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+Legion+Pro+5i+Gen+10",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+Legion+Pro+5i+Gen+10",
+        "badge": "Prime Fast Shipping",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Micro Center",
+        "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Lenovo+Legion+Pro+5i",
+        "badge": "PC Builder Hub",
+        "icon": "\ud83c\udfec"
+      }
+    ]
   },
   {
     "id": "c-desktop-beast-4090",
@@ -557,7 +941,39 @@ const COMPUTERS_CATALOG = [
     "ram_details": "64GB DDR5-5600 MT/s Dual-Channel XMP (4x DIMM Slots, Upgradable to 128GB DDR5)",
     "ports_io": "Front: 1x USB-C 10Gbps, 3x USB-A 5Gbps, 3.5mm; Rear: 1x USB-C 20Gbps, 2x USB-A 10Gbps, 4x USB-A 5Gbps, 2x USB 2.0, 1x RJ-45 2.5G LAN, 7.1 Surround SPDIF, 3x DP 1.4a, 1x HDMI 2.1",
     "webcam_biometrics": "Requires External Webcam / Peripherals; Supports FIDO2 / Windows Hello USB Keys",
-    "thermals_acoustics": "Alienware Legend 3 Liquid Cooling with 240mm Radiator, 1000W 80-Plus Platinum PSU, 5 High-Flow Chassis Fans (~42 dBA gaming load)"
+    "thermals_acoustics": "Alienware Legend 3 Liquid Cooling with 240mm Radiator, 1000W 80-Plus Platinum PSU, 5 High-Flow Chassis Fans (~42 dBA gaming load)",
+    "stores": [
+      {
+        "store": "Dell / Alienware Official",
+        "url": "https://www.dell.com/en-us/shop/desktop-computers/alienware-aurora-r16-gaming-desktop/spd/alienware-aurora-r16-desktop",
+        "badge": "Direct OEM Configurator",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Alienware+Aurora+R16+RTX+4090",
+        "badge": "High-End Rig Stock",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Alienware+Aurora+R16+RTX+4090",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Alienware+Aurora+R16",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Micro Center",
+        "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Alienware+Aurora+R16",
+        "badge": "PC Showroom",
+        "icon": "\ud83c\udfec"
+      }
+    ]
   },
   {
     "id": "c-minisforum-um780",
@@ -600,10 +1016,45 @@ const COMPUTERS_CATALOG = [
     "ram_details": "32GB DDR5-5600 MT/s (Dual SO-DIMM Slots, Upgradable up to 96GB DDR5, Non-Soldered)",
     "ports_io": "1x Oculink Port (PCIe 4.0 x4 64Gbps), 2x USB4 40Gbps (Type-C), 2x HDMI 2.1, 4x USB-A 3.2 Gen 2 (10Gbps), 2x 2.5G RJ-45 Ethernet LAN, 3.5mm Audio",
     "webcam_biometrics": "Requires External Webcam; Supports USB Fingerprint Key",
-    "thermals_acoustics": "Dual Active Cooling Fans (CPU Fan + Dedicated RAM/SSD Active Cooler) with Liquid Metal Thermal Interface, Whisper quiet (~30 dBA)"
+    "thermals_acoustics": "Dual Active Cooling Fans (CPU Fan + Dedicated RAM/SSD Active Cooler) with Liquid Metal Thermal Interface, Whisper quiet (~30 dBA)",
+    "stores": [
+      {
+        "store": "Minisforum Official",
+        "url": "https://store.minisforum.com/products/minisforum-um780-xtx",
+        "badge": "Direct OEM Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/dp/B0CKPD61F9",
+        "badge": "Prime In Stock",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Minisforum+UM780+XTX",
+        "badge": "Featured Marketplace",
+        "icon": "\ud83d\udcbb"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Minisforum+UM780",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "AliExpress Official",
+        "url": "https://www.aliexpress.com/w/wholesale-minisforum-um780-xtx.html",
+        "badge": "Manufacturer Outlet",
+        "icon": "\ud83c\udf10"
+      }
+    ]
   }
 ];
 
+// ==========================================
+// PERIPHERALS CATALOG (Curated Quality Match List)
+// ==========================================
 const PERIPHERALS_CATALOG = [
   {
     "id": "p-dell-4k-monitor",

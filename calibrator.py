@@ -57,6 +57,7 @@ class Computer:
     ports_io: str = ""
     webcam_biometrics: str = ""
     thermals_acoustics: str = ""
+    stores: List[Dict[str, Any]] = field(default_factory=list)
 
 COMPUTERS_CATALOG: List[Computer] = [
     # --- Ultra Budget / Basic Home & School ---

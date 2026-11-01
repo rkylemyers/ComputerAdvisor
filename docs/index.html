@@ -177,6 +177,16 @@
       border-color: #e27d60 !important;
     }
 
+    .store-link-item {
+      transition: all 0.15s ease-in-out;
+    }
+    .store-link-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(245, 158, 11, 0.8) !important;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.15);
+    }
+
     .win95-input, .win95-select, textarea.win95-input {
       background: rgba(18, 22, 28, 0.85);
       color: #f7f4ea;
@@ -2930,16 +2940,29 @@
           } else if (r.id === "row-warranty") {
             html += `${comp.warranty_years} Year${comp.warranty_years > 1 ? 's' : ''} Commercial Warranty`;
           } else if (r.id === "row-buy") {
+            const storeList = (comp.stores && comp.stores.length > 0) ? comp.stores : [
+              { store: comp.retailer || 'Primary Store', url: comp.purchase_url, badge: 'In Stock', icon: '🛒' },
+              ...(comp.official_url && comp.official_url !== comp.purchase_url ? [{ store: 'Official OEM', url: comp.official_url, badge: 'Direct', icon: '🏢' }] : [])
+            ];
+
             html += `
-              <div style="display: flex; flex-direction: column; gap: 5px;">
-                <a href="${comp.purchase_url}" target="_blank" rel="noopener noreferrer" class="win95-btn btn-anime-sunset" style="font-size: 12px; padding: 5px 10px; text-decoration: none; text-align: center; justify-content: center;">
-                  🛒 Buy @ ${comp.retailer || 'Store'} ($${comp.price.toLocaleString()}) &gt;&gt;
-                </a>
-                ${(comp.official_url && comp.official_url !== comp.purchase_url) ? `
-                  <a href="${comp.official_url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 11px; padding: 3px 8px; text-decoration: none; text-align: center; justify-content: center; color: #cbd5e1; border-color: rgba(255,255,255,0.18);">
-                    📄 Official OEM Page &gt;&gt;
+              <div class="store-links-panel" style="display: flex; flex-direction: column; gap: 4px; padding: 2px 0;">
+                <div style="font-size: 10px; font-weight: 800; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                  <span>🏬</span> 5 Stores to Buy:
+                </div>
+                ${storeList.map((s, sIdx) => `
+                  <a href="${s.url}" target="_blank" rel="noopener noreferrer" 
+                     class="win95-btn store-link-item ${sIdx === 0 ? 'btn-anime-sunset' : ''}" 
+                     style="font-size: 11px; padding: 4px 8px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 6px; border-radius: 4px; ${sIdx === 0 ? 'font-weight: 700;' : 'background: rgba(30, 41, 59, 0.75); color: #f1f5f9; border: 1px solid rgba(255,255,255,0.15);'}">
+                    <span style="display: flex; align-items: center; gap: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                      <span>${s.icon || '🛒'}</span>
+                      <strong style="font-size: 11px;">${s.store}</strong>
+                    </span>
+                    <span style="font-size: 9px; padding: 1px 5px; border-radius: 3px; background: rgba(0,0,0,0.35); color: #cbd5e1; white-space: nowrap; font-family: 'Outfit', sans-serif;">
+                      ${s.badge || 'Check Price'} &rarr;
+                    </span>
                   </a>
-                ` : ''}
+                `).join('')}
               </div>
             `;
           }
@@ -3226,7 +3249,8 @@
       const promptText = `
 User Query: "${question}"
 ${filterActionSummary ? `System Event: Applied dynamic filter action: "${filterActionSummary}". The comparison table was updated.` : ''}
-${isAskingForLink && targetComp ? `System Event: User is asking for direct links or pricing clarification for "${targetComp.name}". Verified Retailer: "${targetComp.retailer || 'Retail Store'}", Retail Deal Price: "$${targetComp.price}", Direct Purchase Link: "${targetComp.purchase_url}", Official OEM Specs Page: "${targetComp.official_url || targetComp.purchase_url}", Price Notes: "${targetComp.price_notes || ''}". Give these verified details!` : ''}
+${isAskingForLink && targetComp ? `System Event: User is asking for purchase links or stores for "${targetComp.name}". Here are the 5 verified stores:
+${(targetComp.stores || []).map(s => `- ${s.icon || '🛒'} ${s.store} (${s.badge}): ${s.url}`).join('\n')}` : ''}
 
 Currently Active Computer Recommendations & Verified Pricing/Links:
 ${JSON.stringify(currentRecommendations.slice(0, 5).map(r => ({
@@ -3240,23 +3264,24 @@ ${JSON.stringify(currentRecommendations.slice(0, 5).map(r => ({
   pricing_notes: r.computer.price_notes || "",
   direct_retail_purchase_url: r.computer.purchase_url,
   official_oem_specs_page: r.computer.official_url || r.computer.purchase_url,
+  stores: (r.computer.stores || []).map(s => `${s.store} (${s.badge}): ${s.url}`),
   cpu: r.computer.cpu_model,
   ram: r.computer.ram_gb,
   target_summary: r.computer.target_summary
 })), null, 2)}
 
-Provide a direct, complete, and articulate response to the user's question in 2 to 4 sentences. If they asked about pricing discrepancies or links, explain why manufacturer direct websites (like ASUS, Lenovo, Dell) list list MSRP or top-tier bundles (e.g. $1,799 on ASUS direct for the 32GB config) while retail partners like Best Buy / Amazon sell the consumer spec at street price ($1,049). Provide clickable markdown links: [Buy at Store: Retailer Name](URL) and [Official OEM Specs Page: Model Name](URL). Never claim you cannot browse the web or cannot provide URLs.
+Provide a direct, complete, and articulate response to the user's question in 2 to 4 sentences. If they asked about purchasing or store options, provide 5 verified stores from different retailers (e.g. Official Store, Best Buy, Amazon, B&H Photo, Newegg). Provide clickable markdown links: [Store Name: Badge](URL). If they asked about pricing discrepancies, explain why manufacturer direct websites list MSRP while retail partners discount. Never claim you cannot browse the web or cannot provide URLs.
 `;
 
       const systemInstruction = `You are a helpful, knowledgeable computer hardware advisor for ComputeMatch.
 IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
-1. You have direct access to verified retail checkout links ("direct_retail_purchase_url"), official OEM specs pages ("official_oem_specs_page"), street prices, and retailer pricing notes.
-2. If the user asks about price discrepancies (e.g., why a manufacturer's website says "starting at $1,799" while our table shows $1,049 for the ASUS Zenbook 14 OLED):
+1. You have direct access to 5 verified store links for each computer ("stores"), official OEM specs pages ("official_oem_specs_page"), street prices, and retailer pricing notes.
+2. If the user asks where to buy or asks for store links, provide 5 verified store options from different retailers (e.g. Official OEM Store, Best Buy, Amazon, B&H Photo, Newegg) with clickable markdown links: [Store Name: Badge](URL).
+3. If the user asks about price discrepancies (e.g., why a manufacturer's website says "starting at $1,799" while our table shows $1,049 for the ASUS Zenbook 14 OLED):
    - Explain that manufacturer direct storefronts (ASUS.com, Lenovo.com, Dell.com) often list top-spec flagship build-to-order models or full list MSRPs (e.g. 32GB RAM / 3K OLED / warranty bundles).
    - Major retail partners (Best Buy, Amazon) carry the exact consumer volume SKU (Intel Core Ultra 7 / 16GB RAM) at street price ($1,049 or on sale).
-3. NEVER say "I cannot browse the live web", "I cannot check prices", or "I cannot provide URLs". You ALREADY have the direct verified data right in your context!
-4. Always provide the clickable markdown links: [Buy at Store: Retailer ($Price)](URL) and [Official OEM Specs: Model](URL).
-5. Always answer concisely and helpfully in 2-4 sentences.`;
+4. NEVER say "I cannot browse the live web", "I cannot check prices", or "I cannot provide URLs". You ALREADY have the direct verified data right in your context!
+5. Always answer concisely and helpfully in 2-4 sentences with markdown store links.`;
 
       let reply = null;
       let gemData = null;
@@ -3320,9 +3345,10 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
 
     function generateRuleBasedAnswer(qLower, filterActionSummary = "", isAskingForLink = false, targetComp = null) {
       if (isAskingForLink && targetComp) {
-        const offUrl = targetComp.official_url || targetComp.purchase_url;
-        const buyUrl = targetComp.purchase_url;
-        return `I have located and verified the direct official product page for the **${targetComp.name}**:\n\n• 🌐 **Official ASUS Product Page:** [${targetComp.name} Official Overview](${offUrl})\n• 🛒 **Direct Purchase Store Page:** [Order ${targetComp.name} Direct](${buyUrl})\n\nI also updated the "🛒 ORDER NOW >>" button in your comparison matrix above so you will go directly to the specific model page instead of a generic homepage!`;
+        const storeLinks = (targetComp.stores && targetComp.stores.length > 0)
+          ? targetComp.stores.map(s => `• ${s.icon || '🛒'} **${s.store}** (${s.badge}): [Buy / Check Stock at ${s.store}](${s.url})`).join('\n')
+          : `• 🛒 **Primary Store:** [Buy at ${targetComp.retailer}](${targetComp.purchase_url})`;
+        return `Here are 5 verified stores to purchase or check availability for the **${targetComp.name}**:\n\n${storeLinks}\n\nI have also updated your comparison matrix above with all 5 store links for direct checkout!`;
       }
 
       const top = currentRecommendations[0]?.computer;

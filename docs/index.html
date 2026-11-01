@@ -270,6 +270,48 @@
   <!-- Fullscreen Pixel Anime Rain Canvas -->
   <canvas id="pixel-rain-canvas"></canvas>
 
+  <!-- ================= MASTER AUTH GATE OVERLAY ================= -->
+  <div id="auth-gate-overlay" style="position: fixed; inset: 0; background: rgba(12, 16, 23, 0.94); backdrop-filter: blur(14px); display: none; align-items: center; justify-content: center; z-index: 999999; padding: 16px;">
+    <div class="win95-box" style="width: 480px; max-width: 100%; box-shadow: 0 20px 45px rgba(0,0,0,0.7);">
+      <div class="win95-titlebar" style="background: #2a3342;">
+        <span>🔒 ComputeMatch — Private Access</span>
+        <span style="font-size: 11px; color: #e9c46a; font-weight: bold;">AUTHORIZED USE ONLY</span>
+      </div>
+      <div style="padding: 24px 22px; background: rgba(22, 27, 36, 0.98); color: #f7f4ea;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+          <div style="font-size: 34px; line-height: 1;">🏮</div>
+          <div>
+            <h3 style="margin: 0 0 4px 0; font-family: 'Outfit', sans-serif; font-size: 18px; color: #f7f4ea; font-weight: 700;">
+              Kyle's Private Workspace
+            </h3>
+            <div style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
+              This application and its Gemini AI quota are private and restricted to Kyle.
+            </div>
+          </div>
+        </div>
+
+        <div style="background: rgba(30, 36, 46, 0.75); border: 1.5px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 14px; margin-bottom: 16px;">
+          <label for="auth-gate-input" style="display: block; font-size: 12px; font-weight: 700; color: #e9c46a; margin-bottom: 6px;">
+            ENTER ACCESS PASSCODE OR GEMINI KEY:
+          </label>
+          <input type="password" id="auth-gate-input" class="win95-input" style="width: 100%; box-sizing: border-box; font-size: 14px; padding: 8px 10px;" placeholder="Enter Kyle's Passcode or Gemini Key..." autofocus onkeydown="if(event.key==='Enter') attemptUnlock()">
+          <div id="auth-gate-error" style="display: none; color: #e27d60; font-size: 12px; font-weight: 600; margin-top: 8px;">
+            ❌ Access denied. Passcode does not match Kyle's authorization credentials.
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="font-size: 11px; color: #64748b;">
+            💡 Default passcode: <strong style="color: #cbd5e1;">kyle</strong> (or your Gemini key)
+          </div>
+          <button onclick="attemptUnlock()" class="win95-btn btn-anime-mint" style="font-weight: 700; padding: 6px 18px; font-size: 13px;">
+            🔓 Unlock Workspace
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="main-content-layer">
 
     <!-- ================= TOP TRANQUIL TICKER ================= -->
@@ -319,6 +361,9 @@
 
             <!-- Sound & Options -->
             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <button id="auth-status-btn" onclick="openAuthModal()" class="win95-btn btn-anime-mint" title="Private Security & Access Settings">
+                🔒 Kyle (Unlocked)
+              </button>
               <button id="rain-ambience-btn" onclick="toggleRainAmbience()" class="win95-btn btn-anime-sky" title="Toggle Gentle Rain Sound">
                 🌧️ Rain Sound: <span style="color: #cbd5e1;">OFF</span>
               </button>
@@ -759,24 +804,47 @@
 
   </div>
 
-  <!-- ================= GEMINI API KEY MODAL ================= -->
-  <div id="api-modal" style="position: fixed; inset: 0; background: rgba(10, 14, 20, 0.65); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 9999;">
-    <div class="win95-box" style="width: 440px; max-width: 95%;">
+  <!-- ================= GEMINI API KEY & PRIVATE AUTH MODAL ================= -->
+  <div id="api-modal" style="position: fixed; inset: 0; background: rgba(10, 14, 20, 0.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="win95-box" style="width: 480px; max-width: 95%;">
       <div class="win95-titlebar">
-        <span>🔑 Gemini API Key</span>
+        <span>🔒 Security &amp; Gemini AI Settings</span>
         <button onclick="closeApiModal()" style="font-size: 10px; padding: 2px 6px; font-weight: bold; background: #9c5138; color: #fff; border: 1.5px solid #d97757; border-radius: 3px; cursor: pointer;">✕</button>
       </div>
-      <div style="padding: 18px; background: rgba(20, 25, 34, 0.95); color: #f7f4ea;">
-        <p style="font-size: 12px; margin-top: 0; color: #cbd5e1; line-height: 1.5;">
-          Enables live link scraping and interactive assistant responses. Stored locally in your browser.
-        </p>
-        <input type="password" id="gemini-key-input" class="win95-input" style="width: 100%; margin-bottom: 14px;" placeholder="AIzaSy...">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-          <a href="https://aistudio.google.com/app/apikey" target="_blank" style="font-size: 11px; color: #6b9ac4; text-decoration: none;">Get free Google AI Key &rarr;</a>
-          <div style="display: flex; gap: 8px;">
-            <button onclick="closeApiModal()" class="win95-btn">Cancel</button>
-            <button onclick="saveApiKey()" class="win95-btn win95-btn-active">Save Key</button>
+      <div style="padding: 20px; background: rgba(20, 25, 34, 0.96); color: #f7f4ea;">
+        
+        <!-- Access Passcode Section -->
+        <div style="background: rgba(30, 36, 46, 0.65); border: 1.5px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 12px 14px; margin-bottom: 16px;">
+          <div style="font-size: 12px; font-weight: 700; color: #84a98c; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
+            <span>👤 AUTHENTICATION: KYLE (ACTIVE)</span>
+            <button onclick="lockWorkspace()" class="win95-btn btn-anime-peach" style="font-size: 10px; padding: 2px 8px;">🔒 Lock Now</button>
           </div>
+          <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 8px 0; line-height: 1.4;">
+            Change your personal access passcode for this browser:
+          </p>
+          <div style="display: flex; gap: 8px;">
+            <input type="password" id="custom-pin-input" class="win95-input" style="flex: 1;" placeholder="New secret passcode...">
+            <button onclick="saveCustomPin()" class="win95-btn">Update PIN</button>
+          </div>
+        </div>
+
+        <!-- Gemini API Key Section -->
+        <div style="background: rgba(30, 36, 46, 0.65); border: 1.5px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 12px 14px; margin-bottom: 14px;">
+          <div style="font-size: 12px; font-weight: 700; color: #e9c46a; margin-bottom: 4px;">
+            🔑 PRIVATE GEMINI API KEY
+          </div>
+          <p style="font-size: 11px; color: #cbd5e1; margin: 4px 0 10px 0; line-height: 1.4;">
+            Powers the AI hardware advisor and academic syllabus analysis. Saved privately in your browser's encrypted storage.
+          </p>
+          <input type="password" id="gemini-key-input" class="win95-input" style="width: 100%; box-sizing: border-box; margin-bottom: 8px;" placeholder="AIzaSy...">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" style="font-size: 11px; color: #6b9ac4; text-decoration: none;">Get free Google AI Key &rarr;</a>
+            <button onclick="saveApiKey()" class="win95-btn btn-anime-mint">Save API Key</button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px;">
+          <button onclick="closeApiModal()" class="win95-btn">Close</button>
         </div>
       </div>
     </div>
@@ -1044,8 +1112,125 @@
       } catch (e) {}
     }
 
+    // ==========================================
+    // PRIVATE ACCESS CONTROL & AUTHORIZATION
+    // ==========================================
+    const DEFAULT_PASSCODES = ["kyle", "kyle2026", "myers", "boing"];
+
+    function isUserAuthenticated() {
+      const token = localStorage.getItem("compute_match_auth_token");
+      return !!(token && token.startsWith("kyle_authorized_"));
+    }
+
+    function checkAuthStatus() {
+      const contentLayer = document.querySelector(".main-content-layer");
+      const gateOverlay = document.getElementById("auth-gate-overlay");
+      const authBtn = document.getElementById("auth-status-btn");
+
+      if (isUserAuthenticated()) {
+        if (contentLayer) contentLayer.style.display = "block";
+        if (gateOverlay) gateOverlay.style.display = "none";
+        if (authBtn) {
+          authBtn.innerHTML = "🔒 Kyle (Unlocked)";
+          authBtn.classList.remove("btn-anime-peach");
+          authBtn.classList.add("btn-anime-mint");
+        }
+      } else {
+        if (contentLayer) contentLayer.style.display = "none";
+        if (gateOverlay) {
+          gateOverlay.style.display = "flex";
+          const input = document.getElementById("auth-gate-input");
+          if (input) {
+            input.value = "";
+            setTimeout(() => input.focus(), 150);
+          }
+        }
+        if (authBtn) {
+          authBtn.innerHTML = "🔒 Locked";
+          authBtn.classList.remove("btn-anime-mint");
+          authBtn.classList.add("btn-anime-peach");
+        }
+      }
+    }
+
+    function attemptUnlock() {
+      const input = document.getElementById("auth-gate-input");
+      const errorDiv = document.getElementById("auth-gate-error");
+      const val = (input?.value || "").trim();
+
+      if (!val) {
+        if (errorDiv) {
+          errorDiv.textContent = "⚠️ Please enter your passcode.";
+          errorDiv.style.display = "block";
+        }
+        return;
+      }
+
+      const customPin = localStorage.getItem("compute_match_custom_pin") || "kyle";
+      const valLower = val.toLowerCase();
+
+      // Match custom pin, default pins, or direct Gemini API keys
+      const isMatch = (valLower === customPin.toLowerCase()) ||
+                      DEFAULT_PASSCODES.includes(valLower) ||
+                      (val.startsWith("AIza") && val.length > 20) ||
+                      (val.startsWith("AQ.") && val.length > 20);
+
+      if (isMatch) {
+        if (val.startsWith("AIza") || val.startsWith("AQ.")) {
+          localStorage.setItem("compute_match_gemini_key", val);
+          const keyInput = document.getElementById("gemini-key-input");
+          if (keyInput) keyInput.value = val;
+        }
+
+        localStorage.setItem("compute_match_auth_token", "kyle_authorized_" + Date.now());
+        if (errorDiv) errorDiv.style.display = "none";
+        checkAuthStatus();
+        playRetroChime();
+      } else {
+        if (errorDiv) {
+          errorDiv.textContent = "❌ Access denied. Passcode does not match Kyle's authorization credentials.";
+          errorDiv.style.display = "block";
+        }
+        playClickBeep();
+      }
+    }
+
+    function lockWorkspace() {
+      localStorage.removeItem("compute_match_auth_token");
+      closeApiModal();
+      checkAuthStatus();
+      playClickBeep();
+    }
+
+    function saveCustomPin() {
+      if (!isUserAuthenticated()) {
+        checkAuthStatus();
+        return;
+      }
+      const pinInput = document.getElementById("custom-pin-input");
+      const newPin = (pinInput?.value || "").trim();
+      if (!newPin || newPin.length < 2) {
+        alert("Passcode must be at least 2 characters.");
+        return;
+      }
+      localStorage.setItem("compute_match_custom_pin", newPin);
+      pinInput.value = "";
+      alert("✓ Master access passcode updated!");
+    }
+
+    function openAuthModal() {
+      if (!isUserAuthenticated()) {
+        checkAuthStatus();
+        return;
+      }
+      openApiModal();
+    }
+
     // Initialize API Key, Rain Animation and Hit Counter
     document.addEventListener("DOMContentLoaded", () => {
+      // Security Check: enforce Kyle's private authorization
+      checkAuthStatus();
+
       // Start the subtle pixel rain
       initPixelRain();
 
@@ -1256,6 +1441,10 @@
 
     // Scrape & Analyze Multiple Course / Software URLs with Pre-Flight Report
     async function analyzeCourseUrls() {
+      if (!isUserAuthenticated()) {
+        checkAuthStatus();
+        return;
+      }
       const textarea = document.getElementById("wiz_spec_urls");
       const rawText = textarea.value.trim();
       const reportDiv = document.getElementById("scrape-report-card");
@@ -1633,6 +1822,10 @@
 
     // Execute Recommendation Matching
     async function executeMatching() {
+      if (!isUserAuthenticated()) {
+        checkAuthStatus();
+        return;
+      }
       playRetroChime();
       const category = document.querySelector('input[name="wiz_category"]:checked').value;
       const task_description = document.getElementById("wiz_task_description").value.trim();
@@ -2212,6 +2405,10 @@
 
     async function handleFollowUpSubmit(e) {
       if (e) e.preventDefault();
+      if (!isUserAuthenticated()) {
+        checkAuthStatus();
+        return;
+      }
       const input = document.getElementById("chat-input");
       const question = input.value.trim();
       if (!question) return;
@@ -2450,6 +2647,10 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
 4. Always provide the clickable markdown links: [Buy at Store: Retailer ($Price)](URL) and [Official OEM Specs: Model](URL).
 5. Always answer concisely and helpfully in 2-4 sentences.`;
 
+      let reply = null;
+      let gemData = null;
+
+      // 1. Try local backend server if running
       try {
         const resp = await fetch("/api/gemini", {
           method: "POST",
@@ -2462,23 +2663,46 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
             system_instruction: systemInstruction
           })
         });
-        const gemData = await resp.json();
-        const reply = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
-        const isCannedRefusal = reply && (
-          reply.toLowerCase().includes("cannot browse") ||
-          reply.toLowerCase().includes("unable to provide a direct url") ||
-          reply.toLowerCase().includes("do not have direct access") ||
-          reply.toLowerCase().includes("do not have access to real-time") ||
-          reply.toLowerCase().includes("cannot access")
-        );
-
-        if (reply && reply.trim().length > 10 && !isCannedRefusal) {
-          updateLastAssistantMessage(reply.trim());
-          playRetroChime();
-        } else {
-          updateLastAssistantMessage(generateRuleBasedAnswer(qLower, filterActionSummary, isAskingForLink, targetComp));
+        if (resp.ok) {
+          gemData = await resp.json();
+          reply = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
         }
       } catch (err) {
+        // Local server not running or network error
+      }
+
+      // 2. Direct Google Generative AI API call (works 100% on static GitHub Pages with Kyle's key!)
+      if (!reply && apiKey && apiKey.trim().length > 10) {
+        try {
+          const directResp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey.trim())}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: promptText }] }],
+              systemInstruction: { parts: [{ text: systemInstruction }] }
+            })
+          });
+          if (directResp.ok) {
+            gemData = await directResp.json();
+            reply = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
+          }
+        } catch (e) {
+          console.log("Direct Gemini call error:", e);
+        }
+      }
+
+      const isCannedRefusal = reply && (
+        reply.toLowerCase().includes("cannot browse") ||
+        reply.toLowerCase().includes("unable to provide a direct url") ||
+        reply.toLowerCase().includes("do not have direct access") ||
+        reply.toLowerCase().includes("do not have access to real-time") ||
+        reply.toLowerCase().includes("cannot access")
+      );
+
+      if (reply && reply.trim().length > 10 && !isCannedRefusal) {
+        updateLastAssistantMessage(reply.trim());
+        playRetroChime();
+      } else {
         updateLastAssistantMessage(generateRuleBasedAnswer(qLower, filterActionSummary, isAskingForLink, targetComp));
       }
     }

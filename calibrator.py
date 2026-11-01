@@ -6,6 +6,7 @@ metric-scoring, anti-overkill, release-year-decay, and peripheral-pairing algori
 """
 
 import json
+import os
 import math
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional
@@ -59,7 +60,7 @@ class Computer:
     thermals_acoustics: str = ""
     stores: List[Dict[str, Any]] = field(default_factory=list)
 
-COMPUTERS_CATALOG: List[Computer] = [
+STATIC_COMPUTERS_CATALOG: List[Computer] = [
     # --- Ultra Budget / Basic Home & School ---
     Computer(
         id="c-chromebook-plus",
@@ -767,6 +768,29 @@ COMPUTERS_CATALOG: List[Computer] = [
 # 2. PERIPHERALS CATALOG
 # ==============================================================================
 
+def _load_catalog() -> List[Computer]:
+    js_path = os.path.join(os.path.dirname(__file__), "catalog.js")
+    if os.path.exists(js_path):
+        try:
+            with open(js_path, "r", encoding="utf-8") as f:
+                content = f.read()
+            idx1 = content.find("const COMPUTERS_CATALOG =") + len("const COMPUTERS_CATALOG =")
+            idx2 = content.find("const MONITORS_CATALOG =")
+            raw = content[idx1:idx2].strip()
+            semi = raw.rfind("];")
+            if semi != -1:
+                raw = raw[:semi+1]
+            comps = json.loads(raw)
+            field_names = set(Computer.__dataclass_fields__.keys())
+            loaded = [Computer(**{k: v for k, v in c.items() if k in field_names}) for c in comps]
+            if loaded:
+                return loaded
+        except Exception as e:
+            pass
+    return STATIC_COMPUTERS_CATALOG
+
+COMPUTERS_CATALOG: List[Computer] = _load_catalog()
+
 @dataclass
 class Peripheral:
     id: str
@@ -949,11 +973,15 @@ def score_computer(comp: Computer, persona: UserPersona, current_year: int = 202
         mobility_score = bat_score + weight_score
 
     # 6. Display & Screen Fit (10 points max)
-    display_score = 5.0
-    if comp.screen_nits >= persona.min_nits:
-        display_score += 3.0
-    if "DCI-P3" in comp.screen_gamut or "100% sRGB" in comp.screen_gamut:
-        display_score += 2.0
+    is_chassis = (comp.form_factor in ["Desktop", "Mini PC"] or comp.screen_size == 0)
+    if is_chassis:
+        display_score = 10.0 if persona.mobility_need == "desk_bound" else 6.0
+    else:
+        display_score = 5.0
+        if comp.screen_nits >= persona.min_nits:
+            display_score += 3.0
+        if "DCI-P3" in comp.screen_gamut or "100% sRGB" in comp.screen_gamut:
+            display_score += 2.0
 
     # 7. Release Year Decay (10 points max)
     # Penalize older hardware (current_year=2026)

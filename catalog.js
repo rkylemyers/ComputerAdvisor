@@ -35,7 +35,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Best Buy street deal price ($379 vs $499 standard retail).",
     "cpu_details": "Intel Core i3-N305 (8 Efficiency Cores / 8 Threads, up to 3.80 GHz Boost, 6MB Smart Cache, 15W TDP)",
     "cpu_benchmark_score": "PassMark: 10,150 | Geekbench 6: 4,950 Multi / 1,380 Single",
-    "cpu_independent_review": "Grade: B- (High-Efficiency Everyday) \u2022 8 Gracemont efficiency cores at 15W TDP. Snappy for 20+ browser tabs, Zoom, and 4K media; lacks hyperthreading for sustained 3D rendering.",
+    "cpu_independent_review": "Grade: B- (High-Efficiency Everyday) • 8 Gracemont efficiency cores at 15W TDP. Snappy for 20+ browser tabs, Zoom, and 4K media; lacks hyperthreading for sustained 3D rendering.",
     "gpu_details": "Intel UHD Graphics (32 Execution Units @ 1.25 GHz, Shared System Memory)",
     "ram_details": "8GB LPDDR5-4800 MT/s (Soldered Onboard, Single-Channel, Non-Upgradable)",
     "ports_io": "2x USB-C 3.2 Gen 1 (Power Delivery & DP 1.4), 1x USB-A 3.2 Gen 1, 1x MicroSD Slot, 3.5mm Headphone Jack",
@@ -46,31 +46,31 @@ const COMPUTERS_CATALOG = [
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/lenovo-ideapad-slim-3i-chromebook-plus-14-fhd-laptop-intel-core-i3-n305-8gb-memory-128gb-emmc-abyss-blue/6550736.p",
         "badge": "In Stock & Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Lenovo Official",
         "url": "https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/ideapad-slim-3i-chromebook-plus-gen-8-14-inch-intel/len101i0088",
         "badge": "Direct OEM",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Lenovo+IdeaPad+Slim+3i+Chromebook+Plus+14",
         "badge": "Prime Shipping",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+IdeaPad+Slim+3i+Chromebook+Plus",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Walmart",
         "url": "https://www.walmart.com/search?q=Lenovo+IdeaPad+Slim+3i+Chromebook+Plus",
         "badge": "Rollback Deal",
-        "icon": "\ud83d\uded2"
+        "icon": "🛒"
       }
     ]
   },
@@ -110,7 +110,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Amazon street price for Ryzen 5 / 16GB RAM / 512GB SSD configuration.",
     "cpu_details": "AMD Ryzen 5 7520U (4 Cores / 8 Threads, 2.80 GHz Base / 4.30 GHz Boost, 4MB L3 Cache, 15W TDP, Zen 2)",
     "cpu_benchmark_score": "PassMark: 9,300 | Geekbench 6: 4,600 Multi / 1,410 Single",
-    "cpu_independent_review": "Grade: B- (Reliable Budget Multitasker) \u2022 4 cores / 8 threads Zen 2 at 15W. Highly stable thermal profile for everyday multitasking, office suites, and student research.",
+    "cpu_independent_review": "Grade: B- (Reliable Budget Multitasker) • 4 cores / 8 threads Zen 2 at 15W. Highly stable thermal profile for everyday multitasking, office suites, and student research.",
     "gpu_details": "AMD Radeon 610M (2 RDNA2 CUs @ 1.9 GHz, Hardware AV1 / VP9 decode, Shared VRAM)",
     "ram_details": "16GB LPDDR5-5500 MT/s (Dual-Channel Soldered, Low-Power High-Bandwidth, Non-Upgradable)",
     "ports_io": "1x USB-C 3.2 Gen 2, 2x USB-A 3.2 Gen 1, 1x HDMI 2.1 (Up to 4K @ 60Hz), 3.5mm Headphone Jack, Barrel Power",
@@ -121,31 +121,31 @@ const COMPUTERS_CATALOG = [
         "store": "Amazon",
         "url": "https://www.amazon.com/dp/B0BS4BP8FB",
         "badge": "Prime Delivery",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Acer Official",
         "url": "https://store.acer.com/en-us/laptops/aspire",
         "badge": "Direct OEM",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Acer+Aspire+3+Ryzen+5",
         "badge": "Store Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=Acer+Aspire+3+A315-24P",
         "badge": "Verified Seller",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       },
       {
         "store": "Walmart",
         "url": "https://www.walmart.com/search?q=Acer+Aspire+3+A315-24P",
         "badge": "Value Deal",
-        "icon": "\ud83d\uded2"
+        "icon": "🛒"
       }
     ]
   },
@@ -185,7 +185,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Street sale price $899 at Amazon & Best Buy ($100 off Apple Store $999 MSRP).",
     "cpu_details": "Apple M2 (8 Cores: 4 Avalanche Performance @ 3.49 GHz + 4 Blizzard Efficiency @ 2.42 GHz, 16-Core Neural Engine)",
     "cpu_benchmark_score": "Geekbench 6: 9,850 Multi / 2,620 Single | PassMark: 15,400",
-    "cpu_independent_review": "Grade: A- (Fanless Efficiency Leader) \u2022 Industry-leading single-core burst responsiveness and thermals. Operates 100% silently with zero throttling on daily productivity.",
+    "cpu_independent_review": "Grade: A- (Fanless Efficiency Leader) • Industry-leading single-core burst responsiveness and thermals. Operates 100% silently with zero throttling on daily productivity.",
     "gpu_details": "Apple 8-Core Integrated GPU (1.4 GHz, 100 GB/s Unified Memory Bandwidth, ProRes & ProRes RAW Engine)",
     "ram_details": "8GB Unified Memory (LPDDR5-6400, Shared CPU/GPU Unified Pool, 100GB/s Bandwidth, Soldered)",
     "ports_io": "2x Thunderbolt 3 / USB4 (Up to 40Gbps), 1x MagSafe 3 Charging Port, 1x 3.5mm Jack with High-Impedance Headphone Support",
@@ -196,31 +196,31 @@ const COMPUTERS_CATALOG = [
         "store": "Apple Official",
         "url": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-m2",
         "badge": "Official Apple Store",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/dp/B0B3C57XLR",
         "badge": "Prime Deal",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/apple-macbook-air-13-6-laptop-m2-chip-8gb-memory-256gb-ssd-midnight/6509650.p",
         "badge": "Totaltech & Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+MacBook+Air+13+M2",
         "badge": "Payboo 0% Tax",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Costco",
         "url": "https://www.costco.com/CatalogSearch?keyword=MacBook+Air+M2",
         "badge": "Member Warranty",
-        "icon": "\ud83d\udcb3"
+        "icon": "💳"
       }
     ]
   },
@@ -260,7 +260,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Apple MSRP $1,099 with 16GB unified memory standard.",
     "cpu_details": "Apple M3 (8 Cores: 4 Performance @ 4.05 GHz + 4 Efficiency @ 2.75 GHz, 16-Core 3nm Neural Engine 18 TOPS)",
     "cpu_benchmark_score": "Geekbench 6: 11,850 Multi / 3,080 Single | PassMark: 18,900",
-    "cpu_independent_review": "Grade: A (Gold Standard Mobile SoC) \u2022 3nm process with hardware ray-tracing & AV1 engine. Exceptional battery-to-performance curve; single-core speed outpaces desktop chips.",
+    "cpu_independent_review": "Grade: A (Gold Standard Mobile SoC) • 3nm process with hardware ray-tracing & AV1 engine. Exceptional battery-to-performance curve; single-core speed outpaces desktop chips.",
     "gpu_details": "Apple 10-Core Integrated GPU (Dynamic Caching, Hardware-Accelerated Ray Tracing & Mesh Shading, 100 GB/s)",
     "ram_details": "16GB Unified Memory (LPDDR5-6400 Unified Memory Architecture, Soldered, High-Efficiency Multi-Tasking)",
     "ports_io": "2x Thunderbolt / USB4 (40Gbps), 1x MagSafe 3 Fast-Charging (0 to 50% in 30 min), 3.5mm Studio Jack",
@@ -271,31 +271,31 @@ const COMPUTERS_CATALOG = [
         "store": "Apple Official",
         "url": "https://www.apple.com/shop/buy-mac/macbook-air/13-inch-m3",
         "badge": "Official Apple Store",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/dp/B0CX23V2ZP",
         "badge": "Prime 1-Day",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=MacBook+Air+13+M3+16GB",
         "badge": "Same-Day Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=MacBook+Air+13+M3+16GB",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Adorama",
         "url": "https://www.adorama.com/l/?searchinfo=macbook+air+m3+16gb",
         "badge": "VIP Rewards",
-        "icon": "\ud83d\udcf8"
+        "icon": "📸"
       }
     ]
   },
@@ -335,7 +335,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Best Buy street price for Core Ultra 7 / 16GB RAM / 1TB SSD. Note: ASUS direct store lists top-spec 32GB models starting at $1,799.",
     "cpu_details": "Intel Core Ultra 7 155H (16 Cores: 6P @ 4.8 GHz + 8E @ 3.8 GHz + 2 Low-Power E-cores, Intel AI Boost NPU)",
     "cpu_benchmark_score": "PassMark: 25,200 | Geekbench 6: 12,450 Multi / 2,380 Single | Cinebench R23: 15,200",
-    "cpu_independent_review": "Grade: A (Modern AI & Efficiency Architecture) \u2022 Meteor Lake hybrid design with Intel AI Boost NPU. Strong 22-thread multi-tasking with low-power E-cores keeping idle drain minimal.",
+    "cpu_independent_review": "Grade: A (Modern AI & Efficiency Architecture) • Meteor Lake hybrid design with Intel AI Boost NPU. Strong 22-thread multi-tasking with low-power E-cores keeping idle drain minimal.",
     "gpu_details": "Intel Arc Graphics (8 Xe-cores @ 2.25 GHz, Ray Tracing, Intel XeSS AI Super-Sampling)",
     "ram_details": "16GB LPDDR5X-7467 MT/s (Ultra High-Speed Low-Latency Soldered, Dual-Channel)",
     "ports_io": "2x Thunderbolt 4 (DisplayPort / Power Delivery 40Gbps), 1x USB-A 3.2 Gen 1, 1x HDMI 2.1 TMDS, 3.5mm Combo Jack",
@@ -346,31 +346,31 @@ const COMPUTERS_CATALOG = [
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/asus-zenbook-14-oled-14-wuxga-touch-laptop-intel-core-ultra-7-16gb-memory-512gb-ssd-jasper-gray/6568761.p",
         "badge": "Exclusive Retail Deal",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "ASUS Official",
         "url": "https://www.asus.com/us/laptops/for-home/zenbook/asus-zenbook-14-oled-ux3405/",
         "badge": "Direct OEM",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=ASUS+Zenbook+14+OLED+UX3405",
         "badge": "Prime Eligible",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=ASUS+Zenbook+14+OLED+UX3405",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=ASUS+Zenbook+14+OLED+UX3405",
         "badge": "Fast Shipping",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       }
     ]
   },
@@ -410,7 +410,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Best Buy retail price $849.99 ($200 below HP's official $1,049.99 list price).",
     "cpu_details": "AMD Ryzen 7 8840HS (8 Cores / 16 Threads, 3.3 GHz Base / 5.1 GHz Max Boost, 16MB L3 Cache, AMD Ryzen AI NPU 38 TOPS)",
     "cpu_benchmark_score": "PassMark: 28,800 | Geekbench 6: 12,100 Multi / 2,490 Single | Cinebench R23: 16,400",
-    "cpu_independent_review": "Grade: A (Zen 4 Powerhouse with 38 TOPS AI) \u2022 4nm architecture with dedicated XDNA NPU. Outperforms Core Ultra 7 in sustained multi-threaded rendering while generating lower chassis heat.",
+    "cpu_independent_review": "Grade: A (Zen 4 Powerhouse with 38 TOPS AI) • 4nm architecture with dedicated XDNA NPU. Outperforms Core Ultra 7 in sustained multi-threaded rendering while generating lower chassis heat.",
     "gpu_details": "AMD Radeon 780M (12 RDNA3 CUs @ 2.7 GHz, Full DirectX 12 Ultimate & Vulkan 1.3)",
     "ram_details": "16GB LPDDR5-6400 MT/s (High-Efficiency Dual-Channel Soldered)",
     "ports_io": "1x Thunderbolt 4 / USB4 40Gbps (PD, DP 2.1), 1x USB-C 10Gbps, 2x USB-A 10Gbps (HP Sleep and Charge), 1x HDMI 2.1, 3.5mm",
@@ -421,31 +421,31 @@ const COMPUTERS_CATALOG = [
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/hp-envy-2-in-1-14-wide-ultra-xga-touch-screen-laptop-amd-ryzen-7-8840hs-16gb-memory-512gb-ssd-glacier-silver/6571087.p",
         "badge": "Top Rated Retailer",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "HP Official",
         "url": "https://www.hp.com/us-en/shop/mdp/laptops/envy-x360-14",
         "badge": "Direct OEM Configurator",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=HP+Envy+x360+14+8840HS",
         "badge": "Prime Shipping",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=HP+Envy+x360+14",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=HP+Envy+x360+14",
         "badge": "Online Deals",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       }
     ]
   },
@@ -485,7 +485,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official MSRP $1,199 for Snapdragon X Elite / 16GB RAM / 512GB OLED tablet (keyboard sold separately).",
     "cpu_details": "Qualcomm Snapdragon X Elite X1E-80-100 (12 Oryon Cores up to 3.4 GHz, Dual-Core Boost 4.0 GHz, 45 TOPS Hexagon NPU)",
     "cpu_benchmark_score": "Geekbench 6: 14,400 Multi / 2,810 Single | Cinebench 2024: 1,020 Multi",
-    "cpu_independent_review": "Grade: A- (Breakthrough ARM Multi-Core Speed) \u2022 12 custom Oryon cores delivering blistering 14,400+ Geekbench multi-core throughput, matched with a 45 TOPS Hexagon NPU and 14hr battery.",
+    "cpu_independent_review": "Grade: A- (Breakthrough ARM Multi-Core Speed) • 12 custom Oryon cores delivering blistering 14,400+ Geekbench multi-core throughput, matched with a 45 TOPS Hexagon NPU and 14hr battery.",
     "gpu_details": "Qualcomm Adreno GPU (3.8 TFLOPS, DirectX 12 Feature Level 12_1, Triple 4K Display Support)",
     "ram_details": "16GB LPDDR5X-8448 MT/s (High-Bandwidth 135 GB/s Bus Soldered Memory)",
     "ports_io": "2x USB4 / USB-C (DisplayPort 1.4a & Fast Charging), 1x Surface Connect Port, 1x Surface Pro Keyboard Magnetic Port",
@@ -496,31 +496,31 @@ const COMPUTERS_CATALOG = [
         "store": "Microsoft Official",
         "url": "https://www.microsoft.com/en-us/d/surface-pro-11th-edition/8vg44331vf3w",
         "badge": "Official Microsoft Store",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/microsoft-surface-pro-copilot-pc-13-oled-touch-screen-snapdragon-x-elite-16gb-memory-512gb-ssd-device-only-platinum/6582827.p",
         "badge": "In-Store Demo & Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Microsoft+Surface+Pro+11th+Edition",
         "badge": "Prime In Stock",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Microsoft+Surface+Pro+11th+Edition",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=Microsoft+Surface+Pro+11th+Edition",
         "badge": "Express Delivery",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       }
     ]
   },
@@ -560,7 +560,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Lenovo Store direct price with standard e-coupon savings for AMD Ryzen AI 7 PRO 360 / 32GB RAM / 1TB SSD.",
     "cpu_details": "AMD Ryzen AI 7 PRO 360 (8 Cores / 16 Threads, 4nm Zen 5 Architecture up to 5.0 GHz Boost, 50 TOPS XDNA 2 NPU, Enterprise AMD PRO Security)",
     "cpu_benchmark_score": "PassMark: 29,800 | Geekbench 6: 12,850 Multi / 2,680 Single | Cinebench 2024: 1,080 Multi",
-    "cpu_independent_review": "Grade: A+ (Zen 5 Architecture & 50 TOPS AI NPU) \u2022 Cutting-edge 4nm Zen 5 silicon with enterprise hardware security and a dedicated 50 TOPS NPU. Incredible sustained compiler throughput and all-day 17+ hour battery efficiency.",
+    "cpu_independent_review": "Grade: A+ (Zen 5 Architecture & 50 TOPS AI NPU) • Cutting-edge 4nm Zen 5 silicon with enterprise hardware security and a dedicated 50 TOPS NPU. Incredible sustained compiler throughput and all-day 17+ hour battery efficiency.",
     "gpu_details": "AMD Radeon 880M (12 RDNA 3.5 CUs, Dual DisplayPort 2.1 MST Hub Support)",
     "ram_details": "32GB LPDDR5X-7500 MT/s (High-Speed Low-Power Memory)",
     "ports_io": "2x USB4 / Thunderbolt 4 (Power Delivery 3.0 & DP 2.1), 2x USB-A 3.2 Gen 1 (1 Always On), 1x HDMI 2.1 (4K@60Hz), 3.5mm Headphone Jack, Nano-SIM (optional)",
@@ -571,31 +571,31 @@ const COMPUTERS_CATALOG = [
         "store": "Lenovo Official",
         "url": "https://www.lenovo.com/us/en/p/laptops/thinkpad/thinkpadt/lenovo-thinkpad-t14s-gen-6-14-inch-amd-laptop/len101t0109",
         "badge": "Direct OEM / Custom Build",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+ThinkPad+T14s+Gen+6",
         "badge": "Corporate Authorized",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=ThinkPad+T14s+Gen+6",
         "badge": "Check Retail Stock",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Lenovo+ThinkPad+T14s+Gen+6",
         "badge": "Prime Verified",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=Lenovo+ThinkPad+T14s+Gen+6",
         "badge": "Business Marketplace",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       }
     ]
   },
@@ -635,7 +635,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Dell Official Store direct configurator link for XPS 16 (9640) with Core Ultra 7/9 & dedicated RTX graphics. Also browse current retail stock via Best Buy.",
     "cpu_details": "Intel Core Ultra 9 185H (16 Cores / 22 Threads, 6P @ 5.1 GHz + 8E @ 3.8 GHz + 2 LPE, 24MB Smart Cache, Intel AI NPU)",
     "cpu_benchmark_score": "PassMark: 28,400 | Geekbench 6: 13,600 Multi / 2,520 Single | Cinebench R23: 17,100",
-    "cpu_independent_review": "Grade: A (Flagship Creator Mobile Platform) \u2022 5.1 GHz peak clock speed with 24MB Smart Cache. Exceptional Premiere / DaVinci timeline scrubbing and real-time audio multi-tracking.",
+    "cpu_independent_review": "Grade: A (Flagship Creator Mobile Platform) • 5.1 GHz peak clock speed with 24MB Smart Cache. Exceptional Premiere / DaVinci timeline scrubbing and real-time audio multi-tracking.",
     "gpu_details": "NVIDIA GeForce RTX 4070 Laptop GPU (8GB GDDR6, 60W TGP, Ada Lovelace, DLSS 3.5 Frame Generation & Ray Reconstruction)",
     "ram_details": "32GB LPDDR5X-7467 MT/s (Dual-Channel Low-Power Memory, Soldered Motherboard Configuration)",
     "ports_io": "3x Thunderbolt 4 (Type-C with Power Delivery and DisplayPort), 1x Full-Size MicroSD v6.0 Card Reader, 1x 3.5mm Headphone/Mic Combo",
@@ -646,31 +646,31 @@ const COMPUTERS_CATALOG = [
         "store": "Dell Official",
         "url": "https://www.dell.com/en-us/shop/cty/spd/xps-16-9640-laptop",
         "badge": "Direct OEM Configurator",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+XPS+16+9640",
         "badge": "Store Stock & Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Dell+XPS+16+9640",
         "badge": "Prime Delivery",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+XPS+16+9640",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Micro Center",
         "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Dell+XPS+16",
         "badge": "In-Store & Online",
-        "icon": "\ud83c\udfec"
+        "icon": "🏬"
       }
     ]
   },
@@ -710,7 +710,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Apple Store MSRP $2,499 for 14-Core CPU / 20-Core GPU / 24GB Unified Memory / 512GB SSD.",
     "cpu_details": "Apple M4 Pro (14 Cores: 10 Performance Cores + 4 Efficiency Cores, 273 GB/s Memory Bandwidth, 16-Core Neural Engine)",
     "cpu_benchmark_score": "Geekbench 6: 22,800 Multi / 3,920 Single | Cinebench 2024: 1,720 Multi",
-    "cpu_independent_review": "Grade: A+ (World-Leading Single-Core & Neural Engine) \u2022 Unrivaled 3,900+ Geekbench single-core speed, 273 GB/s unified memory bandwidth, and full hardware ray-tracing with Thunderbolt 5 support.",
+    "cpu_independent_review": "Grade: A+ (World-Leading Single-Core & Neural Engine) • Unrivaled 3,900+ Geekbench single-core speed, 273 GB/s unified memory bandwidth, and full hardware ray-tracing with Thunderbolt 5 support.",
     "gpu_details": "Apple 20-Core GPU (Dynamic Caching, Hardware-Accelerated Ray Tracing, AV1 Decode Engine, Dual ProRes Encoders)",
     "ram_details": "24GB Unified Memory (LPDDR5X Unified High-Bandwidth Architecture 273 GB/s, Shared System Pool)",
     "ports_io": "3x Thunderbolt 5 (Up to 120Gbps), 1x HDMI 2.1 (Up to 8K @ 60Hz or 4K @ 240Hz), 1x SDXC Card Slot, 1x MagSafe 3 Port, 1x 3.5mm Studio Jack",
@@ -721,31 +721,31 @@ const COMPUTERS_CATALOG = [
         "store": "Apple Official",
         "url": "https://www.apple.com/shop/buy-mac/macbook-pro/16-inch",
         "badge": "Official Apple Store",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=MacBook+Pro+16+M4+Pro",
         "badge": "Fast In-Store Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=MacBook+Pro+16+M4+Pro",
         "badge": "Prime 1-Day",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+MacBook+Pro+16+M4+Pro",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Adorama",
         "url": "https://www.adorama.com/l/?searchinfo=apple+macbook+pro+16+m4+pro",
         "badge": "VIP Pro Rewards",
-        "icon": "\ud83d\udcf8"
+        "icon": "📸"
       }
     ]
   },
@@ -785,7 +785,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Apple Store MSRP $1,999 for M2 Max 12-Core CPU / 30-Core GPU / 32GB RAM / 512GB SSD.",
     "cpu_details": "Apple M2 Max (12 Cores: 8 Performance Cores @ 3.68 GHz + 4 Efficiency Cores @ 2.42 GHz, 400 GB/s Memory Bandwidth)",
     "cpu_benchmark_score": "Geekbench 6: 14,900 Multi / 2,780 Single | Cinebench R23: 14,800",
-    "cpu_independent_review": "Grade: A+ (Massive Memory Bandwidth Monster) \u2022 Colossal 400 GB/s system bus bandwidth. Unmatched for 8K ProRes video streams and ultra-low buffer latency in complex audio DAWs.",
+    "cpu_independent_review": "Grade: A+ (Massive Memory Bandwidth Monster) • Colossal 400 GB/s system bus bandwidth. Unmatched for 8K ProRes video streams and ultra-low buffer latency in complex audio DAWs.",
     "gpu_details": "Apple 30-Core GPU (Hardware Ray Tracing, 4 ProRes Video Acceleration Engines, Quad 6K Display Support)",
     "ram_details": "32GB Unified Memory (LPDDR5 Unified Architecture with massive 400 GB/s System Bus Bandwidth)",
     "ports_io": "Rear: 4x Thunderbolt 4, 2x USB-A (5Gbps), 1x HDMI 2.1, 1x 10Gb Ethernet, 3.5mm Jack; Front: 2x USB-C (10Gbps), 1x SDXC Slot",
@@ -796,31 +796,31 @@ const COMPUTERS_CATALOG = [
         "store": "Apple Official",
         "url": "https://www.apple.com/shop/buy-mac/mac-studio",
         "badge": "Official Apple Store",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+Mac+Studio+M2+Max",
         "badge": "Instant Savings & In Stock",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/apple-mac-studio-apple-m2-max-with-12-core-cpu-and-30-core-gpu-32gb-memory-512gb-ssd-silver/6545199.p",
         "badge": "Verified In Stock",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Apple+Mac+Studio+M2+Max",
         "badge": "Prime Delivery",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Adorama",
         "url": "https://www.adorama.com/l/?searchinfo=mac+studio+m2+max",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf8"
+        "icon": "📸"
       }
     ]
   },
@@ -860,7 +860,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Lenovo Store direct price for SKU 83F300BBUS with Core Ultra 7 251HX / 32GB RAM / 1TB SSD / RTX 5070 (12GB GDDR7).",
     "cpu_details": "Intel Core Ultra 7 251HX (16 Cores / 24 Threads: P-cores up to 5.10 GHz + E-cores up to 4.50 GHz, Intel AI Boost NPU)",
     "cpu_benchmark_score": "PassMark: 39,400 | Geekbench 6: 16,800 Multi / 2,920 Single | Cinebench 2024: 1,350 Multi",
-    "cpu_independent_review": "Grade: A+ (Next-Gen Hybrid Silicon with Dedicated NPU) \u2022 Massive 24-thread mobile workstation compute with 5.1 GHz boost and 245W power ceiling. Built for heavy multi-threaded simulations, video pipelines, and high-FPS gaming.",
+    "cpu_independent_review": "Grade: A+ (Next-Gen Hybrid Silicon with Dedicated NPU) • Massive 24-thread mobile workstation compute with 5.1 GHz boost and 245W power ceiling. Built for heavy multi-threaded simulations, video pipelines, and high-FPS gaming.",
     "gpu_details": "NVIDIA GeForce RTX 5070 Laptop GPU (12GB GDDR7 Dedicated Memory, Advanced Optimus, DLSS 4 & Full Ray Tracing)",
     "ram_details": "32GB DDR5-5600 MT/s (2x 16GB Dual-Channel SODIMM, User-Upgradable up to 64GB DDR5)",
     "ports_io": "1x Thunderbolt 4 / USB-C (DisplayPort 2.1), 1x USB-C 3.2 Gen 2 (140W Power Delivery), 4x USB-A 3.2 Gen 1 (1 Always On), 1x HDMI 2.1 (Up to 8K/60Hz), 1x RJ-45 Gigabit LAN, 3.5mm",
@@ -871,31 +871,31 @@ const COMPUTERS_CATALOG = [
         "store": "Lenovo Official",
         "url": "https://www.lenovo.com/us/en/p/laptops/legion-laptops/legion-pro-series/legion-pro-5i-gen-10-16-inch-intel/83f300bbus",
         "badge": "Direct OEM / Custom Build",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Lenovo+Legion+Pro+5i+Gen+10",
         "badge": "Gaming Dept In Stock",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+Legion+Pro+5i+Gen+10",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Lenovo+Legion+Pro+5i+Gen+10",
         "badge": "Prime Fast Shipping",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Micro Center",
         "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Lenovo+Legion+Pro+5i",
         "badge": "PC Builder Hub",
-        "icon": "\ud83c\udfec"
+        "icon": "🏬"
       }
     ]
   },
@@ -935,7 +935,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Dell direct price for Core i9-14900KF + RTX 4090 24GB liquid-cooled config. (Base Aurora models start at $1,299 with lower specs).",
     "cpu_details": "Intel Core i9-14900KF (24 Cores / 32 Threads: 8P-Cores @ 6.0 GHz Thermal Velocity Boost + 16E-Cores @ 4.4 GHz, 36MB Smart Cache, 240mm AIO Liquid Cooler)",
     "cpu_benchmark_score": "PassMark: 58,900 | Geekbench 6: 21,400 Multi / 3,210 Single | Cinebench R23: 40,200",
-    "cpu_independent_review": "Grade: S (Extreme Desktop Peak Tier) \u2022 Record-setting 6.0 GHz peak clock speed with 32 threads. Unrestricted king of real-time Unreal Engine 5 development, 4K ray tracing, and physics.",
+    "cpu_independent_review": "Grade: S (Extreme Desktop Peak Tier) • Record-setting 6.0 GHz peak clock speed with 32 threads. Unrestricted king of real-time Unreal Engine 5 development, 4K ray tracing, and physics.",
     "gpu_details": "NVIDIA GeForce RTX 4090 Desktop (24GB GDDR6X, 450W TGP, Ada Lovelace, 16,384 CUDA Cores, 3rd Gen RT Cores, DLSS 3 Frame Gen)",
     "ram_details": "64GB DDR5-5600 MT/s Dual-Channel XMP (4x DIMM Slots, Upgradable to 128GB DDR5)",
     "ports_io": "Front: 1x USB-C 10Gbps, 3x USB-A 5Gbps, 3.5mm; Rear: 1x USB-C 20Gbps, 2x USB-A 10Gbps, 4x USB-A 5Gbps, 2x USB 2.0, 1x RJ-45 2.5G LAN, 7.1 Surround SPDIF, 3x DP 1.4a, 1x HDMI 2.1",
@@ -946,31 +946,31 @@ const COMPUTERS_CATALOG = [
         "store": "Dell / Alienware Official",
         "url": "https://www.dell.com/en-us/shop/desktop-computers/alienware-aurora-r16-gaming-desktop/spd/alienware-aurora-r16-desktop",
         "badge": "Direct OEM Configurator",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Alienware+Aurora+R16+RTX+4090",
         "badge": "High-End Rig Stock",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Alienware+Aurora+R16+RTX+4090",
         "badge": "Prime Delivery",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Alienware+Aurora+R16",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Micro Center",
         "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Alienware+Aurora+R16",
         "badge": "PC Showroom",
-        "icon": "\ud83c\udfec"
+        "icon": "🏬"
       }
     ]
   },
@@ -1010,7 +1010,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Amazon / Minisforum direct price for pre-configured 32GB RAM + 1TB NVMe configuration ($439 barebones without RAM/storage).",
     "cpu_details": "AMD Ryzen 7 7840HS (8 Cores / 16 Threads, 3.8 GHz Base / 5.1 GHz Max Boost, 16MB L3 Cache, Zen 4 4nm, 54W-65W TDP mode)",
     "cpu_benchmark_score": "PassMark: 29,400 | Geekbench 6: 12,300 Multi / 2,480 Single | Cinebench R23: 16,800",
-    "cpu_independent_review": "Grade: A (Mini Workstation Heavyweight) \u2022 Full-power 54W Zen 4 architecture with Radeon 780M. Outperforms ultrabook chips under sustained multi-hour compiling and rendering loads.",
+    "cpu_independent_review": "Grade: A (Mini Workstation Heavyweight) • Full-power 54W Zen 4 architecture with Radeon 780M. Outperforms ultrabook chips under sustained multi-hour compiling and rendering loads.",
     "gpu_details": "AMD Radeon 780M (12 RDNA3 CUs @ 2.7 GHz, Oculink PCIe 4.0 x4 Port for External Desktop GPU Docking at 64Gbps)",
     "ram_details": "32GB DDR5-5600 MT/s (Dual SO-DIMM Slots, Upgradable up to 96GB DDR5, Non-Soldered)",
     "ports_io": "1x Oculink Port (PCIe 4.0 x4 64Gbps), 2x USB4 40Gbps (Type-C), 2x HDMI 2.1, 4x USB-A 3.2 Gen 2 (10Gbps), 2x 2.5G RJ-45 Ethernet LAN, 3.5mm Audio",
@@ -1021,31 +1021,31 @@ const COMPUTERS_CATALOG = [
         "store": "Minisforum Official",
         "url": "https://store.minisforum.com/products/minisforum-um780-xtx",
         "badge": "Direct OEM Store",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/dp/B0CKPD61F9",
         "badge": "Prime In Stock",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=Minisforum+UM780+XTX",
         "badge": "Featured Marketplace",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Minisforum+UM780",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "AliExpress Official",
         "url": "https://www.aliexpress.com/w/wholesale-minisforum-um780-xtx.html",
         "badge": "Manufacturer Outlet",
-        "icon": "\ud83c\udf10"
+        "icon": "🌐"
       }
     ]
   },
@@ -1085,7 +1085,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Dell Store direct configurator price with 32GB RAM / 1TB SSD / Dual Hot-Swap Batteries.",
     "cpu_details": "Intel Core i7-1370H (14 Cores / 20 Threads: 6P-Cores @ 5.0 GHz Turbo + 8E-Cores, 24MB Smart Cache, Enterprise vPro)",
     "cpu_benchmark_score": "PassMark: 28,400 | Geekbench 6: 12,200 Multi / 2,640 Single",
-    "cpu_independent_review": "Grade: A (Industrial Grade Muscle) \u2022 Sealed QuadCool thermal design prevents grease, dust, and metallic shavings from entering the chassis while delivering high sustained multi-core performance.",
+    "cpu_independent_review": "Grade: A (Industrial Grade Muscle) • Sealed QuadCool thermal design prevents grease, dust, and metallic shavings from entering the chassis while delivering high sustained multi-core performance.",
     "gpu_details": "Intel Iris Xe Graphics (96 EUs with hardware acceleration for diagnostics, schematics, and GIS mapping)",
     "ram_details": "32GB DDR5-4800 MT/s (Dual SO-DIMM Slots, User-Upgradable up to 64GB DDR5)",
     "ports_io": "2x Thunderbolt 4 / USB-C, 2x USB-A 3.2 Gen 1 (1 PowerShare), 1x Native RS-232 Serial Port (for CNC/PLCs), 2x RJ-45 Gigabit LAN, 1x HDMI 2.0, MicroSD Card Reader, Stylus Slot",
@@ -1096,31 +1096,31 @@ const COMPUTERS_CATALOG = [
         "store": "Dell Rugged Store",
         "url": "https://www.dell.com/en-us/shop/dell-laptops/latitude-5430-rugged-laptop/spd/latitude-14-5430-laptop",
         "badge": "Direct OEM Configurator",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+Latitude+5430+Rugged",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+Latitude+Rugged",
         "badge": "Check Retail Stock",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Dell+Latitude+5430+Rugged",
         "badge": "Prime Delivery",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=Dell+Latitude+5430+Rugged",
         "badge": "Industrial Verified",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       }
     ]
   },
@@ -1160,7 +1160,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Panasonic TOUGHBOOK configured with 32GB RAM / 1TB Quick-Release SSD and Dual Hot-Swap Batteries.",
     "cpu_details": "Intel Core i7-1370P vPro (14 Cores / 20 Threads, up to 5.2 GHz, 24MB Smart Cache, 28W P-Series Architecture)",
     "cpu_benchmark_score": "PassMark: 26,900 | Geekbench 6: 11,800 Multi / 2,520 Single",
-    "cpu_independent_review": "Grade: A+ (Mission-Critical Field Reliability) \u2022 Built specifically for harsh environmental conditions: manufacturing assembly floors, automotive ECU diagnostic scanning, utility fleets, and outdoor fieldwork.",
+    "cpu_independent_review": "Grade: A+ (Mission-Critical Field Reliability) • Built specifically for harsh environmental conditions: manufacturing assembly floors, automotive ECU diagnostic scanning, utility fleets, and outdoor fieldwork.",
     "gpu_details": "Intel Iris Xe Graphics (with optional modular discrete GPU xPAK module)",
     "ram_details": "32GB DDR4-3200 MT/s (Modular SO-DIMM, User-Upgradable to 64GB)",
     "ports_io": "1x Thunderbolt 4 / USB-C, 2x USB-A 3.2 Gen 1, 1x Native DB9 Serial Port, 1x MicroSDXC, 1x HDMI 2.0, 1x Gigabit Ethernet LAN, Modular xPAK expansion bay, Stylus Garage",
@@ -1171,31 +1171,31 @@ const COMPUTERS_CATALOG = [
         "store": "Panasonic Official",
         "url": "https://na.panasonic.com/us/computers-tablets-handhelds/computers/laptops/toughbook-55",
         "badge": "Direct OEM TOUGHBOOK",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Panasonic+Toughbook+55",
         "badge": "Authorized Rugged Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Panasonic+Toughbook",
         "badge": "Enterprise Catalog",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Panasonic+Toughbook+55",
         "badge": "Prime Verified",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=Panasonic+Toughbook+55",
         "badge": "Marketplace In Stock",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
       }
     ]
   },
@@ -1235,7 +1235,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Official Apple Store price $599 for M4 10C CPU / 10C GPU / 16GB RAM / 256GB SSD ($799 for 512GB).",
     "cpu_details": "Apple M4 (10 Cores: 4 Performance Cores @ 4.4 GHz + 6 Efficiency Cores @ 2.85 GHz, 120 GB/s Memory Bandwidth, 16-Core Neural Engine 38 TOPS)",
     "cpu_benchmark_score": "Geekbench 6: 15,100 Multi / 3,850 Single | Cinebench R24: 980 Multi / 175 Single",
-    "cpu_independent_review": "Grade: S (Phenomenal Efficiency King) \u2022 World-class single-core speeds outperforming desktop Core i9 chips while drawing under 35 watts peak power under full load.",
+    "cpu_independent_review": "Grade: S (Phenomenal Efficiency King) • World-class single-core speeds outperforming desktop Core i9 chips while drawing under 35 watts peak power under full load.",
     "gpu_details": "Apple 10-Core GPU (Hardware-Accelerated Ray Tracing, Dynamic Caching, AV1 Decode, Drives up to 3 Displays Simultaneously: 2x 6K@60Hz over TB4 + 1x 5K@60Hz or 4K@60Hz over HDMI)",
     "ram_details": "16GB Unified Memory (LPDDR5X with 120 GB/s bandwidth, Unified CPU/GPU Pool)",
     "ports_io": "Front: 2x USB-C (10Gbps), 3.5mm Headphone Jack; Rear: 3x Thunderbolt 4 (40Gbps DP-Alt), 1x HDMI 2.1, 1x Gigabit Ethernet (10GbE optional), Power In",
@@ -1246,31 +1246,31 @@ const COMPUTERS_CATALOG = [
         "store": "Apple Official Store",
         "url": "https://www.apple.com/shop/buy-mac/mac-mini",
         "badge": "Official OEM Store",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/apple-mac-mini-m4-chip-built-for-apple-intelligence-16gb-memory-256gb-ssd-silver/6534640.p",
         "badge": "In Stock Ready for Pickup",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Apple+Mac+Mini+M4+16GB",
         "badge": "Prime Next-Day Delivery",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+Mac+mini+M4",
         "badge": "Authorized Dealer",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Adorama",
         "url": "https://www.adorama.com/l/?searchinfo=apple+mac+mini+m4",
         "badge": "Apple Authorized",
-        "icon": "\ud83d\udcf8"
+        "icon": "📸"
       }
     ]
   },
@@ -1310,7 +1310,7 @@ const COMPUTERS_CATALOG = [
     "price_notes": "Dell Direct enterprise sale price for Core i7-14700 / 16GB DDR5 / 512GB PCIe Gen4 SSD configuration with 3-year onsite service.",
     "cpu_details": "Intel Core i7-14700 (20 Cores / 28 Threads: 8 Performance Cores @ 5.4 GHz Turbo + 12 Efficient Cores @ 4.2 GHz, 33MB Smart Cache, 65W-219W TDP)",
     "cpu_benchmark_score": "PassMark: 45,800 | Geekbench 6: 18,200 Multi / 2,890 Single | Cinebench R23: 31,500",
-    "cpu_independent_review": "Grade: A+ (Corporate Multitasking Powerhouse) \u2022 Phenomenal 20-core thread density. Runs dozens of spreadsheet tabs, database compiles, and VM containers without breaking a sweat.",
+    "cpu_independent_review": "Grade: A+ (Corporate Multitasking Powerhouse) • Phenomenal 20-core thread density. Runs dozens of spreadsheet tabs, database compiles, and VM containers without breaking a sweat.",
     "gpu_details": "Intel UHD Graphics 770 (32 Execution Units, Drives up to 3 Independent Monitors natively via dual DisplayPort 1.4a + HDMI 1.4b/2.1 at up to 4K@60Hz without discrete card)",
     "ram_details": "16GB DDR5-5600 MT/s Dual-Channel (4x DIMM Slots, User-Upgradable up to 128GB DDR5)",
     "ports_io": "Front: 1x USB-C 3.2 Gen 2 (10Gbps), 3x USB-A 3.2 Gen 1 (5Gbps), 1x Universal Audio Jack; Rear: 2x DisplayPort 1.4a, 1x HDMI 1.4b, 4x USB-A 3.2, 2x USB 2.0 with SmartPower, 1x RJ-45 Gigabit Ethernet, Audio Line-Out, PCIe Expansion Slots",
@@ -1321,31 +1321,931 @@ const COMPUTERS_CATALOG = [
         "store": "Dell Direct",
         "url": "https://www.dell.com/en-us/shop/desktop-computers/optiplex-tower-plus-7020/spd/optiplex-7020-plus-desktop",
         "badge": "Direct OEM 3-Yr Onsite",
-        "icon": "\ud83c\udfe2"
+        "icon": "🏢"
       },
       {
         "store": "B&H Photo Video",
         "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+OptiPlex+7020",
         "badge": "In Stock & Ready to Ship",
-        "icon": "\ud83d\udcf7"
+        "icon": "📷"
       },
       {
         "store": "Amazon",
         "url": "https://www.amazon.com/s?k=Dell+OptiPlex+7020+Core+i7+14700",
         "badge": "Prime Business Delivery",
-        "icon": "\ud83d\udce6"
+        "icon": "📦"
       },
       {
         "store": "Best Buy",
         "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+OptiPlex+7020",
         "badge": "Verified Partner",
-        "icon": "\ud83c\udff7\ufe0f"
+        "icon": "🏷️"
       },
       {
         "store": "Newegg",
         "url": "https://www.newegg.com/p/pl?d=Dell+OptiPlex+7020",
         "badge": "Business Marketplace",
-        "icon": "\ud83d\udcbb"
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-lenovo-legion-tower-7i",
+    "name": "Lenovo Legion Tower 7i Gen 8",
+    "brand": "Lenovo",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 2699.0,
+    "cpu_model": "Intel Core i9-14900KF (24C/32T Liquid Cooled)",
+    "cpu_tier": 5,
+    "cpu_cores": 24,
+    "gpu_model": "NVIDIA GeForce RTX 4080 Super (16GB GDDR6X)",
+    "gpu_tier": 4,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 30.8,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.lenovo.com/us/en/p/desktops/legion-desktops/legion-t-series-towers/legion-tower-7i-gen-8-intel/len102g0007",
+    "target_summary": "Liquid-cooled powerhouse with 360mm AIO, Intel Core i9, and RTX 4080 Super for 4K ray tracing and 3D rendering.",
+    "user_rating": 4.8,
+    "review_count": 920,
+    "ranking_badge": "Best RTX 4080 Super Liquid-Cooled Tower",
+    "os_edition": "Windows 11 Home 64-bit Edition (Pro Upgrade Available)",
+    "official_url": "https://www.lenovo.com/us/en/p/desktops/legion-desktops/legion-t-series-towers/legion-tower-7i-gen-8-intel/len102g0007",
+    "retailer": "Lenovo Official Store",
+    "msrp": 2899.0,
+    "price_notes": "Lenovo Direct sale price with 360mm liquid cooler and 850W ATX 3.0 PSU.",
+    "cpu_details": "Intel Core i9-14900KF (24 Cores / 32 Threads, up to 6.0 GHz, 360mm Liquid AIO Cooler, 34-liter ventilated chassis)",
+    "cpu_benchmark_score": "PassMark: 58,400 | Geekbench 6: 21,100 Multi / 3,180 Single",
+    "cpu_independent_review": "Grade: S (Thermal Stability Titan) • 360mm radiator keeps 24-core i9 at peak boost clocks with zero thermal throttling under sustained Cinebench loops.",
+    "gpu_details": "NVIDIA GeForce RTX 4080 Super (16GB GDDR6X, 320W TGP, 3x DisplayPort 1.4a + 1x HDMI 2.1a, Quad 4K @ 120Hz support)",
+    "ram_details": "32GB DDR5-5600 MT/s (Dual Channel, 4x DIMM Slots, Upgradable to 128GB)",
+    "ports_io": "Top: 2x USB 3.2 Gen 1, 2x USB 2.0, Headphone/Mic; Rear: 1x USB-C 3.2 Gen 2x2 (20Gbps), 4x USB 3.2 Gen 1, 2x USB 3.2 Gen 2, 2.5G LAN, 3x DP 1.4a, 1x HDMI 2.1",
+    "webcam_biometrics": "Requires External Webcam; Standard Gaming Keyboard/Mouse Compatible",
+    "thermals_acoustics": "Legion Coldfront 5.0 Liquid Cooling, 6 High-Airflow ARGB Fans, Whispering 38 dBA under gaming loads",
+    "stores": [
+      {
+        "store": "Lenovo Official",
+        "url": "https://www.lenovo.com/us/en/p/desktops/legion-desktops/legion-t-series-towers/legion-tower-7i-gen-8-intel/len102g0007",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+Legion+Tower+7i",
+        "badge": "In Stock Ready to Ship",
+        "icon": "📷"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Lenovo+Legion+Tower+7i",
+        "badge": "Verified In Stock",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+Legion+Tower+7i+RTX+4080",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Legion+Tower+7i",
+        "badge": "Official Partner",
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-corsair-vengeance-i7500",
+    "name": "Corsair Vengeance i7500 Gaming Desktop",
+    "brand": "Corsair",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 2199.0,
+    "cpu_model": "Intel Core i7-14700KF (20C/28T Liquid Cooled)",
+    "cpu_tier": 4,
+    "cpu_cores": 20,
+    "gpu_model": "NVIDIA GeForce RTX 4070 Ti Super (16GB GDDR6X)",
+    "gpu_tier": 4,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 29.5,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 2,
+    "purchase_url": "https://www.corsair.com/us/en/p/gaming-computers/cs-9050085-na/vengeance-i7500-gaming-pc-i7-14700kf-rtx-4070-ti-super-1tb-m2-32gb-ddr5-cs-9050085-na",
+    "target_summary": "Enthusiast custom-tier tower with high-speed 6000MHz DDR5, iCUE liquid cooling, and RTX 4070 Ti Super 16GB.",
+    "user_rating": 4.8,
+    "review_count": 680,
+    "ranking_badge": "Top-Tier Build Quality & Airflow Tower",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://www.corsair.com/us/en/p/gaming-computers/cs-9050085-na/vengeance-i7500-gaming-pc-i7-14700kf-rtx-4070-ti-super-1tb-m2-32gb-ddr5-cs-9050085-na",
+    "retailer": "Corsair Direct",
+    "msrp": 2399.0,
+    "price_notes": "Built using standard retail components (Corsair RM750e PSU, Vengeance RGB RAM, H100i liquid cooler).",
+    "cpu_details": "Intel Core i7-14700KF (20 Cores / 28 Threads: 8P + 12E, up to 5.6 GHz, Corsair H100i RGB Liquid Cooler)",
+    "cpu_benchmark_score": "PassMark: 46,200 | Geekbench 6: 18,600 Multi / 2,940 Single",
+    "cpu_independent_review": "Grade: A+ (Standard Parts Enthusiast PC) • Zero proprietary parts. Standard ATX motherboard and PSU allow lifetime upgradeability without vendor lock-in.",
+    "gpu_details": "NVIDIA GeForce RTX 4070 Ti Super (16GB GDDR6X, 256-bit memory bus, 3x DP 1.4a + 1x HDMI 2.1a)",
+    "ram_details": "32GB Corsair VENGEANCE RGB DDR5-6000 MT/s (2x16GB, Low-Latency XMP 3.0)",
+    "ports_io": "Front: 1x USB-C 3.2 Gen 2, 2x USB 3.2 Gen 1, Audio Jack; Rear: 1x USB-C 20Gbps, 3x USB 3.2 Gen 2, 4x USB 3.2 Gen 1, 2.5GbE LAN, 3x DP 1.4a, 1x HDMI 2.1",
+    "webcam_biometrics": "Requires External Webcam; Standard PC Peripherals Compatible",
+    "thermals_acoustics": "Corsair 4000D Airflow chassis with rapid-route cable management and 240mm liquid cooler",
+    "stores": [
+      {
+        "store": "Corsair Direct",
+        "url": "https://www.corsair.com/us/en/p/gaming-computers/cs-9050085-na/vengeance-i7500-gaming-pc-i7-14700kf-rtx-4070-ti-super-1tb-m2-32gb-ddr5-cs-9050085-na",
+        "badge": "Direct OEM 2-Yr Warranty",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/corsair-vengeance-i7500-gaming-desktop-intel-core-i7-14700kf-32gb-ddr5-6000-mhz-nvidia-geforce-rtx-4070-ti-super-1tb-ssd-black/6575114.p",
+        "badge": "Free 2-Day Shipping",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Corsair+Vengeance+i7500+4070+Ti+Super",
+        "badge": "Prime In Stock",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Corsair+Vengeance+i7500",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Corsair+Vengeance+i7500",
+        "badge": "Official Marketplace",
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-dell-xps-8960",
+    "name": "Dell XPS 8960 Desktop Tower",
+    "brand": "Dell",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 1499.0,
+    "cpu_model": "Intel Core i7-14700 (20C/28T, up to 5.4 GHz)",
+    "cpu_tier": 4,
+    "cpu_cores": 20,
+    "gpu_model": "NVIDIA GeForce RTX 4060 Ti (8GB GDDR6)",
+    "gpu_tier": 3,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 19.8,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.dell.com/en-us/shop/desktop-computers/xps-desktop/spd/xps-8960-desktop",
+    "target_summary": "Understated creator tower with 20-core Intel Core i7, 32GB RAM, and RTX 4060 Ti for clean studio desks.",
+    "user_rating": 4.7,
+    "review_count": 1450,
+    "ranking_badge": "Best Creator & Executive Minimalist Desktop",
+    "os_edition": "Windows 11 Pro 64-bit Edition Pre-Installed",
+    "official_url": "https://www.dell.com/en-us/shop/desktop-computers/xps-desktop/spd/xps-8960-desktop",
+    "retailer": "Dell Direct",
+    "msrp": 1749.0,
+    "price_notes": "Dell Direct price for liquid-cooled Core i7 + RTX 4060 Ti + 32GB RAM configuration.",
+    "cpu_details": "Intel Core i7-14700 (20 Cores / 28 Threads: 8P + 12E, up to 5.4 GHz, 33MB Smart Cache, Liquid Cooled option)",
+    "cpu_benchmark_score": "PassMark: 45,900 | Geekbench 6: 18,400 Multi / 2,900 Single",
+    "cpu_independent_review": "Grade: A (Executive Studio Workhorse) • Minimalist graphite aluminum front bezel with zero distracting RGB. Whisper-quiet fan curves ideal for home recording and office environments.",
+    "gpu_details": "NVIDIA GeForce RTX 4060 Ti (8GB GDDR6, 3x DisplayPort 1.4a + 1x HDMI 2.1a, supports 4 simultaneous displays)",
+    "ram_details": "32GB DDR5-5600 MT/s Dual-Channel (2x DIMM Slots, Upgradable to 64GB)",
+    "ports_io": "Front: 1x USB-C 3.2 Gen 2 (10Gbps), 3x USB-A 3.2 Gen 1 (5Gbps), SD Card Reader, Audio Jack; Rear: 1x USB-C 10Gbps, 2x USB-A 3.2, 2x USB 2.0, Gigabit LAN, 7.1 Audio, 3x DP 1.4a, 1x HDMI 2.1",
+    "webcam_biometrics": "Requires External Webcam; Standard Dell Business Keyboard & Mouse Included in Box",
+    "thermals_acoustics": "Proprietary high-efficiency cooling shroud, 750W 80-Plus Platinum PSU, near-silent operation (<24 dBA)",
+    "stores": [
+      {
+        "store": "Dell Direct",
+        "url": "https://www.dell.com/en-us/shop/desktop-computers/xps-desktop/spd/xps-8960-desktop",
+        "badge": "Official Dell Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/dell-xps-8960-desktop-intel-core-i7-14700-32gb-memory-nvidia-geforce-rtx-4060-ti-1tb-ssd-graphite/6575120.p",
+        "badge": "In Store Ready",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+XPS+8960+Desktop+i7+14700",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+XPS+8960",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=dell+xps+8960",
+        "badge": "In Stock",
+        "icon": "📸"
+      }
+    ]
+  },
+  {
+    "id": "c-hp-omen-45l",
+    "name": "HP OMEN 45L Gaming Desktop",
+    "brand": "HP",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 3199.0,
+    "cpu_model": "Intel Core i9-14900K (24C/32T Cryo Chamber Cooled)",
+    "cpu_tier": 5,
+    "cpu_cores": 24,
+    "gpu_model": "NVIDIA GeForce RTX 4090 (24GB GDDR6X)",
+    "gpu_tier": 4,
+    "ram_gb": 64,
+    "storage_gb": 2000,
+    "battery_hours": 0.0,
+    "weight_lbs": 49.8,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.hp.com/us-en/shop/pdp/omen-by-hp-45l-gaming-desktop-gt22-2000-8z0l8av-1",
+    "target_summary": "Patented Cryo Chamber external cooling tower pulling unheated ambient air to maintain extreme RTX 4090 clock speeds.",
+    "user_rating": 4.9,
+    "review_count": 810,
+    "ranking_badge": "Best Cryo-Cooled Extreme AI & 4K Tower",
+    "os_edition": "Windows 11 Pro 64-bit Edition",
+    "official_url": "https://www.hp.com/us-en/shop/pdp/omen-by-hp-45l-gaming-desktop-gt22-2000-8z0l8av-1",
+    "retailer": "HP Official Store",
+    "msrp": 3499.0,
+    "price_notes": "Equipped with patented external Cryo Chamber liquid cooling compartment.",
+    "cpu_details": "Intel Core i9-14900K (24 Cores / 32 Threads, up to 6.0 GHz Turbo, 360mm AIO Liquid Cooler isolated in top chamber)",
+    "cpu_benchmark_score": "PassMark: 59,200 | Geekbench 6: 21,500 Multi / 3,220 Single | Cinebench R23: 40,800",
+    "cpu_independent_review": "Grade: S+ (Revolutionary Cooling Innovation) • The isolated top Cryo Chamber draws cool room air through the radiator rather than internal GPU heat exhaust, lowering CPU temps by up to 6°C.",
+    "gpu_details": "NVIDIA GeForce RTX 4090 (24GB GDDR6X, 450W TGP, 3x DisplayPort 1.4a, 1x HDMI 2.1a)",
+    "ram_details": "64GB Kingston FURY DDR5-5200 MT/s RGB (4x16GB, Upgradable to 128GB)",
+    "ports_io": "Top: 2x USB-A 5Gbps, 2x USB 2.0, Headset Jack; Rear: 1x USB-C 10Gbps, 1x USB-C 5Gbps, 2x USB-A 10Gbps, 2x USB-A 5Gbps, 2x USB 2.0, Gigabit LAN, 3x DP 1.4a, 1x HDMI 2.1",
+    "webcam_biometrics": "Requires External Webcam; Standard Wired Keyboard & Optical Mouse Included",
+    "thermals_acoustics": "HP OMEN Cryo Chamber with 1200W 80-Plus Gold ATX 3.0 Power Supply",
+    "stores": [
+      {
+        "store": "HP Official Store",
+        "url": "https://www.hp.com/us-en/shop/pdp/omen-by-hp-45l-gaming-desktop-gt22-2000-8z0l8av-1",
+        "badge": "Official OEM",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/hp-omen-45l-gaming-desktop-intel-core-i9-14900k-64gb-ddr5-memory-nvidia-geforce-rtx-4090-2tb-ssd-black/6575125.p",
+        "badge": "Free 2-Day Shipping",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=HP+OMEN+45L+RTX+4090",
+        "badge": "Prime In Stock",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=HP+OMEN+45L",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Micro Center",
+        "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=HP+OMEN+45L",
+        "badge": "Hardware Specialist",
+        "icon": "⚙️"
+      }
+    ]
+  },
+  {
+    "id": "c-mac-studio-m2-ultra",
+    "name": "Apple Mac Studio (M2 Ultra)",
+    "brand": "Apple",
+    "os": "macOS",
+    "form_factor": "Desktop",
+    "release_year": 2023,
+    "price": 3499.0,
+    "cpu_model": "Apple M2 Ultra (24-Core CPU)",
+    "cpu_tier": 5,
+    "cpu_cores": 24,
+    "gpu_model": "Apple 60-Core GPU (800 GB/s Bandwidth)",
+    "gpu_tier": 4,
+    "ram_gb": 64,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 7.9,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.apple.com/shop/buy-mac/mac-studio",
+    "target_summary": "Unrivaled multi-display creative desktop supporting up to 8x 4K displays or 6x 6K displays with 800 GB/s unified memory.",
+    "user_rating": 4.9,
+    "review_count": 1180,
+    "ranking_badge": "#1 Multi-Display Creative Workstation (8 Displays)",
+    "os_edition": "macOS Sequoia 15 (Factory Pre-installed, 800 GB/s Memory Bandwidth)",
+    "official_url": "https://www.apple.com/shop/buy-mac/mac-studio",
+    "retailer": "Apple Official Store",
+    "msrp": 3999.0,
+    "price_notes": "Official Apple Store price for M2 Ultra 24C CPU / 60C GPU / 64GB Unified Memory / 1TB SSD.",
+    "cpu_details": "Apple M2 Ultra (24 Cores: 16 Performance Cores + 8 Efficiency Cores, 32-Core Neural Engine 31.6 TOPS, 800 GB/s Memory Bandwidth)",
+    "cpu_benchmark_score": "Geekbench 6: 21,800 Multi / 2,820 Single | Cinebench R23: 28,900",
+    "cpu_independent_review": "Grade: S (Unrivaled Memory Throughput) • Colossal 800 GB/s memory bandwidth allows loading full 70B parameter LLM models and rendering 22 streams of 8K ProRes video in real time.",
+    "gpu_details": "Apple 60-Core GPU (Hardware Ray Tracing, Drives up to 8x 4K displays @ 60Hz, 6x 6K displays @ 60Hz, or 3x 8K displays @ 60Hz simultaneously!)",
+    "ram_details": "64GB Unified Memory (LPDDR5 Unified Pool, 800 GB/s System Bus Bandwidth, Upgradable to 192GB)",
+    "ports_io": "Rear: 4x Thunderbolt 4 (40Gbps), 2x USB-A (5Gbps), 1x HDMI 2.1, 1x 10Gb Ethernet LAN, 3.5mm Headphone Jack; Front: 2x Thunderbolt 4, 1x SDXC Card Slot",
+    "webcam_biometrics": "Requires External Webcam / Studio Display; Supports Apple Magic Keyboard with Touch ID",
+    "thermals_acoustics": "Dual Centrifugal Blower System with Massive Copper Thermal Core, inaudible under everyday loads (<15 dBA)",
+    "stores": [
+      {
+        "store": "Apple Official",
+        "url": "https://www.apple.com/shop/buy-mac/mac-studio",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+Mac+Studio+M2+Ultra",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/apple-mac-studio-m2-ultra-24-core-cpu-60-core-gpu-64gb-memory-1tb-ssd-silver/6545201.p",
+        "badge": "Verified Partner",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Apple+Mac+Studio+M2+Ultra+64GB",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=mac+studio+m2+ultra",
+        "badge": "Authorized Dealer",
+        "icon": "📸"
+      }
+    ]
+  },
+  {
+    "id": "c-hp-z2-mini-g9",
+    "name": "HP Z2 Mini G9 Workstation",
+    "brand": "HP",
+    "os": "Windows",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 2499.0,
+    "cpu_model": "Intel Core i7-14700K (20C/28T, 5.5 GHz)",
+    "cpu_tier": 5,
+    "cpu_cores": 20,
+    "gpu_model": "NVIDIA RTX 4000 Ada Generation (20GB GDDR6)",
+    "gpu_tier": 4,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 5.7,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 3,
+    "purchase_url": "https://www.hp.com/us-en/shop/pdp/hp-z2-mini-g9-workstation-wolf-pro-security-edition-p-9h2g8ut-aba-1",
+    "target_summary": "Ultra-dense ISV-certified mini workstation with 20GB ECC professional GPU for CAD, SolidWorks, and AI inference.",
+    "user_rating": 4.8,
+    "review_count": 520,
+    "ranking_badge": "Best Pro CAD & Engineering Mini Workstation",
+    "os_edition": "Windows 11 Pro for Workstations (HP Wolf Pro Security Edition)",
+    "official_url": "https://www.hp.com/us-en/shop/pdp/hp-z2-mini-g9-workstation-wolf-pro-security-edition-p-9h2g8ut-aba-1",
+    "retailer": "HP Official Store",
+    "msrp": 2899.0,
+    "price_notes": "Equipped with NVIDIA RTX 4000 Ada 20GB workstation GPU and 3-year onsite business warranty.",
+    "cpu_details": "Intel Core i7-14700K (20 Cores / 28 Threads: 8P + 12E, up to 5.5 GHz, 33MB Cache, Phase-Change Liquid Cooling)",
+    "cpu_benchmark_score": "PassMark: 48,200 | Geekbench 6: 18,900 Multi / 2,960 Single",
+    "cpu_independent_review": "Grade: S (Pro Certified Engineering Titan) • Fully certified for Autodesk Revit, SolidWorks, Siemens NX, and ArcGIS with dedicated enterprise driver stability.",
+    "gpu_details": "NVIDIA RTX 4000 Ada Generation (20GB GDDR6 with ECC, 4x Mini-DisplayPort 1.4a outputs, drives 4x 4K @ 120Hz or 2x 8K)",
+    "ram_details": "32GB DDR5-5600 MT/s SODIMM (2x Slots, Upgradable to 64GB DDR5)",
+    "ports_io": "Front: 1x USB-C 20Gbps, 2x USB-A 10Gbps, Audio Jack; Rear: 3x DisplayPort 1.4, 4x Mini-DP 1.4a on GPU, 3x USB-A 10Gbps, 1x RJ-45 Gigabit LAN",
+    "webcam_biometrics": "Requires External Webcam; Standard HP USB Business Keyboard & Mouse Included in Box",
+    "thermals_acoustics": "Custom copper vapor chamber with blower fans, whisper-quiet office operation (<22 dBA)",
+    "stores": [
+      {
+        "store": "HP Official Store",
+        "url": "https://www.hp.com/us-en/shop/pdp/hp-z2-mini-g9-workstation-wolf-pro-security-edition-p-9h2g8ut-aba-1",
+        "badge": "Direct OEM 3-Yr Warranty",
+        "icon": "🏢"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=HP+Z2+Mini+G9",
+        "badge": "Authorized Workstation Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=HP+Z2+Mini+G9+RTX+4000",
+        "badge": "Prime Business",
+        "icon": "📦"
+      },
+      {
+        "store": "CDW",
+        "url": "https://www.cdw.com/search/?key=HP+Z2+Mini+G9",
+        "badge": "Enterprise Authorized",
+        "icon": "⚙️"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=HP+Z2+Mini+G9",
+        "badge": "Verified Marketplace",
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-asus-rog-strix-g16chr",
+    "name": "ASUS ROG Strix G16CHR Gaming Desktop",
+    "brand": "ASUS",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 1699.0,
+    "cpu_model": "Intel Core i7-14700F (20C/28T, up to 5.4 GHz)",
+    "cpu_tier": 4,
+    "cpu_cores": 20,
+    "gpu_model": "NVIDIA GeForce RTX 4070 Super (12GB GDDR6X)",
+    "gpu_tier": 4,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 24.2,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://rog.asus.com/us/desktops/mid-tower/rog-strix-g16chr-series/",
+    "target_summary": "High-airflow gaming and rendering desktop with RTX 4070 Super, 20-core CPU, and built-in headset hanger.",
+    "user_rating": 4.7,
+    "review_count": 870,
+    "ranking_badge": "Best Value High-Performance 1440p/4K Tower",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://rog.asus.com/us/desktops/mid-tower/rog-strix-g16chr-series/",
+    "retailer": "ASUS Official Store",
+    "msrp": 1899.0,
+    "price_notes": "ASUS Direct price for Core i7-14700F + RTX 4070 Super 12GB + 32GB DDR5.",
+    "cpu_details": "Intel Core i7-14700F (20 Cores / 28 Threads: 8P + 12E, up to 5.4 GHz, Tower Air Cooler with Dual Heatpipes)",
+    "cpu_benchmark_score": "PassMark: 45,200 | Geekbench 6: 18,100 Multi / 2,870 Single",
+    "cpu_independent_review": "Grade: A (Price-to-Performance Champion) • The RTX 4070 Super offers 20% higher shader performance than the standard 4070, making 4K video rendering and 1440p 144Hz gaming effortless.",
+    "gpu_details": "NVIDIA GeForce RTX 4070 Super (12GB GDDR6X, 3x DisplayPort 1.4a, 1x HDMI 2.1a)",
+    "ram_details": "32GB DDR5-5600 MT/s (2x16GB, Upgradable to 64GB)",
+    "ports_io": "Front: 2x USB 3.2 Gen 1, 1x Audio Jack; Rear: 1x USB-C 3.2 Gen 2, 2x USB 3.2 Gen 2, 4x USB 2.0, 1x 2.5GbE LAN, 3x DP 1.4a, 1x HDMI 2.1",
+    "webcam_biometrics": "Requires External Webcam; Standard ASUS Gaming Keyboard/Mouse Included",
+    "thermals_acoustics": "High-airflow mesh front fascia with Aura Sync ARGB lighting and integrated carry handle",
+    "stores": [
+      {
+        "store": "ASUS Official Store",
+        "url": "https://rog.asus.com/us/desktops/mid-tower/rog-strix-g16chr-series/",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/asus-rog-gaming-desktop-intel-core-i7-14700f-32gb-memory-nvidia-geforce-rtx-4070-super-1tb-ssd-black/6573783.p",
+        "badge": "In Store Ready",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+ROG+Strix+G16CHR+4070+Super",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ASUS+ROG+Strix+G16CHR",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ASUS+ROG+Strix+G16CHR",
+        "badge": "Featured Retailer",
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-beelink-ser8",
+    "name": "Beelink SER8 Mini PC",
+    "brand": "Beelink",
+    "os": "Windows",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 649.0,
+    "cpu_model": "AMD Ryzen 7 8845HS (8C/16T AI)",
+    "cpu_tier": 3,
+    "cpu_cores": 8,
+    "gpu_model": "AMD Radeon 780M (Quad Display Support)",
+    "gpu_tier": 1,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 1.6,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.bee-link.com/products/beelink-ser8-8845hs",
+    "target_summary": "All-metal CNC aluminum mini PC with AMD Hawk Point AI, near-silent vapor chamber cooling, driving up to 4x 4K displays.",
+    "user_rating": 4.8,
+    "review_count": 940,
+    "ranking_badge": "Best Silent All-Metal Aluminum Mini PC",
+    "os_edition": "Windows 11 Pro 64-bit Edition (Pre-Activated)",
+    "official_url": "https://www.bee-link.com/products/beelink-ser8-8845hs",
+    "retailer": "Beelink Direct",
+    "msrp": 749.0,
+    "price_notes": "All-metal CNC aluminum chassis with high-density vapor chamber cooling.",
+    "cpu_details": "AMD Ryzen 7 8845HS (8 Cores / 16 Threads, 3.8 GHz Base / 5.1 GHz Max Boost, 38 TOPS NPU, Zen 4 4nm, 54W TDP mode)",
+    "cpu_benchmark_score": "PassMark: 30,200 | Geekbench 6: 12,800 Multi / 2,540 Single",
+    "cpu_independent_review": "Grade: A (Whisper-Quiet Premium Mini PC) • The vapor chamber cooler keeps noise below 32 dBA under full load, with zero bottom vents to avoid dust ingestion.",
+    "gpu_details": "AMD Radeon 780M (12 RDNA 3 CUs @ 2.7 GHz, drives 4 independent 4K @ 120Hz displays via USB4 + USB-C + HDMI 2.1 + DP 1.4)",
+    "ram_details": "32GB Crucial DDR5-5600 MT/s Dual-Channel (Dual SO-DIMM Slots, Upgradable to 64GB)",
+    "ports_io": "Front: 1x USB-C 10Gbps, 1x USB-A 3.2 (10Gbps), 3.5mm Jack; Rear: 1x USB4 40Gbps, 1x USB-A 10Gbps, 2x USB 2.0, 1x HDMI 2.1, 1x DisplayPort 1.4, 1x 2.5G LAN",
+    "webcam_biometrics": "Requires External Webcam; Standard PC Peripherals Compatible",
+    "thermals_acoustics": "MSC System Vapor Chamber Cooling with high-density silent blower (<32 dBA full sustained load)",
+    "stores": [
+      {
+        "store": "Beelink Official",
+        "url": "https://www.bee-link.com/products/beelink-ser8-8845hs",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Beelink+SER8+8845HS+32GB",
+        "badge": "Prime Next-Day",
+        "icon": "📦"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Beelink+SER8",
+        "badge": "In Stock",
+        "icon": "💻"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Beelink+SER8",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Minisforum Store",
+        "url": "https://store.minisforum.com",
+        "badge": "Mini PC Partner",
+        "icon": "⚙️"
+      }
+    ]
+  },
+  {
+    "id": "c-lenovo-thinkstation-p3-tiny",
+    "name": "Lenovo ThinkStation P3 Tiny Workstation",
+    "brand": "Lenovo",
+    "os": "Windows",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 1299.0,
+    "cpu_model": "Intel Core i7-14700 (20C/28T vPro)",
+    "cpu_tier": 4,
+    "cpu_cores": 20,
+    "gpu_model": "NVIDIA RTX A1000 (8GB GDDR6 Pro)",
+    "gpu_tier": 3,
+    "ram_gb": 32,
+    "storage_gb": 512,
+    "battery_hours": 0.0,
+    "weight_lbs": 3.1,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 3,
+    "purchase_url": "https://www.lenovo.com/us/en/p/workstations/thinkstation-p-series/thinkstation-p3-tiny-workstation/len102s0015",
+    "target_summary": "World's smallest 1-liter ISV-certified workstation supporting up to 6 independent displays for financial trading and CAD.",
+    "user_rating": 4.8,
+    "review_count": 620,
+    "ranking_badge": "Best Tiny 1-Liter Financial & Trading Workstation",
+    "os_edition": "Windows 11 Pro 64-bit Edition (Lenovo Commercial vPro Edition)",
+    "official_url": "https://www.lenovo.com/us/en/p/workstations/thinkstation-p-series/thinkstation-p3-tiny-workstation/len102s0015",
+    "retailer": "Lenovo Official Store",
+    "msrp": 1599.0,
+    "price_notes": "Equipped with dedicated NVIDIA RTX A1000 8GB workstation GPU and 3-year Premier Onsite service.",
+    "cpu_details": "Intel Core i7-14700 (20 Cores / 28 Threads: 8P + 12E, up to 5.4 GHz, Intel vPro Enterprise, 65W TDP)",
+    "cpu_benchmark_score": "PassMark: 45,500 | Geekbench 6: 18,300 Multi / 2,890 Single",
+    "cpu_independent_review": "Grade: A+ (Trading & Engineering Dynamo) • 1-liter chassis engineered to drive up to 6 financial charts or CAD assemblies simultaneously.",
+    "gpu_details": "NVIDIA RTX A1000 (8GB GDDR6, 4x Mini-DisplayPort 1.4a outputs, ISV certified for AutoCAD, Bloomberg, and SolidWorks)",
+    "ram_details": "32GB DDR5-5600 MT/s SODIMM (2x Slots, Upgradable to 64GB)",
+    "ports_io": "Front: 1x USB-C 10Gbps, 2x USB-A 10Gbps, Audio Jack; Rear: 1x DisplayPort 1.4, 1x HDMI 2.1, 4x Mini-DP 1.4a on GPU, 2x USB 3.2, 1x Gigabit LAN",
+    "webcam_biometrics": "Requires External Webcam; Standard Lenovo Business Keyboard & Mouse Included in Box",
+    "thermals_acoustics": "MIL-SPEC tested thermal blower system, robust in demanding factory/trading floor environments",
+    "stores": [
+      {
+        "store": "Lenovo Official",
+        "url": "https://www.lenovo.com/us/en/p/workstations/thinkstation-p-series/thinkstation-p3-tiny-workstation/len102s0015",
+        "badge": "Official OEM 3-Yr Onsite",
+        "icon": "🏢"
+      },
+      {
+        "store": "CDW",
+        "url": "https://www.cdw.com/search/?key=ThinkStation+P3+Tiny",
+        "badge": "Enterprise Authorized",
+        "icon": "⚙️"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ThinkStation+P3+Tiny",
+        "badge": "In Stock Ready to Ship",
+        "icon": "📷"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+ThinkStation+P3+Tiny+RTX+A1000",
+        "badge": "Prime Business",
+        "icon": "📦"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ThinkStation+P3+Tiny",
+        "badge": "Official Partner",
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-apple-mac-mini-m4-pro",
+    "name": "Apple Mac mini (M4 Pro, 2024/2025)",
+    "brand": "Apple",
+    "os": "macOS",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 1399.0,
+    "cpu_model": "Apple M4 Pro (12-Core CPU)",
+    "cpu_tier": 5,
+    "cpu_cores": 12,
+    "gpu_model": "Apple 16-Core GPU (Thunderbolt 5)",
+    "gpu_tier": 4,
+    "ram_gb": 24,
+    "storage_gb": 512,
+    "battery_hours": 0.0,
+    "weight_lbs": 1.6,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.apple.com/shop/buy-mac/mac-mini",
+    "target_summary": "5-inch powerhouse with Apple M4 Pro, 24GB Unified Memory, and 3x Thunderbolt 5 ports (120Gbps) supporting triple 6K displays.",
+    "user_rating": 4.9,
+    "review_count": 1820,
+    "ranking_badge": "Best Pro Mini PC with Thunderbolt 5",
+    "os_edition": "macOS Sequoia 15 (Factory Pre-installed, 273 GB/s Memory Bandwidth)",
+    "official_url": "https://www.apple.com/shop/buy-mac/mac-mini",
+    "retailer": "Apple Official Store",
+    "msrp": 1399.0,
+    "price_notes": "Official Apple Store price for M4 Pro 12C CPU / 16C GPU / 24GB RAM / 512GB SSD.",
+    "cpu_details": "Apple M4 Pro (12 Cores: 8 Performance Cores @ 4.5 GHz + 4 Efficiency Cores, 273 GB/s Memory Bandwidth, 16-Core Neural Engine)",
+    "cpu_benchmark_score": "Geekbench 6: 22,100 Multi / 3,920 Single | Cinebench R24: 1,420 Multi / 178 Single",
+    "cpu_independent_review": "Grade: S+ (Next-Gen Micro-Workstation Benchmark) • Multi-core performance rivaling Mac Studio M2 Max and desktop Core i9 chips in a tiny 5x5-inch enclosure.",
+    "gpu_details": "Apple 16-Core GPU (Hardware Ray Tracing, 3x Thunderbolt 5 @ 120Gbps, drives up to 3x 6K @ 60Hz displays or dual 6K + one 8K)",
+    "ram_details": "24GB Unified Memory (LPDDR5X, 273 GB/s Bandwidth, Unified CPU/GPU Pool)",
+    "ports_io": "Front: 2x USB-C (10Gbps), 3.5mm Headphone Jack; Rear: 3x Thunderbolt 5 (120Gbps DP-Alt), 1x HDMI 2.1, 1x Gigabit Ethernet, Power In",
+    "webcam_biometrics": "Requires External Webcam; Supports Apple Magic Keyboard with Touch ID",
+    "thermals_acoustics": "New through-chassis thermal architecture venting through base, barely audible (<14 dBA idle, ~24 dBA sustained load)",
+    "stores": [
+      {
+        "store": "Apple Official Store",
+        "url": "https://www.apple.com/shop/buy-mac/mac-mini",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/apple-mac-mini-m4-pro-chip-built-for-apple-intelligence-24gb-memory-512gb-ssd-silver/6534645.p",
+        "badge": "Ready for Pickup",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Apple+Mac+Mini+M4+Pro+24GB",
+        "badge": "Prime Next-Day Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+Mac+mini+M4+Pro",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=apple+mac+mini+m4+pro",
+        "badge": "Apple Authorized",
+        "icon": "📸"
+      }
+    ]
+  },
+  {
+    "id": "c-asus-nuc-14-pro",
+    "name": "ASUS NUC 14 Pro Mini PC",
+    "brand": "ASUS",
+    "os": "Windows",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 799.0,
+    "cpu_model": "Intel Core Ultra 7 155H (16C/22T AI)",
+    "cpu_tier": 4,
+    "cpu_cores": 16,
+    "gpu_model": "Intel Arc Graphics (Dual Thunderbolt 4)",
+    "gpu_tier": 2,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 1.4,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 3,
+    "purchase_url": "https://www.asus.com/us/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/",
+    "target_summary": "Official Intel NUC flagship successor with Intel Core Ultra 7 Meteor Lake, dual Thunderbolt 4 ports, and toolless chassis.",
+    "user_rating": 4.7,
+    "review_count": 710,
+    "ranking_badge": "Official Intel NUC Flagship Successor",
+    "os_edition": "Windows 11 Pro 64-bit Edition Pre-Installed",
+    "official_url": "https://www.asus.com/us/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/",
+    "retailer": "ASUS Official Store",
+    "msrp": 899.0,
+    "price_notes": "Official successor to Intel's NUC division, built with 3-year commercial warranty.",
+    "cpu_details": "Intel Core Ultra 7 155H (16 Cores / 22 Threads: 6P + 8E + 2 Low-Power Island Cores, Intel AI Boost NPU, up to 4.8 GHz Turbo)",
+    "cpu_benchmark_score": "PassMark: 28,600 | Geekbench 6: 12,600 Multi / 2,420 Single",
+    "cpu_independent_review": "Grade: A (Industrial Grade Micro Titan) • 4x4-inch toolless chassis designed for 24/7 continuous operation with dual Thunderbolt 4 display outputs.",
+    "gpu_details": "Intel Arc Graphics (8 Xe-Cores @ 2.25 GHz, drives up to 4x 4K @ 60Hz displays via dual Thunderbolt 4 + dual HDMI 2.1)",
+    "ram_details": "32GB DDR5-5600 MT/s Dual-Channel SODIMM (Upgradable to 96GB)",
+    "ports_io": "Front: 1x USB-C 20Gbps, 2x USB-A 10Gbps; Rear: 2x Thunderbolt 4 (40Gbps DP-Alt), 2x HDMI 2.1 (TMDS), 1x USB-A 10Gbps, 1x USB 2.0, 1x 2.5G Intel LAN",
+    "webcam_biometrics": "Requires External Webcam; Standard PC Peripherals Compatible",
+    "thermals_acoustics": "Whisper-quiet blower with dual heatpipes, designed for 24/7 commercial reliability (<26 dBA)",
+    "stores": [
+      {
+        "store": "ASUS Official Store",
+        "url": "https://www.asus.com/us/displays-desktops/nucs/nuc-mini-pcs/asus-nuc-14-pro/",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+NUC+14+Pro+Core+Ultra+7",
+        "badge": "Prime In Stock",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ASUS+NUC+14+Pro",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ASUS+NUC+14+Pro",
+        "badge": "In Stock",
+        "icon": "💻"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=ASUS+NUC+14+Pro",
+        "badge": "Verified Partner",
+        "icon": "🏷️"
+      }
+    ]
+  },
+  {
+    "id": "c-lenovo-ideacentre-tower-gen9",
+    "name": "Lenovo IdeaCentre Tower Gen 9",
+    "brand": "Lenovo",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 749.0,
+    "cpu_model": "AMD Ryzen 7 8700G (8C/16T Hawk Point)",
+    "cpu_tier": 3,
+    "cpu_cores": 8,
+    "gpu_model": "AMD Radeon 780M (Triple Display Output)",
+    "gpu_tier": 1,
+    "ram_gb": 16,
+    "storage_gb": 512,
+    "battery_hours": 0.0,
+    "weight_lbs": 15.4,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.lenovo.com/us/en/p/desktops/ideacentre/500-series/ideacentre-tower-gen-9-17l-amd/len102d0034",
+    "target_summary": "Modern cloud-grey home office desktop with 8-core AMD Zen 4 architecture, Ryzen AI, and native triple display output.",
+    "user_rating": 4.6,
+    "review_count": 890,
+    "ranking_badge": "Best Value Home Office & Study Desktop",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://www.lenovo.com/us/en/p/desktops/ideacentre/500-series/ideacentre-tower-gen-9-17l-amd/len102d0034",
+    "retailer": "Lenovo Official Store",
+    "msrp": 849.0,
+    "price_notes": "Lenovo Direct sale price with AMD Ryzen 7 8700G and 16GB DDR5-5200.",
+    "cpu_details": "AMD Ryzen 7 8700G (8 Cores / 16 Threads, 4.2 GHz Base / 5.1 GHz Max Boost, 16MB L3 Cache, built-in 16 TOPS NPU, 65W TDP)",
+    "cpu_benchmark_score": "PassMark: 32,400 | Geekbench 6: 13,400 Multi / 2,680 Single",
+    "cpu_independent_review": "Grade: A- (Everyday Multitasking King) • Desktop Zen 4 Hawk Point chip with Radeon 780M graphics delivers smooth casual gaming, 4K video playback, and fast application loading.",
+    "gpu_details": "AMD Radeon 780M Integrated Graphics (Drives up to 3 independent monitors via HDMI 2.1 + DisplayPort 1.4 + VGA)",
+    "ram_details": "16GB DDR5-5200 MT/s (2x8GB Dual Channel, Upgradable to 32GB)",
+    "ports_io": "Front: 1x USB-C 3.2 Gen 1 (5Gbps), 2x USB-A 3.2 Gen 1, Headphone Jack; Rear: 4x USB 2.0, 1x HDMI 2.1, 1x DisplayPort 1.4, 1x VGA, 1x Gigabit LAN, Audio Out",
+    "webcam_biometrics": "Requires External Webcam; Standard Lenovo Wired Business Keyboard & Mouse Included in Box",
+    "thermals_acoustics": "17-liter clean cloud-grey chassis with whisper-quiet fan (<20 dBA idle, ~28 dBA load)",
+    "stores": [
+      {
+        "store": "Lenovo Official",
+        "url": "https://www.lenovo.com/us/en/p/desktops/ideacentre/500-series/ideacentre-tower-gen-9-17l-amd/len102d0034",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Lenovo+IdeaCentre+Tower+Gen+9",
+        "badge": "In Store Ready",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+IdeaCentre+Tower+8700G",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+IdeaCentre+Tower+Gen+9",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Lenovo+IdeaCentre+Tower+Gen+9",
+        "badge": "Official Marketplace",
+        "icon": "💻"
       }
     ]
   }
@@ -1954,7 +2854,8 @@ const PERIPHERALS_CATALOG = [
   }
 ];
 
-function clientScoreComputer(comp, persona, currentYear = 2026) {
+function clientScoreComputer(comp, rawPersona, currentYear = 2026) {
+  const persona = (rawPersona && rawPersona.persona) ? rawPersona.persona : (rawPersona || {});
   const reasons = [];
 
   // 1. OS Compatibility Check
@@ -3060,8 +3961,8 @@ const FALLBACK_WILSON_ANALYSIS = {
 // ==========================================
 function getDesktopPackageDetails(comp) {
   if (!comp) return { isDesktop: false, needsMonitor: false, needsKeyboard: false, needsMouse: false };
-  const ff = (comp.form_factor || '').toLowerCase();
-  const isDesktop = ff === 'desktop' || ff === 'mini pc' || comp.screen_size === 0;
+  const ff = (comp.form_factor || "").toLowerCase();
+  const isDesktop = ff === "desktop" || ff === "mini pc" || comp.screen_size === 0;
   
   if (!isDesktop) {
     return {
@@ -3069,40 +3970,97 @@ function getDesktopPackageDetails(comp) {
       needsMonitor: false,
       needsKeyboard: false,
       needsMouse: false,
-      screenSummary: comp.screen_size + '" (' + comp.screen_nits + ' nits, ' + comp.screen_gamut + ')'
+      screenSummary: comp.screen_size + '" (' + comp.screen_nits + " nits, " + comp.screen_gamut + ")"
     };
   }
 
   let keyboardMouseIncluded = false;
   let keyboardMouseNote = "No keyboard or mouse included in this standalone chassis. External input devices required.";
   
-  if (comp.id === 'c-desktop-beast-4090') {
+  if (comp.id === "c-desktop-beast-4090") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "Basic wired USB multimedia keyboard and optical mouse included in box. Ergonomic wireless upgrade recommended.";
-  } else if (comp.id === 'c-dell-optiplex-7020') {
+  } else if (comp.id === "c-dell-optiplex-7020") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "Standard Dell wired business USB keyboard and mouse included in box.";
-  } else if (comp.brand === 'Apple') {
-    keyboardMouseNote = "Chassis ships with power cable only. Apple Magic Keyboard with Touch ID and Magic Mouse / Trackpad required.";
+  } else if (comp.id === "c-hp-omen-45l") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "HP 310 wired USB black keyboard and mouse combo included in box.";
+  } else if (comp.id === "c-lenovo-legion-tower-7i") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Lenovo Legion RGB gaming keyboard and optical gaming mouse included in box.";
+  } else if (comp.id === "c-dell-xps-8960") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Dell KB216 wired multimedia keyboard and MS116 optical mouse included in box.";
+  } else if (comp.id === "c-lenovo-ideacentre-tower-gen9") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Lenovo Calliope wired USB keyboard and mouse combo included in box.";
+  } else if (comp.id === "c-hp-z2-mini-g9") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "HP wired business desktop keyboard and mouse included in box.";
+  } else if (comp.id === "c-lenovo-thinkstation-p3-tiny") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Lenovo Traditional USB business keyboard and mouse included in box.";
+  } else if (comp.brand === "Apple") {
+    keyboardMouseNote = "Chassis ships with power cord only. Apple Magic Keyboard with Touch ID and Magic Mouse / Trackpad required.";
+  } else if (comp.id === "c-corsair-vengeance-i7500") {
+    keyboardMouseNote = "High-end custom enthusiast tower ships without peripherals. Mechanical keyboard and precision gaming mouse required.";
+  } else if (comp.id === "c-asus-rog-strix-g16chr") {
+    keyboardMouseNote = "Standalone gaming tower chassis. Dedicated gaming mechanical keyboard and low-latency mouse recommended.";
+  } else if (comp.id === "c-beelink-ser8" || comp.id === "c-minisforum-um780" || comp.id === "c-asus-nuc-14-pro") {
+    keyboardMouseNote = "Ultra-compact mini PC chassis ships with power brick and VESA mount. Wireless desktop combo or Bluetooth peripherals required.";
   }
 
   let maxMonitors = 4;
   let portsSummary = comp.ports_io || "DisplayPort + HDMI";
   let gpuVerdict = "Natively supports multi-monitor output.";
 
-  if (comp.id.includes('4090')) {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4090 with 24GB VRAM drives up to 4x 4K @ 120Hz/144Hz displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id.includes('mac-studio')) {
+  if (comp.id === "c-mac-studio-m2-ultra") {
+    maxMonitors = 8;
+    gpuVerdict = "Apple M2 Ultra 60-Core GPU drives up to 8 displays simultaneously (8x 4K @ 60Hz, or 6x 6K @ 60Hz over 6x Thunderbolt 4 + 2x HDMI 2.1).";
+  } else if (comp.id === "c-mac-studio-m2max") {
     maxMonitors = 5;
     gpuVerdict = "Apple M2 Max 30-Core GPU drives up to 5 displays simultaneously (4x up to 6K @ 60Hz over Thunderbolt 4 + 1x 4K @ 240Hz or 8K @ 60Hz over HDMI 2.1).";
-  } else if (comp.id.includes('mac-mini')) {
+  } else if (comp.id === "c-apple-mac-mini-m4-pro") {
+    maxMonitors = 3;
+    gpuVerdict = "Apple M4 Pro 16-Core GPU drives up to 3 displays simultaneously (3x 6K @ 60Hz over Thunderbolt 5 @ 120Gbps, or 1x 8K @ 60Hz + 1x 4K @ 240Hz).";
+  } else if (comp.id === "c-apple-mac-mini-m4") {
     maxMonitors = 3;
     gpuVerdict = "Apple M4 10-Core GPU drives up to 3 displays simultaneously (2x up to 6K @ 60Hz over Thunderbolt 4 + 1x 5K @ 60Hz or 4K @ 60Hz over HDMI).";
-  } else if (comp.id.includes('minisforum')) {
+  } else if (comp.id === "c-hp-omen-45l" || comp.id === "c-desktop-beast-4090") {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA GeForce RTX 4090 with 24GB VRAM drives up to 4x 4K @ 120Hz/144Hz displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+  } else if (comp.id === "c-lenovo-legion-tower-7i") {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA GeForce RTX 4080 Super with 16GB GDDR6X drives up to 4x 4K/UHD displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+  } else if (comp.id === "c-corsair-vengeance-i7500") {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA GeForce RTX 4070 Ti Super with 16GB GDDR6X drives up to 4x 4K displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+  } else if (comp.id === "c-asus-rog-strix-g16chr") {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA GeForce RTX 4070 Super with 12GB VRAM drives up to 4 displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+  } else if (comp.id === "c-dell-xps-8960") {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA GeForce RTX 4060 Ti with 8GB GDDR6 drives up to 4 displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+  } else if (comp.id === "c-hp-z2-mini-g9") {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA RTX 4000 Ada Generation with 20GB ECC VRAM drives up to 4x 4K/5K CAD/BIM displays via 4x Mini-DisplayPort 1.4a outputs.";
+  } else if (comp.id === "c-lenovo-thinkstation-p3-tiny") {
+    maxMonitors = 6;
+    gpuVerdict = "NVIDIA RTX A1000 8GB + Intel UHD 770 drives up to 6 displays simultaneously via 4x Mini-DisplayPort 1.4a, 1x DP, and 1x HDMI.";
+  } else if (comp.id === "c-minisforum-um780") {
     maxMonitors = 4;
     gpuVerdict = "AMD Radeon 780M drives up to 4x 4K @ 60Hz displays simultaneously via 2x USB4 (40Gbps Type-C) + 1x DisplayPort 1.4 + 1x HDMI 2.1.";
-  } else if (comp.id.includes('optiplex')) {
+  } else if (comp.id === "c-asus-nuc-14-pro") {
+    maxMonitors = 4;
+    gpuVerdict = "Intel Arc Graphics drives up to 4 displays simultaneously via 2x Thunderbolt 4 / USB-C and 2x HDMI 2.1.";
+  } else if (comp.id === "c-beelink-ser8") {
+    maxMonitors = 3;
+    gpuVerdict = "AMD Radeon 780M drives up to 3x 4K displays simultaneously via 1x USB4 (40Gbps Type-C), 1x DisplayPort 1.4, and 1x HDMI 2.1.";
+  } else if (comp.id === "c-lenovo-ideacentre-tower-gen9") {
+    maxMonitors = 3;
+    gpuVerdict = "AMD Radeon 780M on Ryzen 7 8700G APU drives up to 3 displays via 1x HDMI 2.1, 1x DisplayPort 1.4, and 1x VGA / USB-C.";
+  } else if (comp.id.includes("optiplex")) {
     maxMonitors = 3;
     gpuVerdict = "Intel UHD Graphics 770 natively drives up to 3 independent monitors via dual DisplayPort 1.4a and 1x HDMI 1.4b at 4K @ 60Hz without a discrete GPU.";
   }
@@ -3121,25 +4079,28 @@ function getDesktopPackageDetails(comp) {
   };
 }
 
-function checkGpuMonitorCompatibility(comp, monitor, quantity = 2) {
+function checkGpuMonitorCompatibility(comp, monitor, quantity) {
+  if (quantity === undefined) quantity = 2;
   if (!comp || !monitor) return { compatible: true, message: "Compatible display connection." };
   const pkg = getDesktopPackageDetails(comp);
   
   const isCompatible = quantity <= pkg.maxMonitors;
   let connectionMethod = "";
 
-  if (comp.id.includes('mac-studio') || comp.id.includes('mac-mini')) {
-    if (monitor.daisy_chain_support && monitor.connector_summary.includes('USB-C')) {
-      connectionMethod = "Connect Monitor 1 via Thunderbolt 4 / USB-C (provides 90W PD & video). Connect Monitor 2 via 2nd Thunderbolt port or HDMI 2.1.";
+  if (comp.brand === "Apple") {
+    if (monitor.daisy_chain_support && (monitor.connector_summary || "").includes("USB-C")) {
+      connectionMethod = "Connect Monitor 1 via Thunderbolt / USB-C (video & 90W upstream power). Daisy-chain Monitor 2 via DP-Out or connect to 2nd Thunderbolt / HDMI port.";
     } else {
-      connectionMethod = "Connect Monitor 1 via Thunderbolt 4 to DP/HDMI cable, Monitor 2 via native HDMI 2.1.";
+      connectionMethod = "Connect Monitor 1 via Thunderbolt / USB-C to DP/HDMI cable, Monitor 2 via native HDMI 2.1 port.";
     }
-  } else if (comp.id.includes('4090')) {
-    connectionMethod = "Connect via dedicated DisplayPort 1.4a and HDMI 2.1a ports on the NVIDIA RTX 4090 graphics card (supporting G-Sync & full HDR).";
-  } else if (comp.id.includes('minisforum')) {
-    connectionMethod = "Connect Monitor 1 via USB4 (Type-C to DP/USB-C), Monitor 2 via native DisplayPort 1.4 or HDMI 2.1.";
-  } else if (comp.id.includes('optiplex')) {
-    connectionMethod = "Connect Monitor 1 via DisplayPort 1.4a, Monitor 2 via 2nd DisplayPort 1.4a (or HDMI).";
+  } else if (comp.id === "c-hp-z2-mini-g9" || comp.id === "c-lenovo-thinkstation-p3-tiny") {
+    connectionMethod = "Connect via Mini-DisplayPort to DisplayPort/HDMI latching cables (or included mDP adapters) directly into the dedicated NVIDIA workstation GPU.";
+  } else if ((comp.gpu_tier || 0) >= 2 || (comp.gpu_model || "").includes("RTX") || (comp.gpu_model || "").includes("GeForce")) {
+    connectionMethod = "Connect via dedicated DisplayPort 1.4a and HDMI 2.1a ports on the NVIDIA RTX graphics card (supporting G-Sync, high refresh rates & full HDR).";
+  } else if (comp.id.includes("minisforum") || comp.id === "c-beelink-ser8" || comp.id === "c-asus-nuc-14-pro") {
+    connectionMethod = "Connect Monitor 1 via USB4 / Thunderbolt 4 (Type-C), Monitor 2 via native DisplayPort 1.4 or HDMI 2.1.";
+  } else if (comp.id.includes("optiplex") || comp.id === "c-lenovo-ideacentre-tower-gen9") {
+    connectionMethod = "Connect Monitor 1 via DisplayPort 1.4a, Monitor 2 via 2nd DisplayPort or HDMI port on motherboard I/O.";
   } else {
     connectionMethod = "Connect using DisplayPort 1.4 or HDMI ports on the computer chassis.";
   }
@@ -3151,7 +4112,9 @@ function checkGpuMonitorCompatibility(comp, monitor, quantity = 2) {
     connectionMethod: connectionMethod,
     badge: isCompatible ? "✓ 100% GPU Compatible" : "⚠️ Exceeds Recommended GPU Ports",
     summary: isCompatible 
-      ? `✓ ${comp.name}'s GPU (${comp.gpu_model}) effortlessly handles ${quantity}x ${monitor.name}.`
-      : `⚠️ ${comp.name} natively supports up to ${pkg.maxMonitors} displays simultaneously.`
+      ? "✓ " + comp.name + "'s GPU (" + comp.gpu_model + ") effortlessly handles " + quantity + "x " + monitor.name + "."
+      : "⚠️ " + comp.name + " natively supports up to " + pkg.maxMonitors + " displays simultaneously."
   };
 }
+
+

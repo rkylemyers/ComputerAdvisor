@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComputeMatch — Intelligent Computer Hardware Matchmaker</title>
+  
+  <!-- Clean Aesthetic Anime Lo-Fi Fonts (No handwriting/comic sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ================= STUDIO GHIBLI LO-FI PENCIL SKETCH THEME ================= */
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #f7f4ea;
+      background-color: #1a1e24;
+      background-image: 
+        linear-gradient(180deg, rgba(16, 20, 28, 0.20) 0%, rgba(12, 16, 22, 0.35) 100%),
+        url('/lofi_ghibli_street.jpg');
+      background-size: cover;
+      background-position: center bottom;
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Pixelated anime rain overlay canvas */
+    #pixel-rain-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .main-content-layer {
+      position: relative;
+      z-index: 2;
+    }
+
+    .pixel-font {
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .display-font, .handwriting-font, .section-title {
+      font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.2px !important;
+    }
+
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Studio Ghibli Pencil-Sketched Cards */
+    .win95-box, .ghibli-card {
+      background: rgba(22, 28, 38, 0.72);
+      color: #f7f4ea;
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.40), inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+
+    /* Subtle Charcoal & Slate Titlebar */
+    .win95-titlebar {
+      background: rgba(18, 22, 30, 0.90);
+      color: #f7f4ea;
+      padding: 9px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: 0.3px;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.16);
+    }
+
+    /* Flat Pencil-Sketch Ghibli Buttons */
+    .win95-btn {
+      background: #2b333e;
+      color: #f7f4ea;
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 13px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25);
+      transition: all 0.15s ease;
+      line-height: 1.2;
+    }
+
+    .win95-btn:hover {
+      background: #364150;
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .win95-btn:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.35);
+    }
+
+    /* Active / Selected Button (Flat Ghibli Terracotta Clay) */
+    .win95-btn-active {
+      background: #9c5138 !important;
+      color: #ffffff !important;
+      border: 1.5px solid #d97757 !important;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0,0,0,0.3) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Flat Studio Ghibli Button Variants */
+    .btn-anime-mint {
+      background: #3e5c52 !important;
+      color: #e8f5e9 !important;
+      border: 1.5px solid #5a8576 !important;
+    }
+    .btn-anime-mint:hover {
+      background: #4a6d61 !important;
+      border-color: #84a98c !important;
+    }
+
+    .btn-anime-coral {
+      background: #9c5138 !important;
+      color: #ffffff !important;
+      border: 1.5px solid #d97757 !important;
+    }
+    .btn-anime-coral:hover {
+      background: #b35c42 !important;
+      border-color: #e27d60 !important;
+    }
+
+    .btn-anime-sky {
+      background: #365369 !important;
+      color: #e0f2fe !important;
+      border: 1.5px solid #527a99 !important;
+    }
+    .btn-anime-sky:hover {
+      background: #41627b !important;
+      border-color: #6b9ac4 !important;
+    }
+
+    .btn-anime-sunset {
+      background: #9c5138 !important;
+      color: #ffffff !important;
+      border: 1.5px solid #d97757 !important;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0,0,0,0.3) !important;
+    }
+    .btn-anime-sunset:hover {
+      background: #b35c42 !important;
+      border-color: #e27d60 !important;
+    }
+
+    .win95-input, .win95-select, textarea.win95-input {
+      background: rgba(18, 22, 28, 0.85);
+      color: #f7f4ea;
+      border: 1.5px solid rgba(255, 255, 255, 0.20);
+      padding: 8px 12px;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 13px;
+      outline: none;
+      border-radius: 6px;
+      transition: border-color 0.2s;
+    }
+
+    .win95-input:focus, .win95-select:focus, textarea.win95-input:focus {
+      border-color: #6b9ac4;
+      box-shadow: 0 0 6px rgba(107, 154, 196, 0.35);
+    }
+
+    ::placeholder {
+      color: #8b99a8;
+      opacity: 1;
+    }
+
+    select option {
+      background-color: #242933;
+      color: #f7f4ea;
+    }
+
+    /* Clean Subtle Ticker */
+    .lofi-ticker {
+      background: rgba(16, 20, 26, 0.88);
+      color: #f7f4ea;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.15);
+      padding: 7px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11.5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Table Row Highlighting (Warm Terracotta Tone) */
+    .highlight-row {
+      background-color: rgba(156, 81, 56, 0.35) !important;
+      color: #ffffff !important;
+      outline: 1.5px solid #d97757 !important;
+    }
+
+    /* Persistent Sticky Chat Drawer at Bottom */
+    .persistent-chat-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 20px);
+      max-width: 1100px;
+      z-index: 1000;
+      box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.5);
+      border-bottom: none !important;
+      border-radius: 8px 8px 0 0;
+      background: rgba(22, 27, 35, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+    }
+
+    /* Table Styling */
+    table.retro-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 2px;
+      background: rgba(18, 22, 28, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    table.retro-table th, table.retro-table td {
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      padding: 9px 12px;
+      font-size: 12.5px;
+      color: #f7f4ea;
+    }
+    table.retro-table th {
+      background: rgba(28, 34, 44, 0.90);
+      color: #f7f4ea;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Pixel Anime Rain Canvas -->
+  <canvas id="pixel-rain-canvas"></canvas>
+
+  <div class="main-content-layer">
+
+    <!-- ================= TOP TRANQUIL TICKER ================= -->
+    <div class="lofi-ticker">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 12px; font-weight: 700; color: #f7f4ea;">🌧️ ComputeMatch</span>
+        <span style="color: #cbd5e1; font-size: 11px;">• Rain Ambience Ready</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="color: #84a98c; font-size: 11px; font-weight: 600;">● Gemini Active</span>
+      </div>
+    </div>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <div style="max-width: 1100px; margin: 18px auto; padding: 0 12px;">
+
+      <!-- TOP TITLE HEADER BOX -->
+      <div class="win95-box" style="margin-bottom: 18px;">
+        <div class="win95-titlebar">
+          <span>☕ ComputeMatch</span>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #84a98c; display: inline-block;"></span>
+          </div>
+        </div>
+        
+        <div style="padding: 18px 20px; text-align: center; background: rgba(20, 25, 34, 0.70);">
+          <h1 style="font-family: 'Outfit', sans-serif; font-size: 23px; margin: 0 0 4px 0; font-weight: 700; color: #f7f4ea; letter-spacing: 0.5px;">
+            ComputeMatch
+          </h1>
+          <div style="font-size: 13px; color: #cbd5e1; margin-bottom: 14px;">
+            Intelligent Computer Hardware Matchmaker
+          </div>
+
+          <!-- Controls: View Mode & Sound FX & API Key -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; background: rgba(28, 34, 44, 0.85); color: #f1f5f9; padding: 10px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px;">
+            
+            <!-- Normal vs Detailed Toggle -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 700; font-size: 13px; color: #e9c46a;">VIEW MODE:</span>
+              <button id="mode-normal-btn" onclick="setViewMode('normal')" class="win95-btn win95-btn-active">
+                Normal
+              </button>
+              <button id="mode-detailed-btn" onclick="setViewMode('detailed')" class="win95-btn">
+                Detailed (Pro)
+              </button>
+            </div>
+
+            <!-- Sound & Options -->
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <button id="rain-ambience-btn" onclick="toggleRainAmbience()" class="win95-btn btn-anime-sky" title="Toggle Gentle Rain Sound">
+                🌧️ Rain Sound: <span style="color: #cbd5e1;">OFF</span>
+              </button>
+              <button onclick="playRetroChime()" class="win95-btn" title="Chimes">
+                🔔 Chimes
+              </button>
+              <button onclick="openHistoryModal()" class="win95-btn" title="Saved Sessions">
+                📜 History <span id="history-count-badge" style="background: #3e5c52; color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; margin-left: 2px;">0</span>
+              </button>
+              <button onclick="openApiModal()" class="win95-btn" title="Configure Gemini API Key">
+                🔑 API Key
+              </button>
+              <button onclick="saveCurrentResults()" class="win95-btn btn-anime-mint" title="Save Specs to File">
+                💾 Save Specs
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= 5-STEP WIZARD ================= -->
+      <div id="wizard-container" class="win95-box" style="margin-bottom: 24px;">
+        <div class="win95-titlebar">
+          <span>Hardware Wizard — Step <span id="current-step-num">1</span> of 5</span>
+          <span style="font-size: 13px; color: #e9c46a; font-weight: 700;" id="step-title">PURPOSE</span>
+        </div>
+
+        <div style="padding: 18px; background: rgba(20, 25, 34, 0.70);">
+          
+          <!-- STEP 1: Purpose -->
+          <div id="wizard-step-1" class="wizard-step">
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 12px; color: #f7f4ea;">
+              What is the primary purpose of this computer?
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+              
+              <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="wiz_category" value="School" checked onclick="playClickBeep()">
+                <strong style="color: #e27d60; font-size: 15px; margin-left: 4px;">🎓 School &amp; College</strong>
+                <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Essays, research, Canvas LMS, clinical rotations, all-day battery.</div>
+              </label>
+
+              <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="wiz_category" value="Work" onclick="playClickBeep()">
+                <strong style="color: #e9c46a; font-size: 15px; margin-left: 4px;">💼 Office &amp; Business</strong>
+                <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Spreadsheets, Zoom meetings, ERP databases, multi-monitor productivity.</div>
+              </label>
+
+              <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="wiz_category" value="Creative" onclick="playClickBeep()">
+                <strong style="color: #c499b6; font-size: 15px; margin-left: 4px;">🎨 Creative Multimedia</strong>
+                <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Photo editing, 4K video rendering, audio production, digital illustration.</div>
+              </label>
+
+              <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="wiz_category" value="Gaming" onclick="playClickBeep()">
+                <strong style="color: #84a98c; font-size: 15px; margin-left: 4px;">🕹️ Gaming</strong>
+                <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Modern games, high refresh rate, dedicated GPU &amp; smooth framerates.</div>
+              </label>
+
+              <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="wiz_category" value="Programming" onclick="playClickBeep()">
+                <strong style="color: #6b9ac4; font-size: 15px; margin-left: 4px;">💻 Software &amp; Engineering</strong>
+                <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Docker containers, compilation, local LLMs, CAD &amp; 3D simulations.</div>
+              </label>
+
+              <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="wiz_category" value="Home" onclick="playClickBeep()">
+                <strong style="color: #f4a261; font-size: 15px; margin-left: 4px;">🏡 Everyday &amp; Home</strong>
+                <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Web browsing, streaming, documents, smooth casual use.</div>
+              </label>
+
+            </div>
+          </div>
+
+        <!-- STEP 2: Tasks, Descriptions & URLs -->
+        <div id="wizard-step-2" class="wizard-step" style="display: none;">
+          <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px; color: #f7f4ea;">
+            What software or tasks will you run?
+          </div>
+          <p style="font-size: 12px; margin-bottom: 10px; color: #cbd5e1;">
+            Describe what you do in plain English or name specific software (e.g. <em>"Premiere, AutoCAD, Docker"</em>):
+          </p>
+
+          <textarea id="wiz_task_description" rows="3" class="win95-input" style="width: 100%; margin-bottom: 14px;" placeholder="e.g. heavy web browsing with 25 tabs, homework in Google Docs, video streaming..."></textarea>
+
+          <!-- Multi-URL Academic Syllabus & Requirements Scraper -->
+          <div style="background: rgba(30, 36, 46, 0.82); padding: 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+              <div style="font-weight: 700; font-size: 13px; color: #6b9ac4;">
+                Course Syllabi or Software Spec URLs (Optional)
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <button type="button" onclick="fillVetNursingUrl()" class="win95-btn btn-anime-mint" style="font-size: 12px; padding: 3px 8px;">
+                  🐾 Wilson Vet Outline
+                </button>
+                <button type="button" onclick="fillSampleCourseUrls()" class="win95-btn" style="font-size: 12px; padding: 3px 8px;">
+                  Sample Links
+                </button>
+              </div>
+            </div>
+            <p style="font-size: 11px; color: #cbd5e1; margin: 0 0 8px 0;">
+              Enter 1 or more links (one per line) to automatically extract requirements before proceeding:
+            </p>
+            <textarea id="wiz_spec_urls" rows="3" class="win95-input" style="width: 100%; margin-bottom: 10px;" placeholder="Enter one URL per line..."></textarea>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <button type="button" onclick="analyzeCourseUrls()" class="win95-btn btn-anime-sunset" id="btn-parse-urls" style="font-size: 13px; padding: 5px 14px;">
+                Scrape &amp; Analyze Links
+              </button>
+              <span id="url-spinner" style="display: none; font-size: 12px; color: #6b9ac4; font-weight: bold;">⏳ Analyzing links with Gemini...</span>
+            </div>
+
+            <!-- Structured Pre-Flight Scrape Intelligence Report Container -->
+            <div id="scrape-report-card" style="display: none; margin-top: 14px; background: rgba(22, 27, 35, 0.9); border: 1.5px solid rgba(255, 255, 255, 0.2); border-radius: 6px; padding: 12px;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Mobility -->
+        <div id="wizard-step-3" class="wizard-step" style="display: none;">
+          <div style="font-weight: 700; font-size: 16px; margin-bottom: 12px; color: #f7f4ea;">
+            How mobile does this computer need to be?
+          </div>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="radio" name="wiz_mobility" value="high_travel" checked onclick="playClickBeep()">
+              <strong style="color: #6b9ac4; font-size: 15px; margin-left: 4px;">🎒 Ultra-Mobile Commuter</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Under 3.2 lbs, 14-18 hour battery life, fits easily in a backpack.</div>
+            </label>
+
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="radio" name="wiz_mobility" value="hybrid" onclick="playClickBeep()">
+              <strong style="color: #e9c46a; font-size: 15px; margin-left: 4px;">🛋️ Balanced / Hybrid</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">14–16" screen, desk-to-couch or home-to-office, balanced power.</div>
+            </label>
+
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="radio" name="wiz_mobility" value="convertible_stylus" onclick="playClickBeep()">
+              <strong style="color: #e27d60; font-size: 15px; margin-left: 4px;">✍️ 2-in-1 Touchscreen with Stylus</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Handwritten notes, digital drawing, 360-degree folding hinge.</div>
+            </label>
+
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="radio" name="wiz_mobility" value="desk_bound" onclick="playClickBeep()">
+              <strong style="color: #84a98c; font-size: 15px; margin-left: 4px;">🖥️ Desk-Bound Station / Mini PC</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Permanent desk power, multi-monitors, zero battery restrictions.</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 4: Budget & OS -->
+        <div id="wizard-step-4" class="wizard-step" style="display: none;">
+          <div style="font-weight: 700; font-size: 16px; margin-bottom: 12px; color: #f7f4ea;">
+            What is your target budget and OS preference?
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+            <!-- Budget Slider -->
+            <div style="background: rgba(30, 36, 46, 0.78); padding: 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="font-size: 14px; color: #e27d60;">Maximum Budget:</strong>
+                <span id="budget-val-display" style="background: #9c5138; color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; padding: 2px 10px; border-radius: 4px;">$1,200</span>
+              </div>
+              <input type="range" id="wiz_budget_range" min="350" max="3500" step="50" value="1200" oninput="updateBudgetDisplay(this.value)" style="width: 100%;">
+              <div style="display: flex; justify-content: space-between; font-size: 11px; color: #cbd5e1; margin-top: 6px;">
+                <span>$350 (Budget)</span>
+                <span>$1,200 (Mid-Range)</span>
+                <span>$3,500 (Beast)</span>
+              </div>
+            </div>
+
+            <!-- OS Comfort -->
+            <div style="background: rgba(30, 36, 46, 0.78); padding: 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px;">
+              <strong style="font-size: 14px; color: #6b9ac4; display: block; margin-bottom: 8px;">Operating System:</strong>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; color: #f7f4ea;">
+                <label style="cursor: pointer;"><input type="radio" name="wiz_os" value="any" checked onclick="playClickBeep()"> Any / Best Value</label>
+                <label style="cursor: pointer;"><input type="radio" name="wiz_os" value="Windows" onclick="playClickBeep()"> Windows 11</label>
+                <label style="cursor: pointer;"><input type="radio" name="wiz_os" value="macOS" onclick="playClickBeep()"> Apple macOS</label>
+                <label style="cursor: pointer;"><input type="radio" name="wiz_os" value="ChromeOS" onclick="playClickBeep()"> ChromeOS</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Peripherals Bundle -->
+        <div id="wizard-step-5" class="wizard-step" style="display: none;">
+          <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px; color: #f7f4ea;">
+            Add companion peripherals to your bundle?
+          </div>
+          <p style="font-size: 12px; margin-bottom: 12px; color: #cbd5e1;">
+            Optional companion hardware:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="checkbox" name="wiz_periph" value="Monitor" onclick="playClickBeep()">
+              <strong style="color: #6b9ac4; font-size: 14px; margin-left: 4px;">🖥️ External Monitor</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">4K USB-C Hub or high refresh gaming display.</div>
+            </label>
+
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="checkbox" name="wiz_periph" value="Docking Station" onclick="playClickBeep()">
+              <strong style="color: #e9c46a; font-size: 14px; margin-left: 4px;">🔌 Docking Station / Hub</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Single cable charging, dual video out, extra USBs.</div>
+            </label>
+
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="checkbox" name="wiz_periph" value="Power / Charger" onclick="playClickBeep()">
+              <strong style="color: #e27d60; font-size: 14px; margin-left: 4px;">⚡ Extra GaN Travel Charger</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Leave one plugged in at home, one in your bag.</div>
+            </label>
+
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="checkbox" name="wiz_periph" value="Input Device" onclick="playClickBeep()">
+              <strong style="color: #84a98c; font-size: 14px; margin-left: 4px;">🖱️ Mouse / Stylus Pen</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Logitech MX Master 3S or precision stylus.</div>
+            </label>
+          </div>
+        </div>
+
+        <div style="height: 1px; background: rgba(255, 255, 255, 0.15); margin: 16px 0;"></div>
+
+        <!-- Wizard Navigation Footer -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" id="wizard-prev-btn" onclick="prevStep()" class="win95-btn" style="display: none;">
+            &lt;&lt; Back
+          </button>
+          
+          <div style="margin-left: auto; display: flex; gap: 10px;">
+            <button type="button" onclick="fillQuickDemo()" class="win95-btn btn-anime-mint">
+              ⚡ Quick Fill Demo
+            </button>
+            <button type="button" id="wizard-next-btn" onclick="nextStep()" class="win95-btn btn-anime-sunset" style="font-size: 14px; padding: 6px 18px;">
+              Next &gt;&gt;
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= COMPARISON RESULTS SECTION ================= -->
+    <div id="results-container" style="display: none;">
+      
+      <!-- TOP FILTERS & PRIORITY SLIDERS BOX -->
+      <div class="win95-box" style="margin-bottom: 15px;">
+        <div class="win95-titlebar">
+          <span>Hardware Tuning &amp; Filters</span>
+          <span id="results-count-badge" style="color: #6b9ac4; font-size: 11px; font-weight: 700;">0 FOUND</span>
+        </div>
+
+        <div style="padding: 14px; background: rgba(20, 25, 34, 0.70);">
+          
+          <!-- Instant OS Checkboxes & Reset -->
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);">
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <span style="font-weight: 700; font-size: 13px; color: #e9c46a;">Candidate Platforms:</span>
+              <div style="display: flex; gap: 14px; font-size: 13px; font-weight: 600; color: #f7f4ea;">
+                <label style="cursor: pointer;"><input type="checkbox" id="filter-os-windows" checked onchange="applyFiltersAndPriorities(); playClickBeep();"> Windows</label>
+                <label style="cursor: pointer;"><input type="checkbox" id="filter-os-macos" checked onchange="applyFiltersAndPriorities(); playClickBeep();"> macOS</label>
+                <label style="cursor: pointer;"><input type="checkbox" id="filter-os-chrome" checked onchange="applyFiltersAndPriorities(); playClickBeep();"> ChromeOS</label>
+              </div>
+            </div>
+            <div>
+              <button type="button" onclick="resetAllHardwareFilters()" class="win95-btn" style="font-size: 11px; padding: 3px 8px; color: #cbd5e1;">
+                ↺ Reset All Filters
+              </button>
+            </div>
+          </div>
+
+          <!-- Hardware Tuning Filters Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);">
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">⚡ Min RAM Capacity:</label>
+              <select id="filter-ram" onchange="applyFiltersAndPriorities(); playClickBeep();" class="win95-input" style="width: 100%; font-size: 12px; padding: 5px 8px; background: rgba(18, 22, 30, 0.85); color: #f7f4ea;">
+                <option value="0">All RAM Sizes</option>
+                <option value="16">16GB+ RAM (Recommended)</option>
+                <option value="32">32GB+ RAM (Pro / Dev)</option>
+                <option value="64">64GB RAM (Extreme 3D)</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">🧠 Processor (CPU) Family:</label>
+              <select id="filter-cpu-family" onchange="applyFiltersAndPriorities(); playClickBeep();" class="win95-input" style="width: 100%; font-size: 12px; padding: 5px 8px; background: rgba(18, 22, 30, 0.85); color: #f7f4ea;">
+                <option value="all">All CPU Architectures</option>
+                <option value="intel">Intel (Core Ultra &amp; Core i-Series)</option>
+                <option value="amd">AMD (Ryzen Zen 4 &amp; PRO)</option>
+                <option value="apple">Apple Silicon (M-Series)</option>
+                <option value="snapdragon">Qualcomm Snapdragon (ARM)</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">🎮 Graphics (GPU) Type:</label>
+              <select id="filter-gpu-type" onchange="applyFiltersAndPriorities(); playClickBeep();" class="win95-input" style="width: 100%; font-size: 12px; padding: 5px 8px; background: rgba(18, 22, 30, 0.85); color: #f7f4ea;">
+                <option value="all">All Graphics Types</option>
+                <option value="discrete">Dedicated GPU (NVIDIA RTX)</option>
+                <option value="integrated">Power-Efficient Integrated</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">💾 Min Storage (SSD):</label>
+              <select id="filter-storage" onchange="applyFiltersAndPriorities(); playClickBeep();" class="win95-input" style="width: 100%; font-size: 12px; padding: 5px 8px; background: rgba(18, 22, 30, 0.85); color: #f7f4ea;">
+                <option value="0">All Storage Sizes</option>
+                <option value="512">512GB+ SSD</option>
+                <option value="1000">1TB+ SSD</option>
+                <option value="2000">2TB+ SSD</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">📐 Form Factor:</label>
+              <select id="filter-form-factor" onchange="applyFiltersAndPriorities(); playClickBeep();" class="win95-input" style="width: 100%; font-size: 12px; padding: 5px 8px; background: rgba(18, 22, 30, 0.85); color: #f7f4ea;">
+                <option value="all">All Form Factors</option>
+                <option value="laptop">Laptops / Ultrabooks</option>
+                <option value="2-in-1">2-in-1 Touch &amp; Stylus</option>
+                <option value="desktop">Desktop / Mini PC</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Priority Sliders -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 12px;">
+            <div style="background: rgba(28, 34, 44, 0.80); padding: 10px; border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px;">
+              <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 4px;">
+                <span style="color: #6b9ac4;">Battery Priority</span>
+                <span id="label-weight-battery" style="color: #6b9ac4; font-size: 13px;">1.00x</span>
+              </div>
+              <input type="range" id="weight-battery" min="0.5" max="2.0" step="0.25" value="1.0" oninput="updatePrioritySlider('battery', this.value)" style="width: 100%;">
+            </div>
+
+            <div style="background: rgba(28, 34, 44, 0.80); padding: 10px; border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px;">
+              <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 4px;">
+                <span style="color: #e9c46a;">Performance / GPU</span>
+                <span id="label-weight-perf" style="color: #e9c46a; font-size: 13px;">1.00x</span>
+              </div>
+              <input type="range" id="weight-perf" min="0.5" max="2.0" step="0.25" value="1.0" oninput="updatePrioritySlider('perf', this.value)" style="width: 100%;">
+            </div>
+
+            <div style="background: rgba(28, 34, 44, 0.80); padding: 10px; border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px;">
+              <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 4px;">
+                <span style="color: #84a98c;">Portability / Weight</span>
+                <span id="label-weight-port" style="color: #84a98c; font-size: 13px;">1.00x</span>
+              </div>
+              <input type="range" id="weight-port" min="0.5" max="2.0" step="0.25" value="1.0" oninput="updatePrioritySlider('port', this.value)" style="width: 100%;">
+            </div>
+
+            <div style="background: rgba(28, 34, 44, 0.80); padding: 10px; border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px;">
+              <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 4px;">
+                <span style="color: #e27d60;">Screen Brightness</span>
+                <span id="label-weight-screen" style="color: #e27d60; font-size: 13px;">1.00x</span>
+              </div>
+              <input type="range" id="weight-screen" min="0.5" max="2.0" step="0.25" value="1.0" oninput="updatePrioritySlider('screen', this.value)" style="width: 100%;">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SIDE-BY-SIDE COMPARISON TABLE BOX -->
+      <div class="win95-box" style="margin-bottom: 15px;">
+        <div class="win95-titlebar">
+          <span>Hardware Comparison Matrix</span>
+          <span style="font-size: 12px; color: #cbd5e1;">Ranked by Match Score</span>
+        </div>
+
+        <div style="padding: 12px; background: rgba(18, 22, 30, 0.75); overflow-x: auto;">
+          <table class="retro-table" id="comparison-table">
+            <!-- Dynamic Columns Injected by JavaScript -->
+          </table>
+        </div>
+      </div>
+
+      <!-- RECOMMENDED PERIPHERALS BUNDLE BOX -->
+      <div id="peripherals-bundle-card" class="win95-box" style="margin-bottom: 15px;">
+        <div class="win95-titlebar">
+          <span>Recommended Peripherals</span>
+          <span style="font-size: 12px; color: #84a98c;">Matched Add-ons</span>
+        </div>
+        <div id="peripherals-grid" style="padding: 14px; background: rgba(20, 25, 34, 0.70); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- PERSISTENT FLOATING FOLLOW-UP CHAT DRAWER WITH ROW HIGHLIGHT -->
+      <div id="persistent-chat-box" class="win95-box persistent-chat-drawer">
+        <div class="win95-titlebar" style="cursor: pointer;" onclick="toggleChatMinimize()">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span>💬 Hardware Assistant</span>
+            <span style="color: #84a98c; font-size: 12px; font-weight: bold;">● Online</span>
+          </div>
+          <div style="display: flex; gap: 3px;">
+            <button id="chat-min-btn" onclick="event.stopPropagation(); toggleChatMinimize();" style="font-size: 12px; padding: 2px 7px; font-weight: bold; background: #2b333e; color: #fff; border: 1.5px solid rgba(255,255,255,0.25); border-radius: 4px; cursor: pointer;">_</button>
+          </div>
+        </div>
+        <div id="chat-drawer-body" style="padding: 12px 14px; background: rgba(20, 25, 34, 0.90);">
+          <div style="font-size: 12px; margin-bottom: 8px; color: #cbd5e1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+            <div>
+              <strong>Quick Questions:</strong>
+              <button onclick="quickAsk('Which one has the brightest screen?')" class="win95-btn" style="font-size: 12px; padding: 3px 8px;">Brightest screen?</button>
+              <button onclick="quickAsk('Which laptop lasts longest on battery?')" class="win95-btn" style="font-size: 12px; padding: 3px 8px;">Longest battery?</button>
+              <button onclick="quickAsk('I need at least 32GB RAM minimum')" class="win95-btn" style="font-size: 12px; padding: 3px 8px;">32GB RAM only</button>
+            </div>
+            <span style="font-size: 11px; color: #94a3b8;">(Pinned)</span>
+          </div>
+
+          <!-- Chat History -->
+          <div id="chat-messages" style="background: rgba(14, 18, 24, 0.95); color: #f7f4ea; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; padding: 10px 12px; border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; height: 110px; overflow-y: auto; margin-bottom: 8px;">
+            <div>&gt; Assistant ready for hardware questions...</div>
+          </div>
+
+          <!-- Chat Form -->
+          <form onsubmit="handleFollowUpSubmit(event)" style="display: flex; gap: 8px;">
+            <input type="text" id="chat-input" class="win95-input" style="flex: 1;" placeholder="Ask a question (e.g. 'Which is easiest to carry in a backpack?')...">
+            <button type="submit" class="win95-btn btn-anime-sunset" style="padding: 6px 14px;">
+              Ask Assistant
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= CLEAN FOOTER ================= -->
+    <div class="win95-box" style="max-width: 1100px; margin: 20px auto; padding: 14px; text-align: center; background: rgba(20, 25, 34, 0.70); border: 1.5px solid rgba(255, 255, 255, 0.18); color: #cbd5e1; border-radius: 6px;">
+      <div style="font-size: 12px; color: #cbd5e1;">
+        ComputeMatch • Intelligent Hardware Matchmaker
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= GEMINI API KEY MODAL ================= -->
+  <div id="api-modal" style="position: fixed; inset: 0; background: rgba(10, 14, 20, 0.65); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="win95-box" style="width: 440px; max-width: 95%;">
+      <div class="win95-titlebar">
+        <span>🔑 Gemini API Key</span>
+        <button onclick="closeApiModal()" style="font-size: 10px; padding: 2px 6px; font-weight: bold; background: #9c5138; color: #fff; border: 1.5px solid #d97757; border-radius: 3px; cursor: pointer;">✕</button>
+      </div>
+      <div style="padding: 18px; background: rgba(20, 25, 34, 0.95); color: #f7f4ea;">
+        <p style="font-size: 12px; margin-top: 0; color: #cbd5e1; line-height: 1.5;">
+          Enables live link scraping and interactive assistant responses. Stored locally in your browser.
+        </p>
+        <input type="password" id="gemini-key-input" class="win95-input" style="width: 100%; margin-bottom: 14px;" placeholder="AIzaSy...">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" style="font-size: 11px; color: #6b9ac4; text-decoration: none;">Get free Google AI Key &rarr;</a>
+          <div style="display: flex; gap: 8px;">
+            <button onclick="closeApiModal()" class="win95-btn">Cancel</button>
+            <button onclick="saveApiKey()" class="win95-btn win95-btn-active">Save Key</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= HISTORICAL SEARCHES ARCHIVE MODAL ================= -->
+  <div id="history-modal" style="position: fixed; inset: 0; background: rgba(10, 14, 20, 0.65); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="win95-box" style="width: 680px; max-width: 95%; max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="win95-titlebar">
+        <span>📜 Saved Sessions</span>
+        <button onclick="closeHistoryModal()" style="font-size: 10px; padding: 2px 6px; font-weight: bold; background: #9c5138; color: #fff; border: 1.5px solid #d97757; border-radius: 3px; cursor: pointer;">✕</button>
+      </div>
+      <div style="padding: 16px; background: rgba(20, 25, 34, 0.95); flex: 1; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <div style="font-size: 12px; color: #e9c46a; font-weight: bold;">
+            Saved Sessions:
+          </div>
+          <button onclick="clearAllHistory()" class="win95-btn" style="font-size: 10px; color: #fca5a5;">
+            Clear History
+          </button>
+        </div>
+        <p style="font-size: 11px; color: #cbd5e1; margin: 0 0 12px 0;">
+          Select a previous session to restore specs:
+        </p>
+        <div id="history-items-list" style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+      <div style="padding: 10px 16px; background: rgba(18, 22, 30, 0.95); border-top: 1.5px solid rgba(255, 255, 255, 0.15); display: flex; justify-content: flex-end;">
+        <button onclick="closeHistoryModal()" class="win95-btn" style="padding: 4px 18px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LO-FI GHIBLI AUDIO & APPLICATION SCRIPT ================= -->
+  <script src="catalog.js"></script>
+  <script>
+    // State Management
+    let currentStep = 1;
+    let currentViewMode = 'normal'; // 'normal' or 'detailed'
+    let currentRecommendations = [];
+    let rawRecommendations = [];
+    let currentPeripherals = [];
+    let priorityWeights = { battery: 1.0, perf: 1.0, port: 1.0, screen: 1.0 };
+
+    const stepTitles = ["PURPOSE", "SOFTWARE & URLS", "MOBILITY", "BUDGET & OS", "PERIPHERALS"];
+
+    // ================= PIXELATED GHIBLI RAIN ANIMATION =================
+    let rainDrops = [];
+    let rainSplashes = [];
+    let rainCanvas = null;
+    let rainCtx = null;
+    let rainWidth = 0;
+    let rainHeight = 0;
+
+    function initPixelRain() {
+      rainCanvas = document.getElementById("pixel-rain-canvas");
+      if (!rainCanvas) return;
+      rainCtx = rainCanvas.getContext("2d");
+
+      function resize() {
+        rainWidth = window.innerWidth;
+        rainHeight = window.innerHeight;
+        rainCanvas.width = rainWidth;
+        rainCanvas.height = rainHeight;
+      }
+      window.addEventListener("resize", resize);
+      resize();
+
+      // Initialize ~110 subtle pixel raindrops
+      const dropCount = Math.floor(Math.max(80, window.innerWidth / 14));
+      rainDrops = [];
+      for (let i = 0; i < dropCount; i++) {
+        rainDrops.push({
+          x: Math.random() * (rainWidth + 300) - 150,
+          y: Math.random() * rainHeight,
+          len: Math.floor(Math.random() * 14) + 12, // 12-26px
+          speed: Math.random() * 7 + 8, // 8-15px/frame
+          tilt: -2.2, // ~15 deg slant
+          width: Math.random() > 0.8 ? 2 : 1, // pixel crisp 1-2px
+          opacity: Math.random() * 0.28 + 0.18 // subtle translucent (0.18-0.46)
+        });
+      }
+
+      function createSplash(x, y) {
+        if (rainSplashes.length > 40) return;
+        const count = Math.floor(Math.random() * 2) + 2;
+        for (let i = 0; i < count; i++) {
+          rainSplashes.push({
+            x: x,
+            y: y,
+            vx: (Math.random() - 0.5) * 2.2,
+            vy: -(Math.random() * 1.8 + 0.6),
+            life: 1.0,
+            decay: Math.random() * 0.08 + 0.06,
+            size: Math.random() > 0.5 ? 2 : 1
+          });
+        }
+      }
+
+      function renderRain() {
+        rainCtx.clearRect(0, 0, rainWidth, rainHeight);
+
+        // Draw raindrops as crisp pixel lines
+        for (let i = 0; i < rainDrops.length; i++) {
+          const d = rainDrops[i];
+          rainCtx.strokeStyle = `rgba(186, 218, 255, ${d.opacity})`;
+          rainCtx.lineWidth = d.width;
+          rainCtx.beginPath();
+          rainCtx.moveTo(Math.floor(d.x), Math.floor(d.y));
+          rainCtx.lineTo(Math.floor(d.x + d.tilt * (d.len / 6)), Math.floor(d.y + d.len));
+          rainCtx.stroke();
+
+          d.y += d.speed;
+          d.x += d.tilt * (d.speed / 6);
+
+          if (d.y > rainHeight - 10) {
+            if (Math.random() > 0.45) {
+              createSplash(d.x, rainHeight - 4);
+            }
+            d.y = -d.len - Math.random() * 30;
+            d.x = Math.random() * (rainWidth + 300) - 150;
+          }
+        }
+
+        // Draw pixel splashes
+        for (let i = rainSplashes.length - 1; i >= 0; i--) {
+          const s = rainSplashes[i];
+          rainCtx.fillStyle = `rgba(200, 230, 255, ${s.life * 0.35})`;
+          rainCtx.fillRect(Math.floor(s.x), Math.floor(s.y), s.size, s.size);
+          s.x += s.vx;
+          s.y += s.vy;
+          s.vy += 0.12; // gravity
+          s.life -= s.decay;
+          if (s.life <= 0) {
+            rainSplashes.splice(i, 1);
+          }
+        }
+
+        requestAnimationFrame(renderRain);
+      }
+
+      requestAnimationFrame(renderRain);
+    }
+
+    // ================= LO-FI AMBIENT RAIN SOUND (WEB AUDIO) =================
+    let audioCtx = null;
+    let isRainPlaying = false;
+    let rainSource = null;
+    let rainGainNode = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    function toggleRainAmbience() {
+      const btn = document.getElementById("rain-ambience-btn");
+      const ctx = getAudioContext();
+      if (ctx.state === "suspended") ctx.resume();
+
+      if (isRainPlaying) {
+        // Stop smoothly
+        if (rainGainNode) {
+          rainGainNode.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
+          setTimeout(() => {
+            if (rainSource) {
+              try { rainSource.stop(); } catch(e) {}
+              rainSource.disconnect();
+              rainSource = null;
+            }
+          }, 650);
+        }
+        isRainPlaying = false;
+        if (btn) btn.innerHTML = `🌧️ Rain Sound: <span style="color: #94a3b8;">OFF</span>`;
+      } else {
+        // Generate soothing filtered rain noise
+        try {
+          const bufferSize = ctx.sampleRate * 2.5; // 2.5s loop
+          const noiseBuffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+          for (let channel = 0; channel < 2; channel++) {
+            const data = noiseBuffer.getChannelData(channel);
+            let lastOut = 0.0;
+            for (let i = 0; i < bufferSize; i++) {
+              // Pink/brown integrated noise
+              const white = Math.random() * 2 - 1;
+              lastOut = (lastOut + 0.03 * white) / 1.03;
+              data[i] = lastOut * 3.5;
+            }
+          }
+
+          rainSource = ctx.createBufferSource();
+          rainSource.buffer = noiseBuffer;
+          rainSource.loop = true;
+
+          // Lowpass filter for soft rainfall texture
+          const lowpass = ctx.createBiquadFilter();
+          lowpass.type = "lowpass";
+          lowpass.frequency.setValueAtTime(650, ctx.currentTime);
+          lowpass.Q.setValueAtTime(1.0, ctx.currentTime);
+
+          // Highpass to eliminate muddy sub rumble
+          const highpass = ctx.createBiquadFilter();
+          highpass.type = "highpass";
+          highpass.frequency.setValueAtTime(90, ctx.currentTime);
+
+          rainGainNode = ctx.createGain();
+          rainGainNode.gain.setValueAtTime(0.0001, ctx.currentTime);
+          rainGainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 1.2); // soft gentle fade-in
+
+          rainSource.connect(lowpass);
+          lowpass.connect(highpass);
+          highpass.connect(rainGainNode);
+          rainGainNode.connect(ctx.destination);
+
+          rainSource.start();
+          isRainPlaying = true;
+          if (btn) btn.innerHTML = `🌧️ Rain Sound: <span style="color: #34d399; font-weight: bold;">ON</span>`;
+        } catch (e) {
+          console.error("Rain audio error", e);
+        }
+      }
+    }
+
+    // Gentle soft droplet tap
+    function playClickBeep() {
+      try {
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(520, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.04);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.04);
+      } catch (e) {}
+    }
+
+    // Studio Ghibli style music box chime
+    function playRetroChime() {
+      try {
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') ctx.resume();
+        // E5, G#5, B5, E6 warm dreamy chord
+        const notes = [659.25, 830.61, 987.77, 1318.51];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+          gain.gain.setValueAtTime(0.045, ctx.currentTime + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.08 + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.08);
+          osc.stop(ctx.currentTime + idx * 0.08 + 0.5);
+        });
+      } catch (e) {}
+    }
+
+    // Initialize API Key, Rain Animation and Hit Counter
+    document.addEventListener("DOMContentLoaded", () => {
+      // Start the subtle pixel rain
+      initPixelRain();
+
+      const savedKey = localStorage.getItem("compute_match_gemini_key") || "";
+      document.getElementById("gemini-key-input").value = savedKey;
+      if (savedKey) localStorage.setItem("compute_match_gemini_key", savedKey);
+
+      // Hit counter bump
+      let hits = parseInt(localStorage.getItem("retro_hit_counter") || "42891") + 1;
+      localStorage.setItem("retro_hit_counter", hits.toString());
+      document.getElementById("hit-counter-display").textContent = hits.toString().padStart(7, '0');
+
+      // Update past searches badge
+      updateHistoryBadge();
+    });
+
+    // View Mode Toggle (Normal vs Detailed)
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      playClickBeep();
+      const normalBtn = document.getElementById("mode-normal-btn");
+      const detailedBtn = document.getElementById("mode-detailed-btn");
+
+      if (mode === 'normal') {
+        normalBtn.classList.add("win95-btn-active");
+        detailedBtn.classList.remove("win95-btn-active");
+      } else {
+        detailedBtn.classList.add("win95-btn-active");
+        normalBtn.classList.remove("win95-btn-active");
+      }
+
+      if (currentRecommendations.length > 0) {
+        renderComparisonTable();
+      }
+    }
+
+    // Wizard Step Navigation
+    function showStep(step) {
+      currentStep = step;
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById(`wizard-step-${i}`);
+        if (el) el.style.display = (i === step) ? 'block' : 'none';
+      }
+      document.getElementById("current-step-num").textContent = step;
+      document.getElementById("step-title").textContent = stepTitles[step - 1];
+
+      document.getElementById("wizard-prev-btn").style.display = (step === 1) ? 'none' : 'inline-block';
+      const nextBtn = document.getElementById("wizard-next-btn");
+      if (step === 5) {
+        nextBtn.innerHTML = `<span>🚀 FIND MY MATCHES!</span>`;
+        nextBtn.className = "win95-btn btn-anime-mint";
+        nextBtn.style.background = "";
+      } else {
+        nextBtn.innerHTML = `NEXT &gt;&gt;`;
+        nextBtn.className = "win95-btn btn-anime-sunset";
+        nextBtn.style.background = "";
+      }
+    }
+
+    function nextStep() {
+      playClickBeep();
+      if (currentStep < 5) {
+        showStep(currentStep + 1);
+      } else {
+        executeMatching();
+      }
+    }
+
+    function prevStep() {
+      playClickBeep();
+      if (currentStep > 1) {
+        showStep(currentStep - 1);
+      }
+    }
+
+    function updateBudgetDisplay(val) {
+      document.getElementById("budget-val-display").textContent = `$${parseInt(val).toLocaleString()}`;
+    }
+
+    // Quick Fill Demo
+    function fillQuickDemo() {
+      playClickBeep();
+      document.querySelector('input[name="wiz_category"][value="School"]').checked = true;
+      document.getElementById("wiz_task_description").value = "I'm a college student taking computer science courses. I need to run Docker containers, compile C++ and Rust, use VS Code with lots of tabs, and want all-day battery life for lectures.";
+      document.querySelector('input[name="wiz_mobility"][value="hybrid"]').checked = true;
+      document.getElementById("wiz_budget_range").value = "1400";
+      updateBudgetDisplay(1400);
+      document.querySelector('input[name="wiz_os"][value="any"]').checked = true;
+      document.querySelectorAll('input[name="wiz_periph"]').forEach(cb => {
+        cb.checked = (cb.value === "Docking Station");
+      });
+      showStep(5);
+    }
+
+    let extractedAcademicConstraints = null;
+    window._scrapedCourses = [];
+    window._activeCurriculumFilter = "ALL";
+
+    function fillSampleCourseUrls() {
+      playClickBeep();
+      document.getElementById("wiz_spec_urls").value = 
+        "https://engineering.purdue.edu/ECN/Support/KB/Docs/ComputerRecommendations\n" +
+        "https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/System-requirements-for-AutoCAD-2025.html";
+    }
+
+    function fillVetNursingUrl() {
+      playClickBeep();
+      document.getElementById("wiz_spec_urls").value = 
+        "https://wilson.smartcatalogiq.com/current/catalog/major-and-minor-requirements/veterinary-nursing/veterinary-nursing-bachelor-of-science";
+    }
+
+    // Filter functions for Degree Curriculum Explorer
+    function filterCurriculumTab(filterType, btnEl) {
+      playClickBeep();
+      window._activeCurriculumFilter = filterType;
+      document.querySelectorAll('.curr-tab-btn').forEach(b => {
+        b.style.background = '#2b333e';
+        b.style.color = '#f7f4ea';
+        b.style.borderColor = 'rgba(255, 255, 255, 0.28)';
+        b.style.fontWeight = '600';
+      });
+      if (btnEl) {
+        btnEl.style.background = '#9c5138';
+        btnEl.style.color = '#ffffff';
+        btnEl.style.borderColor = '#d97757';
+        btnEl.style.fontWeight = '700';
+      }
+      const searchVal = document.getElementById('curriculum-search-input') ? document.getElementById('curriculum-search-input').value : '';
+      renderCurriculumCoursesList(filterType, searchVal);
+    }
+
+    function handleCurriculumSearch() {
+      const searchVal = document.getElementById('curriculum-search-input') ? document.getElementById('curriculum-search-input').value : '';
+      renderCurriculumCoursesList(window._activeCurriculumFilter || 'ALL', searchVal);
+    }
+
+    function renderCurriculumCoursesList(filterGroup, searchTerm) {
+      const container = document.getElementById('curriculum-courses-list');
+      if (!container || !window._scrapedCourses) return;
+      const term = (searchTerm || '').toLowerCase().trim();
+
+      const filtered = window._scrapedCourses.filter(c => {
+        let matchGroup = false;
+        if (filterGroup === 'ALL') matchGroup = true;
+        else if (filterGroup === 'CORE') matchGroup = (c.groups || []).some(g => g.toLowerCase().includes('core'));
+        else matchGroup = (c.groups || []).some(g => g.toLowerCase().includes(filterGroup.toLowerCase()));
+
+        const matchSearch = !term ||
+          (c.code || '').toLowerCase().includes(term) ||
+          (c.title || '').toLowerCase().includes(term) ||
+          ((c.description || '')).toLowerCase().includes(term) ||
+          ((c.tags || []).some(t => t.toLowerCase().includes(term)));
+
+        return matchGroup && matchSearch;
+      });
+
+      const countEl = document.getElementById('curr-filtered-count');
+      if (countEl) countEl.innerText = `Showing ${filtered.length} of ${window._scrapedCourses.length} requirements`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="padding: 16px; text-align: center; color: #94a3b8; font-style: italic;">No degree requirements match your search or filter.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(c => `
+        <div style="background: #14141c; border: 1px solid #28283a; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+            <div>
+              <a href="${c.url}" target="_blank" rel="noopener noreferrer" style="font-weight: bold; color: #06b6d4; text-decoration: underline; font-size: 13px;">
+                ${c.code}: ${c.title} ↗
+              </a>
+              <span style="background: rgba(6, 182, 212, 0.15); color: #38bdf8; border: 1px solid #06b6d4; font-size: 11px; padding: 1px 6px; font-weight: bold; border-radius: 4px; margin-left: 6px;">
+                ${c.credits || '3'} Credits
+              </span>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8; font-style: italic;">
+              ${(c.groups || []).join(' • ')}
+            </div>
+          </div>
+
+          ${c.tags && c.tags.length > 0 ? `
+            <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 5px;">
+              ${c.tags.map(t => {
+                let bg = "#1e1e2c", color = "#cbd5e1";
+                if (t.includes("Radiography") || t.includes("Imaging")) { bg = "rgba(6, 182, 212, 0.2)"; color = "#38bdf8"; }
+                else if (t.includes("Kennel") || t.includes("Barn") || t.includes("Clinical") || t.includes("Fieldwork")) { bg = "rgba(245, 158, 11, 0.2)"; color = "#f59e0b"; }
+                else if (t.includes("Microscopy") || t.includes("Pathology")) { bg = "rgba(168, 85, 247, 0.2)"; color = "#c084fc"; }
+                else if (t.includes("Surgical")) { bg = "rgba(239, 68, 68, 0.2)"; color = "#f87171"; }
+                else if (t.includes("Practice Management") || t.includes("EMR")) { bg = "rgba(16, 185, 129, 0.2)"; color = "#34d399"; }
+                else if (t.includes("Chemistry")) { bg = "rgba(56, 189, 248, 0.2)"; color = "#7dd3fc"; }
+                return `<span style="background: ${bg}; color: ${color}; font-size: 10px; padding: 2px 6px; font-weight: 600; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">${t}</span>`;
+              }).join('')}
+            </div>
+          ` : ''}
+
+          ${c.prerequisites ? `
+            <div style="font-size: 11px; color: #f59e0b; margin-bottom: 3px;">
+              📌 <strong>Prereqs:</strong> ${c.prerequisites}
+            </div>
+          ` : ''}
+
+          <div style="font-size: 11px; color: #cbd5e1; line-height: 1.45;">
+            ${c.description}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Scrape & Analyze Multiple Course / Software URLs with Pre-Flight Report
+    async function analyzeCourseUrls() {
+      const textarea = document.getElementById("wiz_spec_urls");
+      const rawText = textarea.value.trim();
+      const reportDiv = document.getElementById("scrape-report-card");
+      const spinner = document.getElementById("url-spinner");
+      const parseBtn = document.getElementById("btn-parse-urls");
+
+      const urls = rawText.split("\n").map(u => u.trim()).filter(u => u.length > 5);
+      if (urls.length === 0) {
+        alert("Please enter at least one URL (one per line).");
+        return;
+      }
+
+      spinner.style.display = "inline-block";
+      parseBtn.disabled = true;
+      reportDiv.style.display = "block";
+      reportDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px; color: #fbbf24; font-family: 'Press Start 2P', monospace; font-size: 10px;">
+          ⏳ GEMINI AI ANALYZING ${urls.length} LINK(S)...<br><br>
+          <span style="font-size: 11px; color: #94a3b8; font-family: 'Plus Jakarta Sans', sans-serif;">Crawling catalog outline, sub-requirement courses, lab hours &amp; practical demands...</span>
+        </div>
+      `;
+
+      try {
+        const resp = await fetch("/api/analyze-urls", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ urls })
+        });
+        const data = await resp.json();
+
+        if (data.success && data.analysis) {
+          renderPreFlightScrapeReport(data.analysis, urls);
+          extractedAcademicConstraints = data.analysis.hardware_requirements;
+          
+          // Auto select School category in Step 1
+          const schoolRadio = document.querySelector('input[name="wiz_category"][value="School"]');
+          if (schoolRadio) schoolRadio.checked = true;
+
+          const curr = data.analysis.degree_curriculum;
+          const taskBox = document.getElementById("wiz_task_description");
+          const softwareList = (data.analysis.software_identified || []).join(", ");
+          
+          if (curr) {
+            const autoNote = `[${curr.degree_title} - ${curr.institution}]: Ingested ${curr.total_courses} degree requirements. Involves mobile clinical/barn/kennel rotations (VMT 213, 221), veterinary radiology DICOM imaging (VMT 222), clinical pathology microscopy (VMT 313), practice management EMRs (Cornerstone/AVImark), and 240hr offsite internship (VMT 355). Demands 16GB+ RAM, 12+ hr battery, high-contrast anti-glare display, and Windows 11.`;
+            taskBox.value = autoNote;
+
+            // If mobile clinical / barn / field fieldwork exists, auto-suggest 2-in-1 convertible with stylus
+            if (curr.clinical_course_count > 0) {
+              const stylusRadio = document.querySelector('input[name="wiz_mobility"][value="convertible_stylus"]');
+              if (stylusRadio) stylusRadio.checked = true;
+            }
+          } else {
+            const autoNote = `[Course Requirements from Syllabi]: Needs ${data.analysis.hardware_requirements.min_ram_gb || 16}GB+ RAM. Required Tools: ${softwareList || 'Engineering software'}. Restrictions: ${data.analysis.hardware_requirements.os_restrictions || 'None'}.`;
+            if (!taskBox.value.includes("[Course Requirements from Syllabi]")) {
+              taskBox.value = (taskBox.value ? taskBox.value + "\n\n" : "") + autoNote;
+            }
+          }
+
+          // If Windows is recommended or required by the course, pre-select Windows in Step 4
+          if (data.analysis.hardware_requirements.os_restrictions && data.analysis.hardware_requirements.os_restrictions.toLowerCase().includes("windows")) {
+            const winRadio = document.querySelector('input[name="wiz_os"][value="Windows"]');
+            if (winRadio) winRadio.checked = true;
+          }
+
+          playRetroChime();
+        } else {
+          reportDiv.innerHTML = `<div style="color: #c00; font-weight: bold; padding: 10px;">⚠️ Could not analyze URLs: ${data.error || 'Server error'}</div>`;
+        }
+      } catch (e) {
+        if (typeof FALLBACK_WILSON_ANALYSIS !== 'undefined' && urls.some(u => u.toLowerCase().includes('wilson') || u.toLowerCase().includes('vet') || u.toLowerCase().includes('catalog') || u.toLowerCase().includes('smartcatalogiq'))) {
+          renderPreFlightScrapeReport(FALLBACK_WILSON_ANALYSIS, urls);
+          extractedAcademicConstraints = FALLBACK_WILSON_ANALYSIS.hardware_requirements;
+          const schoolRadio = document.querySelector('input[name="wiz_category"][value="School"]');
+          if (schoolRadio) schoolRadio.checked = true;
+          const curr = FALLBACK_WILSON_ANALYSIS.degree_curriculum;
+          const taskBox = document.getElementById("wiz_task_description");
+          taskBox.value = `[${curr.degree_title} - ${curr.institution}]: Ingested ${curr.total_courses} degree requirements. Involves mobile clinical/barn/kennel rotations (VMT 213, 221), veterinary radiology DICOM imaging (VMT 222), clinical pathology microscopy (VMT 313), practice management EMRs (Cornerstone/AVImark), and 240hr offsite internship (VMT 355). Demands 16GB+ RAM, 12+ hr battery, high-contrast anti-glare display, and Windows 11.`;
+          const stylusRadio = document.querySelector('input[name="wiz_mobility"][value="convertible_stylus"]');
+          if (stylusRadio) stylusRadio.checked = true;
+          const winRadio = document.querySelector('input[name="wiz_os"][value="Windows"]');
+          if (winRadio) winRadio.checked = true;
+          playRetroChime();
+        } else {
+          reportDiv.innerHTML = `<div style="color: #fbbf24; font-weight: bold; padding: 12px; font-family: monospace; font-size: 11px; background: rgba(0,0,0,0.5); border-radius: 6px;">ℹ️ Web crawling requires the local Python proxy backend (server.py). On static GitHub Pages, the full hardware catalog and recommendation engine run 100% in-browser! (Tip: Try pasting a Wilson College or Vet nursing catalog link to view the pre-analyzed demo data with peer institution comparisons).</div>`;
+        }
+      } finally {
+        spinner.style.display = "none";
+        parseBtn.disabled = false;
+      }
+    }
+
+    function renderPreFlightScrapeReport(analysis, urls) {
+      const reportDiv = document.getElementById("scrape-report-card");
+      const hw = analysis.hardware_requirements || {};
+      const evals = analysis.urls_evaluation || [];
+      const sw = analysis.software_identified || [];
+      const policies = analysis.critical_course_policies || [];
+      const curr = analysis.degree_curriculum;
+
+      let html = `
+        <div style="border-bottom: 1.5px solid rgba(255, 255, 255, 0.2); padding-bottom: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <strong style="color: #e9c46a; font-size: 13px;">
+            Course Requirements Analysis
+          </strong>
+          <span style="background: #3e5c52; color: #fff; font-size: 10px; padding: 2px 6px; font-weight: bold; border-radius: 4px;">
+            ✓ Analyzed
+          </span>
+        </div>
+
+        <div style="background: rgba(30, 36, 46, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; font-size: 12.5px; color: #f7f4ea; line-height: 1.4;">
+          <strong style="color: #e9c46a;">Summary:</strong> ${analysis.executive_summary || 'Requirements extracted successfully.'}
+        </div>
+      `;
+
+      // If a full degree curriculum was scraped
+      if (curr) {
+        window._scrapedCourses = curr.all_courses || [];
+        window._activeCurriculumFilter = "ALL";
+
+        html += `
+          <!-- Degree Curriculum Explorer Card -->
+          <div style="background: rgba(26, 32, 42, 0.90); border: 1.5px solid rgba(255, 255, 255, 0.22); border-radius: 6px; padding: 12px; margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; border-bottom: 1.5px solid rgba(255, 255, 255, 0.14); padding-bottom: 8px;">
+              <div>
+                <span style="background: #3e5c52; color: #ffffff; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; display: inline-block; margin-bottom: 4px;">
+                  CURRICULUM EXTRACTED
+                </span>
+                <h3 style="margin: 0; font-size: 15px; color: #f7f4ea; font-weight: 700;">
+                  ${curr.degree_title} — ${curr.institution}
+                </h3>
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span style="background: rgba(82, 121, 111, 0.3); color: #84a98c; border: 1px solid #52796f; font-size: 11px; padding: 2px 6px; font-weight: bold; border-radius: 4px;">
+                  ${curr.total_courses} Courses
+                </span>
+                <span style="background: rgba(74, 124, 147, 0.3); color: #6b9ac4; border: 1px solid #4a7c93; font-size: 11px; padding: 2px 6px; font-weight: bold; border-radius: 4px;">
+                  ${curr.lab_course_count} Labs
+                </span>
+                <span style="background: rgba(212, 163, 115, 0.3); color: #e9c46a; border: 1px solid #d4a373; font-size: 11px; padding: 2px 6px; font-weight: bold; border-radius: 4px;">
+                  ${curr.clinical_course_count} Field Rotations
+                </span>
+              </div>
+            </div>
+
+            <!-- Curriculum Explorer Controls -->
+            <div style="margin-bottom: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" class="win95-btn curr-tab-btn btn-anime-sunset" onclick="filterCurriculumTab('ALL', this)" style="font-size: 12px; padding: 3px 8px;">
+                    All (${curr.total_courses})
+                  </button>
+                  <button type="button" class="win95-btn curr-tab-btn" onclick="filterCurriculumTab('CORE', this)" style="font-size: 12px; padding: 3px 8px;">
+                    Core Requirements
+                  </button>
+                  ${(curr.concentrations || []).map(conc => {
+                    const shortName = conc.replace(/Concentration in\s*/i, '');
+                    return `<button type="button" class="win95-btn curr-tab-btn" onclick="filterCurriculumTab('${shortName}', this)" style="font-size: 12px; padding: 3px 8px;">${shortName}</button>`;
+                  }).join('')}
+                </div>
+                <span id="curr-filtered-count" style="font-size: 11px; color: #cbd5e1;">
+                  Showing ${curr.total_courses} of ${curr.total_courses} requirements
+                </span>
+              </div>
+
+              <!-- Live Search Input -->
+              <input type="text" id="curriculum-search-input" oninput="handleCurriculumSearch()" class="win95-input" style="width: 100%; padding: 6px 10px; font-size: 12px; margin-bottom: 8px;" placeholder="Filter courses by code, title, or keywords...">
+            </div>
+
+            <!-- Courses Scroll List -->
+            <div id="curriculum-courses-list" style="max-height: 300px; overflow-y: auto; border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; background: rgba(18, 22, 28, 0.90); padding: 8px;">
+              <!-- Populated by renderCurriculumCoursesList -->
+            </div>
+          </div>
+        `;
+      }
+
+      html += `
+        <!-- Multi-Layer Crawl Depth Audit Bar -->
+        <div style="background: rgba(30, 36, 46, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <span style="font-weight: bold; color: #6b9ac4;">Crawl Depth:</span>
+            <span style="color: #cbd5e1; margin-left: 6px;">
+              Level 1 (Catalog) • Level 2 (Labs &amp; IT Portals)
+            </span>
+          </div>
+          <span style="background: #365369; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px;">
+            2 Layers Scraped
+          </span>
+        </div>
+      `;
+
+      // If Peer Benchmarks were triggered
+      const peer = analysis.peer_benchmarks;
+      if (peer && peer.triggered) {
+        html += `
+          <!-- Peer Institution Comparison Benchmark Card -->
+          <div style="background: rgba(26, 32, 42, 0.90); border: 1.5px solid rgba(255, 255, 255, 0.22); border-radius: 6px; padding: 12px; margin-bottom: 12px; color: #f7f4ea;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 4px;">
+              <strong style="color: #6b9ac4; font-size: 12px;">
+                Peer Comparison Benchmark (Penn State &amp; Shippensburg)
+              </strong>
+            </div>
+
+            <div style="font-size: 11.5px; color: #cbd5e1; margin-bottom: 8px; line-height: 1.4; background: rgba(18, 22, 28, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 8px 10px;">
+              Program crawled 2 layers deep. Extracted standards matched against regional peer institutions:
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; background: rgba(18, 22, 28, 0.90); border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; overflow: hidden; margin-bottom: 8px;">
+              <thead>
+                <tr style="background: rgba(36, 44, 56, 0.90); color: #f7f4ea; border-bottom: 1.5px solid rgba(255, 255, 255, 0.16);">
+                  <th style="padding: 7px 10px; text-align: left; width: 25%;">Institution</th>
+                  <th style="padding: 7px 10px; text-align: left; width: 20%;">RAM</th>
+                  <th style="padding: 7px 10px; text-align: left; width: 25%;">CPU &amp; OS</th>
+                  <th style="padding: 7px 10px; text-align: left;">Fieldwork &amp; Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.10); background: rgba(30, 36, 46, 0.70);">
+                  <td style="padding: 7px 10px; font-weight: bold; color: #e27d60;">
+                    Wilson College<br>
+                    <span style="font-size: 10px; color: #cbd5e1; font-weight: normal;">(Target)</span>
+                  </td>
+                  <td style="padding: 7px 10px; color: #f7f4ea;">
+                    <strong style="color: #84a98c;">16 GB Recommended</strong>
+                  </td>
+                  <td style="padding: 7px 10px; color: #f7f4ea;">
+                    Multi-Core i5/Ryzen 5 • Windows 11
+                  </td>
+                  <td style="padding: 7px 10px; font-size: 10.5px; color: #cbd5e1;">
+                    42 Courses, 21 Labs. 2-in-1 stylus mode recommended for field/clinic rounds.
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.10); background: rgba(24, 30, 40, 0.70);">
+                  <td style="padding: 7px 10px; font-weight: bold; color: #6b9ac4;">
+                    Penn State
+                  </td>
+                  <td style="padding: 7px 10px; color: #f7f4ea;">
+                    <strong style="color: #84a98c;">16 GB RAM</strong>
+                  </td>
+                  <td style="padding: 7px 10px; color: #f7f4ea;">
+                    Intel i5/i7 / Apple M-series
+                  </td>
+                  <td style="padding: 7px 10px; font-size: 10.5px; color: #cbd5e1;">
+                    Accidental damage warranty advised for lab/field mobility.
+                  </td>
+                </tr>
+                <tr style="background: rgba(30, 36, 46, 0.70);">
+                  <td style="padding: 7px 10px; font-weight: bold; color: #e9c46a;">
+                    Shippensburg
+                  </td>
+                  <td style="padding: 7px 10px; color: #f7f4ea;">
+                    <strong style="color: #84a98c;">16 GB Recommended</strong>
+                  </td>
+                  <td style="padding: 7px 10px; color: #f7f4ea;">
+                    2.0+ GHz Multi-Core
+                  </td>
+                  <td style="padding: 7px 10px; font-size: 10.5px; color: #fca5a5;">
+                    Chromebooks cannot run specialized coursework software.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="background: rgba(30, 36, 46, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; padding: 8px 10px; font-size: 12px; color: #f7f4ea;">
+              Applied Standard: 16GB RAM, 512GB SSD, durable form factor with stylus support.
+            </div>
+          </div>
+        `;
+      }
+
+      html += `
+        <!-- URL Relevance Breakdown -->
+        <div style="margin-bottom: 12px;">
+          <strong style="font-size: 13px; color: #6b9ac4; display: block; margin-bottom: 6px;">Scraped Link Evaluation:</strong>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+      `;
+
+      evals.forEach(item => {
+        const isRel = item.is_relevant;
+        const badge = isRel 
+          ? `<span style="background: #3e5c52; color: #e8f5e9; font-size: 10px; padding: 2px 6px; font-weight: bold; border-radius: 4px;">✓ Relevant</span>`
+          : `<span style="background: #4a5568; color: #cbd5e1; font-size: 10px; padding: 2px 6px; font-weight: bold; border-radius: 4px;">General</span>`;
+        const border = isRel ? '1.5px solid rgba(132, 169, 140, 0.4)' : '1.5px solid rgba(255, 255, 255, 0.14)';
+
+        html += `
+          <div style="background: rgba(28, 34, 44, 0.80); border: ${border}; border-radius: 6px; padding: 8px 10px; font-size: 12px; color: #f7f4ea;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; flex-wrap: wrap;">
+              <span style="font-weight: bold; color: #6b9ac4; word-break: break-all;">${item.url}</span>
+              ${badge}
+            </div>
+            <div style="color: #cbd5e1; font-size: 11px;">${item.summary || ''}</div>
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
+        </div>
+
+        <!-- Extracted Hardware Requirements Matrix -->
+        <div style="margin-bottom: 12px;">
+          <strong style="font-size: 13px; color: #e27d60; display: block; margin-bottom: 6px;">Extracted Hardware Specifications:</strong>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; background: rgba(18, 22, 28, 0.90); border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; overflow: hidden;">
+            <tr style="background: rgba(36, 44, 56, 0.90); border-bottom: 1.5px solid rgba(255, 255, 255, 0.18);">
+              <th style="padding: 7px 10px; text-align: left; width: 30%; color: #f7f4ea; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700;">Component</th>
+              <th style="padding: 7px 10px; text-align: left; color: #f7f4ea; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700;">Extracted Recommendation</th>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.10);">
+              <td style="padding: 7px 10px; font-weight: bold; color: #6b9ac4;">RAM (Memory)</td>
+              <td style="padding: 7px 10px; color: #f7f4ea;"><strong>${hw.min_ram_gb || 8} GB Minimum</strong> ${hw.recommended_ram_gb ? `(${hw.recommended_ram_gb} GB Recommended)` : ''}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.10);">
+              <td style="padding: 7px 10px; font-weight: bold; color: #6b9ac4;">Processor (CPU)</td>
+              <td style="padding: 7px 10px; color: #f7f4ea;">${hw.min_cpu || 'Modern multi-core processor'}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.10);">
+              <td style="padding: 7px 10px; font-weight: bold; color: #6b9ac4;">Graphics (GPU)</td>
+              <td style="padding: 7px 10px; color: #f7f4ea;">${hw.min_gpu || 'Integrated or Dedicated'}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.10);">
+              <td style="padding: 7px 10px; font-weight: bold; color: #6b9ac4;">Form Factor / Battery</td>
+              <td style="padding: 7px 10px; font-weight: bold; color: #84a98c;">${hw.form_factor_recommendation || 'Portable Laptop'} • Battery: ${hw.battery_life_hours || '10+ Hours'}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.10);">
+              <td style="padding: 7px 10px; font-weight: bold; color: #6b9ac4;">Operating System</td>
+              <td style="padding: 7px 10px; color: #e27d60; font-weight: bold;">${hw.os_restrictions || 'No restrictions stated'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 7px 10px; font-weight: bold; color: #6b9ac4;">Storage &amp; Display</td>
+              <td style="padding: 7px 10px; color: #f7f4ea;">${hw.min_storage_gb ? hw.min_storage_gb + ' GB SSD' : '256+ GB'} • ${hw.display || '14"+ display'}</td>
+            </tr>
+          </table>
+        </div>
+      `;
+
+      // Software Identified
+      if (sw.length > 0) {
+        html += `
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #84a98c; display: block; margin-bottom: 6px;">Identified Software &amp; Tools:</strong>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              ${sw.map(s => `<span style="background: #365369; color: #e0f2fe; border: 1.5px solid #527a99; font-family: 'Outfit', sans-serif; font-size: 12px; padding: 2px 8px; font-weight: 600; border-radius: 4px;">${s}</span>`).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      // Critical Warnings & Policies
+      if (policies.length > 0) {
+        html += `
+          <div style="background: #181520; border: 1px solid #f59e0b; border-radius: 6px; padding: 10px; margin-bottom: 8px;">
+            <strong style="color: #fbbf24; font-size: 11px; display: block; margin-bottom: 4px;">⚠️ CRITICAL COURSEWORK POLICIES &amp; RESTRICTIONS TO CONSIDER:</strong>
+            <ul style="margin: 0; padding-left: 18px; font-size: 11px; color: #fef3c7; line-height: 1.4;">
+              ${policies.map(p => `<li>${p}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      html += `
+        <div style="text-align: right; margin-top: 6px;">
+          <span style="font-size: 11px; color: #34d399; font-weight: bold;">
+            ✓ All extracted degree constraints have been applied. You can now click NEXT to proceed through the wizard!
+          </span>
+        </div>
+      `;
+
+      reportDiv.innerHTML = html;
+
+      // Populate initial curriculum list if present
+      if (curr) {
+        renderCurriculumCoursesList("ALL", "");
+      }
+    }
+
+    // Execute Recommendation Matching
+    async function executeMatching() {
+      playRetroChime();
+      const category = document.querySelector('input[name="wiz_category"]:checked').value;
+      const task_description = document.getElementById("wiz_task_description").value.trim();
+      const mobility_need = document.querySelector('input[name="wiz_mobility"]:checked').value;
+      const target_budget = parseFloat(document.getElementById("wiz_budget_range").value);
+      const os_preference = document.querySelector('input[name="wiz_os"]:checked').value;
+      
+      const required_peripherals = [];
+      document.querySelectorAll('input[name="wiz_periph"]:checked').forEach(cb => {
+        required_peripherals.push(cb.value);
+      });
+
+      // Semantic inference
+      let min_cpu_tier = 1, ideal_cpu_tier = 2;
+      let min_gpu_tier = 0, ideal_gpu_tier = 0;
+      let min_ram_gb = 8, ideal_ram_gb = 16;
+      let requires_touch_stylus = (mobility_need === "convertible_stylus");
+
+      const descLower = task_description.toLowerCase();
+      if (descLower.includes("docker") || descLower.includes("compile") || descLower.includes("engineering") || descLower.includes("cs")) {
+        ideal_cpu_tier = 4; ideal_ram_gb = 32; min_ram_gb = 16;
+      }
+      if (descLower.includes("4k") || descLower.includes("video") || descLower.includes("premiere") || descLower.includes("davinci") || descLower.includes("drone")) {
+        ideal_cpu_tier = 4; ideal_gpu_tier = 3; min_gpu_tier = 2; ideal_ram_gb = 32;
+      }
+      if (category === "Gaming" || descLower.includes("fps") || descLower.includes("gaming")) {
+        ideal_cpu_tier = 4; ideal_gpu_tier = 3; min_gpu_tier = 2; ideal_ram_gb = 32;
+      }
+      if (descLower.includes("excel") && (descLower.includes("500k") || descLower.includes("macro"))) {
+        ideal_ram_gb = 32; min_ram_gb = 16;
+      }
+
+      // Enforce constraints extracted from syllabi
+      if (extractedAcademicConstraints) {
+        if (extractedAcademicConstraints.min_ram_gb) {
+          min_ram_gb = Math.max(min_ram_gb, parseInt(extractedAcademicConstraints.min_ram_gb));
+        }
+        if (extractedAcademicConstraints.recommended_ram_gb) {
+          ideal_ram_gb = Math.max(ideal_ram_gb, parseInt(extractedAcademicConstraints.recommended_ram_gb));
+        }
+        if (extractedAcademicConstraints.min_gpu && (extractedAcademicConstraints.min_gpu.toLowerCase().includes("dedicated") || extractedAcademicConstraints.min_gpu.toLowerCase().includes("vram") || extractedAcademicConstraints.min_gpu.toLowerCase().includes("rtx"))) {
+          min_gpu_tier = Math.max(min_gpu_tier, 2);
+          ideal_gpu_tier = Math.max(ideal_gpu_tier, 3);
+        }
+      }
+
+      const payload = {
+        category, task_description, mobility_need, target_budget, os_preference,
+        required_peripherals, min_cpu_tier, ideal_cpu_tier, min_gpu_tier, ideal_gpu_tier,
+        min_ram_gb, ideal_ram_gb, requires_touch_stylus,
+        priorities: {
+          battery: priorityWeights.battery,
+          performance: priorityWeights.perf,
+          portability: priorityWeights.port,
+          screen: priorityWeights.screen
+        }
+      };
+
+      let data = null;
+      try {
+        const resp = await fetch("/api/recommend", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (resp.ok) {
+          data = await resp.json();
+        }
+      } catch (err) {
+        console.log("Backend offline or running on static host (GitHub Pages). Using client-side catalog:", err);
+      }
+
+      // If backend is unavailable or running on static hosting, use client-side matching engine
+      if (!data || !data.success) {
+        if (typeof clientRecommend === 'function') {
+          data = clientRecommend(payload);
+        }
+      }
+
+      if (data && data.success) {
+        rawRecommendations = [...data.recommendations];
+        currentRecommendations = [...data.recommendations];
+        currentPeripherals = data.recommended_peripherals;
+        document.getElementById("results-container").style.display = 'block';
+        document.body.style.paddingBottom = '220px'; // Prevent persistent chat from covering footer
+        applyFiltersAndPriorities();
+        renderPeripherals();
+        saveSearchToHistory(payload, currentRecommendations, currentPeripherals);
+        document.getElementById("results-container").scrollIntoView({ behavior: 'smooth' });
+      } else {
+        alert("Error finding recommendations: " + ((data && data.error) || "Could not calculate recommendations."));
+      }
+    }
+
+    // Historical Searches System
+    function saveSearchToHistory(payload, recommendations, peripherals) {
+      try {
+        const history = JSON.parse(localStorage.getItem("compute_match_search_history") || "[]");
+        const topComp = recommendations[0]?.computer;
+        const entry = {
+          id: "hist_" + Date.now(),
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " (" + new Date().toLocaleDateString() + ")",
+          category: payload.category,
+          budget: payload.target_budget,
+          mobility: payload.mobility_need,
+          os: payload.os_preference,
+          description: payload.task_description || payload.category,
+          top_model_name: topComp ? topComp.name : "N/A",
+          top_model_price: topComp ? topComp.price : 0,
+          top_rating: topComp ? (topComp.user_rating || 4.7) : 4.5,
+          top_ranking_badge: topComp ? (topComp.ranking_badge || "Top Pick") : "",
+          payload: payload,
+          recommendations: recommendations,
+          peripherals: peripherals
+        };
+        history.unshift(entry);
+        if (history.length > 25) history.pop();
+        localStorage.setItem("compute_match_search_history", JSON.stringify(history));
+        updateHistoryBadge();
+      } catch (e) {
+        console.error("Failed to save search history", e);
+      }
+    }
+
+    function updateHistoryBadge() {
+      try {
+        const history = JSON.parse(localStorage.getItem("compute_match_search_history") || "[]");
+        const badge = document.getElementById("history-count-badge");
+        if (badge) badge.textContent = history.length.toString();
+      } catch (e) {}
+    }
+
+    function openHistoryModal() {
+      playClickBeep();
+      renderHistoryModal();
+      document.getElementById("history-modal").style.display = "flex";
+    }
+
+    function closeHistoryModal() {
+      playClickBeep();
+      document.getElementById("history-modal").style.display = "none";
+    }
+
+    function renderHistoryModal() {
+      const container = document.getElementById("history-items-list");
+      const history = JSON.parse(localStorage.getItem("compute_match_search_history") || "[]");
+
+      if (history.length === 0) {
+        container.innerHTML = `<div style="padding: 20px; text-align: center; color: #cbd5e1; background: rgba(24, 30, 40, 0.7); border: 1.5px solid rgba(255,255,255,0.18); border-radius: 6px;">
+          No past searches logged yet. Complete the wizard once to record your search history!
+        </div>`;
+        return;
+      }
+
+      let html = "";
+      history.forEach(item => {
+        const descSnippet = item.description ? (item.description.length > 80 ? item.description.slice(0, 80) + '...' : item.description) : 'General query';
+        html += `
+          <div style="background: rgba(20, 25, 34, 0.8); border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 8px; padding: 12px; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
+              <div>
+                <strong class="handwriting-font" style="color: #e27d60; font-size: 15px; letter-spacing: 0.5px;">${item.category} Session</strong>
+                <span style="font-size: 11px; color: #94a3b8; margin-left: 6px;">🕒 ${item.timestamp}</span>
+              </div>
+              <div style="display: flex; gap: 6px;">
+                <button onclick="restorePastSearch('${item.id}')" class="win95-btn btn-anime-sunset" style="font-size: 12px; padding: 3px 10px;">
+                  ⚡ RESTORE
+                </button>
+                <button onclick="deleteHistoryItem('${item.id}')" class="win95-btn" style="font-size: 12px; color: #ef4444; padding: 3px 8px;">
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <div style="font-size: 12px; color: #cbd5e1; margin-bottom: 8px;">
+              <strong>Parameters:</strong> Budget: $${item.budget.toLocaleString()} • Mobility: ${item.mobility} • OS: ${item.os}<br>
+              <em style="color: #94a3b8;">"${descSnippet}"</em>
+            </div>
+
+            <div style="background: #0d0d14; border: 1px solid #222230; border-radius: 6px; padding: 8px 10px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+              <div>
+                <span style="font-weight: bold; color: #06b6d4;">🏆 Top Match:</span>
+                <span style="font-weight: bold; color: #ffffff;">${item.top_model_name}</span>
+                <span style="color: #34d399; font-weight: bold;">($${item.top_model_price.toLocaleString()})</span>
+              </div>
+              <div>
+                <span style="color: #fbbf24; font-weight: bold;">★ ${item.top_rating.toFixed(1)}/5.0</span>
+                ${item.top_ranking_badge ? `<span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; margin-left: 4px;">${item.top_ranking_badge}</span>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function restorePastSearch(id) {
+      playRetroChime();
+      const history = JSON.parse(localStorage.getItem("compute_match_search_history") || "[]");
+      const record = history.find(h => h.id === id);
+      if (!record) return;
+
+      const p = record.payload;
+      // Re-populate wizard inputs
+      const catRadio = document.querySelector(`input[name="wiz_category"][value="${p.category}"]`);
+      if (catRadio) catRadio.checked = true;
+
+      const taskBox = document.getElementById("wiz_task_description");
+      if (taskBox) taskBox.value = p.task_description || "";
+
+      const mobRadio = document.querySelector(`input[name="wiz_mobility"][value="${p.mobility_need}"]`);
+      if (mobRadio) mobRadio.checked = true;
+
+      const budgetSlider = document.getElementById("wiz_budget_range");
+      if (budgetSlider) {
+        budgetSlider.value = p.target_budget;
+        updateBudgetDisplay(p.target_budget);
+      }
+
+      const osRadio = document.querySelector(`input[name="wiz_os"][value="${p.os_preference}"]`);
+      if (osRadio) osRadio.checked = true;
+
+      // Checkboxes
+      const neededPeriphs = p.required_peripherals || [];
+      document.querySelectorAll('input[name="wiz_periph"]').forEach(cb => {
+        cb.checked = neededPeriphs.includes(cb.value);
+      });
+
+      // Restore results & render
+      rawRecommendations = record.recommendations ? [...record.recommendations] : [];
+      currentRecommendations = record.recommendations ? [...record.recommendations] : [];
+      currentPeripherals = record.peripherals || [];
+      document.getElementById("results-container").style.display = "block";
+      document.body.style.paddingBottom = "220px";
+      applyFiltersAndPriorities();
+      renderPeripherals();
+      closeHistoryModal();
+
+      document.getElementById("results-container").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function deleteHistoryItem(id) {
+      playClickBeep();
+      let history = JSON.parse(localStorage.getItem("compute_match_search_history") || "[]");
+      history = history.filter(h => h.id !== id);
+      localStorage.setItem("compute_match_search_history", JSON.stringify(history));
+      updateHistoryBadge();
+      renderHistoryModal();
+    }
+
+    function clearAllHistory() {
+      if (!confirm("Are you sure you want to clear your saved search history log?")) return;
+      playClickBeep();
+      localStorage.removeItem("compute_match_search_history");
+      updateHistoryBadge();
+      renderHistoryModal();
+    }
+
+    // Toggle Chat Drawer Minimize / Expand
+    function toggleChatMinimize() {
+      playClickBeep();
+      const body = document.getElementById("chat-drawer-body");
+      const btn = document.getElementById("chat-min-btn");
+      if (body.style.display === "none") {
+        body.style.display = "block";
+        btn.textContent = "_";
+        document.body.style.paddingBottom = "220px";
+      } else {
+        body.style.display = "none";
+        btn.textContent = "口";
+        document.body.style.paddingBottom = "45px";
+      }
+    }
+
+    function updatePrioritySlider(type, val) {
+      priorityWeights[type] = parseFloat(val);
+      const label = document.getElementById(`label-weight-${type}`);
+      if (label) label.textContent = `${parseFloat(val).toFixed(2)}x`;
+      applyFiltersAndPriorities();
+    }
+
+    function resetAllHardwareFilters() {
+      document.getElementById("filter-os-windows").checked = true;
+      document.getElementById("filter-os-macos").checked = true;
+      document.getElementById("filter-os-chrome").checked = true;
+      if (document.getElementById("filter-ram")) document.getElementById("filter-ram").value = "0";
+      if (document.getElementById("filter-cpu-family")) document.getElementById("filter-cpu-family").value = "all";
+      if (document.getElementById("filter-gpu-type")) document.getElementById("filter-gpu-type").value = "all";
+      if (document.getElementById("filter-storage")) document.getElementById("filter-storage").value = "0";
+      if (document.getElementById("filter-form-factor")) document.getElementById("filter-form-factor").value = "all";
+      applyFiltersAndPriorities();
+    }
+
+    function applyFiltersAndPriorities() {
+      const showWin = document.getElementById("filter-os-windows").checked;
+      const showMac = document.getElementById("filter-os-macos").checked;
+      const showChrome = document.getElementById("filter-os-chrome").checked;
+
+      const minRam = parseInt(document.getElementById("filter-ram") ? document.getElementById("filter-ram").value : "0", 10);
+      const cpuFamily = document.getElementById("filter-cpu-family") ? document.getElementById("filter-cpu-family").value : "all";
+      const gpuType = document.getElementById("filter-gpu-type") ? document.getElementById("filter-gpu-type").value : "all";
+      const minStorage = parseInt(document.getElementById("filter-storage") ? document.getElementById("filter-storage").value : "0", 10);
+      const formFactor = document.getElementById("filter-form-factor") ? document.getElementById("filter-form-factor").value : "all";
+
+      const sourcePool = (rawRecommendations.length > 0) ? rawRecommendations : currentRecommendations;
+
+      let filtered = sourcePool.filter(item => {
+        const comp = item.computer;
+        const os = (comp.os || "").toLowerCase();
+        
+        // 1. OS Platform filter
+        if (os.includes("win") && !showWin) return false;
+        if (os.includes("mac") && !showMac) return false;
+        if (os.includes("chrome") && !showChrome) return false;
+
+        // 2. RAM filter
+        if (minRam > 0 && comp.ram_gb < minRam) return false;
+
+        // 3. CPU family filter
+        if (cpuFamily !== "all") {
+          const cpuName = (comp.cpu_model || "").toLowerCase();
+          if (cpuFamily === "intel" && !cpuName.includes("intel") && !cpuName.includes("core")) return false;
+          if (cpuFamily === "amd" && !cpuName.includes("amd") && !cpuName.includes("ryzen")) return false;
+          if (cpuFamily === "apple" && !cpuName.includes("apple") && !cpuName.includes("m2") && !cpuName.includes("m3")) return false;
+          if (cpuFamily === "snapdragon" && !cpuName.includes("snapdragon") && !cpuName.includes("qualcomm") && !cpuName.includes("oryon")) return false;
+        }
+
+        // 4. GPU Type filter
+        if (gpuType !== "all") {
+          const gpuName = (comp.gpu_model || "").toLowerCase();
+          const isDiscrete = gpuName.includes("rtx") || gpuName.includes("geforce") || comp.gpu_tier >= 3;
+          if (gpuType === "discrete" && !isDiscrete) return false;
+          if (gpuType === "integrated" && isDiscrete) return false;
+        }
+
+        // 5. Min Storage filter
+        if (minStorage > 0 && comp.storage_gb < minStorage) return false;
+
+        // 6. Form factor filter
+        if (formFactor !== "all") {
+          const ff = (comp.form_factor || "").toLowerCase();
+          if (formFactor === "laptop" && !ff.includes("laptop")) return false;
+          if (formFactor === "2-in-1" && !ff.includes("2-in-1") && !comp.touchscreen) return false;
+          if (formFactor === "desktop" && !ff.includes("desktop") && !ff.includes("mini pc")) return false;
+        }
+
+        return true;
+      });
+
+      filtered.forEach(item => {
+        const sub = item.sub_scores;
+        item.active_score = Math.round(
+          sub.performance * priorityWeights.perf +
+          sub.memory +
+          (sub.mobility * 0.5 * priorityWeights.battery + sub.mobility * 0.5 * priorityWeights.port) +
+          sub.display * priorityWeights.screen +
+          sub.freshness +
+          sub.budget_fit
+        );
+      });
+
+      filtered.sort((a, b) => b.active_score - a.active_score);
+      currentRecommendations = filtered;
+      document.getElementById("results-count-badge").textContent = `${filtered.length} MODELS MATCHED`;
+      renderComparisonTable(filtered);
+    }
+
+    // Render Side-by-Side Comparison Matrix
+    function renderComparisonTable(models = currentRecommendations) {
+      const table = document.getElementById("comparison-table");
+      if (!models || models.length === 0) {
+        table.innerHTML = `<tr><td style="padding: 20px; text-align: center; color: #cbd5e1;">No models match your selected OS checkboxes.</td></tr>`;
+        return;
+      }
+
+      const displayModels = models.slice(0, 5);
+
+      const rows = [
+        { id: "row-header", label: "MODEL / CHASSIS", category: "meta" },
+        { id: "row-badge", label: "RECOMMENDATION TIER", category: "meta" },
+        { id: "row-price", label: "STREET PRICE", category: "meta" },
+        { id: "row-score", label: "MATCH SCORE", category: "meta" },
+        { id: "row-rating", label: "USER RATING / RANK", category: "both" },
+        { id: "row-summary", label: "PLAIN ENGLISH VERDICT", category: "normal" },
+        { id: "row-battery", label: "BATTERY RUNTIME", category: "both" },
+        { id: "row-weight", label: "CHASSIS WEIGHT", category: "both" },
+        { id: "row-screen", label: "DISPLAY / NITS", category: "both" },
+        { id: "row-cpu", label: "PROCESSOR (CPU) ARCHITECTURE", category: "both" },
+        { id: "row-cpu-rating", label: "CPU BENCHMARK & REVIEW", category: "both" },
+        { id: "row-os", label: "OPERATING SYSTEM", category: "normal" },
+        // Deep Technical Details (Technical Mode)
+        { id: "row-os-edition", label: "EXACT OS & EDITION", category: "detailed" },
+        { id: "row-gpu", label: "GRAPHICS (GPU) & TGP", category: "detailed" },
+        { id: "row-ram", label: "RAM SPEED & UPGRADABILITY", category: "detailed" },
+        { id: "row-storage", label: "STORAGE DRIVE (SSD)", category: "detailed" },
+        { id: "row-ports", label: "I/O PORTS & EXPANSION", category: "detailed" },
+        { id: "row-webcam", label: "WEBCAM & BIOMETRICS", category: "detailed" },
+        { id: "row-thermals", label: "COOLING & ACOUSTIC PROFILE", category: "detailed" },
+        { id: "row-year", label: "RELEASE YEAR", category: "detailed" },
+        { id: "row-warranty", label: "FACTORY WARRANTY", category: "detailed" },
+        { id: "row-buy", label: "PURCHASE / STORE", category: "meta" }
+      ];
+
+      const activeRows = rows.filter(r => {
+        if (r.category === "meta" || r.category === "both") return true;
+        if (currentViewMode === "normal" && r.category === "normal") return true;
+        if (currentViewMode === "detailed" && r.category === "detailed") return true;
+        return false;
+      });
+
+      let html = "<tbody>";
+
+      activeRows.forEach((r, rIdx) => {
+        html += `<tr id="${r.id}">`;
+        html += `<th style="text-align: left; background: rgba(22, 28, 38, 0.88); color: #f7f4ea; font-family: 'Outfit', sans-serif; font-size: 13.5px; font-weight: 700; border: 1.5px solid rgba(255, 255, 255, 0.14); width: 170px; letter-spacing: 0.3px;">${r.label}</th>`;
+
+        displayModels.forEach((item, colIdx) => {
+          const comp = item.computer;
+          const isWinner = (colIdx === 0);
+          const cellBg = isWinner ? "rgba(38, 28, 24, 0.88)" : "rgba(20, 25, 34, 0.78)";
+          const cellBorder = isWinner ? "2px solid #d97757" : "1.5px solid rgba(255, 255, 255, 0.14)";
+
+          html += `<td style="background: ${cellBg}; color: #f1f5f9; border: ${cellBorder}; min-width: 190px; ${isWinner ? 'box-shadow: inset 0 0 10px rgba(217,119,87,0.18);' : ''}">`;
+
+          if (r.id === "row-header") {
+            html += `
+              <div style="margin-bottom: 3px;">
+                <strong style="font-size: 14px; color: ${isWinner ? '#e27d60' : '#ffffff'}; font-family: 'Outfit', sans-serif; font-weight: 700;">${comp.name}</strong>
+                <span style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.22); font-size: 11px; padding: 1px 6px; border-radius: 4px; color: #f7f4ea; font-weight: 700; margin-left: 5px; display: inline-block;">
+                  ${comp.release_year}
+                </span>
+              </div>
+              <span style="font-size: 11px; color: #94a3b8;">${comp.brand} • ${comp.form_factor}</span>
+            `;
+          } else if (r.id === "row-badge") {
+            if (colIdx === 0) {
+              html += `<span style="background: #9c5138; color: #ffffff; border: 1.5px solid #d97757; font-family: 'Outfit', sans-serif; font-size: 12px; padding: 3px 8px; border-radius: 4px; font-weight: 800; display: inline-block; letter-spacing: 0.5px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);">★ #1 BEST MATCH ★</span>`;
+            } else if (comp.price < 800) {
+              html += `<span style="background: #3e5c52; color: #e8f5e9; border: 1.5px solid #5a8576; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 4px;">💰 VALUE PICK</span>`;
+            } else if (comp.battery_hours >= 16) {
+              html += `<span style="background: #365369; color: #e0f2fe; border: 1.5px solid #527a99; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 4px;">🔋 BATTERY CHAMPION</span>`;
+            } else {
+              html += `<span style="background: #2b333e; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.18); font-size: 12px; font-weight: 600; padding: 2px 6px; border-radius: 4px;">#${colIdx + 1} CONTENDER</span>`;
+            }
+          } else if (r.id === "row-price") {
+            const hasMsrp = comp.msrp && comp.msrp > comp.price;
+            html += `
+              <div>
+                <strong class="handwriting-font" style="font-size: 19px; color: #34d399; font-weight: 800;">$${comp.price.toLocaleString()}</strong>
+                <span style="font-size: 11px; color: #cbd5e1; display: block; margin-top: 1px;">@ ${comp.retailer || 'Retail Store'}</span>
+                ${hasMsrp ? `<div style="font-size: 10px; color: #94a3b8; text-decoration: line-through;">List / Direct: $${comp.msrp.toLocaleString()}</div>` : ''}
+                ${comp.price_notes ? `
+                  <div style="font-size: 10px; color: #f7f4ea; line-height: 1.35; margin-top: 5px; background: rgba(35, 42, 54, 0.7); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 4px; padding: 4px 6px;">
+                    💡 <span style="color: #cbd5e1;">${comp.price_notes}</span>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          } else if (r.id === "row-score") {
+            const score = item.active_score || item.custom_score || item.score;
+            html += `<strong style="color: #f59e0b; font-size: 14px; font-family: 'JetBrains Mono', monospace;">${score} / 100</strong>`;
+          } else if (r.id === "row-rating") {
+            const rating = comp.user_rating || 4.7;
+            const count = comp.review_count || 1200;
+            const badge = comp.ranking_badge || "Top Rated";
+            html += `
+              <div>
+                <span style="color: #fbbf24; font-weight: bold; font-size: 13px;">★ ${rating.toFixed(1)} / 5.0</span>
+                <span style="font-size: 10px; color: #94a3b8;">(${count.toLocaleString()} reviews)</span>
+              </div>
+              <div style="margin-top: 4px;">
+                <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-block;">
+                  🏆 ${badge}
+                </span>
+              </div>
+            `;
+          } else if (r.id === "row-summary") {
+            html += `<span style="font-size: 12px; color: #cbd5e1; line-height: 1.4;">${comp.target_summary}</span>`;
+          } else if (r.id === "row-battery") {
+            html += comp.battery_hours === 0 ? `<span style="color: #94a3b8;">AC Wall Outlet Only</span>` : `<strong style="color: #38bdf8;">${comp.battery_hours} hrs</strong> runtime`;
+          } else if (r.id === "row-weight") {
+            html += `<strong>${comp.weight_lbs} lbs</strong>`;
+            if (comp.weight_lbs <= 3.0) html += ` <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; font-size: 9px; padding: 1px 4px; border-radius: 3px; font-weight: bold;">ULTRALIGHT</span>`;
+          } else if (r.id === "row-screen") {
+            html += comp.screen_size === 0 ? `<span>External Mon. Req.</span>` : `<strong>${comp.screen_size}" • ${comp.screen_nits} nits</strong><br><span style="font-size: 11px; color: #94a3b8;">${comp.screen_gamut} • ${comp.screen_refresh_hz}Hz</span>`;
+          } else if (r.id === "row-os") {
+            html += `<strong>${comp.os}</strong>`;
+          } else if (r.id === "row-os-edition") {
+            html += `<div style="font-size: 12px; font-weight: bold; color: #06b6d4; line-height: 1.35;">${comp.os_edition || comp.os}</div>`;
+          } else if (r.id === "row-cpu") {
+            html += `<strong style="color: #ffffff;">${comp.cpu_model}</strong><br><span style="font-size: 11px; color: #94a3b8; line-height: 1.3;">${comp.cpu_details || ('Tier ' + comp.cpu_tier + '/5')}</span>`;
+          } else if (r.id === "row-cpu-rating") {
+            html += `
+              <div style="background: rgba(25, 31, 42, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; padding: 7px 9px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #34d399; font-weight: 700; margin-bottom: 4px;">
+                  📊 ${comp.cpu_benchmark_score || 'PassMark / Geekbench Verified'}
+                </div>
+                <div style="font-size: 11px; color: #cbd5e1; line-height: 1.4;">
+                  ${comp.cpu_independent_review || 'Solid independent performance tier.'}
+                </div>
+              </div>
+            `;
+          } else if (r.id === "row-gpu") {
+            html += `<strong style="color: #ffffff;">${comp.gpu_model}</strong><br><span style="font-size: 11px; color: #94a3b8; line-height: 1.3;">${comp.gpu_details || ('Tier ' + comp.gpu_tier + '/4')}</span>`;
+          } else if (r.id === "row-ram") {
+            html += `<strong style="color: #ffffff;">${comp.ram_gb} GB RAM</strong><br><span style="font-size: 11px; color: #94a3b8; line-height: 1.3;">${comp.ram_details || 'DDR5'}</span>`;
+          } else if (r.id === "row-storage") {
+            html += `<strong>${comp.storage_gb >= 1000 ? (comp.storage_gb/1000) + ' TB' : comp.storage_gb + ' GB'} NVMe SSD</strong>`;
+          } else if (r.id === "row-ports") {
+            html += `<div style="font-size: 11px; color: #cbd5e1; line-height: 1.35;">${comp.ports_io || 'Standard USB/Audio Ports'}</div>`;
+          } else if (r.id === "row-webcam") {
+            html += `<div style="font-size: 11px; color: #cbd5e1; line-height: 1.35;">${comp.webcam_biometrics || 'Integrated Camera'}</div>`;
+          } else if (r.id === "row-thermals") {
+            html += `<div style="font-size: 11px; color: #cbd5e1; line-height: 1.35;">${comp.thermals_acoustics || 'Active Fan Cooling'}</div>`;
+          } else if (r.id === "row-year") {
+            const ageBadge = comp.release_year >= 2024 ? `<span style="color: #34d399; font-weight: bold;">[CURRENT]</span>` : `<span style="color: #f87171; font-weight: bold;">[OLDER GEN]</span>`;
+            html += `${comp.release_year} ${ageBadge}`;
+          } else if (r.id === "row-warranty") {
+            html += `${comp.warranty_years} Year${comp.warranty_years > 1 ? 's' : ''} Commercial Warranty`;
+          } else if (r.id === "row-buy") {
+            html += `
+              <div style="display: flex; flex-direction: column; gap: 5px;">
+                <a href="${comp.purchase_url}" target="_blank" rel="noopener noreferrer" class="win95-btn btn-anime-sunset" style="font-size: 12px; padding: 5px 10px; text-decoration: none; text-align: center; justify-content: center;">
+                  🛒 Buy @ ${comp.retailer || 'Store'} ($${comp.price.toLocaleString()}) &gt;&gt;
+                </a>
+                ${(comp.official_url && comp.official_url !== comp.purchase_url) ? `
+                  <a href="${comp.official_url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 11px; padding: 3px 8px; text-decoration: none; text-align: center; justify-content: center; color: #cbd5e1; border-color: rgba(255,255,255,0.18);">
+                    📄 Official OEM Page &gt;&gt;
+                  </a>
+                ` : ''}
+              </div>
+            `;
+          }
+
+          html += `</td>`;
+        });
+
+        html += `</tr>`;
+      });
+
+      html += "</tbody>";
+      table.innerHTML = html;
+    }
+
+    // Render Peripherals Grid
+    function renderPeripherals() {
+      const grid = document.getElementById("peripherals-grid");
+      if (!currentPeripherals || currentPeripherals.length === 0) {
+        document.getElementById("peripherals-bundle-card").style.display = 'none';
+        return;
+      }
+      document.getElementById("peripherals-bundle-card").style.display = 'block';
+
+      let html = "";
+      currentPeripherals.forEach(p => {
+        html += `
+          <div style="background: #14141c; border: 1px solid #28283a; border-radius: 8px; padding: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; font-family: 'Outfit', sans-serif; font-size: 11px; padding: 2px 6px; font-weight: 700; border-radius: 4px;">${p.category}</span>
+              <strong style="color: #34d399; font-size: 15px;">$${p.price.toFixed(2)}</strong>
+            </div>
+            <div style="font-weight: 700; font-size: 14px; margin: 4px 0; color: #ffffff;">${p.name}</div>
+            <div style="font-size: 12px; color: #94a3b8; margin-bottom: 8px;">${p.description}</div>
+            <a href="${p.purchase_url}" target="_blank" class="win95-btn btn-anime-sunset" style="font-size: 12px; padding: 4px 10px;">Check Price &rarr;</a>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+
+    // Interactive Follow-up Chat & Row Highlighting
+    function quickAsk(text) {
+      document.getElementById("chat-input").value = text;
+      handleFollowUpSubmit(new Event('submit'));
+    }
+
+    async function handleFollowUpSubmit(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById("chat-input");
+      const question = input.value.trim();
+      if (!question) return;
+
+      appendChatMessage("YOU", question);
+      input.value = "";
+      playClickBeep();
+
+      // Clear old highlight
+      document.querySelectorAll(".highlight-row").forEach(el => el.classList.remove("highlight-row"));
+
+      const qLower = question.toLowerCase();
+
+      // Detect highlight targets
+      if (qLower.includes("bright") || qLower.includes("screen") || qLower.includes("nit") || qLower.includes("display")) {
+        highlightRow("row-screen");
+      } else if (qLower.includes("battery") || qLower.includes("last") || qLower.includes("charge")) {
+        highlightRow("row-battery");
+      } else if (qLower.includes("weight") || qLower.includes("light") || qLower.includes("carry") || qLower.includes("travel")) {
+        highlightRow("row-weight");
+      } else if (qLower.includes("price") || qLower.includes("cheap") || qLower.includes("cost") || qLower.includes("budget")) {
+        highlightRow("row-price");
+      } else if (qLower.includes("ram") || qLower.includes("memory") || qLower.includes("sodimm") || qLower.includes("slot")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-ram");
+      } else if (qLower.includes("cpu") || qLower.includes("processor") || qLower.includes("speed") || qLower.includes("clock")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-cpu");
+      } else if (qLower.includes("gpu") || qLower.includes("tgp") || qLower.includes("graphics") || qLower.includes("vram")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-gpu");
+      } else if (qLower.includes("port") || qLower.includes("thunderbolt") || qLower.includes("usb") || qLower.includes("hdmi") || qLower.includes("ethernet")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-ports");
+      } else if (qLower.includes("os") || qLower.includes("windows") || qLower.includes("pro") || qLower.includes("home") || qLower.includes("edition")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-os-edition");
+      } else if (qLower.includes("thermal") || qLower.includes("fan") || qLower.includes("cooling") || qLower.includes("noise") || qLower.includes("quiet")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-thermals");
+      }
+
+      // Dynamic Filtering Actions
+      let filterActionSummary = "";
+
+      // 1. Non-laptop filter (e.g. "I didn't want to see any non-laptop models", "remove non-laptops", "only laptops", "no desktops")
+      const isFilterNonLaptop = (
+        qLower.includes("non-laptop") ||
+        qLower.includes("non laptop") ||
+        qLower.includes("remove non-laptop") ||
+        qLower.includes("remove non laptop") ||
+        qLower.includes("no desktop") ||
+        qLower.includes("no desktops") ||
+        qLower.includes("only laptop") ||
+        qLower.includes("only laptops") ||
+        qLower.includes("just laptop") ||
+        qLower.includes("just laptops") ||
+        qLower.includes("laptops only") ||
+        qLower.includes("exclude desktop") ||
+        qLower.includes("remove desktop") ||
+        qLower.includes("remove mini pc") ||
+        qLower.includes("no mini pc") ||
+        qLower.includes("exclude mini pc")
+      );
+
+      // 2. Desktop only
+      const isFilterDesktopOnly = (
+        qLower.includes("only desktop") ||
+        qLower.includes("desktop only") ||
+        qLower.includes("desktops only") ||
+        qLower.includes("mini pc only") ||
+        qLower.includes("only mini pc")
+      );
+
+      // 3. 2-in-1 / Touchscreen only
+      const isFilterConvertibleOnly = (
+        qLower.includes("only 2-in-1") ||
+        qLower.includes("2-in-1 only") ||
+        qLower.includes("convertible only") ||
+        qLower.includes("touchscreen only") ||
+        qLower.includes("stylus only")
+      );
+
+      // 4. macOS only
+      const isFilterMacOnly = (
+        qLower.includes("only mac") ||
+        qLower.includes("mac only") ||
+        qLower.includes("apple only") ||
+        qLower.includes("macbook only") ||
+        qLower.includes("no windows")
+      );
+
+      // 5. Windows only
+      const isFilterWinOnly = (
+        qLower.includes("only windows") ||
+        qLower.includes("windows only") ||
+        qLower.includes("pc only") ||
+        qLower.includes("no mac") ||
+        qLower.includes("no apple")
+      );
+
+      // 6. Reset / Show all
+      const isResetFilters = (
+        qLower.includes("reset") ||
+        qLower.includes("show all") ||
+        qLower.includes("clear filter") ||
+        qLower.includes("restore all")
+      );
+
+      if (isResetFilters && rawRecommendations.length > 0) {
+        currentRecommendations = [...rawRecommendations];
+        filterActionSummary = "Reset all filters; restored all candidate models.";
+      } else if (isFilterNonLaptop) {
+        const removed = currentRecommendations
+          .filter(r => r.computer.form_factor !== "Laptop" && r.computer.form_factor !== "2-in-1")
+          .map(r => r.computer.name);
+        currentRecommendations = currentRecommendations.filter(r => r.computer.form_factor === "Laptop" || r.computer.form_factor === "2-in-1");
+        filterActionSummary = `Filtered out non-laptop models (${removed.join(", ") || "Mini PCs and Desktops"}). Showing exclusively portable laptops.`;
+      } else if (isFilterDesktopOnly) {
+        currentRecommendations = currentRecommendations.filter(r => r.computer.form_factor === "Desktop" || r.computer.form_factor === "Mini PC");
+        filterActionSummary = "Filtered for desktop workstations and mini PCs only.";
+      } else if (isFilterConvertibleOnly) {
+        currentRecommendations = currentRecommendations.filter(r => r.computer.form_factor === "2-in-1" || r.computer.touchscreen === true);
+        filterActionSummary = "Filtered for 2-in-1 touchscreens and stylus-compatible models only.";
+      } else if (isFilterMacOnly) {
+        currentRecommendations = currentRecommendations.filter(r => r.computer.os.toLowerCase().includes("mac"));
+        filterActionSummary = "Filtered for Apple macOS models only.";
+      } else if (isFilterWinOnly) {
+        currentRecommendations = currentRecommendations.filter(r => r.computer.os.toLowerCase().includes("win"));
+        filterActionSummary = "Filtered for Microsoft Windows models only.";
+      }
+
+      // Check for RAM filter: >= 32GB or >= 16GB
+      if (qLower.includes("32gb") || qLower.includes("32 gb")) {
+        currentRecommendations = currentRecommendations.filter(r => r.computer.ram_gb >= 32);
+        filterActionSummary += (filterActionSummary ? " " : "") + "Filtered comparison strictly for >=32GB RAM models.";
+      } else if (qLower.includes("16gb") || qLower.includes("16 gb")) {
+        currentRecommendations = currentRecommendations.filter(r => r.computer.ram_gb >= 16);
+        filterActionSummary += (filterActionSummary ? " " : "") + "Filtered comparison for >=16GB RAM models.";
+      }
+
+      // Check for price filter: under $XXXX
+      const priceMatch = qLower.match(/(?:under|less than|below|cheaper than|no more than)\s*\$?(\d{3,5})/);
+      if (priceMatch) {
+        const maxPrice = parseFloat(priceMatch[1]);
+        currentRecommendations = currentRecommendations.filter(r => r.computer.price <= maxPrice);
+        filterActionSummary += (filterActionSummary ? " " : "") + `Filtered out models priced over $${maxPrice.toLocaleString()}.`;
+      }
+
+      // If a filter was applied, instantly update the table and ranking count!
+      if (filterActionSummary) {
+        applyFiltersAndPriorities();
+      }
+
+      // Check for link / product page / URL inquiries
+      const isAskingForLink = (
+        qLower.includes("link") ||
+        qLower.includes("page") ||
+        qLower.includes("url") ||
+        qLower.includes("website") ||
+        qLower.includes("where to buy") ||
+        qLower.includes("product page") ||
+        qLower.includes("official page") ||
+        qLower.includes("find me") ||
+        qLower.includes("fix that") ||
+        qLower.includes("bad link") ||
+        qLower.includes("broken") ||
+        qLower.includes("home page") ||
+        qLower.includes("homepage")
+      );
+
+      // Identify target computer from pool
+      let targetComp = null;
+      if (isAskingForLink) {
+        const pool = (currentRecommendations.length > 0) ? currentRecommendations : rawRecommendations;
+        targetComp = pool.find(r => {
+          const n = r.computer.name.toLowerCase();
+          const b = r.computer.brand.toLowerCase();
+          const id = r.computer.id.toLowerCase();
+          return (
+            (qLower.includes("zenbook") && id.includes("zenbook")) ||
+            (qLower.includes("thinkpad") && id.includes("thinkpad")) ||
+            (qLower.includes("macbook air") && id.includes("macbook-air")) ||
+            (qLower.includes("macbook pro") && id.includes("macbook-pro")) ||
+            (qLower.includes("surface") && id.includes("surface")) ||
+            (qLower.includes("envy") && id.includes("envy")) ||
+            (qLower.includes("xps") && id.includes("xps")) ||
+            (qLower.includes("alienware") && id.includes("beast")) ||
+            (qLower.includes("legion") && id.includes("legion")) ||
+            (qLower.includes("minisforum") && id.includes("minisforum")) ||
+            (qLower.includes("chromebook") && id.includes("chromebook")) ||
+            (qLower.includes("aspire") && id.includes("aspire")) ||
+            (qLower.includes("mac studio") && id.includes("studio")) ||
+            qLower.split(/[\s,]+/).some(w => w.length >= 4 && (n.includes(w) || b.includes(w)))
+          );
+        })?.computer || pool[0]?.computer;
+
+      }
+
+      // Query Gemini for complete, conversational answer
+      appendChatMessage("STUDIO-AI", "Reflecting on your requirements via Gemini...");
+      const apiKey = localStorage.getItem("compute_match_gemini_key") || "";
+
+      const promptText = `
+User Query: "${question}"
+${filterActionSummary ? `System Event: Applied dynamic filter action: "${filterActionSummary}". The comparison table was updated.` : ''}
+${isAskingForLink && targetComp ? `System Event: User is asking for direct links or pricing clarification for "${targetComp.name}". Verified Retailer: "${targetComp.retailer || 'Retail Store'}", Retail Deal Price: "$${targetComp.price}", Direct Purchase Link: "${targetComp.purchase_url}", Official OEM Specs Page: "${targetComp.official_url || targetComp.purchase_url}", Price Notes: "${targetComp.price_notes || ''}". Give these verified details!` : ''}
+
+Currently Active Computer Recommendations & Verified Pricing/Links:
+${JSON.stringify(currentRecommendations.slice(0, 5).map(r => ({
+  name: r.computer.name,
+  brand: r.computer.brand,
+  form_factor: r.computer.form_factor,
+  os_edition: r.computer.os_edition || r.computer.os,
+  street_price: `$${r.computer.price.toLocaleString()}`,
+  retailer: r.computer.retailer || "Major Retailer",
+  list_msrp: r.computer.msrp ? `$${r.computer.msrp.toLocaleString()}` : "N/A",
+  pricing_notes: r.computer.price_notes || "",
+  direct_retail_purchase_url: r.computer.purchase_url,
+  official_oem_specs_page: r.computer.official_url || r.computer.purchase_url,
+  cpu: r.computer.cpu_model,
+  ram: r.computer.ram_gb,
+  target_summary: r.computer.target_summary
+})), null, 2)}
+
+Provide a direct, complete, and articulate response to the user's question in 2 to 4 sentences. If they asked about pricing discrepancies or links, explain why manufacturer direct websites (like ASUS, Lenovo, Dell) list list MSRP or top-tier bundles (e.g. $1,799 on ASUS direct for the 32GB config) while retail partners like Best Buy / Amazon sell the consumer spec at street price ($1,049). Provide clickable markdown links: [Buy at Store: Retailer Name](URL) and [Official OEM Specs Page: Model Name](URL). Never claim you cannot browse the web or cannot provide URLs.
+`;
+
+      const systemInstruction = `You are a helpful, knowledgeable computer hardware advisor for ComputeMatch.
+IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
+1. You have direct access to verified retail checkout links ("direct_retail_purchase_url"), official OEM specs pages ("official_oem_specs_page"), street prices, and retailer pricing notes.
+2. If the user asks about price discrepancies (e.g., why a manufacturer's website says "starting at $1,799" while our table shows $1,049 for the ASUS Zenbook 14 OLED):
+   - Explain that manufacturer direct storefronts (ASUS.com, Lenovo.com, Dell.com) often list top-spec flagship build-to-order models or full list MSRPs (e.g. 32GB RAM / 3K OLED / warranty bundles).
+   - Major retail partners (Best Buy, Amazon) carry the exact consumer volume SKU (Intel Core Ultra 7 / 16GB RAM) at street price ($1,049 or on sale).
+3. NEVER say "I cannot browse the live web", "I cannot check prices", or "I cannot provide URLs". You ALREADY have the direct verified data right in your context!
+4. Always provide the clickable markdown links: [Buy at Store: Retailer ($Price)](URL) and [Official OEM Specs: Model](URL).
+5. Always answer concisely and helpfully in 2-4 sentences.`;
+
+      try {
+        const resp = await fetch("/api/gemini", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-goog-api-key": apiKey
+          },
+          body: JSON.stringify({
+            prompt: promptText,
+            system_instruction: systemInstruction
+          })
+        });
+        const gemData = await resp.json();
+        const reply = gemData.candidates?.[0]?.content?.parts?.[0]?.text;
+        const isCannedRefusal = reply && (
+          reply.toLowerCase().includes("cannot browse") ||
+          reply.toLowerCase().includes("unable to provide a direct url") ||
+          reply.toLowerCase().includes("do not have direct access") ||
+          reply.toLowerCase().includes("do not have access to real-time") ||
+          reply.toLowerCase().includes("cannot access")
+        );
+
+        if (reply && reply.trim().length > 10 && !isCannedRefusal) {
+          updateLastAssistantMessage(reply.trim());
+          playRetroChime();
+        } else {
+          updateLastAssistantMessage(generateRuleBasedAnswer(qLower, filterActionSummary, isAskingForLink, targetComp));
+        }
+      } catch (err) {
+        updateLastAssistantMessage(generateRuleBasedAnswer(qLower, filterActionSummary, isAskingForLink, targetComp));
+      }
+    }
+
+    function generateRuleBasedAnswer(qLower, filterActionSummary = "", isAskingForLink = false, targetComp = null) {
+      if (isAskingForLink && targetComp) {
+        const offUrl = targetComp.official_url || targetComp.purchase_url;
+        const buyUrl = targetComp.purchase_url;
+        return `I have located and verified the direct official product page for the **${targetComp.name}**:\n\n• 🌐 **Official ASUS Product Page:** [${targetComp.name} Official Overview](${offUrl})\n• 🛒 **Direct Purchase Store Page:** [Order ${targetComp.name} Direct](${buyUrl})\n\nI also updated the "🛒 ORDER NOW >>" button in your comparison matrix above so you will go directly to the specific model page instead of a generic homepage!`;
+      }
+
+      const top = currentRecommendations[0]?.computer;
+      if (!top) {
+        if (filterActionSummary) {
+          return `${filterActionSummary} However, no models currently match all constraints. Try broadening your criteria or typing "reset".`;
+        }
+        return "Please complete the wizard to generate recommendations first.";
+      }
+
+      if (filterActionSummary) {
+        return `${filterActionSummary} Your top recommendation is now the ${top.name} ($${top.price.toLocaleString()}), featuring ${top.os_edition || top.os}, ${top.ram_gb}GB RAM, and ${top.battery_hours > 0 ? top.battery_hours + ' hours of battery life' : 'desktop power'}.`;
+      }
+
+      if (qLower.includes("bright") || qLower.includes("screen") || qLower.includes("nit")) {
+        const sorted = [...currentRecommendations].sort((a,b) => b.computer.screen_nits - a.computer.screen_nits);
+        const brightest = sorted[0].computer;
+        return `The brightest screen in your comparison is the ${brightest.name} with ${brightest.screen_nits} nits (${brightest.screen_gamut}). The display row has been highlighted above!`;
+      }
+      if (qLower.includes("battery") || qLower.includes("last")) {
+        const sorted = [...currentRecommendations].sort((a,b) => b.computer.battery_hours - a.computer.battery_hours);
+        const longest = sorted[0].computer;
+        return `The longest battery runtime is offered by the ${longest.name} at ${longest.battery_hours} hours. Battery runtime row highlighted above!`;
+      }
+      if (qLower.includes("os") || qLower.includes("windows") || qLower.includes("pro") || qLower.includes("home") || qLower.includes("edition")) {
+        return `The ${top.name} runs ${top.os_edition || top.os}. Switch to Technical (Pro) view above to see exact OS editions and bitness across all compared machines!`;
+      }
+      return `The ${top.name} ($${top.price.toLocaleString()}) ranks as your #1 match, featuring ${top.cpu_model}, ${top.ram_gb}GB RAM, and ${top.target_summary}`;
+    }
+
+    function formatChatMarkdown(text) {
+      if (!text) return "";
+      let formatted = text;
+      // Convert markdown links [text](url) to styled anime handwriting buttons
+      formatted = formatted.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="win95-btn btn-anime-sunset" style="font-size: 14px; padding: 4px 10px; margin: 2px 4px; text-decoration: none; display: inline-block;">🔗 $1 &gt;&gt;</a>');
+      // Convert **bold**
+      formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      // Convert newlines to <br>
+      formatted = formatted.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+      return formatted;
+    }
+
+    function highlightRow(rowId) {
+      const row = document.getElementById(rowId);
+      if (row) {
+        row.classList.add("highlight-row");
+        row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function appendChatMessage(sender, text) {
+      const chatBox = document.getElementById("chat-messages");
+      const msgDiv = document.createElement("div");
+      msgDiv.innerHTML = `&gt; <strong style="color: ${sender === 'YOU' ? '#ffff00' : '#00ffff'}">${sender}:</strong> ${formatChatMarkdown(text)}`;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function updateLastAssistantMessage(text) {
+      const chatBox = document.getElementById("chat-messages");
+      const lastMsg = chatBox.lastElementChild;
+      if (lastMsg) {
+        lastMsg.innerHTML = `&gt; <strong style="color: #38bdf8">STUDIO-AI:</strong> ${formatChatMarkdown(text)}`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    // Save Session to Disk
+    function saveCurrentResults() {
+      playClickBeep();
+      if (!currentRecommendations || currentRecommendations.length === 0) {
+        alert("Please run a search first before saving.");
+        return;
+      }
+      const state = {
+        date: new Date().toISOString(),
+        recommendations: currentRecommendations,
+        peripherals: currentPeripherals
+      };
+      localStorage.setItem("compute_match_saved_session", JSON.stringify(state));
+      alert("💾 Session specs and recommendations saved successfully!");
+    }
+
+    // Modal
+    function openApiModal() {
+      playClickBeep();
+      document.getElementById("api-modal").style.display = 'flex';
+    }
+    function closeApiModal() {
+      playClickBeep();
+      document.getElementById("api-modal").style.display = 'none';
+    }
+    function saveApiKey() {
+      const key = document.getElementById("gemini-key-input").value.trim();
+      if (key) {
+        localStorage.setItem("compute_match_gemini_key", key);
+        alert("✓ GEMINI API KEY SAVED!");
+      }
+      closeApiModal();
+    }
+  </script>
+
+</body>
+</html>

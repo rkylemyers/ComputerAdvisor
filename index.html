@@ -298,45 +298,53 @@
 
         <!-- METHOD 1: MAC TOUCH ID / APPLE PASSKEY -->
         <div style="margin-bottom: 16px;">
-          <button type="button" onclick="unlockWithMacPasskey()" class="win95-btn btn-anime-mint" style="width: 100%; padding: 12px; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 8px rgba(52, 211, 153, 0.2);">
+          <button type="button" onclick="unlockWithMacPasskey()" class="win95-btn btn-anime-mint" style="width: 100%; padding: 13px; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 10px rgba(52, 211, 153, 0.25);">
             <span style="font-size: 20px;"></span> Unlock with Mac Touch ID / Passkey
           </button>
         </div>
 
         <div style="display: flex; align-items: center; text-align: center; margin: 14px 0; color: #64748b; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;">
           <div style="flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.12);"></div>
-          <span style="padding: 0 10px;">OR USE 2-FACTOR AUTHENTICATION</span>
+          <span style="padding: 0 10px;">OR USE MASTER FALLBACK KEY</span>
           <div style="flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.12);"></div>
         </div>
 
-        <!-- METHOD 2: EMAIL 2FA TO RKYLE.MYERS@GMAIL.COM -->
+        <!-- METHOD 2: MASTER CRYPTOGRAPHIC FALLBACK KEY -->
         <div style="background: rgba(30, 36, 46, 0.75); border: 1.5px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 14px; margin-bottom: 14px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
-            <span style="font-size: 12px; font-weight: 700; color: #84a98c;">📧 Email 2FA to rkyle.myers@gmail.com</span>
-            <button type="button" id="btn-send-2fa-code" onclick="sendEmail2FACode()" class="win95-btn btn-anime-sky" style="font-size: 11px; padding: 3px 8px;">
-              Send 2FA Code
+          <label for="auth-gate-input" style="display: block; font-size: 12px; font-weight: 700; color: #e9c46a; margin-bottom: 6px;">
+            🔑 MASTER FALLBACK ACCESS KEY:
+          </label>
+          <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+            <input type="password" id="auth-gate-input" class="win95-input" style="flex: 1; font-size: 13px; padding: 8px 10px;" placeholder="Paste KYLE-SEC-XXXXXX-XXXXXX..." autofocus onkeydown="if(event.key==='Enter') attemptUnlock()">
+            <button type="button" onclick="attemptUnlock()" class="win95-btn btn-anime-mint" style="font-weight: 700; padding: 6px 16px;">
+              Unlock
             </button>
           </div>
-          <div id="email-2fa-status" style="font-size: 11px; margin-bottom: 8px; line-height: 1.4; display: none;"></div>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="email-2fa-code-input" class="win95-input" placeholder="Enter 6-digit code..." style="flex: 1; font-size: 13px; letter-spacing: 2px;" maxlength="6" onkeydown="if(event.key==='Enter') verifyEmail2FACode()">
-            <button type="button" onclick="verifyEmail2FACode()" class="win95-btn btn-anime-mint" style="padding: 4px 14px; font-weight: 700;">Verify Code</button>
+          <div style="font-size: 11px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
+            <span>Unguessable 40-char key generated for Kyle</span>
+            <button type="button" onclick="toggleKeyVisibility()" style="background: none; border: none; color: #6b9ac4; font-size: 11px; cursor: pointer; text-decoration: underline;">
+              Show / Hide Key
+            </button>
           </div>
         </div>
 
-        <!-- METHOD 3: HIGH-ENTROPY CRYPTOGRAPHIC MASTER FALLBACK KEY -->
+        <!-- METHOD 3: EMAIL 2FA TO RKYLE.MYERS@GMAIL.COM -->
         <details style="background: rgba(22, 28, 38, 0.65); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px; padding: 10px 12px; margin-bottom: 12px;">
-          <summary style="font-size: 12px; font-weight: 600; color: #e9c46a; cursor: pointer;">
-            🔑 Enter Master Cryptographic Fallback Key
+          <summary style="font-size: 12px; font-weight: 600; color: #84a98c; cursor: pointer;">
+            📧 2-Factor Authentication (Email Code to rkyle.myers@gmail.com)
           </summary>
           <div style="margin-top: 10px;">
-            <p style="font-size: 11px; color: #94a3b8; margin: 0 0 6px 0; line-height: 1.4;">
-              Random 40-character master key dispatched to <strong>rkyle.myers@gmail.com</strong>:
-            </p>
-            <input type="password" id="auth-gate-input" class="win95-input" style="width: 100%; box-sizing: border-box; font-size: 13px; padding: 7px 10px; margin-bottom: 8px;" placeholder="KYLE-SEC-XXXXXX-XXXXXX-XXXXXX..." onkeydown="if(event.key==='Enter') attemptUnlock()">
-            <button type="button" onclick="attemptUnlock()" class="win95-btn btn-anime-mint" style="width: 100%; padding: 7px; font-weight: 700;">
-              Unlock with Master Key
-            </button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; color: #cbd5e1;">Target Email: <strong>rkyle.myers@gmail.com</strong></span>
+              <button type="button" id="btn-send-2fa-code" onclick="sendEmail2FACode()" class="win95-btn btn-anime-sky" style="font-size: 11px; padding: 3px 8px;">
+                Send 2FA Code
+              </button>
+            </div>
+            <div id="email-2fa-status" style="font-size: 11px; margin-bottom: 8px; line-height: 1.4; display: none;"></div>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="email-2fa-code-input" class="win95-input" placeholder="Enter 6-digit code..." style="flex: 1; font-size: 13px; letter-spacing: 2px;" maxlength="6" onkeydown="if(event.key==='Enter') verifyEmail2FACode()">
+              <button type="button" onclick="verifyEmail2FACode()" class="win95-btn btn-anime-mint" style="padding: 4px 14px; font-weight: 700;">Verify Code</button>
+            </div>
           </div>
         </details>
 
@@ -1197,6 +1205,13 @@
           authBtn.classList.remove("btn-anime-mint");
           authBtn.classList.add("btn-anime-peach");
         }
+      }
+    }
+
+    function toggleKeyVisibility() {
+      const input = document.getElementById("auth-gate-input");
+      if (input) {
+        input.type = input.type === "password" ? "text" : "password";
       }
     }
 

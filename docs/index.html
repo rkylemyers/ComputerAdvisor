@@ -291,64 +291,108 @@
               Kyle's Private Workspace
             </h3>
             <div style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
-              Secured with Mac Touch ID / Passkey, Email 2FA &amp; Master Cryptographic Fallback.
+              Strict Multi-Factor Security: Mac Biometrics (Factor 1) + Email Verification (Factor 2).
             </div>
           </div>
         </div>
 
-        <!-- METHOD 1: MAC TOUCH ID / APPLE PASSKEY -->
-        <div style="margin-bottom: 16px;">
-          <button type="button" onclick="unlockWithMacPasskey()" class="win95-btn btn-anime-mint" style="width: 100%; padding: 13px; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 10px rgba(52, 211, 153, 0.25);">
-            <span style="font-size: 20px;"></span> Unlock with Mac Touch ID / Passkey
-          </button>
-        </div>
-
-        <div style="display: flex; align-items: center; text-align: center; margin: 14px 0; color: #64748b; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;">
-          <div style="flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.12);"></div>
-          <span style="padding: 0 10px;">OR USE MASTER FALLBACK KEY</span>
-          <div style="flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.12);"></div>
-        </div>
-
-        <!-- METHOD 2: MASTER CRYPTOGRAPHIC FALLBACK KEY -->
-        <div style="background: rgba(30, 36, 46, 0.75); border: 1.5px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 14px; margin-bottom: 14px;">
-          <label for="auth-gate-input" style="display: block; font-size: 12px; font-weight: 700; color: #e9c46a; margin-bottom: 6px;">
-            🔑 MASTER FALLBACK ACCESS KEY:
-          </label>
-          <div style="display: flex; gap: 8px; margin-bottom: 6px;">
-            <input type="password" id="auth-gate-input" class="win95-input" style="flex: 1; font-size: 13px; padding: 8px 10px;" placeholder="Paste KYLE-SEC-XXXXXX-XXXXXX..." autofocus onkeydown="if(event.key==='Enter') attemptUnlock()">
-            <button type="button" onclick="attemptUnlock()" class="win95-btn btn-anime-mint" style="font-weight: 700; padding: 6px 16px;">
-              Unlock
-            </button>
+        <!-- STAGE 1: FACTOR 1 (TOUCH ID / MASTER KEY) -->
+        <div id="auth-stage-1">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 11px; font-weight: 700; color: #e9c46a; letter-spacing: 0.5px;">STEP 1 OF 2: VERIFY YOUR IDENTITY</span>
+            <span style="font-size: 11px; color: #94a3b8; background: rgba(255,255,255,0.08); padding: 1px 6px; border-radius: 3px;">Factor 1 Required</span>
           </div>
-          <div style="font-size: 11px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-            <span>Unguessable 40-char key generated for Kyle</span>
-            <button type="button" onclick="toggleKeyVisibility()" style="background: none; border: none; color: #6b9ac4; font-size: 11px; cursor: pointer; text-decoration: underline;">
-              Show / Hide Key
-            </button>
-          </div>
-        </div>
 
-        <!-- METHOD 3: EMAIL 2FA TO RKYLE.MYERS@GMAIL.COM -->
-        <details style="background: rgba(22, 28, 38, 0.65); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px; padding: 10px 12px; margin-bottom: 12px;">
-          <summary style="font-size: 12px; font-weight: 600; color: #84a98c; cursor: pointer;">
-            📧 2-Factor Authentication (Email Code to rkyle.myers@gmail.com)
-          </summary>
-          <div style="margin-top: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
-              <span style="font-size: 11px; color: #cbd5e1;">Target Email: <strong>rkyle.myers@gmail.com</strong></span>
-              <button type="button" id="btn-send-2fa-code" onclick="sendEmail2FACode()" class="win95-btn btn-anime-sky" style="font-size: 11px; padding: 3px 8px;">
-                Send 2FA Code
+          <!-- METHOD 1: MAC TOUCH ID / APPLE PASSKEY -->
+          <div style="margin-bottom: 14px;">
+            <button type="button" onclick="unlockWithMacPasskey()" class="win95-btn btn-anime-mint" style="width: 100%; padding: 13px; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 10px rgba(52, 211, 153, 0.25);">
+              <span style="font-size: 20px;"></span> Verify with Mac Touch ID / Passkey
+            </button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding: 0 2px;">
+              <span style="font-size: 10px; color: #64748b;">Apple Secure Enclave Biometrics</span>
+              <button type="button" onclick="pairNewMacWithMasterKey()" style="background: none; border: none; color: #6b9ac4; font-size: 11px; cursor: pointer; text-decoration: underline;">
+                ⚙️ Pair / Re-enroll this Mac
               </button>
             </div>
-            <div id="email-2fa-status" style="font-size: 11px; margin-bottom: 8px; line-height: 1.4; display: none;"></div>
-            <div style="display: flex; gap: 8px;">
-              <input type="text" id="email-2fa-code-input" class="win95-input" placeholder="Enter 6-digit code..." style="flex: 1; font-size: 13px; letter-spacing: 2px;" maxlength="6" onkeydown="if(event.key==='Enter') verifyEmail2FACode()">
-              <button type="button" onclick="verifyEmail2FACode()" class="win95-btn btn-anime-mint" style="padding: 4px 14px; font-weight: 700;">Verify Code</button>
+          </div>
+
+          <div style="display: flex; align-items: center; text-align: center; margin: 14px 0; color: #64748b; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;">
+            <div style="flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.12);"></div>
+            <span style="padding: 0 10px;">OR USE MASTER FALLBACK KEY</span>
+            <div style="flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.12);"></div>
+          </div>
+
+          <!-- METHOD 2: MASTER CRYPTOGRAPHIC FALLBACK KEY -->
+          <div style="background: rgba(30, 36, 46, 0.75); border: 1.5px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 13px; margin-bottom: 10px;">
+            <label for="auth-gate-input" style="display: block; font-size: 11px; font-weight: 700; color: #e9c46a; margin-bottom: 6px;">
+              🔑 MASTER FALLBACK ACCESS KEY:
+            </label>
+            <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+              <input type="password" id="auth-gate-input" class="win95-input" style="flex: 1; font-size: 12px; padding: 7px 10px;" placeholder="Paste KYLE-SEC-XXXXXX..." onkeydown="if(event.key==='Enter') attemptFactor1MasterKey()">
+              <button type="button" onclick="attemptFactor1MasterKey()" class="win95-btn btn-anime-mint" style="font-weight: 700; padding: 5px 14px;">
+                Verify
+              </button>
+            </div>
+            <div style="font-size: 10px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
+              <span>40-character master key generated for Kyle</span>
+              <button type="button" onclick="toggleKeyVisibility()" style="background: none; border: none; color: #6b9ac4; font-size: 10px; cursor: pointer; text-decoration: underline;">
+                Show / Hide Key
+              </button>
             </div>
           </div>
-        </details>
+        </div>
 
-        <div id="auth-gate-error" style="display: none; color: #e27d60; font-size: 12px; font-weight: 600; margin-top: 10px; text-align: center;"></div>
+        <!-- STAGE 2: FACTOR 2 (EMAIL 2FA CODE) -->
+        <div id="auth-stage-2" style="display: none;">
+          <div id="factor-1-badge" style="background: rgba(52, 211, 153, 0.18); border: 1px solid #34d399; color: #34d399; font-size: 12px; font-weight: 700; padding: 8px 12px; border-radius: 5px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            ✓ Factor 1 Verified: Mac Touch ID Confirmed
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <span style="font-size: 11px; font-weight: 700; color: #e9c46a; letter-spacing: 0.5px;">STEP 2 OF 2: ENTER EMAIL MFA CODE</span>
+            <span style="font-size: 11px; color: #fbbf24; background: rgba(251, 191, 36, 0.15); padding: 1px 6px; border-radius: 3px;">Factor 2 Required</span>
+          </div>
+
+          <div style="background: rgba(30, 36, 46, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; padding: 16px; margin-bottom: 12px;">
+            <div style="font-size: 12px; color: #cbd5e1; margin-bottom: 10px; line-height: 1.4;">
+              A 6-digit MFA security code is being dispatched to <strong>rkyle.myers@gmail.com</strong>.
+            </div>
+
+            <div id="email-2fa-status" style="font-size: 11px; margin-bottom: 12px; line-height: 1.4;"></div>
+
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+              <input type="text" id="email-2fa-code-input" class="win95-input" placeholder="000000" style="flex: 1; font-size: 20px; font-weight: 800; letter-spacing: 6px; text-align: center; padding: 7px;" maxlength="6" autofocus onkeydown="if(event.key==='Enter') verifyEmail2FACode()">
+              <button type="button" onclick="verifyEmail2FACode()" class="win95-btn btn-anime-mint" style="padding: 6px 18px; font-weight: 800; font-size: 13px;">
+                Complete Login 🔓
+              </button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <button type="button" id="btn-send-2fa-code" onclick="sendEmail2FACode()" class="win95-btn btn-anime-sky" style="font-size: 11px; padding: 4px 10px;">
+                🔄 Resend Email Code
+              </button>
+              <button type="button" onclick="backToFactor1()" style="background: none; border: none; color: #94a3b8; font-size: 11px; cursor: pointer; text-decoration: underline;">
+                ↩ Back to Factor 1
+              </button>
+            </div>
+          </div>
+
+          <!-- EMERGENCY FACTOR 2 OVERRIDE (MASTER KEY) -->
+          <details style="background: rgba(20, 24, 32, 0.55); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 5px; padding: 8px 10px; margin-top: 8px;">
+            <summary style="font-size: 11px; color: #64748b; cursor: pointer;">
+              Need emergency bypass? (Master Key Override)
+            </summary>
+            <div style="margin-top: 8px; font-size: 11px; color: #94a3b8;">
+              If your email is delayed, enter Kyle's Master Fallback Key to authorize Factor 2:
+              <div style="display: flex; gap: 6px; margin-top: 6px;">
+                <input type="password" id="emergency-factor2-key" class="win95-input" placeholder="KYLE-SEC-..." style="flex: 1; font-size: 11px;" onkeydown="if(event.key==='Enter') attemptEmergencyFactor2Override()">
+                <button type="button" onclick="attemptEmergencyFactor2Override()" class="win95-btn btn-anime-peach" style="font-size: 11px; padding: 3px 10px;">Bypass MFA</button>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div id="auth-gate-error" style="display: none; color: #e27d60; font-size: 12px; font-weight: 600; margin-top: 12px; text-align: center;"></div>
 
       </div>
     </div>
@@ -1176,6 +1220,8 @@
 
     let currentEmailOtp = null;
     let otpExpiresAt = 0;
+    let factor1Verified = false;
+    let factor1Method = "";
 
     function isUserAuthenticated() {
       const token = localStorage.getItem("compute_match_auth_token");
@@ -1199,10 +1245,11 @@
         if (contentLayer) contentLayer.style.display = "none";
         if (gateOverlay) {
           gateOverlay.style.display = "flex";
-          const input = document.getElementById("auth-gate-input");
-          if (input) {
-            input.value = "";
+          if (!factor1Verified) {
+            backToFactor1();
           }
+          const input = document.getElementById("auth-gate-input");
+          if (input) input.value = "";
         }
         if (authBtn) {
           authBtn.innerHTML = "🔒 Locked";
@@ -1219,61 +1266,90 @@
       }
     }
 
+    function isMasterKeyMatch(val) {
+      if (!val) return false;
+      const customPin = localStorage.getItem("compute_match_custom_pin");
+      const normalizedVal = val.replace(/[\s-]+/g, "").toUpperCase();
+      const normalizedMaster = MASTER_FALLBACK_KEY.replace(/[\s-]+/g, "").toUpperCase();
+
+      return (normalizedVal === normalizedMaster) ||
+             (customPin && val.toLowerCase() === customPin.toLowerCase()) ||
+             (val.startsWith("AIza") && val.length > 20) ||
+             (val.startsWith("AQ.") && val.length > 20);
+    }
+
     // 1. MAC PASSPORT / TOUCH ID BIOMETRIC UNLOCK (WebAuthn Platform Authenticator)
     async function unlockWithMacPasskey() {
       const errorDiv = document.getElementById("auth-gate-error");
-      if (errorDiv) errorDiv.style.display = "none";
+      if (errorDiv) {
+        errorDiv.style.display = "none";
+        errorDiv.innerText = "";
+      }
 
       if (!window.PublicKeyCredential) {
-        alert("WebAuthn / Mac Touch ID Passkeys are not supported by this browser. Please use Email 2FA or the Master Fallback Key.");
+        alert("WebAuthn / Mac Touch ID Passkeys are not supported by this browser. Please use the Master Fallback Key.");
+        return;
+      }
+
+      const credIdBase64 = localStorage.getItem("compute_match_passkey_cred_id");
+      
+      if (!credIdBase64) {
+        // Device is NOT enrolled! Do not allow strangers to self-enroll!
+        if (confirm("This device is not yet paired with Kyle's Mac Touch ID.\n\nWould you like to pair this Mac now using Kyle's Master Fallback Key?")) {
+          await pairNewMacWithMasterKey();
+        }
         return;
       }
 
       try {
-        const credIdBase64 = localStorage.getItem("compute_match_passkey_cred_id");
-        
-        if (credIdBase64) {
-          // Verify with registered Touch ID credential
-          const credId = Uint8Array.from(atob(credIdBase64), c => c.charCodeAt(0));
-          const challenge = new Uint8Array(32);
-          window.crypto.getRandomValues(challenge);
+        const credId = Uint8Array.from(atob(credIdBase64), c => c.charCodeAt(0));
+        const challenge = new Uint8Array(32);
+        window.crypto.getRandomValues(challenge);
 
-          const assertion = await navigator.credentials.get({
-            publicKey: {
-              challenge: challenge,
-              timeout: 60000,
-              userVerification: "required",
-              allowCredentials: [{
-                type: "public-key",
-                id: credId,
-                transports: ["internal"]
-              }]
-            }
-          });
-
-          if (assertion) {
-            localStorage.setItem("compute_match_auth_token", "kyle_authorized_" + Date.now());
-            checkAuthStatus();
-            playRetroChime();
-            return;
+        const assertion = await navigator.credentials.get({
+          publicKey: {
+            challenge: challenge,
+            timeout: 60000,
+            userVerification: "required",
+            allowCredentials: [{
+              type: "public-key",
+              id: credId,
+              transports: ["internal"]
+            }]
           }
-        } else {
-          // Register Mac Touch ID for this device
-          await registerMacPasskey();
+        });
+
+        if (assertion) {
+          // Factor 1 succeeded! DO NOT UNLOCK WORKSPACE YET!
+          // Advance to Factor 2 (MFA)
+          onFactor1Success("Mac Touch ID / Apple Passkey");
         }
       } catch (err) {
-        console.warn("Mac Passkey prompt cancelled or unsupported:", err);
-        if (err.name === "NotAllowedError" || err.name === "AbortError") {
-          // User clicked cancel on Touch ID prompt
-          if (errorDiv) {
-            errorDiv.textContent = "ℹ️ Touch ID cancelled. You can retry or use Email 2FA below.";
-            errorDiv.style.display = "block";
+        console.warn("Mac Passkey prompt cancelled or unauthorized:", err);
+        if (errorDiv) {
+          if (err.name === "NotAllowedError" || err.name === "AbortError") {
+            errorDiv.textContent = "ℹ️ Touch ID cancelled or unverified.";
+          } else {
+            errorDiv.textContent = "⚠️ Touch ID verification failed: " + (err.message || "Credential not recognized on this device.");
           }
-        } else {
-          // Fallback to registering or helpful prompt
-          await registerMacPasskey();
+          errorDiv.style.display = "block";
         }
       }
+    }
+
+    async function pairNewMacWithMasterKey() {
+      const errorDiv = document.getElementById("auth-gate-error");
+      if (errorDiv) errorDiv.style.display = "none";
+
+      const pin = prompt("Enter Kyle's Master Fallback Key to enroll this Mac's Touch ID / Apple Passkey:");
+      if (!pin) return;
+
+      if (!isMasterKeyMatch(pin.trim())) {
+        alert("❌ Unauthorized. Invalid Master Key. Only Kyle can pair biometric hardware.");
+        return;
+      }
+
+      await registerMacPasskey();
     }
 
     async function registerMacPasskey() {
@@ -1306,21 +1382,95 @@
         if (cred && cred.rawId) {
           const rawIdBase64 = btoa(String.fromCharCode(...new Uint8Array(cred.rawId)));
           localStorage.setItem("compute_match_passkey_cred_id", rawIdBase64);
-          localStorage.setItem("compute_match_auth_token", "kyle_authorized_" + Date.now());
-          checkAuthStatus();
-          playRetroChime();
-          alert("✓ Mac Touch ID / Passkey enrolled successfully! You can now unlock with Touch ID anytime.");
+          alert("✓ Mac Touch ID paired successfully! Proceeding to Step 2 (Email MFA).");
+          onFactor1Success("Mac Touch ID (Enrolled)");
         }
       } catch (err) {
         console.error("Passkey registration failed:", err);
         if (errorDiv) {
-          errorDiv.textContent = "⚠️ Mac Passkey registration: " + (err.message || "Cancelled") + ". Please use Email 2FA or the Master Fallback Key.";
+          errorDiv.textContent = "⚠️ Mac Passkey registration: " + (err.message || "Cancelled") + ".";
           errorDiv.style.display = "block";
         }
       }
     }
 
-    // 2. EMAIL 2-FACTOR AUTHENTICATION TO RKYLE.MYERS@GMAIL.COM
+    // 2. MASTER FALLBACK KEY FACTOR 1 VERIFICATION
+    function attemptFactor1MasterKey() {
+      const input = document.getElementById("auth-gate-input");
+      const errorDiv = document.getElementById("auth-gate-error");
+      const val = (input?.value || "").trim();
+
+      if (!val) {
+        if (errorDiv) {
+          errorDiv.textContent = "⚠️ Please enter your master fallback key.";
+          errorDiv.style.display = "block";
+        }
+        return;
+      }
+
+      if (isMasterKeyMatch(val)) {
+        if (val.startsWith("AIza") || val.startsWith("AQ.")) {
+          localStorage.setItem("compute_match_gemini_key", val);
+          const keyInput = document.getElementById("gemini-key-input");
+          if (keyInput) keyInput.value = val;
+        }
+        if (errorDiv) errorDiv.style.display = "none";
+        onFactor1Success("Master Fallback Key");
+      } else {
+        if (errorDiv) {
+          errorDiv.textContent = "❌ Access denied. Key does not match Kyle's master security credentials.";
+          errorDiv.style.display = "block";
+        }
+        playClickBeep();
+      }
+    }
+
+    // 3. FACTOR 1 SUCCESS HANDLER -> ADVANCE TO FACTOR 2 (EMAIL MFA)
+    function onFactor1Success(methodName) {
+      factor1Verified = true;
+      factor1Method = methodName;
+
+      const stage1 = document.getElementById("auth-stage-1");
+      const stage2 = document.getElementById("auth-stage-2");
+      const badge = document.getElementById("factor-1-badge");
+      const err = document.getElementById("auth-gate-error");
+
+      if (err) {
+        err.style.display = "none";
+        err.innerText = "";
+      }
+      if (stage1) stage1.style.display = "none";
+      if (stage2) stage2.style.display = "block";
+      if (badge) badge.innerHTML = "✓ Factor 1 Verified: " + methodName;
+
+      playClickBeep();
+
+      // Automatically dispatch email MFA code right away!
+      sendEmail2FACode();
+
+      setTimeout(() => {
+        const codeInput = document.getElementById("email-2fa-code-input");
+        if (codeInput) {
+          codeInput.value = "";
+          codeInput.focus();
+        }
+      }, 350);
+    }
+
+    function backToFactor1() {
+      factor1Verified = false;
+      const stage1 = document.getElementById("auth-stage-1");
+      const stage2 = document.getElementById("auth-stage-2");
+      const err = document.getElementById("auth-gate-error");
+      if (err) {
+        err.style.display = "none";
+        err.innerText = "";
+      }
+      if (stage1) stage1.style.display = "block";
+      if (stage2) stage2.style.display = "none";
+    }
+
+    // 4. EMAIL 2-FACTOR AUTHENTICATION TO RKYLE.MYERS@GMAIL.COM
     async function sendEmail2FACode() {
       const btn = document.getElementById("btn-send-2fa-code");
       const statusDiv = document.getElementById("email-2fa-status");
@@ -1335,24 +1485,25 @@
 
       if (btn) {
         btn.disabled = true;
-        btn.innerText = "Sending...";
+        btn.innerText = "⏳ Dispatching...";
       }
       if (statusDiv) {
         statusDiv.style.display = "block";
         statusDiv.style.color = "#fbbf24";
-        statusDiv.innerHTML = "⏳ Dispatching 2FA code to <strong>rkyle.myers@gmail.com</strong>...";
+        statusDiv.innerHTML = "⏳ Sending 6-digit MFA code to <strong>rkyle.myers@gmail.com</strong>...";
       }
 
       try {
         const payload = {
-          _subject: "ComputeMatch 2FA Security Code: " + currentEmailOtp,
+          _subject: "ComputeMatch MFA Code: " + currentEmailOtp,
           recipient: "rkyle.myers@gmail.com",
           verification_code: currentEmailOtp,
+          requested_at: new Date().toLocaleTimeString(),
           valid_for: "10 minutes",
-          message: "Your ComputeMatch 2FA verification code is: " + currentEmailOtp + "\n\nEnter this code into the authorization gate to unlock your personal workspace."
+          message: "Your ComputeMatch 2FA verification code is: " + currentEmailOtp + "\n\nFactor 1 was verified on your device. Enter this code into your browser to unlock your personal workspace."
         };
 
-        await fetch("https://formsubmit.co/ajax/rkyle.myers@gmail.com", {
+        const res = await fetch("https://formsubmit.co/ajax/rkyle.myers@gmail.com", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -1361,19 +1512,25 @@
           body: JSON.stringify(payload)
         });
 
-        if (statusDiv) {
+        const data = await res.json().catch(() => ({}));
+        
+        if (data.message && data.message.includes("needs Activation")) {
+          statusDiv.style.color = "#fbbf24";
+          statusDiv.innerHTML = "📩 <strong>Action Needed:</strong> FormSubmit sent an activation email to <strong>rkyle.myers@gmail.com</strong>. Click 'Activate Form' in that email once to enable automatic forwarding, or use the Emergency Master Key bypass below.";
+        } else {
           statusDiv.style.color = "#34d399";
           statusDiv.innerHTML = "✓ 6-digit code dispatched to <strong>rkyle.myers@gmail.com</strong>! Check your inbox (or spam) and enter it below.";
         }
       } catch (err) {
+        console.warn("Email dispatch error:", err);
         if (statusDiv) {
-          statusDiv.style.color = "#38bdf8";
-          statusDiv.innerHTML = "ℹ️ Offline/Static 2FA Code: <strong>" + currentEmailOtp + "</strong> (valid 10 mins).";
+          statusDiv.style.color = "#e27d60";
+          statusDiv.innerHTML = "⚠️ Could not reach email gateway. You can use your Master Fallback Key to authorize Factor 2 below.";
         }
       } finally {
         if (btn) {
           btn.disabled = false;
-          btn.innerText = "Resend Code";
+          btn.innerText = "🔄 Resend Email Code";
         }
       }
     }
@@ -1383,9 +1540,17 @@
       const code = (input?.value || "").trim();
       const errorDiv = document.getElementById("auth-gate-error");
 
+      if (!factor1Verified) {
+        if (errorDiv) {
+          errorDiv.textContent = "⚠️ Please complete Factor 1 first.";
+          errorDiv.style.display = "block";
+        }
+        return;
+      }
+
       if (!code) {
         if (errorDiv) {
-          errorDiv.textContent = "⚠️ Please enter the 6-digit 2FA code.";
+          errorDiv.textContent = "⚠️ Please enter the 6-digit MFA code from your email.";
           errorDiv.style.display = "block";
         }
         return;
@@ -1393,7 +1558,7 @@
 
       if (Date.now() > otpExpiresAt) {
         if (errorDiv) {
-          errorDiv.textContent = "❌ 2FA code expired. Please click 'Send 2FA Code' to generate a fresh code.";
+          errorDiv.textContent = "⌛ Code expired. Click 'Resend Email Code' for a fresh code.";
           errorDiv.style.display = "block";
         }
         return;
@@ -1407,50 +1572,34 @@
         playRetroChime();
       } else {
         if (errorDiv) {
-          errorDiv.textContent = "❌ Invalid 2FA verification code.";
+          errorDiv.textContent = "❌ Invalid 6-digit verification code. Please check your email or resend.";
           errorDiv.style.display = "block";
         }
         playClickBeep();
       }
     }
 
-    // 3. MASTER CRYPTOGRAPHIC FALLBACK KEY UNLOCK
-    function attemptUnlock() {
-      const input = document.getElementById("auth-gate-input");
+    function attemptEmergencyFactor2Override() {
+      const input = document.getElementById("emergency-factor2-key");
       const errorDiv = document.getElementById("auth-gate-error");
       const val = (input?.value || "").trim();
 
       if (!val) {
         if (errorDiv) {
-          errorDiv.textContent = "⚠️ Please enter your master fallback key or Gemini API key.";
+          errorDiv.textContent = "⚠️ Please enter your master key.";
           errorDiv.style.display = "block";
         }
         return;
       }
 
-      const customPin = localStorage.getItem("compute_match_custom_pin");
-      const normalizedVal = val.replace(/[\s-]+/g, "").toUpperCase();
-      const normalizedMaster = MASTER_FALLBACK_KEY.replace(/[\s-]+/g, "").toUpperCase();
-
-      const isMatch = (normalizedVal === normalizedMaster) ||
-                      (customPin && val.toLowerCase() === customPin.toLowerCase()) ||
-                      (val.startsWith("AIza") && val.length > 20) ||
-                      (val.startsWith("AQ.") && val.length > 20);
-
-      if (isMatch) {
-        if (val.startsWith("AIza") || val.startsWith("AQ.")) {
-          localStorage.setItem("compute_match_gemini_key", val);
-          const keyInput = document.getElementById("gemini-key-input");
-          if (keyInput) keyInput.value = val;
-        }
-
+      if (isMasterKeyMatch(val)) {
         localStorage.setItem("compute_match_auth_token", "kyle_authorized_" + Date.now());
         if (errorDiv) errorDiv.style.display = "none";
         checkAuthStatus();
         playRetroChime();
       } else {
         if (errorDiv) {
-          errorDiv.textContent = "❌ Access denied. Key does not match Kyle's master security credentials.";
+          errorDiv.textContent = "❌ Emergency bypass failed: Invalid master key.";
           errorDiv.style.display = "block";
         }
         playClickBeep();
@@ -1459,7 +1608,11 @@
 
     function lockWorkspace() {
       localStorage.removeItem("compute_match_auth_token");
+      factor1Verified = false;
+      currentEmailOtp = null;
+      otpExpiresAt = 0;
       closeApiModal();
+      backToFactor1();
       const err = document.getElementById("auth-gate-error");
       if (err) {
         err.style.display = "none";

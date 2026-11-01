@@ -2399,17 +2399,54 @@
       let requires_touch_stylus = (mobility_need === "convertible_stylus");
 
       const descLower = task_description.toLowerCase();
-      if (descLower.includes("docker") || descLower.includes("compile") || descLower.includes("engineering") || descLower.includes("cs")) {
-        ideal_cpu_tier = 4; ideal_ram_gb = 32; min_ram_gb = 16;
+      
+      // Programming / DevOps / Data Science
+      if (descLower.includes("docker") || descLower.includes("compile") || descLower.includes("engineering") || descLower.includes("cs") || descLower.includes("python") || descLower.includes("matlab") || descLower.includes("virtual machine") || descLower.includes("vm") || descLower.includes("rust") || descLower.includes("c++") || descLower.includes("llm")) {
+        ideal_cpu_tier = Math.max(ideal_cpu_tier, 4);
+        ideal_ram_gb = Math.max(ideal_ram_gb, 32);
+        min_ram_gb = Math.max(min_ram_gb, 16);
       }
-      if (descLower.includes("4k") || descLower.includes("video") || descLower.includes("premiere") || descLower.includes("davinci") || descLower.includes("drone")) {
-        ideal_cpu_tier = 4; ideal_gpu_tier = 3; min_gpu_tier = 2; ideal_ram_gb = 32;
+      
+      // 3D Rendering / CAD / Game Development
+      if (descLower.includes("blender") || descLower.includes("solidworks") || descLower.includes("autocad") || descLower.includes("cad") || descLower.includes("revit") || descLower.includes("maya") || descLower.includes("unreal") || descLower.includes("unity") || descLower.includes("3d")) {
+        ideal_cpu_tier = Math.max(ideal_cpu_tier, 5);
+        ideal_gpu_tier = Math.max(ideal_gpu_tier, 4);
+        min_gpu_tier = Math.max(min_gpu_tier, 2);
+        ideal_ram_gb = Math.max(ideal_ram_gb, 32);
+        min_ram_gb = Math.max(min_ram_gb, 16);
       }
-      if (category === "Gaming" || descLower.includes("fps") || descLower.includes("gaming")) {
-        ideal_cpu_tier = 4; ideal_gpu_tier = 3; min_gpu_tier = 2; ideal_ram_gb = 32;
+
+      // Video Editing / Motion Graphics
+      if (descLower.includes("4k") || descLower.includes("video") || descLower.includes("premiere") || descLower.includes("davinci") || descLower.includes("after effects") || descLower.includes("drone") || descLower.includes("final cut")) {
+        ideal_cpu_tier = Math.max(ideal_cpu_tier, 4);
+        ideal_gpu_tier = Math.max(ideal_gpu_tier, 3);
+        min_gpu_tier = Math.max(min_gpu_tier, 2);
+        ideal_ram_gb = Math.max(ideal_ram_gb, 32);
       }
-      if (descLower.includes("excel") && (descLower.includes("500k") || descLower.includes("macro"))) {
-        ideal_ram_gb = 32; min_ram_gb = 16;
+
+      // Audio Production / Studio
+      if (descLower.includes("ableton") || descLower.includes("pro tools") || descLower.includes("fl studio") || descLower.includes("logic pro") || descLower.includes("daw") || descLower.includes("music production")) {
+        ideal_cpu_tier = Math.max(ideal_cpu_tier, 4);
+        ideal_ram_gb = Math.max(ideal_ram_gb, 32);
+      }
+
+      // Heavy Data / Excel / Financial Modeling
+      if (descLower.includes("excel") || descLower.includes("500k") || descLower.includes("macro") || descLower.includes("vba") || descLower.includes("power bi") || descLower.includes("sql") || descLower.includes("tableau")) {
+        ideal_ram_gb = Math.max(ideal_ram_gb, 32);
+        min_ram_gb = Math.max(min_ram_gb, 16);
+      }
+
+      // Gaming / High FPS
+      if (category === "Gaming" || descLower.includes("fps") || descLower.includes("gaming") || descLower.includes("steam") || descLower.includes("fortnite") || descLower.includes("warzone") || descLower.includes("cyberpunk")) {
+        ideal_cpu_tier = Math.max(ideal_cpu_tier, 4);
+        ideal_gpu_tier = Math.max(ideal_gpu_tier, 3);
+        min_gpu_tier = Math.max(min_gpu_tier, 2);
+        ideal_ram_gb = Math.max(ideal_ram_gb, 32);
+      }
+
+      // Touch / Stylus / Medical Annotations
+      if (descLower.includes("stylus") || descLower.includes("drawing") || descLower.includes("handwritten") || descLower.includes("pen") || descLower.includes("clinical") || descLower.includes("rounds") || descLower.includes("radiology")) {
+        requires_touch_stylus = true;
       }
 
       // Enforce constraints extracted from syllabi

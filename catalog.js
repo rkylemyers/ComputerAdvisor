@@ -1,4 +1,3 @@
-// Standalone Client-Side Catalog and Recommendation Engine for GitHub/GitLab Pages
 const COMPUTERS_CATALOG = [
   {
     "id": "c-chromebook-plus",
@@ -1199,6 +1198,569 @@ const COMPUTERS_CATALOG = [
         "icon": "\ud83d\udcbb"
       }
     ]
+  },
+  {
+    "id": "c-apple-mac-mini-m4",
+    "name": "Apple Mac mini (M4, 2024/2025)",
+    "brand": "Apple",
+    "os": "macOS",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 599.0,
+    "cpu_model": "Apple M4 (10-Core CPU: 4P + 6E)",
+    "cpu_tier": 4,
+    "cpu_cores": 10,
+    "gpu_model": "Apple 10-Core GPU (Hardware Ray Tracing)",
+    "gpu_tier": 3,
+    "ram_gb": 16,
+    "storage_gb": 256,
+    "battery_hours": 0.0,
+    "weight_lbs": 1.5,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.apple.com/shop/buy-mac/mac-mini",
+    "target_summary": "Ultra-compact powerhouse with Apple M4, 16GB unified memory, and triple display support starting at $599.",
+    "user_rating": 4.9,
+    "review_count": 2150,
+    "ranking_badge": "#1 Best Value Mini PC & Creator Desktop",
+    "os_edition": "macOS Sequoia 15 (Factory Pre-installed, 16GB Standard Unified Memory)",
+    "official_url": "https://www.apple.com/shop/buy-mac/mac-mini",
+    "retailer": "Apple Official Store",
+    "msrp": 599.0,
+    "price_notes": "Official Apple Store price $599 for M4 10C CPU / 10C GPU / 16GB RAM / 256GB SSD ($799 for 512GB).",
+    "cpu_details": "Apple M4 (10 Cores: 4 Performance Cores @ 4.4 GHz + 6 Efficiency Cores @ 2.85 GHz, 120 GB/s Memory Bandwidth, 16-Core Neural Engine 38 TOPS)",
+    "cpu_benchmark_score": "Geekbench 6: 15,100 Multi / 3,850 Single | Cinebench R24: 980 Multi / 175 Single",
+    "cpu_independent_review": "Grade: S (Phenomenal Efficiency King) \u2022 World-class single-core speeds outperforming desktop Core i9 chips while drawing under 35 watts peak power under full load.",
+    "gpu_details": "Apple 10-Core GPU (Hardware-Accelerated Ray Tracing, Dynamic Caching, AV1 Decode, Drives up to 3 Displays Simultaneously: 2x 6K@60Hz over TB4 + 1x 5K@60Hz or 4K@60Hz over HDMI)",
+    "ram_details": "16GB Unified Memory (LPDDR5X with 120 GB/s bandwidth, Unified CPU/GPU Pool)",
+    "ports_io": "Front: 2x USB-C (10Gbps), 3.5mm Headphone Jack; Rear: 3x Thunderbolt 4 (40Gbps DP-Alt), 1x HDMI 2.1, 1x Gigabit Ethernet (10GbE optional), Power In",
+    "webcam_biometrics": "Requires External Webcam; Supports Apple Magic Keyboard with Touch ID",
+    "thermals_acoustics": "Single Blower Thermal Architecture, Virtually inaudible (<12 dBA idle, ~20 dBA full sustained load)",
+    "stores": [
+      {
+        "store": "Apple Official Store",
+        "url": "https://www.apple.com/shop/buy-mac/mac-mini",
+        "badge": "Official OEM Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/apple-mac-mini-m4-chip-built-for-apple-intelligence-16gb-memory-256gb-ssd-silver/6534640.p",
+        "badge": "In Stock Ready for Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Apple+Mac+Mini+M4+16GB",
+        "badge": "Prime Next-Day Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+Mac+mini+M4",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=apple+mac+mini+m4",
+        "badge": "Apple Authorized",
+        "icon": "\ud83d\udcf8"
+      }
+    ]
+  },
+  {
+    "id": "c-dell-optiplex-7020",
+    "name": "Dell OptiPlex 7020 Tower Desktop",
+    "brand": "Dell",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 849.0,
+    "cpu_model": "Intel Core i7-14700 (20C/28T, up to 5.4 GHz)",
+    "cpu_tier": 4,
+    "cpu_cores": 20,
+    "gpu_model": "Intel UHD Graphics 770 (Triple Display Ready)",
+    "gpu_tier": 2,
+    "ram_gb": 16,
+    "storage_gb": 512,
+    "battery_hours": 0.0,
+    "weight_lbs": 14.2,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 3,
+    "purchase_url": "https://www.dell.com/en-us/shop/desktop-computers/optiplex-tower-plus-7020/spd/optiplex-7020-plus-desktop",
+    "target_summary": "Proven enterprise business tower with 20-core Intel Core i7, 16GB DDR5, and native triple monitor output.",
+    "user_rating": 4.7,
+    "review_count": 1320,
+    "ranking_badge": "Best Corporate Multi-Display Tower",
+    "os_edition": "Windows 11 Pro 64-bit Edition (Dell Factory Pre-installed, BitLocker & TPM 2.0)",
+    "official_url": "https://www.dell.com/en-us/shop/desktop-computers/optiplex-tower-plus-7020/spd/optiplex-7020-plus-desktop",
+    "retailer": "Dell Direct",
+    "msrp": 1099.0,
+    "price_notes": "Dell Direct enterprise sale price for Core i7-14700 / 16GB DDR5 / 512GB PCIe Gen4 SSD configuration with 3-year onsite service.",
+    "cpu_details": "Intel Core i7-14700 (20 Cores / 28 Threads: 8 Performance Cores @ 5.4 GHz Turbo + 12 Efficient Cores @ 4.2 GHz, 33MB Smart Cache, 65W-219W TDP)",
+    "cpu_benchmark_score": "PassMark: 45,800 | Geekbench 6: 18,200 Multi / 2,890 Single | Cinebench R23: 31,500",
+    "cpu_independent_review": "Grade: A+ (Corporate Multitasking Powerhouse) \u2022 Phenomenal 20-core thread density. Runs dozens of spreadsheet tabs, database compiles, and VM containers without breaking a sweat.",
+    "gpu_details": "Intel UHD Graphics 770 (32 Execution Units, Drives up to 3 Independent Monitors natively via dual DisplayPort 1.4a + HDMI 1.4b/2.1 at up to 4K@60Hz without discrete card)",
+    "ram_details": "16GB DDR5-5600 MT/s Dual-Channel (4x DIMM Slots, User-Upgradable up to 128GB DDR5)",
+    "ports_io": "Front: 1x USB-C 3.2 Gen 2 (10Gbps), 3x USB-A 3.2 Gen 1 (5Gbps), 1x Universal Audio Jack; Rear: 2x DisplayPort 1.4a, 1x HDMI 1.4b, 4x USB-A 3.2, 2x USB 2.0 with SmartPower, 1x RJ-45 Gigabit Ethernet, Audio Line-Out, PCIe Expansion Slots",
+    "webcam_biometrics": "Requires External Webcam; Standard Dell Wired USB Business Keyboard & Optical Mouse Included in Box",
+    "thermals_acoustics": "Tower Air Cooling with Optimized Fan Duct, 260W 80-Plus Bronze Internal PSU, Whisper Quiet (<22 dBA typical business load)",
+    "stores": [
+      {
+        "store": "Dell Direct",
+        "url": "https://www.dell.com/en-us/shop/desktop-computers/optiplex-tower-plus-7020/spd/optiplex-7020-plus-desktop",
+        "badge": "Direct OEM 3-Yr Onsite",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+OptiPlex+7020",
+        "badge": "In Stock & Ready to Ship",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+OptiPlex+7020+Core+i7+14700",
+        "badge": "Prime Business Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+OptiPlex+7020",
+        "badge": "Verified Partner",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Dell+OptiPlex+7020",
+        "badge": "Business Marketplace",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
+  }
+];
+
+// ==========================================
+// MONITORS CATALOG (Curated Multi-Display Workstation List)
+// ==========================================
+const MONITORS_CATALOG = [
+  {
+    "id": "m-dell-u2723qe",
+    "name": "Dell UltraSharp 27 4K USB-C Hub Monitor (U2723QE)",
+    "brand": "Dell",
+    "price": 519.0,
+    "msrp": 629.0,
+    "screen_size": "27\" Diagonal",
+    "screen_size_num": 27.0,
+    "resolution": "4K UHD (3840 x 2160)",
+    "resolution_class": "4K UHD",
+    "brightness_nits": 400,
+    "brightness_label": "400 nits (VESA DisplayHDR 400 Certified)",
+    "panel_type": "IPS Black (2,000:1 Contrast, 2x Inky Black Depth)",
+    "refresh_rate_hz": 60,
+    "refresh_rate_label": "60 Hz",
+    "response_time": "5ms GtG (Fast Mode)",
+    "color_gamut": "98% DCI-P3, 100% sRGB, 100% Rec.709, Delta E < 2",
+    "aspect_ratio": "16:9",
+    "connector_types": [
+      "1x USB-C (DisplayPort 1.4 Alt Mode, 90W Power Delivery Upstream)",
+      "1x DisplayPort 1.4 (Input)",
+      "1x DisplayPort 1.4 (Out for MST Daisy-Chaining to 2nd monitor)",
+      "1x HDMI 2.0 (HDCP 2.2)",
+      "1x RJ-45 Gigabit Ethernet (1000 Mbps LAN Hub)",
+      "4x SuperSpeed USB-A 3.2 Gen 2 (10 Gbps)",
+      "1x USB-C Downstream (15W Charging)",
+      "1x 3.5mm Audio Line-Out"
+    ],
+    "connector_summary": "USB-C 90W PD \u2022 DisplayPort 1.4 In/Out \u2022 HDMI 2.0 \u2022 RJ-45 LAN Hub",
+    "daisy_chain_support": true,
+    "daisy_chain_note": "Supports DisplayPort MST Daisy-Chaining: Connect 2x 4K monitors using a single cable from the PC!",
+    "stand_ergonomics": "Height Adjust (150mm), 90\u00b0 Vertical Pivot (Portrait), Swivel (-30\u00b0/+30\u00b0), Tilt (-5\u00b0/+21\u00b0), 100x100mm VESA Mountable",
+    "gpu_requirements": "Requires modern GPU with DisplayPort 1.4, USB-C DP-Alt mode, or HDMI 2.0+ (Supports dual 4K displays seamlessly).",
+    "recommended_for": "Dual 4K Office Productivity, Software Engineering, Graphic Design & 4K Timelines",
+    "ranking_badge": "\u2605 #1 Gold Standard Dual 4K Workstation Monitor",
+    "user_rating": 4.8,
+    "review_count": 3120,
+    "stores": [
+      {
+        "store": "Dell Direct",
+        "url": "https://www.dell.com/en-us/shop/dell-ultrasharp-27-4k-usb-c-hub-monitor-u2723qe",
+        "badge": "Official Dell Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/dell-ultrasharp-27-4k-uhd-ips-black-usb-c-hub-monitor-silver/6513254.p",
+        "badge": "Free 2-Day Shipping",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+UltraSharp+U2723QE+4K",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+U2723QE",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=dell+u2723qe",
+        "badge": "Instant Savings",
+        "icon": "\ud83d\udcf8"
+      }
+    ]
+  },
+  {
+    "id": "m-asus-proart-pa278cv",
+    "name": "ASUS ProArt Display 27\" 1440p Professional Monitor (PA278CV)",
+    "brand": "ASUS",
+    "price": 289.0,
+    "msrp": 329.0,
+    "screen_size": "27\" Diagonal",
+    "screen_size_num": 27.0,
+    "resolution": "QHD 1440p (2560 x 1440)",
+    "resolution_class": "1440p QHD",
+    "brightness_nits": 350,
+    "brightness_label": "350 nits (Anti-Glare Matte Coating)",
+    "panel_type": "IPS (1,000:1 Contrast, 178\u00b0 Ultra-Wide Viewing Angles)",
+    "refresh_rate_hz": 75,
+    "refresh_rate_label": "75 Hz (Smooth ProArt Motion)",
+    "response_time": "5ms GtG",
+    "color_gamut": "100% sRGB, 100% Rec. 709, Calman Verified, Factory Delta E < 2",
+    "aspect_ratio": "16:9",
+    "connector_types": [
+      "1x USB-C (DisplayPort Alt Mode, 65W Power Delivery Upstream)",
+      "1x DisplayPort 1.2 (Input)",
+      "1x DisplayPort 1.2 (Out for MST Daisy-Chaining up to 4 monitors)",
+      "1x HDMI 1.4",
+      "4x USB-A 3.2 Gen 1 (5Gbps Hub)",
+      "1x 3.5mm Earphone Jack",
+      "Built-in 2W Stereo Speakers"
+    ],
+    "connector_summary": "USB-C 65W PD \u2022 DisplayPort In/Out MST \u2022 HDMI 1.4 \u2022 4-Port USB Hub",
+    "daisy_chain_support": true,
+    "daisy_chain_note": "DisplayPort Daisy-Chaining supported: Connect multiple displays from a single GPU output.",
+    "stand_ergonomics": "Ergonomic 4-Way Stand: Height (150mm), Pivot \u00b190\u00b0 (Portrait), Swivel \u00b145\u00b0, Tilt -5\u00b0/+35\u00b0, Quick Release VESA 100x100",
+    "gpu_requirements": "Universal compatibility with integrated graphics & discrete GPUs via DisplayPort, USB-C, or HDMI.",
+    "recommended_for": "Color-Accurate Photo/Video Editing, Content Creation, Dual-Screen Multitasking",
+    "ranking_badge": "Best Value Color-Calibrated 1440p Dual Setup",
+    "user_rating": 4.7,
+    "review_count": 1840,
+    "stores": [
+      {
+        "store": "ASUS Store",
+        "url": "https://www.asus.com/us/displays-desktops/monitors/proart/proart-display-pa278cv/",
+        "badge": "Official OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+ProArt+PA278CV",
+        "badge": "Prime In Stock",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ASUS+PA278CV",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=ASUS+ProArt+PA278CV",
+        "badge": "Verified Partner",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ASUS+PA278CV",
+        "badge": "Official Retailer",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
+  },
+  {
+    "id": "m-lg-27gs75q",
+    "name": "LG UltraGear 27\" 1440p 180Hz Fast-IPS Monitor (27GS75Q-B)",
+    "brand": "LG",
+    "price": 249.0,
+    "msrp": 299.0,
+    "screen_size": "27\" Diagonal",
+    "screen_size_num": 27.0,
+    "resolution": "QHD 1440p (2560 x 1440)",
+    "resolution_class": "1440p QHD",
+    "brightness_nits": 400,
+    "brightness_label": "400 nits (VESA DisplayHDR 400)",
+    "panel_type": "Ultra-Fast IPS (1ms GtG Response Time, 1000:1 Contrast)",
+    "refresh_rate_hz": 180,
+    "refresh_rate_label": "180 Hz OC (165 Hz Native)",
+    "response_time": "1ms GtG (Faster Response)",
+    "color_gamut": "99% sRGB (CIE1931), HDR10 Dynamic Range",
+    "aspect_ratio": "16:9",
+    "connector_types": [
+      "1x DisplayPort 1.4 (Supports 1440p @ 180Hz)",
+      "2x HDMI 2.0 (Supports 1440p @ 144Hz)",
+      "1x Headphone Out (3.5mm Audio)"
+    ],
+    "connector_summary": "DisplayPort 1.4 (180Hz) \u2022 2x HDMI 2.0 \u2022 NVIDIA G-Sync & AMD FreeSync",
+    "daisy_chain_support": false,
+    "daisy_chain_note": "Requires dedicated direct video cable from PC GPU for each monitor.",
+    "stand_ergonomics": "Height Adjust (110mm), 90\u00b0 Clockwise Pivot, Tilt (-5\u00b0/+15\u00b0), 100x100mm VESA Mount",
+    "gpu_requirements": "Requires discrete GPU (NVIDIA RTX / AMD Radeon) or high-bandwidth DP 1.4 to unlock full 180Hz refresh rate.",
+    "recommended_for": "Fast-Paced Gaming, Unreal Engine 5 Dev, High-Refresh Ultra-Smooth Workstations",
+    "ranking_badge": "Best 180Hz High-Refresh Dual Gaming Setup",
+    "user_rating": 4.8,
+    "review_count": 2290,
+    "stores": [
+      {
+        "store": "LG Direct",
+        "url": "https://www.lg.com/us/monitors/lg-27gs75q-b-gaming-monitor",
+        "badge": "Direct OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=LG+UltraGear+27GS75Q-B",
+        "badge": "Prime Next-Day",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=LG+UltraGear+27GS75Q",
+        "badge": "In Store Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=LG+27GS75Q",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Micro Center",
+        "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=LG+27GS75Q",
+        "badge": "Hardware Specialist",
+        "icon": "\u2699\ufe0f"
+      }
+    ]
+  },
+  {
+    "id": "m-samsung-viewfinity-s65tc",
+    "name": "Samsung ViewFinity S65TC 34\" Curved Ultrawide (1000R)",
+    "brand": "Samsung",
+    "price": 499.0,
+    "msrp": 699.0,
+    "screen_size": "34\" Ultrawide (21:9 Aspect Ratio)",
+    "screen_size_num": 34.0,
+    "resolution": "UWQHD (3440 x 1440)",
+    "resolution_class": "34\" Ultrawide (Replaces Dual Monitors)",
+    "brightness_nits": 350,
+    "brightness_label": "350 nits (HDR10 High Dynamic Range)",
+    "panel_type": "VA Curved 1000R (Deep 3,000:1 Contrast Ratio)",
+    "refresh_rate_hz": 100,
+    "refresh_rate_label": "100 Hz Smooth Motion",
+    "response_time": "5ms GtG",
+    "color_gamut": "1.07 Billion Colors, 115% sRGB Coverage",
+    "aspect_ratio": "21:9 Ultrawide",
+    "connector_types": [
+      "2x Thunderbolt 4 (1x 90W Host Charging, 1x 15W Daisy-Chain / Accessory)",
+      "1x DisplayPort 1.2",
+      "1x HDMI 2.0",
+      "1x RJ-45 Gigabit Ethernet LAN Hub",
+      "3x USB-A 3.0 Hub",
+      "Built-in 5W Stereo Speakers"
+    ],
+    "connector_summary": "Dual Thunderbolt 4 (90W PD) \u2022 HDMI 2.0 \u2022 DisplayPort 1.2 \u2022 RJ-45 LAN Hub",
+    "daisy_chain_support": true,
+    "daisy_chain_note": "Thunderbolt 4 Daisy-Chaining: Connect 2nd monitor or external high-speed storage via TB4 out.",
+    "stand_ergonomics": "Height Adjustable Stand, Tilt, Swivel, VESA 100x100mm Mountable",
+    "gpu_requirements": "Compatible with Mac Thunderbolt & Windows PCs with DP 1.2 or HDMI 2.0.",
+    "recommended_for": "Seamless Panoramic Multitasking: Replaces 2 separate monitors with zero center bezel gap!",
+    "ranking_badge": "Best Panoramic Dual-Monitor Alternative",
+    "user_rating": 4.6,
+    "review_count": 1420,
+    "stores": [
+      {
+        "store": "Samsung Direct",
+        "url": "https://www.samsung.com/us/computing/monitors/curved/34-viewfinity-s6-s65tc-ultra-wqhd-curved-monitor-thunderbolt-4-ls34c652uanxgo/",
+        "badge": "Direct OEM Deal",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Samsung+ViewFinity+S65TC+34",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Samsung+S65TC+34",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Samsung+ViewFinity+34",
+        "badge": "Verified Partner",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Samsung+ViewFinity+34",
+        "badge": "Tech Marketplace",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
+  },
+  {
+    "id": "m-asus-eyecare-va24ehe",
+    "name": "ASUS Eye Care 24\" 1080p IPS Monitor (VA24EHE)",
+    "brand": "ASUS",
+    "price": 109.0,
+    "msrp": 129.0,
+    "screen_size": "23.8\" Diagonal",
+    "screen_size_num": 24.0,
+    "resolution": "Full HD 1080p (1920 x 1080)",
+    "resolution_class": "1080p FHD",
+    "brightness_nits": 250,
+    "brightness_label": "250 nits (T\u00dcV Rheinland Flicker-Free & Low Blue Light)",
+    "panel_type": "IPS (1,000:1 Contrast, 178\u00b0 Wide Viewing Angle, Frameless Bezel)",
+    "refresh_rate_hz": 75,
+    "refresh_rate_label": "75 Hz (Adaptive-Sync)",
+    "response_time": "5ms GtG",
+    "color_gamut": "72% NTSC (99% sRGB approx)",
+    "aspect_ratio": "16:9",
+    "connector_types": [
+      "1x HDMI 1.4",
+      "1x D-Sub (VGA)",
+      "1x DVI-D"
+    ],
+    "connector_summary": "HDMI 1.4 \u2022 D-Sub VGA \u2022 DVI-D \u2022 Ultra-Slim Frameless Bezel",
+    "daisy_chain_support": false,
+    "daisy_chain_note": "Requires direct HDMI/VGA cable from computer to each monitor.",
+    "stand_ergonomics": "Tilt (-5\u00b0 to +23\u00b0), VESA 100x100mm (Perfect for Dual-Monitor Desk Arm Mounts)",
+    "gpu_requirements": "Universal plug-and-play with any PC, integrated GPU, or laptop. Runs dual screens for just $218 total!",
+    "recommended_for": "Budget Office Multi-Monitor Productivity, Customer Service, Document Review",
+    "ranking_badge": "Best Budget Dual-Screen Value ($218 for 2)",
+    "user_rating": 4.6,
+    "review_count": 5890,
+    "stores": [
+      {
+        "store": "ASUS Store",
+        "url": "https://www.asus.com/us/displays-desktops/monitors/eye-care/va24ehe/",
+        "badge": "Official OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+VA24EHE+24",
+        "badge": "Prime Best Seller",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=ASUS+VA24EHE",
+        "badge": "In Stock",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ASUS+VA24EHE",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ASUS+VA24EHE",
+        "badge": "In Stock",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
+  },
+  {
+    "id": "m-dell-u3223qe",
+    "name": "Dell UltraSharp 32 4K USB-C Hub Monitor (U3223QE)",
+    "brand": "Dell",
+    "price": 749.0,
+    "msrp": 899.0,
+    "screen_size": "31.5\" Diagonal",
+    "screen_size_num": 31.5,
+    "resolution": "4K UHD (3840 x 2160)",
+    "resolution_class": "4K UHD",
+    "brightness_nits": 400,
+    "brightness_label": "400 nits (VESA DisplayHDR 400 Certified)",
+    "panel_type": "IPS Black (2,000:1 Contrast, 1.07 Billion Colors)",
+    "refresh_rate_hz": 60,
+    "refresh_rate_label": "60 Hz",
+    "response_time": "5ms GtG",
+    "color_gamut": "100% sRGB, 100% Rec.709, 98% DCI-P3",
+    "aspect_ratio": "16:9",
+    "connector_types": [
+      "1x USB-C (DisplayPort 1.4, 90W PD Upstream)",
+      "1x DisplayPort 1.4 (In)",
+      "1x DisplayPort 1.4 (Out MST Daisy Chain)",
+      "1x HDMI 2.0",
+      "1x RJ-45 Gigabit Ethernet (1Gbps)",
+      "5x USB-A 3.2 Gen 2 (10Gbps)",
+      "1x USB-C Downstream (15W)",
+      "Built-in KVM Switch (Controls 2 separate PCs with 1 keyboard & mouse)"
+    ],
+    "connector_summary": "USB-C 90W PD \u2022 DisplayPort In/Out \u2022 HDMI 2.0 \u2022 RJ-45 LAN \u2022 Built-in KVM",
+    "daisy_chain_support": true,
+    "daisy_chain_note": "Supports DisplayPort MST Daisy-Chaining & Auto KVM switching.",
+    "stand_ergonomics": "Height Adjust (150mm), 90\u00b0 Pivot (Portrait), Swivel, Tilt, 100x100 VESA",
+    "gpu_requirements": "Requires modern GPU with DisplayPort 1.4, Thunderbolt, or HDMI 2.0.",
+    "recommended_for": "Large-Scale 32\" 4K Canvas, Dual-PC Workstations, Trading & Executive Desks",
+    "ranking_badge": "King of Large-Format 4K Workstation Monitors",
+    "user_rating": 4.7,
+    "review_count": 1680,
+    "stores": [
+      {
+        "store": "Dell Direct",
+        "url": "https://www.dell.com/en-us/shop/dell-ultrasharp-32-4k-usb-c-hub-monitor-u3223qe",
+        "badge": "Official Dell Store",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+U3223QE+32",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+U3223QE",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+U3223QE",
+        "badge": "Verified Partner",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=dell+u3223qe",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf8"
+      }
+    ]
   }
 ];
 
@@ -1269,6 +1831,126 @@ const PERIPHERALS_CATALOG = [
     "price": 59.99,
     "description": "4096 levels of pressure sensitivity, magnetic charging, natural handwriting feel.",
     "purchase_url": "https://www.amazon.com/dp/stylus-pen"
+  },
+  {
+    "id": "p-logitech-mx-keys-combo",
+    "name": "Logitech MX Master 3S Mouse + MX Keys S Advanced Keyboard Bundle",
+    "category": "Input Device",
+    "price": 199.98,
+    "description": "The ultimate workstation productivity duo. Quiet tactile keys, MagSpeed electromagnetic scroll wheel, 8000 DPI sensor, multi-device Bluetooth & Bolt wireless pairing.",
+    "purchase_url": "https://www.logitech.com/en-us/products/combos/mx-keys-s-combo.html",
+    "stores": [
+      {
+        "store": "Logitech Official",
+        "url": "https://www.logitech.com/en-us/products/combos/mx-keys-s-combo.html",
+        "badge": "Official OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/logitech-mx-keys-s-advanced-wireless-illuminated-keyboard-space-gray/6537385.p",
+        "badge": "In Stock",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Logitech+MX+Keys+S+Combo",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Logitech+MX+Keys+S+Combo",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Logitech+MX+Keys+S",
+        "badge": "In Stock",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
+  },
+  {
+    "id": "p-dell-pro-wireless-bundle",
+    "name": "Dell Pro Wireless Keyboard and Optical Mouse (KM5221W)",
+    "category": "Input Device",
+    "price": 39.99,
+    "description": "Reliable 2.4GHz wireless business keyboard and mouse with full numeric keypad and up to 36 months of battery life.",
+    "purchase_url": "https://www.dell.com/en-us/shop/dell-pro-wireless-keyboard-and-mouse-km5221w/apd/580-ajit/pc-accessories",
+    "stores": [
+      {
+        "store": "Dell Direct",
+        "url": "https://www.dell.com/en-us/shop/dell-pro-wireless-keyboard-and-mouse-km5221w/apd/580-ajit/pc-accessories",
+        "badge": "Direct OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+KM5221W+Wireless+Keyboard+Mouse",
+        "badge": "Prime In Stock",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+KM5221W",
+        "badge": "In Store",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+KM5221W",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Dell+KM5221W",
+        "badge": "In Stock",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
+  },
+  {
+    "id": "p-apple-magic-bundle",
+    "name": "Apple Magic Keyboard with Touch ID & Numeric Keypad + Magic Mouse",
+    "category": "Input Device",
+    "price": 278.0,
+    "description": "Official Apple wireless desktop input package. Instant Touch ID biometric unlock, rechargeable lithium-ion battery, USB-C woven cable.",
+    "purchase_url": "https://www.apple.com/shop/product/MMMR3AM/A/magic-keyboard-with-touch-id-and-numeric-keypad-for-mac-models-with-apple-silicon-us-english-black-keys",
+    "stores": [
+      {
+        "store": "Apple Official",
+        "url": "https://www.apple.com/shop/product/MMMR3AM/A/magic-keyboard-with-touch-id-and-numeric-keypad-for-mac-models-with-apple-silicon-us-english-black-keys",
+        "badge": "Official OEM",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/apple-magic-keyboard-with-touch-id-and-numeric-keypad-for-mac-models-with-apple-silicon-black/6500854.p",
+        "badge": "Ready for Pickup",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Apple+Magic+Keyboard+Touch+ID+Numeric",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+Magic+Keyboard+Touch+ID",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=apple+magic+keyboard+touch+id",
+        "badge": "Apple Authorized",
+        "icon": "\ud83d\udcf8"
+      }
+    ]
   }
 ];
 
@@ -1347,11 +2029,16 @@ function clientScoreComputer(comp, persona, currentYear = 2026) {
 
   // 6. Display & Screen Fit (10 points max)
   let display_score = 5.0;
-  if (comp.screen_nits >= (persona.min_nits || 250)) {
-    display_score += 3.0;
-  }
-  if ((comp.screen_gamut || '').includes('DCI-P3') || (comp.screen_gamut || '').includes('100% sRGB')) {
-    display_score += 2.0;
+  const isChassis = (comp.form_factor === 'Desktop' || comp.form_factor === 'Mini PC' || comp.screen_size === 0);
+  if (isChassis) {
+    display_score = (persona.mobility_need === 'desk_bound') ? 10.0 : 6.0;
+  } else {
+    if (comp.screen_nits >= (persona.min_nits || 250)) {
+      display_score += 3.0;
+    }
+    if ((comp.screen_gamut || '').includes('DCI-P3') || (comp.screen_gamut || '').includes('100% sRGB')) {
+      display_score += 2.0;
+    }
   }
 
   // 7. Release Year Decay (10 points max)
@@ -2366,3 +3053,105 @@ const FALLBACK_WILSON_ANALYSIS = {
   ],
   "rationale": "Scraped 2 layers deep across Wilson College catalog, all 42 course syllabi, and laboratory schedules. Because no explicit hardware requirements matrix was published on Wilson catalog pages, automatically triggered comparative analysis against peer benchmark institutions (Penn State University & Shippensburg University) to establish the authoritative 4-year degree standard."
 };
+
+
+// ==========================================
+// WORKSTATION & DESKTOP PACKAGE INSPECTION HELPER
+// ==========================================
+function getDesktopPackageDetails(comp) {
+  if (!comp) return { isDesktop: false, needsMonitor: false, needsKeyboard: false, needsMouse: false };
+  const ff = (comp.form_factor || '').toLowerCase();
+  const isDesktop = ff === 'desktop' || ff === 'mini pc' || comp.screen_size === 0;
+  
+  if (!isDesktop) {
+    return {
+      isDesktop: false,
+      needsMonitor: false,
+      needsKeyboard: false,
+      needsMouse: false,
+      screenSummary: comp.screen_size + '" (' + comp.screen_nits + ' nits, ' + comp.screen_gamut + ')'
+    };
+  }
+
+  let keyboardMouseIncluded = false;
+  let keyboardMouseNote = "No keyboard or mouse included in this standalone chassis. External input devices required.";
+  
+  if (comp.id === 'c-desktop-beast-4090') {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Basic wired USB multimedia keyboard and optical mouse included in box. Ergonomic wireless upgrade recommended.";
+  } else if (comp.id === 'c-dell-optiplex-7020') {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Standard Dell wired business USB keyboard and mouse included in box.";
+  } else if (comp.brand === 'Apple') {
+    keyboardMouseNote = "Chassis ships with power cable only. Apple Magic Keyboard with Touch ID and Magic Mouse / Trackpad required.";
+  }
+
+  let maxMonitors = 4;
+  let portsSummary = comp.ports_io || "DisplayPort + HDMI";
+  let gpuVerdict = "Natively supports multi-monitor output.";
+
+  if (comp.id.includes('4090')) {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA GeForce RTX 4090 with 24GB VRAM drives up to 4x 4K @ 120Hz/144Hz displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+  } else if (comp.id.includes('mac-studio')) {
+    maxMonitors = 5;
+    gpuVerdict = "Apple M2 Max 30-Core GPU drives up to 5 displays simultaneously (4x up to 6K @ 60Hz over Thunderbolt 4 + 1x 4K @ 240Hz or 8K @ 60Hz over HDMI 2.1).";
+  } else if (comp.id.includes('mac-mini')) {
+    maxMonitors = 3;
+    gpuVerdict = "Apple M4 10-Core GPU drives up to 3 displays simultaneously (2x up to 6K @ 60Hz over Thunderbolt 4 + 1x 5K @ 60Hz or 4K @ 60Hz over HDMI).";
+  } else if (comp.id.includes('minisforum')) {
+    maxMonitors = 4;
+    gpuVerdict = "AMD Radeon 780M drives up to 4x 4K @ 60Hz displays simultaneously via 2x USB4 (40Gbps Type-C) + 1x DisplayPort 1.4 + 1x HDMI 2.1.";
+  } else if (comp.id.includes('optiplex')) {
+    maxMonitors = 3;
+    gpuVerdict = "Intel UHD Graphics 770 natively drives up to 3 independent monitors via dual DisplayPort 1.4a and 1x HDMI 1.4b at 4K @ 60Hz without a discrete GPU.";
+  }
+
+  return {
+    isDesktop: true,
+    needsMonitor: true,
+    needsKeyboard: !keyboardMouseIncluded,
+    needsMouse: !keyboardMouseIncluded,
+    keyboardMouseIncluded: keyboardMouseIncluded,
+    keyboardMouseNote: keyboardMouseNote,
+    maxMonitors: maxMonitors,
+    portsSummary: portsSummary,
+    gpuVerdict: gpuVerdict,
+    monitorRequiredMessage: "Desktop / Mini PC chassis does not have a built-in screen. At least one external monitor is required."
+  };
+}
+
+function checkGpuMonitorCompatibility(comp, monitor, quantity = 2) {
+  if (!comp || !monitor) return { compatible: true, message: "Compatible display connection." };
+  const pkg = getDesktopPackageDetails(comp);
+  
+  const isCompatible = quantity <= pkg.maxMonitors;
+  let connectionMethod = "";
+
+  if (comp.id.includes('mac-studio') || comp.id.includes('mac-mini')) {
+    if (monitor.daisy_chain_support && monitor.connector_summary.includes('USB-C')) {
+      connectionMethod = "Connect Monitor 1 via Thunderbolt 4 / USB-C (provides 90W PD & video). Connect Monitor 2 via 2nd Thunderbolt port or HDMI 2.1.";
+    } else {
+      connectionMethod = "Connect Monitor 1 via Thunderbolt 4 to DP/HDMI cable, Monitor 2 via native HDMI 2.1.";
+    }
+  } else if (comp.id.includes('4090')) {
+    connectionMethod = "Connect via dedicated DisplayPort 1.4a and HDMI 2.1a ports on the NVIDIA RTX 4090 graphics card (supporting G-Sync & full HDR).";
+  } else if (comp.id.includes('minisforum')) {
+    connectionMethod = "Connect Monitor 1 via USB4 (Type-C to DP/USB-C), Monitor 2 via native DisplayPort 1.4 or HDMI 2.1.";
+  } else if (comp.id.includes('optiplex')) {
+    connectionMethod = "Connect Monitor 1 via DisplayPort 1.4a, Monitor 2 via 2nd DisplayPort 1.4a (or HDMI).";
+  } else {
+    connectionMethod = "Connect using DisplayPort 1.4 or HDMI ports on the computer chassis.";
+  }
+
+  return {
+    compatible: isCompatible,
+    maxMonitors: pkg.maxMonitors,
+    requestedQuantity: quantity,
+    connectionMethod: connectionMethod,
+    badge: isCompatible ? "✓ 100% GPU Compatible" : "⚠️ Exceeds Recommended GPU Ports",
+    summary: isCompatible 
+      ? `✓ ${comp.name}'s GPU (${comp.gpu_model}) effortlessly handles ${quantity}x ${monitor.name}.`
+      : `⚠️ ${comp.name} natively supports up to ${pkg.maxMonitors} displays simultaneously.`
+  };
+}

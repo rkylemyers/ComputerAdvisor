@@ -704,7 +704,7 @@
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
             <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
-              <input type="checkbox" name="wiz_periph" value="Monitor" onclick="playClickBeep()">
+              <input type="checkbox" name="wiz_periph" id="wiz_periph_monitor" value="Monitor" onchange="onMonitorCheckboxToggle(this.checked); playClickBeep();">
               <strong style="color: #6b9ac4; font-size: 14px; margin-left: 4px;">🖥️ External Monitor</strong>
               <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">4K USB-C Hub or high refresh gaming display.</div>
             </label>
@@ -722,10 +722,48 @@
             </label>
 
             <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
-              <input type="checkbox" name="wiz_periph" value="Input Device" onclick="playClickBeep()">
-              <strong style="color: #84a98c; font-size: 14px; margin-left: 4px;">🖱️ Mouse / Stylus Pen</strong>
-              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Logitech MX Master 3S or precision stylus.</div>
+              <input type="checkbox" name="wiz_periph" id="wiz_periph_input" value="Input Device" onclick="playClickBeep()">
+              <strong style="color: #84a98c; font-size: 14px; margin-left: 4px;">🖱️ Mouse &amp; Keyboard</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Logitech MX Master 3S + MX Keys or ergonomic set.</div>
             </label>
+          </div>
+
+          <!-- Desktop Package & Multi-Monitor Questionnaire Box -->
+          <div id="desktop-package-step5-box" style="display: none; margin-top: 14px; background: rgba(15, 23, 42, 0.88); border: 1.5px solid #38bdf8; border-radius: 6px; padding: 14px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 20px;">🖥️</span>
+                <strong style="color: #38bdf8; font-size: 14px; font-family: 'Outfit', sans-serif;">Desktop Package Assessment</strong>
+              </div>
+              <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;">
+                STANDALONE CHASSIS
+              </span>
+            </div>
+            <p style="font-size: 12px; color: #cbd5e1; margin: 0 0 10px 0; line-height: 1.45;">
+              Standalone desktop PCs and Mini PCs do <strong>not</strong> include a built-in screen (0" display). At least one monitor is required to operate the system, and keyboards/mice are typically not bundled.
+            </p>
+
+            <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px;">
+              <label style="display: block; font-size: 13px; font-weight: 700; color: #fbbf24; margin-bottom: 6px;">
+                How many monitors are needed for this desktop setup?
+              </label>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <label class="win95-btn" style="padding: 6px 12px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; background: rgba(15, 23, 42, 0.9);">
+                  <input type="radio" name="wiz_monitor_qty" value="1" onchange="onWizardMonitorQtyChange(1)"> 1 Monitor (Single Screen)
+                </label>
+                <label class="win95-btn" style="padding: 6px 12px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; background: rgba(15, 23, 42, 0.9);">
+                  <input type="radio" name="wiz_monitor_qty" value="2" checked onchange="onWizardMonitorQtyChange(2)"> 2 Monitors (Dual Display ★ Recommended)
+                </label>
+                <label class="win95-btn" style="padding: 6px 12px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; background: rgba(15, 23, 42, 0.9);">
+                  <input type="radio" name="wiz_monitor_qty" value="3" onchange="onWizardMonitorQtyChange(3)"> 3 Monitors (Triple Screen Workstation)
+                </label>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+              <span>💡</span>
+              <span>We will automatically launch <strong>The Monitor Hunt</strong> to verify your desktop's GPU bandwidth and match compatible DisplayPort/USB-C cables.</span>
+            </div>
           </div>
         </div>
 
@@ -899,6 +937,26 @@
           <!-- Low Options / Alternatives Callout Banner -->
           <div id="low-options-banner" style="display: none; margin-bottom: 12px;"></div>
 
+          <!-- Desktop Package & Monitor Hunt Notice Banner -->
+          <div id="desktop-package-matrix-banner" style="display: none; margin-bottom: 12px; background: linear-gradient(90deg, rgba(14, 165, 233, 0.18), rgba(30, 41, 59, 0.85)); border: 1.5px solid #38bdf8; border-radius: 6px; padding: 12px 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 26px;">🖥️</span>
+                <div>
+                  <div style="font-weight: 800; color: #f7f4ea; font-size: 14px; font-family: 'Outfit', sans-serif;">
+                    Desktop Package Notice: <span id="desktop-banner-pc-name" style="color: #38bdf8;">Standalone Desktop Chassis</span>
+                  </div>
+                  <div id="desktop-banner-pc-detail" style="font-size: 12px; color: #cbd5e1; margin-top: 2px;">
+                    This system does not have a built-in display (0" screen). At least one monitor is required, and keyboard/mouse must be verified.
+                  </div>
+                </div>
+              </div>
+              <button onclick="launchMonitorHuntFromBanner()" class="win95-btn btn-anime-sunset" style="font-size: 13px; font-weight: 800; padding: 7px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <span>🎯</span> Launch Monitor Hunt (Pair 1-3 Displays)
+              </button>
+            </div>
+          </div>
+
           <table class="retro-table" id="comparison-table">
             <!-- Dynamic Columns Injected by JavaScript -->
           </table>
@@ -920,6 +978,109 @@
         </div>
         <div id="peripherals-grid" style="padding: 14px; background: rgba(20, 25, 34, 0.70); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
           <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- ================= THE MONITOR HUNT WORKSTATION BREAKOUT ================= -->
+      <div id="monitor-hunt-section" class="win95-box" style="margin-bottom: 18px; display: none;">
+        <div class="win95-titlebar" style="background: linear-gradient(90deg, #0369a1, #0284c7); color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 6px 12px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">🎯</span>
+            <span style="font-weight: 800; letter-spacing: 0.5px; font-size: 14px;">The Monitor Hunt: Multi-Display Workstation Configurator</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <button onclick="closeMonitorHunt()" class="win95-btn" style="font-size: 11px; padding: 2px 8px; font-weight: bold; background: #9c5138; color: #fff; border: 1.5px solid #d97757; border-radius: 3px; cursor: pointer;">✕ Close Hunt</button>
+          </div>
+        </div>
+
+        <div style="padding: 16px; background: rgba(18, 22, 30, 0.88);">
+          <!-- Top Target Desktop & GPU Specs Card -->
+          <div style="background: rgba(15, 23, 42, 0.92); border: 1.5px solid rgba(56, 189, 248, 0.45); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 800; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px;">
+                  Active Target Workstation:
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                  <strong id="hunt-pc-name" style="font-size: 18px; color: #f7f4ea; font-family: 'Outfit', sans-serif;">Apple Mac Studio (M2 Max)</strong>
+                  <span id="hunt-pc-price" style="font-size: 17px; color: #34d399; font-weight: 800; font-family: 'JetBrains Mono', monospace;">$1,999.00</span>
+                  <div style="display: inline-flex; align-items: center; gap: 6px; margin-left: 6px;">
+                    <label style="font-size: 11.5px; color: #94a3b8;">Switch Desktop:</label>
+                    <select id="hunt-pc-selector" onchange="onHuntTargetPcChange(this.value)" class="win95-input" style="font-size: 12px; padding: 3px 8px; background: #1e293b; color: #f1f5f9; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;">
+                      <!-- Populated via JS -->
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Package Checklist Badges -->
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span id="hunt-badge-screen" style="font-size: 11.5px; padding: 4px 9px; border-radius: 4px; background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid #ef4444; font-weight: 700;">
+                  ❌ Screen: 0" (Monitor Req.)
+                </span>
+                <span id="hunt-badge-keyboard" style="font-size: 11.5px; padding: 4px 9px; border-radius: 4px; background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; font-weight: 700;">
+                  ⚠️ Input: No Keyboard/Mouse
+                </span>
+              </div>
+            </div>
+
+            <!-- GPU Multi-Monitor Capability Report -->
+            <div style="background: rgba(0, 0, 0, 0.4); border-radius: 6px; padding: 12px 14px; font-size: 12.5px; line-height: 1.45; border-left: 3.5px solid #34d399;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                <strong style="color: #34d399; font-size: 13px;">🎮 GPU Display Pipeline &amp; Bandwidth Check:</strong>
+                <span id="hunt-gpu-badge" style="background: rgba(16, 185, 129, 0.25); color: #34d399; font-size: 11px; font-weight: 800; padding: 2px 7px; border-radius: 3px;">
+                  ✓ Up to 5 Displays Supported
+                </span>
+              </div>
+              <div id="hunt-gpu-verdict" style="color: #cbd5e1; margin-bottom: 5px;">
+                Apple M2 Max 30-Core GPU drives up to 5 displays simultaneously (4x up to 6K @ 60Hz over Thunderbolt 4 + 1x 4K @ 240Hz or 8K @ 60Hz over HDMI 2.1).
+              </div>
+              <div id="hunt-gpu-ports" style="font-size: 11.5px; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+                Available Ports: 4x Thunderbolt 4, 1x HDMI 2.1, 2x USB-C (10Gbps)
+              </div>
+            </div>
+          </div>
+
+          <!-- Quantity Selection Bar -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 6px; padding: 12px 16px; margin-bottom: 16px;">
+            <div>
+              <strong style="color: #fbbf24; font-size: 14px; display: block; margin-bottom: 3px;">
+                How many monitors are you shopping for?
+              </strong>
+              <span style="font-size: 12px; color: #cbd5e1;">
+                Picking 2 or 3 monitors will automatically recalculate dual/triple cable topologies and bundle subtotals.
+              </span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button onclick="setMonitorHuntQuantity(1)" id="hunt-qty-btn-1" class="win95-btn" style="padding: 6px 14px; font-size: 12.5px; font-weight: 700; cursor: pointer;">
+                1 Monitor
+              </button>
+              <button onclick="setMonitorHuntQuantity(2)" id="hunt-qty-btn-2" class="win95-btn btn-anime-sunset" style="padding: 6px 16px; font-size: 12.5px; font-weight: 800; cursor: pointer;">
+                2 Monitors (Dual Setup ★)
+              </button>
+              <button onclick="setMonitorHuntQuantity(3)" id="hunt-qty-btn-3" class="win95-btn" style="padding: 6px 14px; font-size: 12.5px; font-weight: 700; cursor: pointer;">
+                3 Monitors (Triple Screen)
+              </button>
+            </div>
+          </div>
+
+          <!-- The Curated Monitors Grid -->
+          <div id="monitor-hunt-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; margin-bottom: 18px;">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Companion Input Devices Section -->
+          <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 8px; padding: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <strong style="color: #38bdf8; font-size: 14.5px;">⌨️ Complete Your Workstation: Companion Input Devices</strong>
+                <span style="font-size: 12px; color: #94a3b8; display: block; margin-top: 2px;">Since most desktop chassis exclude keyboards and mice, add these verified companion bundles to your cart:</span>
+              </div>
+            </div>
+            <div id="hunt-peripherals-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1098,6 +1259,94 @@
         <span style="font-size: 11px; color: #94a3b8;">ComputeMatch Hardware Dispatcher</span>
         <button onclick="closeEmailModal()" class="win95-btn" style="padding: 4px 18px;">Close</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ================= WORKSTATION BUNDLE SHOPPING CART MODAL ================= -->
+  <div id="workstation-cart-modal" style="position: fixed; inset: 0; background: rgba(10, 14, 20, 0.78); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="win95-box" style="width: 740px; max-width: 95%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 12px 35px rgba(0,0,0,0.85); border: 2px solid #38bdf8;">
+      <div class="win95-titlebar" style="background: linear-gradient(90deg, #0369a1, #0284c7); color: #ffffff; display: flex; justify-content: space-between; align-items: center;">
+        <span id="cart-modal-title" style="font-weight: 800; font-size: 14px;">🛒 Workstation Shopping Cart: Desktop + Monitors Bundle</span>
+        <button onclick="closeWorkstationCart()" style="font-size: 10px; padding: 2px 6px; font-weight: bold; background: #9c5138; color: #fff; border: 1.5px solid #d97757; border-radius: 3px; cursor: pointer;">✕</button>
+      </div>
+
+      <div style="padding: 16px; background: rgba(20, 25, 34, 0.96); flex: 1; overflow-y: auto;">
+        <!-- Cart Items List Container -->
+        <div id="cart-items-container" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+          <!-- Injected via JS -->
+        </div>
+
+        <!-- Hardware & GPU Compatibility Verification Seal -->
+        <div id="cart-compatibility-seal" style="background: rgba(16, 185, 129, 0.12); border: 1.5px solid #10b981; border-radius: 6px; padding: 12px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 26px;">🛡️</span>
+          <div>
+            <div style="font-weight: 800; color: #34d399; font-size: 13.5px;">
+              Workstation Hardware &amp; GPU Compatibility Certified
+            </div>
+            <div id="cart-compat-note" style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">
+              System GPU display pipelines, digital connectors, and bandwidth matched for this configuration.
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary & Totals Box -->
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; padding: 14px 18px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13.5px; color: #cbd5e1; margin-bottom: 6px;">
+            <span id="cart-label-pc">Desktop Computer:</span>
+            <span id="cart-subtotal-pc" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f1f5f9;">$0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13.5px; color: #cbd5e1; margin-bottom: 6px;">
+            <span id="cart-label-monitors">Monitors (2x):</span>
+            <span id="cart-subtotal-monitors" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f1f5f9;">$0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13.5px; color: #cbd5e1; margin-bottom: 6px;">
+            <span>Companion Peripherals:</span>
+            <span id="cart-subtotal-periph" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f1f5f9;">$0.00</span>
+          </div>
+          <div style="height: 1px; background: rgba(255, 255, 255, 0.15); margin: 10px 0;"></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 16px;">
+            <strong style="color: #f7f4ea;">Total Workstation Bundle:</strong>
+            <strong id="cart-grand-total" style="color: #34d399; font-size: 22px; font-family: 'JetBrains Mono', monospace;">$0.00</strong>
+          </div>
+        </div>
+
+        <!-- Cart Action Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <button onclick="emailWorkstationBundleCart()" class="win95-btn btn-anime-sunset" style="padding: 11px 18px; font-size: 13.5px; font-weight: 800; justify-content: center; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <span>✉️</span> Email Complete Bundle Cart to Me (All Store Links &amp; Specs)
+          </button>
+          
+          <div style="display: flex; gap: 8px;">
+            <button onclick="launchMonitorHuntFromBanner()" class="win95-btn" style="flex: 1; padding: 8px 12px; font-size: 12px; justify-content: center; display: flex; align-items: center; gap: 6px; cursor: pointer; background: rgba(30, 41, 59, 0.85); color: #e2e8f0;">
+              <span>🎯</span> Change Monitors / Quantity
+            </button>
+            <button onclick="clearWorkstationCart()" class="win95-btn" style="padding: 8px 14px; font-size: 12px; justify-content: center; display: flex; align-items: center; gap: 6px; cursor: pointer; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid #ef4444;">
+              <span>↺</span> Clear Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 10px 16px; background: rgba(18, 22, 30, 0.95); border-top: 1.5px solid rgba(255, 255, 255, 0.15); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 11px; color: #94a3b8;">ComputeMatch Multi-Site Workstation Shopping Cart</span>
+        <button onclick="closeWorkstationCart()" class="win95-btn" style="padding: 4px 18px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Workstation Cart Trigger Badge -->
+  <div id="floating-workstation-cart" onclick="openWorkstationCart()" style="position: fixed; bottom: 24px; right: 24px; z-index: 9990; display: none; cursor: pointer;">
+    <div class="win95-box" style="background: linear-gradient(135deg, #0f172a, #1e293b); border: 2px solid #38bdf8; box-shadow: 0 10px 30px rgba(0,0,0,0.85); padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 14px;">
+      <div style="font-size: 28px;">🛒</div>
+      <div>
+        <div style="font-size: 11px; font-weight: 800; color: #38bdf8; letter-spacing: 0.6px; text-transform: uppercase;">Workstation Cart</div>
+        <div style="font-size: 15px; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">
+          <span id="floating-cart-count">2 items</span> • <span id="floating-cart-total">$3,037.00</span>
+        </div>
+      </div>
+      <button class="win95-btn btn-anime-sunset" style="font-size: 11px; font-weight: 800; padding: 6px 12px; pointer-events: none;">
+        View Cart &rarr;
+      </button>
     </div>
   </div>
 
@@ -1925,6 +2174,19 @@
         nextBtn.innerHTML = `<span>🚀 FIND MY MATCHES!</span>`;
         nextBtn.className = "win95-btn btn-anime-mint";
         nextBtn.style.background = "";
+
+        const mobilityRadio = document.querySelector('input[name="wiz_mobility"]:checked');
+        const isDeskBound = mobilityRadio && mobilityRadio.value === 'desk_bound';
+        if (isDeskBound) {
+          const monCb = document.getElementById("wiz_periph_monitor");
+          if (monCb) monCb.checked = true;
+          const inputCb = document.getElementById("wiz_periph_input");
+          if (inputCb) inputCb.checked = true;
+        }
+        const monCb = document.getElementById("wiz_periph_monitor");
+        if (typeof updateWizardStep5DesktopUI === 'function') {
+          updateWizardStep5DesktopUI(isDeskBound || (monCb && monCb.checked));
+        }
       } else {
         nextBtn.innerHTML = `NEXT &gt;&gt;`;
         nextBtn.className = "win95-btn btn-anime-sunset";
@@ -2600,6 +2862,23 @@
         applyFiltersAndPriorities();
         renderPeripherals();
         saveSearchToHistory(payload, currentRecommendations, currentPeripherals);
+
+        // Auto-launch Monitor Hunt if desktop/desk-bound or monitor requested
+        if (mobility_need === 'desk_bound' || required_peripherals.includes('Monitor')) {
+          const topDesktop = currentRecommendations.find(m => {
+            const c = m.computer;
+            return c.form_factor === 'Desktop' || c.form_factor === 'Mini PC' || c.screen_size === 0;
+          })?.computer || currentRecommendations[0]?.computer;
+
+          if (topDesktop) {
+            currentHuntPcId = topDesktop.id;
+            currentHuntMonitorQty = currentWizardMonitorQty || 2;
+            if (typeof renderMonitorHunt === 'function') renderMonitorHunt();
+            const huntSection = document.getElementById("monitor-hunt-section");
+            if (huntSection) huntSection.style.display = "block";
+          }
+        }
+
         document.getElementById("results-container").scrollIntoView({ behavior: 'smooth' });
       } else {
         alert("Error finding recommendations: " + ((data && data.error) || "Could not calculate recommendations."));
@@ -3197,6 +3476,8 @@
               ...(comp.official_url && comp.official_url !== comp.purchase_url ? [{ store: 'Official OEM', url: comp.official_url, badge: 'Direct', icon: '🏢' }] : [])
             ];
 
+            const isDesktop = (comp.form_factor === 'Desktop' || comp.form_factor === 'Mini PC' || comp.screen_size === 0);
+
             html += `
               <div class="store-links-panel" style="display: flex; flex-direction: column; gap: 4px; padding: 2px 0;">
                 <div style="font-size: 10px; font-weight: 800; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
@@ -3222,6 +3503,25 @@
                         title="Email these 5 store options and specifications to yourself">
                   <span>✉️</span> Email Store Options to Me
                 </button>
+
+                ${isDesktop ? `
+                  <button onclick="launchMonitorHunt('${comp.id}')" 
+                          class="win95-btn btn-anime-sunset" 
+                          style="font-size: 11px; padding: 5px 8px; margin-top: 4px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 4px; cursor: pointer; font-weight: 800; width: 100%;">
+                    <span>🎯</span> Hunt Monitors for this PC
+                  </button>
+                  <button onclick="addPcToCart('${comp.id}')" 
+                          class="win95-btn" 
+                          style="font-size: 11px; padding: 4px 8px; margin-top: 4px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 4px; background: rgba(52, 211, 153, 0.18); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.4); cursor: pointer; font-weight: 700; width: 100%;">
+                    <span>🛒</span> Add PC to Bundle Cart
+                  </button>
+                ` : `
+                  <button onclick="launchMonitorHunt('${comp.id}')" 
+                          class="win95-btn" 
+                          style="font-size: 10.5px; padding: 3px 6px; margin-top: 4px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; border-radius: 4px; background: rgba(30, 41, 59, 0.6); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; width: 100%;">
+                    <span>🖥️</span> Pair External Monitor
+                  </button>
+                `}
               </div>
             `;
           }
@@ -3234,6 +3534,29 @@
 
       html += "</tbody>";
       table.innerHTML = html;
+
+      // Check for Desktop models to display desktop package banner
+      const hasDesktop = displayModels.some(m => {
+        const c = m.computer;
+        return c.form_factor === 'Desktop' || c.form_factor === 'Mini PC' || c.screen_size === 0;
+      });
+      const desktopBanner = document.getElementById("desktop-package-matrix-banner");
+      if (desktopBanner) {
+        if (hasDesktop) {
+          desktopBanner.style.display = "block";
+          const topDesktop = displayModels.find(m => {
+            const c = m.computer;
+            return c.form_factor === 'Desktop' || c.form_factor === 'Mini PC' || c.screen_size === 0;
+          })?.computer || displayModels[0].computer;
+          const nameEl = document.getElementById("desktop-banner-pc-name");
+          const detailEl = document.getElementById("desktop-banner-pc-detail");
+          if (nameEl) nameEl.innerText = topDesktop.name;
+          if (detailEl) detailEl.innerText = `Standalone PC chassis (0" screen). Requires external monitor(s) and input peripherals. GPU supports up to ${topDesktop.form_factor === 'Desktop' ? '4-5' : '3-4'} displays.`;
+          currentHuntPcId = topDesktop.id;
+        } else {
+          desktopBanner.style.display = "none";
+        }
+      }
 
       // Update Expand Columns Button
       const expandBar = document.getElementById("expand-columns-bar");
@@ -3622,6 +3945,15 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         return `Here are 5 verified stores to purchase or check availability for the **${targetComp.name}**:\n\n${storeLinks}\n\nI have also updated your comparison matrix above with all 5 store links for direct checkout!`;
       }
 
+      // Monitor hunt / desktop / cart inquiry
+      if (qLower.includes("monitor hunt") || qLower.includes("monitor") || qLower.includes("dual monitor") || qLower.includes("desktop") || qLower.includes("cart") || qLower.includes("shopping cart") || qLower.includes("bundle")) {
+        return `### 🖥️ Desktop Multi-Monitor & Workstation Cart Advisor:\n\n` +
+          `• **Package Assessment:** Standalone desktops (like the Apple Mac Studio, Alienware Aurora, or Minisforum) have 0" built-in screens and require external monitors and companion input devices.\n` +
+          `• **GPU Bandwidth Check:** All our curated monitors (4K IPS Black, 1440p ProArt, 180Hz Fast-IPS, and 34" Ultrawide) are tested against your PC's GPU digital video outputs and DisplayPort daisy-chaining.\n\n` +
+          `<button onclick="launchMonitorHuntFromBanner()" class="win95-btn btn-anime-sunset" style="font-size: 12px; font-weight: 800; padding: 6px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;"><span>🎯</span> Launch The Monitor Hunt</button>` +
+          ` <button onclick="openWorkstationCart()" class="win95-btn" style="font-size: 12px; font-weight: 700; padding: 6px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; background: rgba(30, 41, 59, 0.9); color: #38bdf8;"><span>🛒</span> Open Workstation Cart</button>`;
+      }
+
       // Email options inquiry
       if (qLower.includes("email") || qLower.includes("send to me") || qLower.includes("mail to me") || qLower.includes("email options") || qLower.includes("send options") || qLower.includes("email myself")) {
         const activeUser = (typeof getActiveUser === 'function') ? getActiveUser() : { email: 'rkyle.myers@gmail.com' };
@@ -3937,7 +4269,47 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       if (userNoteName) userNoteName.innerText = activeUser.name || "Kyle Myers";
       if (userNoteEmail) userNoteEmail.innerText = activeUser.email || "rkyle.myers@gmail.com";
 
-      if (compId === 'all') {
+      if (compId === 'cart') {
+        currentEmailTarget = 'cart';
+        modalTitle.innerHTML = "✉️ Email Workstation Bundle Cart";
+        const pc = workstationCart.pc || currentRecommendations[0]?.computer;
+        const m = workstationCart.monitor || (typeof MONITORS_CATALOG !== 'undefined' ? MONITORS_CATALOG[0] : null);
+        const qty = workstationCart.monitorQty || 2;
+        const totalPc = pc ? pc.price : 0;
+        const totalM = m ? m.price * qty : 0;
+        let totalP = 0;
+        (workstationCart.peripherals || []).forEach(p => totalP += p.price);
+        const grandTotal = totalPc + totalM + totalP;
+
+        previewDiv.innerHTML = `
+          <div style="font-weight: 800; color: #38bdf8; font-size: 13.5px; margin-bottom: 6px;">
+            🛒 Workstation Bundle: Desktop + ${qty}x Displays + Peripherals
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.4; margin-bottom: 8px;">
+            Full hardware specifications, GPU cabling topology, and verified multi-store purchasing links for every item.
+          </div>
+          <div style="background: rgba(0,0,0,0.3); border-radius: 4px; padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #cbd5e1; display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; justify-content: space-between;">
+              <span>1x ${pc ? pc.name : 'Desktop PC'}:</span>
+              <strong style="color: #34d399;">$${totalPc.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>${qty}x ${m ? m.name : 'Monitors'}:</span>
+              <strong style="color: #34d399;">$${totalM.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+            </div>
+            ${totalP > 0 ? `
+              <div style="display: flex; justify-content: space-between;">
+                <span>Peripherals:</span>
+                <strong style="color: #34d399;">$${totalP.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+              </div>
+            ` : ''}
+            <div style="border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 4px; margin-top: 2px; display: flex; justify-content: space-between; font-size: 12.5px;">
+              <span style="color: #f7f4ea; font-weight: bold;">Grand Total:</span>
+              <strong style="color: #34d399; font-weight: 800;">$${grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+            </div>
+          </div>
+        `;
+      } else if (compId === 'all') {
         currentEmailTarget = 'all';
         modalTitle.innerHTML = "✉️ Email Comparison Matrix Options";
         const pool = (currentRecommendations && currentRecommendations.length > 0) ? currentRecommendations : [];
@@ -4026,7 +4398,77 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       const recipient = (recipientInput && recipientInput.value.trim()) ? recipientInput.value.trim() : (getActiveUser()?.email || 'rkyle.myers@gmail.com');
       const user = (typeof getActiveUser === 'function') ? getActiveUser() : { name: "Kyle Myers", email: recipient };
 
-      if (currentEmailTarget === 'all') {
+      if (currentEmailTarget === 'cart') {
+        const pc = workstationCart.pc || currentRecommendations[0]?.computer;
+        const m = workstationCart.monitor || (typeof MONITORS_CATALOG !== 'undefined' ? MONITORS_CATALOG[0] : null);
+        const qty = workstationCart.monitorQty || 2;
+        const totalPc = pc ? pc.price : 0;
+        const totalM = m ? m.price * qty : 0;
+        let totalP = 0;
+        (workstationCart.peripherals || []).forEach(p => totalP += p.price);
+        const grandTotal = totalPc + totalM + totalP;
+
+        const subject = `ComputeMatch Workstation Bundle: ${pc ? pc.name : 'Desktop PC'} + ${qty}x ${m ? m.name : 'Monitors'} ($${grandTotal.toLocaleString()})`;
+
+        let body = `Hello ${user.name},\n\nHere is your requested ComputeMatch Workstation Bundle specifications and verified multi-store purchasing links:\n\n`;
+        body += `========================================================\n`;
+        body += `WORKSTATION BUNDLE SUMMARY\n`;
+        body += `========================================================\n`;
+        body += `Total Bundle Price: $${grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}\n`;
+        body += `Hardware Compatibility: 100% Certified (GPU Pipelines & Digital Ports Matched)\n\n`;
+
+        if (pc) {
+          body += `1. DESKTOP CHASSIS: ${pc.name}\n`;
+          body += `   Street Price: $${pc.price.toLocaleString()}${pc.msrp ? ' (List MSRP: $' + pc.msrp.toLocaleString() + ')' : ''}\n`;
+          body += `   GPU: ${pc.gpu_model}\n`;
+          body += `   CPU: ${pc.cpu_model} (${pc.cpu_details || ''})\n`;
+          body += `   Memory (RAM): ${pc.ram_gb} GB (${pc.ram_details || 'DDR5'})\n`;
+          body += `   Storage Drive: ${pc.storage_gb >= 1000 ? (pc.storage_gb/1000)+'TB' : pc.storage_gb+'GB'} SSD\n`;
+          body += `   Display Output Ports: ${pc.ports_io || 'DisplayPort + HDMI'}\n`;
+          body += `   5 Stores to Buy PC:\n`;
+          (pc.stores || [{store: pc.retailer || 'Store', url: pc.purchase_url}]).forEach((s, idx) => {
+            body += `     ${idx + 1}. ${s.store} (${s.badge || 'Verified'}): ${s.url}\n`;
+          });
+          body += `\n`;
+        }
+
+        if (m) {
+          body += `2. WORKSTATION DISPLAY (${qty}x): ${m.name}\n`;
+          body += `   Quantity: ${qty} Displays\n`;
+          body += `   Unit Price: $${m.price.toFixed(2)} | Subtotal: $${totalM.toFixed(2)}\n`;
+          body += `   Screen Size: ${m.screen_size} (Aspect Ratio: ${m.aspect_ratio || '16:9'})\n`;
+          body += `   Resolution: ${m.resolution}\n`;
+          body += `   Brightness & HDR: ${m.brightness_label}\n`;
+          body += `   Panel Type & Contrast: ${m.panel_type}\n`;
+          body += `   Refresh Rate: ${m.refresh_rate_label} (${m.response_time})\n`;
+          body += `   Color Gamut: ${m.color_gamut}\n`;
+          body += `   Connectors: ${m.connector_summary}\n`;
+          body += `   Daisy Chaining: ${m.daisy_chain_support ? 'Supported (DisplayPort MST)' : 'Direct Video Cables Required'}\n`;
+          body += `   Stand Ergonomics: ${m.stand_ergonomics}\n`;
+          body += `   5 Stores to Buy Monitor:\n`;
+          (m.stores || []).forEach((s, idx) => {
+            body += `     ${idx + 1}. ${s.store} (${s.badge || 'Verified'}): ${s.url}\n`;
+          });
+          body += `\n`;
+        }
+
+        if (workstationCart.peripherals && workstationCart.peripherals.length > 0) {
+          body += `3. COMPANION INPUT PERIPHERALS:\n`;
+          workstationCart.peripherals.forEach((p, idx) => {
+            body += `   • ${p.name} ($${p.price.toFixed(2)}): ${p.description}\n`;
+            (p.stores || [{store: 'Store', url: p.purchase_url}]).forEach((s, sIdx) => {
+              body += `     - ${s.store}: ${s.url}\n`;
+            });
+          });
+          body += `\n`;
+        }
+
+        body += `========================================================\n`;
+        body += `Generated by ComputeMatch Multi-Site Workstation Advisor\n`;
+        body += `https://rkylemyers.github.io/ComputerAdvisor/\n`;
+
+        return { subject, body, recipient };
+      } else if (currentEmailTarget === 'all') {
         const pool = (currentRecommendations && currentRecommendations.length > 0) ? currentRecommendations : [];
         const displayedCount = Math.min(pool.length, currentDisplayLimit || 5);
         const topModels = pool.slice(0, displayedCount);
@@ -4208,6 +4650,578 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         alert("Could not access clipboard.");
       });
     }
+
+    // ==========================================
+    // THE MONITOR HUNT & WORKSTATION SHOPPING CART
+    // ==========================================
+    let currentWizardMonitorQty = 2;
+    let currentHuntPcId = null;
+    let currentHuntMonitorQty = 2;
+    let workstationCart = {
+      pc: null,
+      monitor: null,
+      monitorQty: 2,
+      peripherals: []
+    };
+
+    function onMobilitySelectionChange(val) {
+      if (val === 'desk_bound') {
+        const monitorCb = document.getElementById("wiz_periph_monitor");
+        if (monitorCb) monitorCb.checked = true;
+        updateWizardStep5DesktopUI(true);
+      } else {
+        updateWizardStep5DesktopUI(false);
+      }
+    }
+
+    function onMonitorCheckboxToggle(isChecked) {
+      const mobilityRadio = document.querySelector('input[name="wiz_mobility"]:checked');
+      const isDeskBound = mobilityRadio && mobilityRadio.value === 'desk_bound';
+      updateWizardStep5DesktopUI(isChecked || isDeskBound);
+    }
+
+    function updateWizardStep5DesktopUI(show) {
+      const box = document.getElementById("desktop-package-step5-box");
+      if (box) {
+        box.style.display = show ? "block" : "none";
+      }
+    }
+
+    function onWizardMonitorQtyChange(qty) {
+      currentWizardMonitorQty = parseInt(qty) || 2;
+      currentHuntMonitorQty = currentWizardMonitorQty;
+      playClickBeep();
+    }
+
+    function launchMonitorHunt(compId, initialQty) {
+      playClickBeep();
+      const comp = findComputerById(compId) || currentRecommendations[0]?.computer || (typeof COMPUTERS_CATALOG !== 'undefined' ? COMPUTERS_CATALOG[0] : null);
+      if (!comp) return;
+
+      currentHuntPcId = comp.id;
+      if (initialQty) {
+        currentHuntMonitorQty = initialQty;
+      }
+
+      if (!workstationCart.pc || workstationCart.pc.id !== comp.id) {
+        workstationCart.pc = comp;
+      }
+
+      renderMonitorHunt();
+      const section = document.getElementById("monitor-hunt-section");
+      if (section) {
+        section.style.display = "block";
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function launchMonitorHuntFromBanner() {
+      const topDesktop = (currentRecommendations || []).find(m => {
+        const c = m.computer;
+        return c.form_factor === 'Desktop' || c.form_factor === 'Mini PC' || c.screen_size === 0;
+      })?.computer || currentRecommendations[0]?.computer || (typeof COMPUTERS_CATALOG !== 'undefined' ? COMPUTERS_CATALOG[0] : null);
+
+      if (topDesktop) {
+        launchMonitorHunt(topDesktop.id, currentHuntMonitorQty || 2);
+      } else {
+        launchMonitorHunt('c-mac-studio-m2max', 2);
+      }
+    }
+
+    function closeMonitorHunt() {
+      playClickBeep();
+      const section = document.getElementById("monitor-hunt-section");
+      if (section) section.style.display = "none";
+    }
+
+    function onHuntTargetPcChange(newCompId) {
+      playClickBeep();
+      currentHuntPcId = newCompId;
+      const comp = findComputerById(newCompId);
+      if (comp) workstationCart.pc = comp;
+      renderMonitorHunt();
+      updateFloatingCartBadge();
+    }
+
+    function setMonitorHuntQuantity(qty) {
+      playClickBeep();
+      currentHuntMonitorQty = parseInt(qty) || 2;
+      workstationCart.monitorQty = currentHuntMonitorQty;
+      
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById(`hunt-qty-btn-${i}`);
+        if (btn) {
+          if (i === currentHuntMonitorQty) {
+            btn.className = "win95-btn btn-anime-sunset";
+            btn.style.fontWeight = "800";
+          } else {
+            btn.className = "win95-btn";
+            btn.style.fontWeight = "700";
+          }
+        }
+      }
+
+      renderMonitorHunt();
+      updateFloatingCartBadge();
+    }
+
+    function renderMonitorHunt() {
+      const comp = findComputerById(currentHuntPcId) || (currentRecommendations[0]?.computer) || (typeof COMPUTERS_CATALOG !== 'undefined' ? COMPUTERS_CATALOG[0] : null);
+      if (!comp) return;
+
+      const pkg = (typeof getDesktopPackageDetails === 'function') 
+        ? getDesktopPackageDetails(comp) 
+        : { isDesktop: true, maxMonitors: 4, portsSummary: comp.ports_io, gpuVerdict: "Supports multi-display." };
+
+      const nameEl = document.getElementById("hunt-pc-name");
+      const priceEl = document.getElementById("hunt-pc-price");
+      const screenBadge = document.getElementById("hunt-badge-screen");
+      const kbBadge = document.getElementById("hunt-badge-keyboard");
+      const gpuBadge = document.getElementById("hunt-gpu-badge");
+      const gpuVerdict = document.getElementById("hunt-gpu-verdict");
+      const gpuPorts = document.getElementById("hunt-gpu-ports");
+      const selector = document.getElementById("hunt-pc-selector");
+
+      if (nameEl) nameEl.innerText = `${comp.name} (${comp.form_factor})`;
+      if (priceEl) priceEl.innerText = `$${comp.price.toLocaleString()}`;
+      if (screenBadge) {
+        if (comp.screen_size === 0) {
+          screenBadge.innerText = "❌ Screen: 0" (Monitor Req.)";
+          screenBadge.style.background = "rgba(239, 68, 68, 0.2)";
+          screenBadge.style.color = "#fca5a5";
+          screenBadge.style.border = "1px solid #ef4444";
+        } else {
+          screenBadge.innerText = `✓ Built-in ${comp.screen_size}" Screen`;
+          screenBadge.style.background = "rgba(16, 185, 129, 0.2)";
+          screenBadge.style.color = "#34d399";
+          screenBadge.style.border = "1px solid #10b981";
+        }
+      }
+      if (kbBadge) {
+        kbBadge.innerText = pkg.keyboardMouseIncluded ? "✓ Basic Keyboard/Mouse Included" : "⚠️ No Keyboard/Mouse in Box";
+        kbBadge.style.color = pkg.keyboardMouseIncluded ? "#34d399" : "#fbbf24";
+        kbBadge.style.borderColor = pkg.keyboardMouseIncluded ? "#10b981" : "#f59e0b";
+      }
+      if (gpuBadge) {
+        gpuBadge.innerText = `✓ Up to ${pkg.maxMonitors} Displays Supported`;
+      }
+      if (gpuVerdict) {
+        gpuVerdict.innerText = pkg.gpuVerdict;
+      }
+      if (gpuPorts) {
+        gpuPorts.innerText = `Chassis Display I/O: ${pkg.portsSummary}`;
+      }
+
+      if (selector) {
+        const pool = (typeof COMPUTERS_CATALOG !== 'undefined') ? COMPUTERS_CATALOG : [];
+        const desktopPool = pool.filter(c => c.form_factor === 'Desktop' || c.form_factor === 'Mini PC' || c.screen_size === 0);
+        selector.innerHTML = desktopPool.map(d => `
+          <option value="${d.id}" ${d.id === comp.id ? 'selected' : ''}>${d.name} ($${d.price})</option>
+        `).join('');
+      }
+
+      const grid = document.getElementById("monitor-hunt-grid");
+      if (!grid) return;
+
+      const monitors = (typeof MONITORS_CATALOG !== 'undefined') ? MONITORS_CATALOG : [];
+      const qty = currentHuntMonitorQty || 2;
+
+      grid.innerHTML = monitors.map(m => {
+        const compat = (typeof checkGpuMonitorCompatibility === 'function')
+          ? checkGpuMonitorCompatibility(comp, m, qty)
+          : { compatible: true, summary: `Compatible with ${comp.name}`, connectionMethod: "DisplayPort/HDMI" };
+
+        const subtotal = m.price * qty;
+        const isSelectedInCart = (workstationCart.monitor && workstationCart.monitor.id === m.id && workstationCart.monitorQty === qty);
+
+        return `
+          <div class="win95-box monitor-card" style="background: rgba(20, 25, 34, 0.95); border: ${isSelectedInCart ? '2px solid #34d399' : '1.5px solid rgba(255,255,255,0.18)'}; border-radius: 8px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s ease; ${isSelectedInCart ? 'box-shadow: 0 0 16px rgba(52, 211, 153, 0.25);' : ''}">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px;">
+                  ${m.ranking_badge || 'Workstation Grade'}
+                </span>
+                <div style="text-align: right;">
+                  <span style="font-size: 10px; color: #94a3b8; text-decoration: line-through;">List $${(m.msrp || m.price * 1.2).toFixed(0)}</span>
+                  <div style="font-size: 18px; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">
+                    $${m.price.toFixed(2)} <span style="font-size: 11px; color: #cbd5e1; font-weight: normal;">each</span>
+                  </div>
+                </div>
+              </div>
+
+              <strong style="font-size: 15px; color: #ffffff; font-family: 'Outfit', sans-serif; display: block; margin-bottom: 10px; line-height: 1.3;">
+                ${m.name}
+              </strong>
+
+              <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; font-size: 12px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-bottom: 8px;">
+                  <div>
+                    <span style="color: #94a3b8; font-size: 10.5px; display: block;">SCREEN SIZE</span>
+                    <strong style="color: #38bdf8; font-size: 12.5px;">${m.screen_size}</strong>
+                  </div>
+                  <div>
+                    <span style="color: #94a3b8; font-size: 10.5px; display: block;">RESOLUTION</span>
+                    <strong style="color: #e9c46a; font-size: 12.5px;">${m.resolution}</strong>
+                  </div>
+                  <div>
+                    <span style="color: #94a3b8; font-size: 10.5px; display: block;">BRIGHTNESS &amp; HDR</span>
+                    <strong style="color: #f7f4ea; font-size: 12px;">${m.brightness_label}</strong>
+                  </div>
+                  <div>
+                    <span style="color: #94a3b8; font-size: 10.5px; display: block;">PANEL &amp; CONTRAST</span>
+                    <strong style="color: #f7f4ea; font-size: 12px;">${m.panel_type}</strong>
+                  </div>
+                  <div>
+                    <span style="color: #94a3b8; font-size: 10.5px; display: block;">REFRESH RATE</span>
+                    <strong style="color: #34d399; font-size: 12px;">${m.refresh_rate_label}</strong>
+                  </div>
+                  <div>
+                    <span style="color: #94a3b8; font-size: 10.5px; display: block;">COLOR ACCURACY</span>
+                    <strong style="color: #f7f4ea; font-size: 12px;">${m.color_gamut}</strong>
+                  </div>
+                </div>
+
+                <div style="border-top: 1px dashed rgba(255,255,255,0.14); padding-top: 6px; margin-top: 4px;">
+                  <span style="color: #94a3b8; font-size: 10.5px; display: block; margin-bottom: 2px;">CONNECTORS &amp; I/O PORTS</span>
+                  <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.35;">
+                    ${m.connector_summary}
+                  </div>
+                </div>
+
+                <div style="border-top: 1px dashed rgba(255,255,255,0.14); padding-top: 6px; margin-top: 6px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 11px; color: ${m.daisy_chain_support ? '#34d399' : '#94a3b8'}; font-weight: bold;">
+                    ${m.daisy_chain_support ? '✓ DisplayPort Daisy-Chaining (MST)' : 'Single Direct Video Cables'}
+                  </span>
+                  <span style="font-size: 10.5px; color: #cbd5e1;">VESA 100x100</span>
+                </div>
+              </div>
+
+              <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; font-size: 11.5px; line-height: 1.35;">
+                <div style="font-weight: 800; color: #34d399; margin-bottom: 2px; display: flex; align-items: center; gap: 5px;">
+                  <span>✓</span> GPU Compatibility Verified:
+                </div>
+                <div style="color: #cbd5e1;">
+                  ${compat.summary}
+                </div>
+                <div style="color: #38bdf8; font-size: 10.5px; margin-top: 3px;">
+                  Topology: ${compat.connectionMethod}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; background: rgba(0,0,0,0.3); border-radius: 4px; margin-bottom: 10px;">
+                <span style="font-size: 12px; color: #cbd5e1;">Bundle Subtotal (${qty}x):</span>
+                <strong style="font-size: 16px; color: #34d399; font-family: 'JetBrains Mono', monospace;">$${subtotal.toFixed(2)}</strong>
+              </div>
+
+              <button onclick="addMonitorToCart('${m.id}', ${qty})" class="win95-btn ${isSelectedInCart ? 'btn-anime-mint' : 'btn-anime-sunset'}" style="width: 100%; padding: 8px 12px; font-size: 12.5px; font-weight: 800; justify-content: center; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <span>🛒</span> ${isSelectedInCart ? `✓ Added (${qty}x in Cart)` : `Add ${qty}x to Workstation Cart`}
+              </button>
+
+              <div style="margin-top: 8px; text-align: center;">
+                <button onclick="toggleMonitorStores('${m.id}')" class="win95-btn" style="font-size: 10.5px; padding: 2px 8px; background: transparent; color: #94a3b8; border: none; cursor: pointer; text-decoration: underline;">
+                  🏬 View 5 Verified Store Options &darr;
+                </button>
+                <div id="monitor-stores-${m.id}" style="display: none; margin-top: 6px; flex-direction: column; gap: 4px; text-align: left;">
+                  ${(m.stores || []).map(s => `
+                    <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 10.5px; padding: 3px 8px; text-decoration: none; display: flex; justify-content: space-between; align-items: center; background: rgba(30, 41, 59, 0.7); color: #f1f5f9; border-radius: 3px;">
+                      <span>${s.icon || '🛒'} <strong>${s.store}</strong></span>
+                      <span style="font-size: 9.5px; color: #cbd5e1;">${s.badge} &rarr;</span>
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      renderHuntPeripherals();
+    }
+
+    function toggleMonitorStores(monitorId) {
+      const el = document.getElementById(`monitor-stores-${monitorId}`);
+      if (el) {
+        el.style.display = (el.style.display === "none" || !el.style.display) ? "flex" : "none";
+      }
+    }
+
+    function renderHuntPeripherals() {
+      const list = document.getElementById("hunt-peripherals-list");
+      if (!list) return;
+
+      const periphs = (typeof PERIPHERALS_CATALOG !== 'undefined') ? PERIPHERALS_CATALOG : [];
+      const inputBundles = periphs.filter(p => p.category === 'Input Device');
+
+      list.innerHTML = inputBundles.map(p => {
+        const inCart = (workstationCart.peripherals || []).some(x => x.id === p.id);
+        return `
+          <div style="background: rgba(30, 41, 59, 0.7); border: ${inCart ? '1.5px solid #34d399' : '1px solid rgba(255,255,255,0.15)'}; border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <strong style="color: #f7f4ea; font-size: 12.5px;">${p.name}</strong>
+                <span style="color: #34d399; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px;">$${p.price.toFixed(2)}</span>
+              </div>
+              <div style="font-size: 11px; color: #cbd5e1; line-height: 1.35; margin-bottom: 8px;">
+                ${p.description}
+              </div>
+            </div>
+            <button onclick="togglePeripheralInCart('${p.id}')" class="win95-btn ${inCart ? 'btn-anime-mint' : ''}" style="font-size: 11px; padding: 4px 8px; font-weight: 700; cursor: pointer; align-self: flex-start;">
+              ${inCart ? '✓ Added to Cart' : '+ Add to Bundle'}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addPcToCart(compId) {
+      playClickBeep();
+      const comp = findComputerById(compId);
+      if (!comp) return;
+
+      workstationCart.pc = comp;
+      updateFloatingCartBadge();
+      openWorkstationCart();
+    }
+
+    function addMonitorToCart(monitorId, qty = 2) {
+      playClickBeep();
+      const monitor = (typeof MONITORS_CATALOG !== 'undefined') ? MONITORS_CATALOG.find(m => m.id === monitorId) : null;
+      if (!monitor) return;
+
+      if (!workstationCart.pc) {
+        workstationCart.pc = findComputerById(currentHuntPcId) || currentRecommendations[0]?.computer;
+      }
+
+      workstationCart.monitor = monitor;
+      workstationCart.monitorQty = qty;
+
+      updateFloatingCartBadge();
+      renderMonitorHunt();
+      openWorkstationCart();
+    }
+
+    function togglePeripheralInCart(periphId) {
+      playClickBeep();
+      const p = (typeof PERIPHERALS_CATALOG !== 'undefined') ? PERIPHERALS_CATALOG.find(x => x.id === periphId) : null;
+      if (!p) return;
+
+      const idx = workstationCart.peripherals.findIndex(x => x.id === periphId);
+      if (idx >= 0) {
+        workstationCart.peripherals.splice(idx, 1);
+      } else {
+        workstationCart.peripherals.push(p);
+      }
+
+      updateFloatingCartBadge();
+      renderHuntPeripherals();
+      renderWorkstationCart();
+    }
+
+    function updateFloatingCartBadge() {
+      const badge = document.getElementById("floating-workstation-cart");
+      if (!badge) return;
+
+      const hasItems = workstationCart.pc || workstationCart.monitor || (workstationCart.peripherals && workstationCart.peripherals.length > 0);
+      if (!hasItems) {
+        badge.style.display = "none";
+        return;
+      }
+
+      let count = 0;
+      let total = 0;
+      if (workstationCart.pc) {
+        count += 1;
+        total += workstationCart.pc.price;
+      }
+      if (workstationCart.monitor) {
+        count += workstationCart.monitorQty;
+        total += workstationCart.monitor.price * workstationCart.monitorQty;
+      }
+      if (workstationCart.peripherals) {
+        count += workstationCart.peripherals.length;
+        workstationCart.peripherals.forEach(p => total += p.price);
+      }
+
+      const countEl = document.getElementById("floating-cart-count");
+      const totalEl = document.getElementById("floating-cart-total");
+      if (countEl) countEl.innerText = `${count} item${count > 1 ? 's' : ''}`;
+      if (totalEl) totalEl.innerText = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      badge.style.display = "block";
+    }
+
+    function openWorkstationCart() {
+      playClickBeep();
+      renderWorkstationCart();
+      const modal = document.getElementById("workstation-cart-modal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeWorkstationCart() {
+      playClickBeep();
+      const modal = document.getElementById("workstation-cart-modal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function clearWorkstationCart() {
+      playClickBeep();
+      workstationCart = { pc: null, monitor: null, monitorQty: 2, peripherals: [] };
+      updateFloatingCartBadge();
+      renderMonitorHunt();
+      closeWorkstationCart();
+    }
+
+    function renderWorkstationCart() {
+      const container = document.getElementById("cart-items-container");
+      if (!container) return;
+
+      if (!workstationCart.pc && !workstationCart.monitor && (!workstationCart.peripherals || workstationCart.peripherals.length === 0)) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 24px; color: #94a3b8;">
+            <div style="font-size: 32px; margin-bottom: 8px;">🛒</div>
+            <strong style="color: #cbd5e1; font-size: 14px;">Your Workstation Cart is Empty</strong>
+            <p style="font-size: 12px; margin-top: 4px;">Select a Desktop PC and pair it with 1-3 monitors from The Monitor Hunt!</p>
+          </div>
+        `;
+        document.getElementById("cart-subtotal-pc").innerText = "$0.00";
+        document.getElementById("cart-subtotal-monitors").innerText = "$0.00";
+        document.getElementById("cart-subtotal-periph").innerText = "$0.00";
+        document.getElementById("cart-grand-total").innerText = "$0.00";
+        return;
+      }
+
+      let html = "";
+      let totalPc = 0;
+      let totalMonitors = 0;
+      let totalPeriph = 0;
+
+      if (workstationCart.pc) {
+        const pc = workstationCart.pc;
+        totalPc = pc.price;
+        const stores = pc.stores || [{ store: pc.retailer || 'Store', url: pc.purchase_url }];
+
+        html += `
+          <div style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 6px; padding: 12px 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <div>
+                <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 3px;">
+                  1x WORKSTATION CHASSIS
+                </span>
+                <strong style="font-size: 15px; color: #ffffff; display: block; margin-top: 3px;">${pc.name}</strong>
+                <span style="font-size: 11px; color: #94a3b8;">${pc.brand} • ${pc.form_factor} • GPU: ${pc.gpu_model}</span>
+              </div>
+              <strong style="font-size: 16px; color: #34d399; font-family: 'JetBrains Mono', monospace;">
+                $${pc.price.toLocaleString(undefined, {minimumFractionDigits: 2})}
+              </strong>
+            </div>
+
+            <div style="font-size: 11px; color: #fbbf24; font-weight: 700; margin: 8px 0 4px 0;">
+              🏬 Verified Multi-Store Purchase Links:
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              ${stores.map(s => `
+                <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 10px; padding: 2px 7px; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(30, 41, 59, 0.8); color: #e2e8f0;">
+                  <span>${s.icon || '🛒'}</span> ${s.store} &rarr;
+                </a>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (workstationCart.monitor) {
+        const m = workstationCart.monitor;
+        const qty = workstationCart.monitorQty || 2;
+        totalMonitors = m.price * qty;
+        const stores = m.stores || [];
+
+        html += `
+          <div style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(245, 158, 11, 0.4); border-radius: 6px; padding: 12px 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <div>
+                <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 3px;">
+                  ${qty}x WORKSTATION DISPLAY${qty > 1 ? 'S' : ''}
+                </span>
+                <strong style="font-size: 15px; color: #ffffff; display: block; margin-top: 3px;">${m.name}</strong>
+                <span style="font-size: 11px; color: #cbd5e1;">${m.screen_size} • ${m.resolution} • ${m.brightness_label} • ${m.panel_type}</span>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 10px; color: #94a3b8;">${qty}x @ $${m.price.toFixed(2)}</div>
+                <strong style="font-size: 16px; color: #34d399; font-family: 'JetBrains Mono', monospace;">
+                  $${totalMonitors.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                </strong>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; color: #38bdf8; background: rgba(56, 189, 248, 0.1); border-radius: 4px; padding: 6px 8px; margin: 6px 0;">
+              🔌 <strong>Cabling &amp; Topology:</strong> ${m.daisy_chain_support ? 'Supports DisplayPort Daisy-Chaining (connect monitor 1 to PC, monitor 2 to monitor 1).' : 'Requires direct video cable from PC GPU to each monitor.'}
+            </div>
+
+            <div style="font-size: 11px; color: #fbbf24; font-weight: 700; margin: 8px 0 4px 0;">
+              🏬 Verified Multi-Store Purchase Links:
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              ${stores.map(s => `
+                <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 10px; padding: 2px 7px; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(30, 41, 59, 0.8); color: #e2e8f0;">
+                  <span>${s.icon || '🛒'}</span> ${s.store} &rarr;
+                </a>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (workstationCart.peripherals && workstationCart.peripherals.length > 0) {
+        workstationCart.peripherals.forEach(p => {
+          totalPeriph += p.price;
+          html += `
+            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="color: #f7f4ea; font-size: 13.5px;">${p.name}</strong>
+                <span style="font-size: 11px; color: #94a3b8; display: block;">${p.description}</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <strong style="color: #34d399; font-size: 15px; font-family: 'JetBrains Mono', monospace;">$${p.price.toFixed(2)}</strong>
+                <button onclick="togglePeripheralInCart('${p.id}')" style="background: transparent; color: #fca5a5; border: none; font-size: 12px; cursor: pointer;" title="Remove">✕</button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      container.innerHTML = html;
+
+      const grandTotal = totalPc + totalMonitors + totalPeriph;
+      const pcLabel = document.getElementById("cart-label-pc");
+      const monLabel = document.getElementById("cart-label-monitors");
+      const pcSub = document.getElementById("cart-subtotal-pc");
+      const monSub = document.getElementById("cart-subtotal-monitors");
+      const perSub = document.getElementById("cart-subtotal-periph");
+      const grandSub = document.getElementById("cart-grand-total");
+
+      if (pcLabel && workstationCart.pc) pcLabel.innerText = `${workstationCart.pc.name}:`;
+      if (monLabel) monLabel.innerText = `Monitors (${workstationCart.monitorQty || 2}x):`;
+      if (pcSub) pcSub.innerText = `$${totalPc.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+      if (monSub) monSub.innerText = `$${totalMonitors.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+      if (perSub) perSub.innerText = `$${totalPeriph.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+      if (grandSub) grandSub.innerText = `$${grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+
+      const compatNote = document.getElementById("cart-compat-note");
+      if (compatNote && workstationCart.pc && workstationCart.monitor) {
+        const compat = (typeof checkGpuMonitorCompatibility === 'function')
+          ? checkGpuMonitorCompatibility(workstationCart.pc, workstationCart.monitor, workstationCart.monitorQty || 2)
+          : { summary: "Fully compatible." };
+        compatNote.innerText = compat.summary;
+      }
+    }
+
+    function emailWorkstationBundleCart() {
+      playClickBeep();
+      closeWorkstationCart();
+      openEmailModal('cart');
+    }
+
   </script>
 
 </body>

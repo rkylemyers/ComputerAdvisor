@@ -44,6 +44,10 @@ def is_degree_curriculum_page(target_url: str, html: str) -> bool:
         return True
     return False
 
+# Fast in-memory cache to guarantee sub-second responses for repeated URL scrapes
+SCRAPE_CACHE: Dict[str, Dict[str, Any]] = {}
+ANALYSIS_CACHE: Dict[str, Dict[str, Any]] = {}
+
 def scrape_single_course_detail(base_url: str, item: Dict[str, Any]) -> Dict[str, Any]:
     full_url = item["url"]
     headers = {
@@ -51,7 +55,7 @@ def scrape_single_course_detail(base_url: str, item: Dict[str, Any]) -> Dict[str
     }
     try:
         req = urllib.request.Request(full_url, headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        with urllib.request.urlopen(req, timeout=3.5) as resp:
             c_html = resp.read().decode('utf-8', errors='ignore')
 
         # Course description
@@ -314,9 +318,9 @@ def scrape_degree_curriculum(target_url: str, raw_html: str = None) -> Dict[str,
                 "course_count": sec_count
             })
 
-    # Concurrently fetch and scrape details of all unique courses
+    # Concurrently fetch and scrape details of all unique courses with high concurrency
     scraped_courses = []
-    with ThreadPoolExecutor(max_workers=12) as executor:
+    with ThreadPoolExecutor(max_workers=24) as executor:
         futures = [executor.submit(scrape_single_course_detail, target_url, item) for item in discovered_courses.values()]
         for f in futures:
             try:
@@ -342,30 +346,18 @@ def scrape_degree_curriculum(target_url: str, raw_html: str = None) -> Dict[str,
         desc_short = (c.get('description') or "")[:180]
         summary_courses_text.append(f"- {c['code']} {c['title']} ({c.get('credits', '3')} cr){tag_str}{prereq_str}: {desc_short}")
 
-    # === LAYER 2 DEEP CRAWLING ===
-    # Discover Level 2 pages: companion lab subpages, department program pages, campus IT services
+    # === LAYER 2 DEEP CRAWLING (Verified Institutional & IT Requirements Pages) ===
     level2_urls = set()
-    
-    # 1. Companion lab courses (e.g. VMT 209L, 213L, 216L, 221L, 222L)
-    for c in scraped_courses:
-        c_url = c.get("url", "")
-        code_base = c.get("code", "").lower().replace(" ", "")
-        if code_base.startswith("vmt2") or code_base.startswith("bio") or code_base.startswith("chm"):
-            cand_lab = c_url.rstrip("/") + "l"
-            level2_urls.add(cand_lab)
-
-    # 2. Main Institutional Department & IT pages (going a layer deeper outside the catalog iframe/subdomain)
     if "wilson" in target_url.lower():
         level2_urls.add("https://www.wilson.edu/veterinary-nursing")
         level2_urls.add("https://www.wilson.edu/technology-requirements-online-and-hybrid-learning")
-        level2_urls.add("https://www.wilson.edu/information-technology")
 
-    # Fetch Level 2 pages concurrently
+    # Fetch Level 2 pages concurrently with short timeout
     level2_scraped = []
     def fetch_l2_page(u):
         try:
             req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"})
-            with urllib.request.urlopen(req, timeout=8) as resp:
+            with urllib.request.urlopen(req, timeout=3.5) as resp:
                 text_content = resp.read().decode('utf-8', errors='ignore')
             clean = re.sub(r'<(script|style|nav|footer).*?</\1>', '', text_content, flags=re.DOTALL | re.IGNORECASE)
             clean = re.sub(r'<[^<]+?>', ' ', clean)
@@ -374,12 +366,13 @@ def scrape_degree_curriculum(target_url: str, raw_html: str = None) -> Dict[str,
         except Exception as e:
             return {"url": u, "success": False, "error": str(e), "text": ""}
 
-    with ThreadPoolExecutor(max_workers=8) as ex:
-        l2_futures = [ex.submit(fetch_l2_page, u) for u in level2_urls]
-        for f in l2_futures:
-            res = f.result()
-            if res.get("success") and res.get("text"):
-                level2_scraped.append(res)
+    if level2_urls:
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            l2_futures = [ex.submit(fetch_l2_page, u) for u in level2_urls]
+            for f in l2_futures:
+                res = f.result()
+                if res.get("success") and res.get("text"):
+                    level2_scraped.append(res)
 
     # Evaluate whether explicit hardware specs were found across Level 0, Level 1, and Level 2
     all_crawl_text = raw_html + "\n" + "\n".join([c.get("description", "") for c in scraped_courses]) + "\n" + "\n".join([l["text"] for l in level2_scraped])
@@ -530,6 +523,9 @@ class ComputerAdvisorHandler(http.server.SimpleHTTPRequestHandler):
         if not target_url.startswith("http://") and not target_url.startswith("https://"):
             target_url = "https://" + target_url
 
+        if target_url in SCRAPE_CACHE:
+            return SCRAPE_CACHE[target_url]
+
         try:
             req = urllib.request.Request(
                 target_url,
@@ -568,6 +564,7 @@ class ComputerAdvisorHandler(http.server.SimpleHTTPRequestHandler):
             }
             if degree_curr:
                 res["degree_curriculum"] = degree_curr
+            SCRAPE_CACHE[target_url] = res
             return res
         except Exception as e:
             return {
@@ -622,6 +619,11 @@ class ComputerAdvisorHandler(http.server.SimpleHTTPRequestHandler):
         raw_urls = req_json.get("urls") or ([req_json.get("url")] if req_json.get("url") else [])
         if not raw_urls:
             self.send_json(400, {"error": "No URLs provided to analyze."})
+            return
+
+        cache_key = "|".join(sorted(str(u).strip() for u in raw_urls))
+        if cache_key in ANALYSIS_CACHE:
+            self.send_json(200, ANALYSIS_CACHE[cache_key])
             return
 
         # 1. Scrape all provided links
@@ -834,11 +836,13 @@ Return ONLY a valid JSON object with the following exact structure:
             analysis_json["peer_benchmark_reason"] = active_curriculum.get("peer_benchmark_reason", "")
             analysis_json["crawl_depth_stats"] = active_curriculum.get("crawl_depth_stats", {})
 
-        self.send_json(200, {
+        resp_payload = {
             "success": True,
             "analysis": analysis_json,
             "scraped_count": len(scraped_data)
-        })
+        }
+        ANALYSIS_CACHE[cache_key] = resp_payload
+        self.send_json(200, resp_payload)
 
     def handle_gemini_proxy(self, req_json: Dict[str, Any]):
         api_key = (

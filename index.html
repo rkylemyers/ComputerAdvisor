@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ComputeMatch — Intelligent Computer Hardware Matchmaker</title>
   
+  <!-- Lo-Fi Anime Computer Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  
   <!-- Clean Aesthetic Anime Lo-Fi Fonts (No handwriting/comic sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +29,7 @@
       background-color: #1a1e24;
       background-image: 
         linear-gradient(180deg, rgba(16, 20, 28, 0.20) 0%, rgba(12, 16, 22, 0.35) 100%),
-        url('/lofi_ghibli_street.jpg');
+        url('lofi_ghibli_street.jpg');
       background-size: cover;
       background-position: center bottom;
       background-attachment: fixed;
@@ -689,6 +694,16 @@
                 <option value="laptop">Laptops / Ultrabooks</option>
                 <option value="2-in-1">2-in-1 Touch &amp; Stylus</option>
                 <option value="desktop">Desktop / Mini PC</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">🏷️ OS Edition / License:</label>
+              <select id="filter-os-edition" onchange="applyFiltersAndPriorities(); playClickBeep();" class="win95-input" style="width: 100%; font-size: 12px; padding: 5px 8px; background: rgba(18, 22, 30, 0.85); color: #f7f4ea;">
+                <option value="all">All OS Editions</option>
+                <option value="win-pro">Windows 11 Pro Only (BitLocker / Hyper-V)</option>
+                <option value="win-home">Windows 11 Home Only</option>
+                <option value="macos">macOS Only</option>
               </select>
             </div>
           </div>
@@ -2108,7 +2123,27 @@
       applyFiltersAndPriorities();
     }
 
+    // Active Chat Filters State
+    let activeChatFilters = {
+      winProOnly: false,
+      nonLaptopOnly: false,
+      desktopOnly: false,
+      convertibleOnly: false,
+      macOnly: false,
+      winOnly: false,
+      maxPrice: null
+    };
+
     function resetAllHardwareFilters() {
+      activeChatFilters = {
+        winProOnly: false,
+        nonLaptopOnly: false,
+        desktopOnly: false,
+        convertibleOnly: false,
+        macOnly: false,
+        winOnly: false,
+        maxPrice: null
+      };
       document.getElementById("filter-os-windows").checked = true;
       document.getElementById("filter-os-macos").checked = true;
       document.getElementById("filter-os-chrome").checked = true;
@@ -2117,6 +2152,7 @@
       if (document.getElementById("filter-gpu-type")) document.getElementById("filter-gpu-type").value = "all";
       if (document.getElementById("filter-storage")) document.getElementById("filter-storage").value = "0";
       if (document.getElementById("filter-form-factor")) document.getElementById("filter-form-factor").value = "all";
+      if (document.getElementById("filter-os-edition")) document.getElementById("filter-os-edition").value = "all";
       applyFiltersAndPriorities();
     }
 
@@ -2130,22 +2166,38 @@
       const gpuType = document.getElementById("filter-gpu-type") ? document.getElementById("filter-gpu-type").value : "all";
       const minStorage = parseInt(document.getElementById("filter-storage") ? document.getElementById("filter-storage").value : "0", 10);
       const formFactor = document.getElementById("filter-form-factor") ? document.getElementById("filter-form-factor").value : "all";
+      const osEdition = document.getElementById("filter-os-edition") ? document.getElementById("filter-os-edition").value : "all";
 
       const sourcePool = (rawRecommendations.length > 0) ? rawRecommendations : currentRecommendations;
 
       let filtered = sourcePool.filter(item => {
         const comp = item.computer;
         const os = (comp.os || "").toLowerCase();
+        const editionStr = (comp.os_edition || comp.os || "").toLowerCase();
         
         // 1. OS Platform filter
         if (os.includes("win") && !showWin) return false;
         if (os.includes("mac") && !showMac) return false;
         if (os.includes("chrome") && !showChrome) return false;
 
-        // 2. RAM filter
+        // 2. OS Edition / License filter
+        if (osEdition === "win-pro" || activeChatFilters.winProOnly) {
+          if (!editionStr.includes("pro") || !editionStr.includes("win")) return false;
+        }
+        if (osEdition === "win-home") {
+          if (!editionStr.includes("home") || !editionStr.includes("win")) return false;
+        }
+        if (osEdition === "macos" || activeChatFilters.macOnly) {
+          if (!editionStr.includes("mac")) return false;
+        }
+        if (activeChatFilters.winOnly) {
+          if (!editionStr.includes("win")) return false;
+        }
+
+        // 3. RAM filter
         if (minRam > 0 && comp.ram_gb < minRam) return false;
 
-        // 3. CPU family filter
+        // 4. CPU family filter
         if (cpuFamily !== "all") {
           const cpuName = (comp.cpu_model || "").toLowerCase();
           if (cpuFamily === "intel" && !cpuName.includes("intel") && !cpuName.includes("core")) return false;
@@ -2154,7 +2206,7 @@
           if (cpuFamily === "snapdragon" && !cpuName.includes("snapdragon") && !cpuName.includes("qualcomm") && !cpuName.includes("oryon")) return false;
         }
 
-        // 4. GPU Type filter
+        // 5. GPU Type filter
         if (gpuType !== "all") {
           const gpuName = (comp.gpu_model || "").toLowerCase();
           const isDiscrete = gpuName.includes("rtx") || gpuName.includes("geforce") || comp.gpu_tier >= 3;
@@ -2162,15 +2214,20 @@
           if (gpuType === "integrated" && isDiscrete) return false;
         }
 
-        // 5. Min Storage filter
+        // 6. Min Storage filter
         if (minStorage > 0 && comp.storage_gb < minStorage) return false;
 
-        // 6. Form factor filter
-        if (formFactor !== "all") {
+        // 7. Form factor filter
+        if (formFactor !== "all" || activeChatFilters.nonLaptopOnly || activeChatFilters.desktopOnly || activeChatFilters.convertibleOnly) {
           const ff = (comp.form_factor || "").toLowerCase();
-          if (formFactor === "laptop" && !ff.includes("laptop")) return false;
-          if (formFactor === "2-in-1" && !ff.includes("2-in-1") && !comp.touchscreen) return false;
-          if (formFactor === "desktop" && !ff.includes("desktop") && !ff.includes("mini pc")) return false;
+          if ((formFactor === "laptop" || activeChatFilters.nonLaptopOnly) && !ff.includes("laptop") && !ff.includes("2-in-1")) return false;
+          if ((formFactor === "2-in-1" || activeChatFilters.convertibleOnly) && !ff.includes("2-in-1") && !comp.touchscreen) return false;
+          if ((formFactor === "desktop" || activeChatFilters.desktopOnly) && !ff.includes("desktop") && !ff.includes("mini pc")) return false;
+        }
+
+        // 8. Max Price filter
+        if (activeChatFilters.maxPrice && comp.price > activeChatFilters.maxPrice) {
+          return false;
         }
 
         return true;
@@ -2454,6 +2511,24 @@
       // Dynamic Filtering Actions
       let filterActionSummary = "";
 
+      // 0. Windows 11 Pro only (e.g. "filter out any non windows 11 pro devices", "windows 11 pro only", "only pro")
+      const isFilterWinProOnly = (
+        qLower.includes("windows 11 pro") ||
+        qLower.includes("windows pro") ||
+        qLower.includes("win 11 pro") ||
+        qLower.includes("win pro") ||
+        qLower.includes("non windows 11 pro") ||
+        qLower.includes("non-windows 11 pro") ||
+        qLower.includes("non windows pro") ||
+        qLower.includes("non-pro") ||
+        qLower.includes("non pro") ||
+        qLower.includes("only pro") ||
+        qLower.includes("pro only") ||
+        qLower.includes("pro devices") ||
+        qLower.includes("pro models") ||
+        qLower.includes("pro edition")
+      );
+
       // 1. Non-laptop filter (e.g. "I didn't want to see any non-laptop models", "remove non-laptops", "only laptops", "no desktops")
       const isFilterNonLaptop = (
         qLower.includes("non-laptop") ||
@@ -2518,44 +2593,54 @@
         qLower.includes("restore all")
       );
 
-      if (isResetFilters && rawRecommendations.length > 0) {
-        currentRecommendations = [...rawRecommendations];
+      if (isResetFilters) {
+        activeChatFilters = {
+          winProOnly: false,
+          nonLaptopOnly: false,
+          desktopOnly: false,
+          convertibleOnly: false,
+          macOnly: false,
+          winOnly: false,
+          maxPrice: null
+        };
+        if (document.getElementById("filter-os-edition")) document.getElementById("filter-os-edition").value = "all";
         filterActionSummary = "Reset all filters; restored all candidate models.";
+      } else if (isFilterWinProOnly) {
+        activeChatFilters.winProOnly = true;
+        if (document.getElementById("filter-os-edition")) document.getElementById("filter-os-edition").value = "win-pro";
+        filterActionSummary = "Filtered out all non-Windows 11 Pro devices. Comparison table now displays exclusively verified Windows 11 Pro models.";
       } else if (isFilterNonLaptop) {
-        const removed = currentRecommendations
-          .filter(r => r.computer.form_factor !== "Laptop" && r.computer.form_factor !== "2-in-1")
-          .map(r => r.computer.name);
-        currentRecommendations = currentRecommendations.filter(r => r.computer.form_factor === "Laptop" || r.computer.form_factor === "2-in-1");
-        filterActionSummary = `Filtered out non-laptop models (${removed.join(", ") || "Mini PCs and Desktops"}). Showing exclusively portable laptops.`;
+        activeChatFilters.nonLaptopOnly = true;
+        filterActionSummary = "Filtered out non-laptop models (Mini PCs and Desktops). Showing exclusively portable laptops.";
       } else if (isFilterDesktopOnly) {
-        currentRecommendations = currentRecommendations.filter(r => r.computer.form_factor === "Desktop" || r.computer.form_factor === "Mini PC");
+        activeChatFilters.desktopOnly = true;
         filterActionSummary = "Filtered for desktop workstations and mini PCs only.";
       } else if (isFilterConvertibleOnly) {
-        currentRecommendations = currentRecommendations.filter(r => r.computer.form_factor === "2-in-1" || r.computer.touchscreen === true);
+        activeChatFilters.convertibleOnly = true;
         filterActionSummary = "Filtered for 2-in-1 touchscreens and stylus-compatible models only.";
       } else if (isFilterMacOnly) {
-        currentRecommendations = currentRecommendations.filter(r => r.computer.os.toLowerCase().includes("mac"));
+        activeChatFilters.macOnly = true;
+        if (document.getElementById("filter-os-edition")) document.getElementById("filter-os-edition").value = "macos";
         filterActionSummary = "Filtered for Apple macOS models only.";
       } else if (isFilterWinOnly) {
-        currentRecommendations = currentRecommendations.filter(r => r.computer.os.toLowerCase().includes("win"));
+        activeChatFilters.winOnly = true;
         filterActionSummary = "Filtered for Microsoft Windows models only.";
       }
 
       // Check for RAM filter: >= 32GB or >= 16GB
       if (qLower.includes("32gb") || qLower.includes("32 gb")) {
-        currentRecommendations = currentRecommendations.filter(r => r.computer.ram_gb >= 32);
+        if (document.getElementById("filter-ram")) document.getElementById("filter-ram").value = "32";
         filterActionSummary += (filterActionSummary ? " " : "") + "Filtered comparison strictly for >=32GB RAM models.";
       } else if (qLower.includes("16gb") || qLower.includes("16 gb")) {
-        currentRecommendations = currentRecommendations.filter(r => r.computer.ram_gb >= 16);
+        if (document.getElementById("filter-ram")) document.getElementById("filter-ram").value = "16";
         filterActionSummary += (filterActionSummary ? " " : "") + "Filtered comparison for >=16GB RAM models.";
       }
 
       // Check for price filter: under $XXXX
       const priceMatch = qLower.match(/(?:under|less than|below|cheaper than|no more than)\s*\$?(\d{3,5})/);
       if (priceMatch) {
-        const maxPrice = parseFloat(priceMatch[1]);
-        currentRecommendations = currentRecommendations.filter(r => r.computer.price <= maxPrice);
-        filterActionSummary += (filterActionSummary ? " " : "") + `Filtered out models priced over $${maxPrice.toLocaleString()}.`;
+        activeChatFilters.maxPrice = parseFloat(priceMatch[1]);
+        filterActionSummary += (filterActionSummary ? " " : "") + `Filtered out models priced over $${activeChatFilters.maxPrice.toLocaleString()}.`;
       }
 
       // If a filter was applied, instantly update the table and ranking count!

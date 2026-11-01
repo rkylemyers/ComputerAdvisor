@@ -5030,65 +5030,19 @@ function getDesktopPackageDetails(comp) {
   }
 
   const io = getComputerVideoIOMap(comp);
-
-  let keyboardMouseIncluded = false;
-  let keyboardMouseNote = "No keyboard or mouse included in this standalone chassis. External input devices required.";
-  
-  if (comp.id === "c-apple-imac-24-m4") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Color-matched Apple Magic Keyboard and Magic Mouse included in the box with built-in 24-inch 4.5K display.";
-  } else if (comp.id === "c-desktop-beast-4090") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Basic wired USB multimedia keyboard and optical mouse included in box. Ergonomic wireless upgrade recommended.";
-  } else if (comp.id === "c-dell-optiplex-7020" || comp.id === "c-dell-inspiron-3020") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Standard Dell wired business USB keyboard and optical mouse included in box.";
-  } else if (comp.id === "c-dell-precision-3680") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Dell Pro business wired keyboard and precision optical mouse included in box.";
-  } else if (comp.id === "c-hp-omen-45l") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "HP 310 wired USB black keyboard and mouse combo included in box.";
-  } else if (comp.id === "c-hp-pavilion-tp01") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "HP wired black keyboard and optical mouse combo included in box.";
-  } else if (comp.id === "c-lenovo-legion-tower-7i" || comp.id === "c-lenovo-legion-tower-5i") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Lenovo Legion RGB gaming keyboard and optical gaming mouse included in box.";
-  } else if (comp.id === "c-acer-predator-orion-5000") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Predator RGB mechanical gaming keyboard and optical gaming mouse included in box.";
-  } else if (comp.id === "c-dell-xps-8960") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Dell KB216 wired multimedia keyboard and MS116 optical mouse included in box.";
-  } else if (comp.id === "c-lenovo-ideacentre-tower-gen9") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Lenovo Calliope wired USB keyboard and mouse combo included in box.";
-  } else if (comp.id === "c-hp-z2-mini-g9") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "HP wired business desktop keyboard and mouse included in box.";
-  } else if (comp.id === "c-lenovo-thinkstation-p3-tiny" || comp.id === "c-lenovo-thinkcentre-m70q") {
-    keyboardMouseIncluded = true;
-    keyboardMouseNote = "Lenovo Traditional USB business keyboard and mouse included in box.";
-  } else if (comp.brand === "Apple") {
-    keyboardMouseNote = "Chassis ships with power cord only. Apple Magic Keyboard with Touch ID and Magic Mouse / Trackpad required.";
-  } else if (comp.id === "c-corsair-vengeance-i7500") {
-    keyboardMouseNote = "High-end custom enthusiast tower ships without peripherals. Mechanical keyboard and precision gaming mouse required.";
-  } else if (comp.id === "c-asus-rog-strix-g16chr" || comp.id === "c-asus-rog-g22ch") {
-    keyboardMouseNote = "Standalone gaming tower chassis. Dedicated gaming mechanical keyboard and low-latency mouse recommended.";
-  } else if (comp.id === "c-beelink-ser8" || comp.id === "c-beelink-eqr6" || comp.id === "c-minisforum-um780" || comp.id === "c-minisforum-ms-01" || comp.id === "c-asus-nuc-14-pro") {
-    keyboardMouseNote = "Ultra-compact mini PC chassis ships with power adapter and VESA bracket. External keyboard & mouse required.";
-  }
-
+  const inputPkg = getComputerIncludedPeripherals(comp);
+  const wifiPkg = getComputerWifiSpec(comp);
   const needsMonitor = comp.id !== "c-apple-imac-24-m4";
 
   return {
     isDesktop: true,
     needsMonitor: needsMonitor,
-    needsKeyboard: !keyboardMouseIncluded,
-    needsMouse: !keyboardMouseIncluded,
-    keyboardMouseIncluded: keyboardMouseIncluded,
-    keyboardMouseNote: keyboardMouseNote,
+    needsKeyboard: inputPkg.needed,
+    needsMouse: inputPkg.needed,
+    keyboardMouseIncluded: inputPkg.has_keyboard,
+    keyboardMouseNote: inputPkg.label,
+    included_peripherals_label: inputPkg.label,
+    wifiSpec: wifiPkg,
     maxMonitors: io.maxDisplays,
     portsSummary: io.portsSummary,
     gpuVerdict: io.driveVerdict,
@@ -5111,5 +5065,403 @@ function checkGpuMonitorCompatibility(comp, monitor, quantity) {
       : "⚠️ " + comp.name + " natively supports up to " + evalRes.maxDisplays + " displays simultaneously."
   };
 }
+
+// ==========================================
+// BUILT-IN WI-FI SPECIFICATION RESOLVER
+// ==========================================
+function getComputerWifiSpec(comp) {
+  if (!comp) {
+    return {
+      has_wifi: false,
+      standard: "None",
+      label: "No Built-in Wi-Fi (Gigabit RJ-45 Ethernet Only)",
+      speed: "1 Gbps RJ-45 LAN only",
+      badgeText: "⚠️ Ethernet Only"
+    };
+  }
+
+  // Refurbished legacy micro desktop without built-in wireless card
+  if (comp.id === "c-optiplex-3070-micro-refurb") {
+    return {
+      has_wifi: false,
+      standard: "None",
+      label: "No Built-in Wi-Fi (Gigabit Ethernet RJ-45 Only — USB Wi-Fi adapter or PCIe card required)",
+      speed: "1 Gbps RJ-45 LAN only",
+      badgeText: "⚠️ Ethernet Only"
+    };
+  }
+
+  // Flagship Wi-Fi 7 (802.11be) Rigs & Laptops
+  const wifi7Ids = [
+    "c-thinkpad-t14s-gen6", "c-thinkpad-p1-gen7", "c-dell-xps-14-oled", "c-surface-pro-11",
+    "c-alienware-aurora-r16", "c-corsair-vengeance-i7500", "c-hp-omen-45l", "c-geekom-gt1-mega",
+    "c-lenovo-legion-tower-7i", "c-acer-predator-orion-7000"
+  ];
+  if (wifi7Ids.includes(comp.id)) {
+    return {
+      has_wifi: true,
+      standard: "Wi-Fi 7 (802.11be)",
+      label: "Wi-Fi 7 (802.11be) Tri-Band 2x2 (2.4 / 5 / 6 GHz, 320MHz) + Bluetooth 5.4",
+      speed: "Ultra-Fast up to 5.8 Gbps (Zero-Jitter Gaming & Multi-Stream 8K)",
+      badgeText: "📶 Wi-Fi 7 Built-in"
+    };
+  }
+
+  // High-Performance Wi-Fi 6E (802.11ax 6GHz Band) Models
+  const wifi6EIds = [
+    "c-macbook-air-m3", "c-macbook-pro-14-m4", "c-mac-studio-m2max", "c-mac-studio-m4max",
+    "c-mac-mini-m4", "c-mac-mini-m4pro", "c-apple-imac-24-m4", "c-dell-xps-8960",
+    "c-dell-optiplex-7020-micro", "c-hp-elitedesk-800-mini", "c-hp-envy-desktop-te02",
+    "c-hp-z2-mini-g9", "c-lenovo-thinkcentre-m75q", "c-lenovo-thinkstation-p3-ultra",
+    "c-lenovo-thinkstation-p3-tiny", "c-lenovo-thinkcentre-m70q", "c-lenovo-legion-tower-5i",
+    "c-asus-rog-g22ch", "c-asus-rog-strix-g16chr", "c-geekom-a8", "c-minisforum-um780-xtx",
+    "c-minisforum-um780", "c-asus-nuc-14-pro", "c-rugged-panasonic-toughbook-40",
+    "c-rugged-dell-latitude-5430-rugged", "c-zenbook-duo-oled", "c-legion-pro-5i",
+    "c-yoga-7-2in1", "c-latitude-5450", "c-swift-go-14", "c-zephyrus-g14"
+  ];
+  if (wifi6EIds.includes(comp.id) || (comp.release_year >= 2024 && comp.brand === "Apple")) {
+    return {
+      has_wifi: true,
+      standard: "Wi-Fi 6E (802.11ax)",
+      label: "Wi-Fi 6E (802.11ax) Tri-Band (2.4 / 5 / 6 GHz 160MHz) + Bluetooth 5.3",
+      speed: "Gigabit-Class up to 2.4 Gbps + 2.5GbE / Gigabit Ethernet",
+      badgeText: "📶 Wi-Fi 6E Built-in"
+    };
+  }
+
+  // Standard Wi-Fi 6 (802.11ax) Dual-Band
+  return {
+    has_wifi: true,
+    standard: "Wi-Fi 6 (802.11ax)",
+    label: "Wi-Fi 6 (802.11ax) Dual-Band (2.4 / 5 GHz) + Bluetooth 5.2",
+    speed: "High-Speed up to 1.8 Gbps + Gigabit Ethernet",
+    badgeText: "📶 Wi-Fi 6 Built-in"
+  };
+}
+
+// ==========================================
+// INCLUDED PERIPHERALS (KEYBOARD / MOUSE IN BOX)
+// ==========================================
+function getComputerIncludedPeripherals(comp) {
+  if (!comp) {
+    return {
+      has_keyboard: false,
+      has_mouse: false,
+      is_laptop: false,
+      label: "Chassis only — no keyboard or mouse included in box",
+      needed: true,
+      badgeText: "⚠️ Input Bundle Required"
+    };
+  }
+
+  // Laptops and 2-in-1s feature built-in hardware keyboard and glass trackpad
+  if (comp.form_factor === "Laptop" || comp.form_factor === "2-in-1 Convertible" || comp.form_factor === "Rugged Laptop") {
+    return {
+      has_keyboard: true,
+      has_mouse: true,
+      is_laptop: true,
+      label: "Built-in Backlit Keyboard & Precision Multi-Touch Trackpad (No external bundle required)",
+      detail: "Integrated directly into chassis. Ready for work on your lap or desk.",
+      needed: false,
+      badgeText: "✓ Built-in Laptop Input"
+    };
+  }
+
+  // Tablets
+  if (comp.form_factor === "Tablet" || comp.id === "c-surface-pro-11") {
+    return {
+      has_keyboard: false,
+      has_mouse: false,
+      is_laptop: false,
+      label: "Chassis Only: Detachable Surface Flex Keyboard sold separately",
+      detail: "Touchscreen supported. Separate keyboard/mouse bundle recommended for desktop setup.",
+      needed: true,
+      badgeText: "⚠️ Keyboard Sold Separately"
+    };
+  }
+
+  // All-in-One Desktops (Apple iMac)
+  if (comp.id === "c-apple-imac-24-m4" || comp.form_factor === "All-in-One") {
+    return {
+      has_keyboard: true,
+      has_mouse: true,
+      is_laptop: false,
+      label: "Included in Box: Color-Matched Apple Magic Keyboard with Touch ID & Magic Mouse",
+      detail: "Rechargeable wireless input devices included in factory packaging.",
+      needed: false,
+      badgeText: "📦 Magic Keyboard & Mouse in Box"
+    };
+  }
+
+  // Desktops that ship with OEM Keyboard & Mouse in the box
+  const oemIncludedMap = {
+    "c-hp-slim-s01": "Included in Box: HP 125 USB Black Wired Keyboard & HP 125 Optical Mouse",
+    "c-hp-envy-desktop-te02": "Included in Box: HP 710 Black Wireless Keyboard & Mouse Combo (2.4GHz Dongle)",
+    "c-hp-elitedesk-800-mini": "Included in Box: HP USB Business Desktop Keyboard and Optical Mouse",
+    "c-hp-z2-mini-g9": "Included in Box: HP USB Business Desktop Wired Keyboard and Mouse",
+    "c-dell-inspiron-small-3030": "Included in Box: Dell KB216 Wired Keyboard & Dell MS116 Optical Mouse",
+    "c-dell-xps-8960": "Included in Box: Dell KB216 Wired Multimedia Keyboard & Dell MS116 Optical Mouse",
+    "c-dell-optiplex-7020-micro": "Included in Box: Dell KB216 Wired Keyboard & Dell MS116 Optical Mouse",
+    "c-lenovo-ideacentre-5i": "Included in Box: Lenovo Calliope USB Wired Keyboard and Mouse Combo",
+    "c-lenovo-ideacentre-tower-gen9": "Included in Box: Lenovo Calliope USB Wired Keyboard and Mouse Combo",
+    "c-lenovo-thinkcentre-m75q": "Included in Box: Lenovo Traditional USB Business Keyboard & Optical Mouse",
+    "c-lenovo-thinkcentre-m70q": "Included in Box: Lenovo Traditional USB Business Keyboard & Optical Mouse",
+    "c-lenovo-thinkstation-p3-ultra": "Included in Box: Lenovo Traditional USB Business Keyboard & Optical Mouse",
+    "c-lenovo-thinkstation-p3-tiny": "Included in Box: Lenovo Traditional USB Business Keyboard & Optical Mouse",
+    "c-acer-aspire-tc1780": "Included in Box: Acer USB Wired Keyboard and Optical Mouse",
+    "c-acer-predator-orion-7000": "Included in Box: Predator RGB Mechanical Gaming Keyboard & Optical Mouse",
+    "c-asus-expertcenter-d7": "Included in Box: ASUS USB Wired Business Keyboard & Optical Mouse"
+  };
+
+  if (oemIncludedMap[comp.id]) {
+    return {
+      has_keyboard: true,
+      has_mouse: true,
+      is_laptop: false,
+      label: oemIncludedMap[comp.id],
+      detail: "Factory accessories ready for immediate plug-and-play. Upgrading to a wireless/ergonomic bundle below is optional.",
+      needed: false,
+      badgeText: "📦 OEM Keyboard & Mouse in Box"
+    };
+  }
+
+  // Mini PCs and Custom Towers ship without keyboard/mouse
+  let specificReason = "Chassis ships with power cord only. Keyboard and mouse must be purchased separately.";
+  if (comp.brand === "Apple") {
+    specificReason = "Chassis ships with power cord only. Apple Magic Keyboard with Touch ID or Bluetooth/USB bundle required.";
+  } else if (comp.brand === "Alienware" || comp.brand === "Corsair" || (comp.brand === "ASUS" && comp.id.includes("rog"))) {
+    specificReason = "Enthusiast gaming tower chassis ships without peripherals. Dedicated keyboard and mouse required.";
+  } else if (comp.form_factor === "Mini PC") {
+    specificReason = "Ultra-compact mini PC chassis ships with power adapter and VESA bracket. External keyboard & mouse required.";
+  }
+
+  return {
+    has_keyboard: false,
+    has_mouse: false,
+    is_laptop: false,
+    label: "⚠️ Chassis Only: NO keyboard or mouse included in box (Input bundle required)",
+    detail: specificReason,
+    needed: true,
+    badgeText: "⚠️ Input Bundle Required"
+  };
+}
+
+// ==========================================
+// CURATED KEYBOARD & MOUSE BUNDLES CATALOG
+// (Plain Wired, Wireless USB Dongle, Bluetooth)
+// ==========================================
+const KEYBOARD_MOUSE_BUNDLES = [
+  // --- 1. PLAIN WIRED ---
+  {
+    id: "kb-logitech-mk120",
+    name: "Logitech MK120 USB Wired Keyboard & Optical Mouse Combo",
+    connection_type: "wired",
+    category_label: "Plain Wired (USB-A)",
+    price: 19.99,
+    badge: "Budget Office Standard",
+    connection_badge: "🔌 Plain Wired (Zero Latency, No Batteries)",
+    description: "Full-size spill-resistant keyboard with low-profile quiet keys and high-definition optical tracking mouse (1000 DPI). Plug-and-play USB-A, zero driver setup, zero battery charging.",
+    ports_required: "1x or 2x USB-A Ports",
+    battery_life: "None (Direct 5ft USB cable bus power)",
+    best_for: "Dependable daily typing, school, office, zero wireless interference",
+    stores: [
+      { store: "Logitech Official", url: "https://www.logitech.com/en-us/products/combos/mk120-usb-keyboard-mouse.html", badge: "Direct OEM", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/logitech-mk120-wired-keyboard-and-optical-mouse-black/1628109.p", badge: "In Stock ($19.99)", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B003NREDC8", badge: "Prime Free Delivery", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Logitech+MK120", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Staples", url: "https://www.staples.com/Logitech-MK120-Wired-Keyboard-Mouse-Combo/product_883584", badge: "Store Pickup", icon: "🏬" }
+    ]
+  },
+  {
+    id: "kb-dell-pro-wired",
+    name: "Dell Pro Wired Desktop Keyboard & Optical Mouse (KB216 + MS116)",
+    connection_type: "wired",
+    category_label: "Plain Wired (USB-A)",
+    price: 29.99,
+    badge: "Enterprise Commercial Grade",
+    connection_badge: "🔌 Plain Wired (Zero Latency, No Batteries)",
+    description: "Reinforced enterprise chiclet keyboard with dedicated multimedia volume keys, spill drainage channels, and 1000 DPI ambidextrous optical mouse. Tested for 10 million keystrokes.",
+    ports_required: "2x USB-A Ports",
+    battery_life: "None (Direct USB bus powered)",
+    best_for: "High-volume data entry, corporate workstations, healthcare clinics",
+    stores: [
+      { store: "Dell Direct", url: "https://www.dell.com/en-us/shop/dell-wired-keyboard-kb216-black/apd/580-admt/pc-accessories", badge: "Direct OEM ($29.99)", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/dell-kb216-wired-keyboard-black/5854747.p", badge: "In Stock", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B00ZYLMHSG", badge: "Prime Free Delivery", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Dell+KB216+MS116", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Micro Center", url: "https://www.microcenter.com/search/search_results.aspx?Ntt=Dell+KB216", badge: "In Store", icon: "🏬" }
+    ]
+  },
+  {
+    id: "kb-redragon-s101",
+    name: "Redragon S101 RGB Backlit Keyboard & Ergonomic 3200 DPI Mouse Combo",
+    connection_type: "wired",
+    category_label: "Plain Wired (USB-A)",
+    price: 39.99,
+    badge: "Tactile RGB with Palm Rest",
+    connection_badge: "🔌 Plain Wired (Zero Latency, No Batteries)",
+    description: "Ergonomic keyboard with integrated wrist palm rest, 7 RGB backlighting modes, quiet tactile mechanical-feel keys, and 6-button ergonomic mouse with on-the-fly 3200 DPI adjustment.",
+    ports_required: "2x USB-A Ports (Braided Gold-Plated USB)",
+    battery_life: "None (Direct USB bus powered)",
+    best_for: "Dim-room productivity, creative editing, tactile typing, casual gaming",
+    stores: [
+      { store: "Redragon Official", url: "https://www.redragonshop.com/products/s101-keyboard-mouse-combo", badge: "Direct OEM", icon: "🏢" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B00NLZUM36", badge: "#1 Best Seller ($39.99)", icon: "📦" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/searchpage.jsp?st=Redragon+S101", badge: "In Stock", icon: "🏷️" },
+      { store: "Newegg", url: "https://www.newegg.com/p/pl?d=Redragon+S101", badge: "Free Shipping", icon: "🥚" },
+      { store: "Micro Center", url: "https://www.microcenter.com/search/search_results.aspx?Ntt=Redragon+S101", badge: "In Store", icon: "🏬" }
+    ]
+  },
+
+  // --- 2. WIRELESS USB DONGLE (2.4GHz) ---
+  {
+    id: "kb-logitech-mk270",
+    name: "Logitech MK270 Reliable 2.4GHz Wireless Keyboard & Mouse Combo",
+    connection_type: "dongle",
+    category_label: "Wireless Dongle (2.4GHz)",
+    price: 29.99,
+    badge: "#1 Best Seller Wireless",
+    connection_badge: "📶 2.4GHz USB Dongle (Plug & Play, No Dropouts)",
+    description: "Plug-and-forget 2.4GHz nano USB receiver with 33-foot wireless range. 8 multimedia hotkeys, full numeric keypad, spill-resistant design. Incredible 36-month keyboard and 12-month mouse battery life.",
+    ports_required: "1x USB-A Port for Nano Receiver (Works in BIOS/boot screens)",
+    battery_life: "36 Months (Keyboard) / 12 Months (Mouse) — 2x AAA, 1x AA included",
+    best_for: "Clean desk everyday computing, no pairing hassle, works in BIOS",
+    stores: [
+      { store: "Logitech Official", url: "https://www.logitech.com/en-us/products/combos/mk270-reliable-wireless-keyboard-mouse.html", badge: "Direct OEM", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/logitech-mk270-wireless-keyboard-and-optical-mouse-black/4394012.p", badge: "In Stock ($29.99)", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B079JLY5M2", badge: "Prime Free 1-Day", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Logitech+MK270", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Target", url: "https://www.target.com/s?searchTerm=Logitech+MK270", badge: "Same-Day Pickup", icon: "🎯" }
+    ]
+  },
+  {
+    id: "kb-logitech-mk295",
+    name: "Logitech MK295 Silent Wireless Combo with SilentTouch",
+    connection_type: "dongle",
+    category_label: "Wireless Dongle (2.4GHz)",
+    price: 39.99,
+    badge: "90% Noise Reduction Whisper Quiet",
+    connection_badge: "📶 2.4GHz USB Dongle (SilentTouch Technology)",
+    description: "Exclusive SilentTouch technology eliminates over 90% of typing and clicking noise while maintaining satisfying tactile feel. Includes 2.4GHz USB receiver, 8 hotkeys, full-size layout.",
+    ports_required: "1x USB-A Port for Nano Receiver",
+    battery_life: "36 Months (Keyboard) / 18 Months (Mouse) — Batteries included",
+    best_for: "Shared offices, quiet home setups, late night work, recording studios",
+    stores: [
+      { store: "Logitech Official", url: "https://www.logitech.com/en-us/products/combos/mk295-silent-wireless-keyboard-mouse.html", badge: "Direct OEM", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/logitech-mk295-silent-wireless-keyboard-and-mouse-combo-graphite/6429598.p", badge: "In Stock ($39.99)", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B0897VC575", badge: "Prime Free Delivery", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Logitech+MK295", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Office Depot", url: "https://www.officedepot.com/a/products/7123306/Logitech-MK295-Silent-Wireless-Combo/", badge: "Store Pickup", icon: "🏬" }
+    ]
+  },
+  {
+    id: "kb-dell-pro-wireless",
+    name: "Dell Pro Wireless Keyboard and Optical Mouse (KM5221W)",
+    connection_type: "dongle",
+    category_label: "Wireless Dongle (2.4GHz)",
+    price: 44.99,
+    badge: "3-Year Industry-Leading Battery Life",
+    connection_badge: "📶 2.4GHz USB Dongle (AES 128-bit Encrypted)",
+    description: "Enterprise wireless combo featuring 12 programmable function keys, 4000 DPI adjustable sensor mouse, AES 128-bit hardware encryption, and up to 36 months of uninterrupted battery life.",
+    ports_required: "1x USB-A Port for Dongle",
+    battery_life: "36 Months (Both Keyboard & Mouse) — Batteries included",
+    best_for: "Commercial productivity, financial analysis, multi-screen navigation",
+    stores: [
+      { store: "Dell Direct", url: "https://www.dell.com/en-us/shop/dell-pro-wireless-keyboard-and-mouse-km5221w/apd/580-ajit/pc-accessories", badge: "Direct OEM ($44.99)", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+KM5221W", badge: "In Stock", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B08V579B1S", badge: "Prime Free Delivery", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Dell+KM5221W", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Newegg", url: "https://www.newegg.com/p/pl?d=Dell+KM5221W", badge: "In Stock", icon: "🥚" }
+    ]
+  },
+  {
+    id: "kb-logitech-wave-keys",
+    name: "Logitech Wave Keys MK670 Wireless Ergonomic Combo with Palm Rest",
+    connection_type: "dongle",
+    category_label: "Wireless Dongle (2.4GHz + BLE)",
+    price: 89.99,
+    badge: "Ergonomic Wave & Memory Foam Rest",
+    connection_badge: "📶 Logi Bolt USB Dongle + Bluetooth Dual-Mode",
+    description: "Ergonomist-approved wave keyboard places hands, wrists, and forearms in a natural relaxed posture with 3-layer cushioned memory foam palm rest. Paired with Signature M650 L silent SmartWheel mouse.",
+    ports_required: "1x USB-A (Logi Bolt Dongle) OR Bluetooth Low Energy",
+    battery_life: "36 Months (Keyboard) / 24 Months (Mouse)",
+    best_for: "Carpal tunnel relief, all-day coders, writers, RSI prevention",
+    stores: [
+      { store: "Logitech Official", url: "https://www.logitech.com/en-us/products/combos/wave-keys-mk670.html", badge: "Direct OEM", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/logitech-wave-keys-wireless-ergonomic-keyboard-graphite/6554522.p", badge: "In Stock ($89.99)", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B0CH859SZ9", badge: "Prime Free Delivery", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Logitech+Wave+Keys", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Micro Center", url: "https://www.microcenter.com/search/search_results.aspx?Ntt=Logitech+Wave+Keys", badge: "In Store", icon: "🏬" }
+    ]
+  },
+
+  // --- 3. MULTI-DEVICE BLUETOOTH ---
+  {
+    id: "kb-logitech-pebble-2",
+    name: "Logitech Pebble 2 Combo (Pebble Keys 2 K380s + Pebble Mouse 2 M350s)",
+    connection_type: "bluetooth",
+    category_label: "Multi-Device Bluetooth",
+    price: 59.99,
+    badge: "Ultra-Slim Multi-Device Bluetooth",
+    connection_badge: "🔵 Multi-Device Bluetooth (PC, Mac, iPad, Android)",
+    description: "Sleek scooped round keys with instant 1-touch Easy-Switch between 3 paired Bluetooth devices. Whisper-quiet SilentTouch clicks, customizable middle button, 50% recycled plastic.",
+    ports_required: "None (Bluetooth Low Energy — zero USB ports occupied)",
+    battery_life: "36 Months (Keyboard) / 24 Months (Mouse) — auto sleep",
+    best_for: "Clean minimalist desk, switching between laptop/desktop/iPad, coffee shop mobility",
+    stores: [
+      { store: "Logitech Official", url: "https://www.logitech.com/en-us/products/combos/pebble-2-combo.html", badge: "Direct OEM", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/logitech-pebble-2-combo-wireless-keyboard-and-mouse-tonal-graphite/6553531.p", badge: "In Stock ($59.99)", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B0C39H7VBL", badge: "Prime Free Delivery", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Logitech+Pebble+2+Combo", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Target", url: "https://www.target.com/s?searchTerm=Logitech+Pebble+2+Combo", badge: "In Store", icon: "🎯" }
+    ]
+  },
+  {
+    id: "kb-logitech-mx-keys-s",
+    name: "Logitech MX Keys S Combo (MX Keys S Backlit + MX Master 3S Mouse + Palm Rest)",
+    connection_type: "bluetooth",
+    category_label: "Multi-Device Bluetooth & Bolt",
+    price: 199.98,
+    badge: "The Ultimate Flagship Professional Duo",
+    connection_badge: "🔵 Bluetooth Low Energy + Logi Bolt USB Receiver",
+    description: "The gold standard workstation input package. Low-profile spherically dished keys with smart auto-proximity backlighting, MagSpeed 1,000 lines/sec electromagnetic scroll wheel, 8000 DPI Darkfield sensor (tracks on glass), seamless multi-computer Logitech Flow.",
+    ports_required: "None (Bluetooth LE) OR 1x USB-A for included Logi Bolt receiver",
+    battery_life: "USB-C Rechargeable Li-Po (Up to 5 months with backlight off, 70 days for mouse)",
+    best_for: "Heavy software engineering, financial modeling, graphic design, multi-PC desks",
+    stores: [
+      { store: "Logitech Official", url: "https://www.logitech.com/en-us/products/combos/mx-keys-s-combo.html", badge: "Official OEM ($199.98)", icon: "🏢" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/logitech-mx-keys-s-advanced-wireless-illuminated-keyboard-space-gray/6537385.p", badge: "In Stock", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/dp/B0BS9X1KYY", badge: "Prime Free 1-Day", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Logitech+MX+Keys+S+Combo", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Newegg", url: "https://www.newegg.com/p/pl?d=Logitech+MX+Keys+S", badge: "In Stock", icon: "🥚" }
+    ]
+  },
+  {
+    id: "kb-apple-magic-bundle",
+    name: "Apple Magic Keyboard with Touch ID & Numeric Keypad + Magic Mouse",
+    connection_type: "bluetooth",
+    category_label: "Official Apple Bluetooth",
+    price: 278.00,
+    badge: "Official Apple Silicon Biometrics",
+    connection_badge: "🔵 Apple Wireless Bluetooth (Instant Touch ID Integration)",
+    description: "Official Apple wireless desktop input package. Instant Touch ID biometric authentication for Mac login and Apple Pay, low-profile scissor mechanism, multi-touch gesture mouse. USB-C woven cable included.",
+    ports_required: "None (Bluetooth wireless pairing — zero USB ports occupied)",
+    battery_life: "Internal rechargeable lithium-ion battery (approx 1-2 months per charge)",
+    best_for: "Apple Mac Studio, Mac mini, MacBook Pro desktop dock stations",
+    stores: [
+      { store: "Apple Store", url: "https://www.apple.com/shop/product/MMMR3AM/A/magic-keyboard-with-touch-id-and-numeric-keypad-for-mac-models-with-apple-silicon-us-english-black-keys", badge: "Official OEM ($278.00)", icon: "🍎" },
+      { store: "Best Buy", url: "https://www.bestbuy.com/site/apple-magic-keyboard-with-touch-id-and-numeric-keypad-for-mac-models-with-apple-silicon-black/6500854.p", badge: "Ready for Pickup", icon: "🏷️" },
+      { store: "Amazon", url: "https://www.amazon.com/s?k=Apple+Magic+Keyboard+Touch+ID+Numeric", badge: "Prime Free Delivery", icon: "📦" },
+      { store: "B&H Photo Video", url: "https://www.bhphotovideo.com/c/search?Ntt=Apple+Magic+Keyboard+Touch+ID", badge: "Authorized Dealer", icon: "📷" },
+      { store: "Adorama", url: "https://www.adorama.com/l/?searchinfo=apple+magic+keyboard+touch+id", badge: "Apple Authorized", icon: "📸" }
+    ]
+  }
+];
+
+function findKeyboardMouseBundleById(id) {
+  if (typeof KEYBOARD_MOUSE_BUNDLES === 'undefined') return null;
+  return KEYBOARD_MOUSE_BUNDLES.find(b => b.id === id) || null;
+}
+
 
 

@@ -1021,6 +1021,9 @@
                 <span id="hunt-badge-keyboard" style="font-size: 11.5px; padding: 4px 9px; border-radius: 4px; background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; font-weight: 700;">
                   ⚠️ Input: No Keyboard/Mouse
                 </span>
+                <span id="hunt-badge-wifi" style="font-size: 11.5px; padding: 4px 9px; border-radius: 4px; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 700;">
+                  📶 Wi-Fi 6E Built-in
+                </span>
               </div>
             </div>
 
@@ -1069,16 +1072,47 @@
             <!-- Rendered by JS -->
           </div>
 
-          <!-- Companion Input Devices Section -->
-          <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 8px; padding: 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <!-- Keyboard & Mouse Bundle Configurator Section -->
+          <div id="kb-mouse-hunt-section" style="background: rgba(15, 23, 42, 0.88); border: 1.5px solid rgba(56, 189, 248, 0.45); border-radius: 8px; padding: 16px; margin-bottom: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
               <div>
-                <strong style="color: #38bdf8; font-size: 14.5px;">⌨️ Complete Your Workstation: Companion Input Devices</strong>
-                <span style="font-size: 12px; color: #94a3b8; display: block; margin-top: 2px;">Since most desktop chassis exclude keyboards and mice, add these verified companion bundles to your cart:</span>
+                <strong style="color: #38bdf8; font-size: 15px;">⌨️ Keyboard &amp; Mouse Bundles: Complete Your Setup</strong>
+                <span style="font-size: 12px; color: #94a3b8; display: block; margin-top: 2px;">Choose between reliable wired, drop-out-free 2.4GHz wireless dongle, or multi-device Bluetooth combos.</span>
               </div>
             </div>
-            <div id="hunt-peripherals-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
-              <!-- Rendered by JS -->
+
+            <!-- Real-time PC Inclusion Advisory Banner -->
+            <div id="hunt-kb-advisory-banner" style="margin-bottom: 14px;">
+              <!-- Injected dynamically via JS based on workstationCart.pc -->
+            </div>
+
+            <!-- Connection Filter Tabs -->
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;">
+              <button onclick="setKbFilter('all')" id="btn-kb-filter-all" class="win95-btn btn-anime-sunset" style="font-size: 11.5px; font-weight: 800; padding: 4px 10px; cursor: pointer;">
+                All Bundles (10)
+              </button>
+              <button onclick="setKbFilter('wired')" id="btn-kb-filter-wired" class="win95-btn" style="font-size: 11.5px; font-weight: 700; padding: 4px 10px; cursor: pointer;">
+                🔌 Plain Wired (3)
+              </button>
+              <button onclick="setKbFilter('dongle')" id="btn-kb-filter-dongle" class="win95-btn" style="font-size: 11.5px; font-weight: 700; padding: 4px 10px; cursor: pointer;">
+                📶 2.4GHz USB Dongle (4)
+              </button>
+              <button onclick="setKbFilter('bluetooth')" id="btn-kb-filter-bluetooth" class="win95-btn" style="font-size: 11.5px; font-weight: 700; padding: 4px 10px; cursor: pointer;">
+                🔵 Multi-Device Bluetooth (3)
+              </button>
+            </div>
+
+            <!-- Curated Keyboard & Mouse Bundles Grid -->
+            <div id="hunt-kb-bundles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px;">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Secondary Companion Peripherals (Docks, Chargers, Styluses) -->
+            <div style="border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 14px; margin-top: 16px;">
+              <strong style="color: #cbd5e1; font-size: 13px; display: block; margin-bottom: 8px;">🔌 Additional Companion Docks &amp; Chargers:</strong>
+              <div id="hunt-peripherals-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
+                <!-- Rendered via JS -->
+              </div>
             </div>
           </div>
         </div>
@@ -1301,6 +1335,10 @@
           <div style="display: flex; justify-content: space-between; font-size: 13.5px; color: #cbd5e1; margin-bottom: 6px;">
             <span id="cart-label-monitors">Monitors (2x):</span>
             <span id="cart-subtotal-monitors" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f1f5f9;">$0.00</span>
+          </div>
+          <div id="cart-row-kbmouse" style="display: flex; justify-content: space-between; font-size: 13.5px; color: #cbd5e1; margin-bottom: 6px;">
+            <span id="cart-label-kbmouse">Keyboard &amp; Mouse Bundle:</span>
+            <span id="cart-subtotal-kbmouse" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f1f5f9;">$0.00</span>
           </div>
           <div style="display: flex; justify-content: space-between; font-size: 13.5px; color: #cbd5e1; margin-bottom: 6px;">
             <span>Companion Peripherals:</span>
@@ -3366,6 +3404,8 @@
         { id: "row-screen", label: "DISPLAY / NITS", category: "both" },
         { id: "row-monitors-support", label: "MONITOR CAPACITY & GPU DRIVE", category: "both" },
         { id: "row-video-io", label: "VIDEO OUTPUT PORTS & COMPATIBILITY", category: "both" },
+        { id: "row-wifi", label: "BUILT-IN WI-FI & WIRELESS", category: "both" },
+        { id: "row-included-input", label: "INCLUDED KEYBOARD & MOUSE", category: "both" },
         { id: "row-cpu", label: "PROCESSOR (CPU) ARCHITECTURE", category: "both" },
         { id: "row-cpu-rating", label: "CPU BENCHMARK & REVIEW", category: "both" },
         { id: "row-os", label: "OPERATING SYSTEM", category: "normal" },
@@ -3518,6 +3558,59 @@
                 <div style="font-size: 10.5px; color: #e2e8f0; line-height: 1.35; background: rgba(0,0,0,0.35); padding: 5px 7px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">
                   <span style="color: #38bdf8; font-weight: 700;">Matching Cable:</span> ${evalRes.primaryCable}
                 </div>
+              </div>
+            `;
+          } else if (r.id === "row-wifi") {
+            const wifi = (typeof getComputerWifiSpec === 'function') 
+              ? getComputerWifiSpec(comp) 
+              : { has_wifi: true, standard: "Wi-Fi 6E", label: "Wi-Fi 6E Built-in", badgeText: "📶 Wi-Fi 6E" };
+            const isNoWifi = !wifi.has_wifi || wifi.standard === "None";
+
+            html += `
+              <div style="background: rgba(15, 23, 42, 0.78); border: 1.5px solid ${isNoWifi ? '#ef4444' : 'rgba(56, 189, 248, 0.4)'}; border-radius: 6px; padding: 8px 10px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
+                  <span style="background: ${isNoWifi ? 'rgba(239,68,68,0.2)' : 'rgba(56,189,248,0.2)'}; color: ${isNoWifi ? '#fca5a5' : '#38bdf8'}; border: 1px solid ${isNoWifi ? '#ef4444' : 'rgba(56,189,248,0.5)'}; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px;">
+                    ${isNoWifi ? '⚠️ NO WI-FI' : (wifi.standard.includes('7') ? '🚀 WI-FI 7' : '📶 ' + wifi.standard.toUpperCase())}
+                  </span>
+                  <span style="font-size: 10px; color: ${isNoWifi ? '#f87171' : '#34d399'}; font-weight: 700;">
+                    ${isNoWifi ? 'LAN Only' : 'Built-in'}
+                  </span>
+                </div>
+                <div style="font-size: 11.5px; color: #f1f5f9; font-weight: 600; line-height: 1.35; margin-bottom: 4px;">
+                  ${wifi.label}
+                </div>
+                <div style="font-size: 10px; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+                  ${wifi.speed || 'High-speed wireless throughput'}
+                </div>
+              </div>
+            `;
+          } else if (r.id === "row-included-input") {
+            const inputPkg = (typeof getComputerIncludedPeripherals === 'function')
+              ? getComputerIncludedPeripherals(comp)
+              : { has_keyboard: false, has_mouse: false, label: "Chassis only — no keyboard/mouse", needed: true };
+
+            html += `
+              <div style="background: rgba(15, 23, 42, 0.78); border: 1.5px solid ${inputPkg.has_keyboard ? 'rgba(16, 185, 129, 0.4)' : 'rgba(245, 158, 11, 0.4)'}; border-radius: 6px; padding: 8px 10px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
+                  <span style="background: ${inputPkg.has_keyboard ? 'rgba(16,185,129,0.2)' : 'rgba(245,158,11,0.2)'}; color: ${inputPkg.has_keyboard ? '#34d399' : '#fbbf24'}; border: 1px solid ${inputPkg.has_keyboard ? '#10b981' : '#f59e0b'}; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px;">
+                    ${inputPkg.has_keyboard ? '📦 INCLUDED IN BOX' : '⚠️ CHASSIS ONLY'}
+                  </span>
+                  <span style="font-size: 10px; color: ${inputPkg.has_keyboard ? '#34d399' : '#fbbf24'}; font-weight: 700;">
+                    ${inputPkg.has_keyboard ? 'Ready to Use' : 'Bundle Needed'}
+                  </span>
+                </div>
+                <div style="font-size: 11px; color: #cbd5e1; line-height: 1.35; margin-bottom: 6px;">
+                  ${inputPkg.label}
+                </div>
+                ${inputPkg.needed ? `
+                  <button onclick="launchMonitorHunt('${comp.id}', 2); setTimeout(() => { const el = document.getElementById('kb-mouse-hunt-section'); if(el) el.scrollIntoView({behavior:'smooth'}); }, 300);" class="win95-btn btn-anime-sunset" style="font-size: 10px; padding: 3px 8px; font-weight: 800; width: 100%; justify-content: center; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                    <span>⌨️</span> Choose Bundle &rarr;
+                  </button>
+                ` : `
+                  <div style="font-size: 10px; color: #94a3b8; font-style: italic;">
+                    No extra purchase needed unless upgrading to wireless.
+                  </div>
+                `}
               </div>
             `;
           } else if (r.id === "row-os") {
@@ -4359,13 +4452,18 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         const pc = workstationCart.pc || currentRecommendations[0]?.computer;
         const m = workstationCart.monitor || (typeof MONITORS_CATALOG !== 'undefined' ? MONITORS_CATALOG[0] : null);
         const qty = workstationCart.monitorQty || 2;
+        const kb = workstationCart.keyboardMouseBundle;
         const totalPc = pc ? pc.price : 0;
         const totalM = m ? m.price * qty : 0;
+        const totalKb = kb ? kb.price : 0;
         let totalP = 0;
         (workstationCart.peripherals || []).forEach(p => totalP += p.price);
-        const grandTotal = totalPc + totalM + totalP;
+        const grandTotal = totalPc + totalM + totalKb + totalP;
         const pcStores = pc ? (pc.stores || [{ store: pc.retailer || 'Direct OEM', url: pc.purchase_url, badge: 'In Stock', icon: '🏢' }]) : [];
         const mStores = m ? (m.stores || []) : [];
+
+        const pcWifi = (typeof getComputerWifiSpec === 'function' && pc) ? getComputerWifiSpec(pc) : { label: "Wi-Fi 6E Built-in" };
+        const pcInput = (typeof getComputerIncludedPeripherals === 'function' && pc) ? getComputerIncludedPeripherals(pc) : { label: "Chassis only" };
 
         previewDiv.innerHTML = `
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
@@ -4395,6 +4493,7 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
               <div><strong>GPU:</strong> <span style="color: #38bdf8;">${pc.gpu_model}</span></div>
               <div><strong>Memory:</strong> ${pc.ram_gb}GB RAM • <strong>Storage:</strong> ${pc.storage_gb >= 1000 ? (pc.storage_gb/1000)+'TB' : pc.storage_gb+'GB'} SSD</div>
               <div><strong>Video Ports:</strong> <span style="color: #34d399;">${pc.ports_io || 'DisplayPort + HDMI'}</span></div>
+              <div><strong>Wi-Fi:</strong> <span style="color: #38bdf8;">${pcWifi.label}</span> • <strong>In-Box Input:</strong> <span style="color: ${pcInput.has_keyboard ? '#34d399' : '#fbbf24'};">${pcInput.label}</span></div>
             </div>
             <div style="font-size: 10.5px; color: #fbbf24; font-weight: 700; margin-bottom: 5px;">🏬 5 Stores to Buy Desktop:</div>
             <div style="display: flex; gap: 5px; flex-wrap: wrap;">
@@ -4435,6 +4534,28 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
           </div>
           ` : ''}
 
+          <!-- Keyboard & Mouse Bundle Card -->
+          ${kb ? `
+          <div style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(167, 139, 250, 0.45); border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <div>
+                <span style="background: rgba(167, 139, 250, 0.2); color: #c4b5fd; font-size: 9.5px; font-weight: 800; padding: 2px 6px; border-radius: 3px; text-transform: uppercase;">1x Keyboard &amp; Mouse Bundle (${kb.connection_type.toUpperCase()})</span>
+                <strong style="font-size: 14px; color: #ffffff; display: block; margin-top: 3px;">${kb.name}</strong>
+                <span style="font-size: 11px; color: #cbd5e1;">${kb.badge} • ${kb.ports_required} • Battery: ${kb.battery_life}</span>
+              </div>
+              <strong style="font-size: 15px; color: #34d399; font-family: 'JetBrains Mono', monospace;">$${totalKb.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+            </div>
+            <div style="font-size: 10.5px; color: #fbbf24; font-weight: 700; margin-bottom: 5px;">🏬 5 Stores to Buy Bundle:</div>
+            <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+              ${(kb.stores || []).map(s => `
+                <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 10px; padding: 3px 8px; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(30, 41, 59, 0.85); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.4);">
+                  <span>${s.icon || '🛒'}</span> ${s.store} <span style="font-size: 8.5px; color: #94a3b8;">(${s.badge || 'Verified'})</span> &rarr;
+                </a>
+              `).join('')}
+            </div>
+          </div>
+          ` : ''}
+
           <!-- Hardware & GPU Compatibility Certified Seal -->
           <div style="background: rgba(16, 185, 129, 0.12); border: 1.5px solid #10b981; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
             <div style="font-size: 20px;">🛡️</div>
@@ -4455,9 +4576,15 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
               <span>${qty}x Displays (${m ? m.name : 'Monitors'}):</span>
               <strong style="color: #34d399;">$${totalM.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
             </div>
+            ${totalKb > 0 ? `
+              <div style="display: flex; justify-content: space-between;">
+                <span>1x Input Bundle (${kb ? kb.name : 'Keyboard & Mouse'}):</span>
+                <strong style="color: #34d399;">$${totalKb.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
+              </div>
+            ` : ''}
             ${totalP > 0 ? `
               <div style="display: flex; justify-content: space-between;">
-                <span>Peripherals:</span>
+                <span>Companion Peripherals:</span>
                 <strong style="color: #34d399;">$${totalP.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong>
               </div>
             ` : ''}
@@ -4560,13 +4687,15 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         const pc = workstationCart.pc || currentRecommendations[0]?.computer;
         const m = workstationCart.monitor || (typeof MONITORS_CATALOG !== 'undefined' ? MONITORS_CATALOG[0] : null);
         const qty = workstationCart.monitorQty || 2;
+        const kb = workstationCart.keyboardMouseBundle;
         const totalPc = pc ? pc.price : 0;
         const totalM = m ? m.price * qty : 0;
+        const totalKb = kb ? kb.price : 0;
         let totalP = 0;
         (workstationCart.peripherals || []).forEach(p => totalP += p.price);
-        const grandTotal = totalPc + totalM + totalP;
+        const grandTotal = totalPc + totalM + totalKb + totalP;
 
-        const subject = `ComputeMatch Workstation Bundle: ${pc ? pc.name : 'Desktop PC'} + ${qty}x ${m ? m.name : 'Monitors'} ($${grandTotal.toLocaleString()})`;
+        const subject = `ComputeMatch Workstation Bundle: ${pc ? pc.name : 'Desktop PC'} + ${qty}x ${m ? m.name : 'Monitors'}${kb ? ' + ' + kb.name : ''} ($${grandTotal.toLocaleString()})`;
 
         let body = `Hello ${user.name},\n\nHere is your requested ComputeMatch Workstation Bundle specifications and verified multi-store purchasing links:\n\n`;
         body += `========================================================\n`;
@@ -4576,6 +4705,8 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         body += `Hardware Compatibility: 100% Certified (GPU Pipelines & Digital Ports Matched)\n\n`;
 
         if (pc) {
+          const wifi = (typeof getComputerWifiSpec === 'function') ? getComputerWifiSpec(pc) : { label: "Wi-Fi 6E Built-in" };
+          const includedPer = (typeof getComputerIncludedPeripherals === 'function') ? getComputerIncludedPeripherals(pc) : { label: "Chassis only" };
           body += `1. DESKTOP CHASSIS: ${pc.name}\n`;
           body += `   Street Price: $${pc.price.toLocaleString()}${pc.msrp ? ' (List MSRP: $' + pc.msrp.toLocaleString() + ')' : ''}\n`;
           body += `   GPU: ${pc.gpu_model}\n`;
@@ -4583,6 +4714,8 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
           body += `   Memory (RAM): ${pc.ram_gb} GB (${pc.ram_details || 'DDR5'})\n`;
           body += `   Storage Drive: ${pc.storage_gb >= 1000 ? (pc.storage_gb/1000)+'TB' : pc.storage_gb+'GB'} SSD\n`;
           body += `   Display Output Ports: ${pc.ports_io || 'DisplayPort + HDMI'}\n`;
+          body += `   Built-in Wi-Fi: ${wifi.label}\n`;
+          body += `   Included In Box: ${includedPer.label}\n`;
           body += `   5 Stores to Buy PC:\n`;
           (pc.stores || [{store: pc.retailer || 'Store', url: pc.purchase_url}]).forEach((s, idx) => {
             body += `     ${idx + 1}. ${s.store} (${s.badge || 'Verified'}): ${s.url}\n`;
@@ -4610,8 +4743,22 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
           body += `\n`;
         }
 
+        if (kb) {
+          body += `3. KEYBOARD & MOUSE BUNDLE: ${kb.name}\n`;
+          body += `   Connection Type: ${kb.connection_badge || kb.category_label}\n`;
+          body += `   Unit Price: $${kb.price.toFixed(2)}\n`;
+          body += `   Battery / Power: ${kb.battery_life}\n`;
+          body += `   Ports Required: ${kb.ports_required}\n`;
+          body += `   Best For: ${kb.best_for}\n`;
+          body += `   5 Stores to Buy Bundle:\n`;
+          (kb.stores || []).forEach((s, idx) => {
+            body += `     ${idx + 1}. ${s.store} (${s.badge || 'Verified'}): ${s.url}\n`;
+          });
+          body += `\n`;
+        }
+
         if (workstationCart.peripherals && workstationCart.peripherals.length > 0) {
-          body += `3. COMPANION INPUT PERIPHERALS:\n`;
+          body += `4. COMPANION INPUT PERIPHERALS:\n`;
           workstationCart.peripherals.forEach((p, idx) => {
             body += `   • ${p.name} ($${p.price.toFixed(2)}): ${p.description}\n`;
             (p.stores || [{store: 'Store', url: p.purchase_url}]).forEach((s, sIdx) => {
@@ -4625,7 +4772,7 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         body += `Generated by ComputeMatch Multi-Site Workstation Advisor\n`;
         body += `https://rkylemyers.github.io/ComputerAdvisor/\n`;
 
-        const html = buildCartHtmlEmail(user, pc, m, qty, workstationCart.peripherals);
+        const html = buildCartHtmlEmail(user, pc, m, qty, workstationCart.peripherals, kb);
         return { subject, body, html, recipient };
       } else if (currentEmailTarget === 'all') {
         const pool = (currentRecommendations && currentRecommendations.length > 0) ? currentRecommendations : [];
@@ -4637,6 +4784,8 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
 
         topModels.forEach((item, idx) => {
           const c = item.computer;
+          const wifi = (typeof getComputerWifiSpec === 'function') ? getComputerWifiSpec(c) : { label: "Wi-Fi 6E Built-in" };
+          const includedPer = (typeof getComputerIncludedPeripherals === 'function') ? getComputerIncludedPeripherals(c) : { label: "Integrated" };
           body += `========================================================\n`;
           body += `#${idx + 1}: ${c.name}\n`;
           body += `Street Price: $${c.price.toLocaleString()}${c.msrp ? ' (List MSRP: $' + c.msrp.toLocaleString() + ')' : ''}\n`;
@@ -4648,7 +4797,9 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
           body += `• Memory (RAM): ${c.ram_gb} GB (${c.ram_details || 'DDR5'})\n`;
           body += `• Storage: ${c.storage_gb >= 1000 ? (c.storage_gb/1000)+'TB' : c.storage_gb+'GB'} NVMe SSD\n`;
           body += `• Graphics: ${c.gpu_model}\n`;
-          body += `• Display: ${c.screen_size}" (${c.screen_nits} nits, ${c.screen_gamut})\n`;
+          body += `• Display: ${c.screen_size === 0 ? 'External Display Required' : c.screen_size + '" (' + c.screen_nits + ' nits, ' + c.screen_gamut + ')'}\n`;
+          body += `• Built-in Wi-Fi: ${wifi.label}\n`;
+          body += `• Included Peripherals: ${includedPer.label}\n`;
           body += `• Battery Life: ${c.battery_hours} hours | Weight: ${c.weight_lbs} lbs\n`;
           body += `• OS: ${c.os_edition || c.os}\n\n`;
           body += `5 Verified Purchase Store Links:\n`;
@@ -4667,6 +4818,8 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         return { subject, body, html, recipient };
       } else {
         const comp = currentEmailTarget || (currentRecommendations[0]?.computer);
+        const wifi = (typeof getComputerWifiSpec === 'function' && comp) ? getComputerWifiSpec(comp) : { label: "Wi-Fi 6E Built-in" };
+        const includedPer = (typeof getComputerIncludedPeripherals === 'function' && comp) ? getComputerIncludedPeripherals(comp) : { label: "Chassis only" };
         const subject = `ComputeMatch Store Options: ${comp.name} ($${comp.price.toLocaleString()})`;
         let body = `Hello ${user.name},\n\nHere are the specifications and verified purchase store links for your selected laptop match:\n\n`;
         body += `MODEL: ${comp.name} (${comp.release_year})\n`;
@@ -4680,7 +4833,9 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         body += `• Memory (RAM): ${comp.ram_gb} GB (${comp.ram_details || 'DDR5'})\n`;
         body += `• Storage Drive: ${comp.storage_gb >= 1000 ? (comp.storage_gb/1000)+'TB' : comp.storage_gb+'GB'} NVMe SSD\n`;
         body += `• Graphics (GPU): ${comp.gpu_model} (${comp.gpu_details || ''})\n`;
-        body += `• Display: ${comp.screen_size}" • ${comp.screen_nits} nits • ${comp.screen_gamut} • ${comp.screen_refresh_hz}Hz\n`;
+        body += `• Display: ${comp.screen_size === 0 ? 'External Display Required' : comp.screen_size + '" • ' + comp.screen_nits + ' nits • ' + comp.screen_gamut + ' • ' + comp.screen_refresh_hz + 'Hz'}\n`;
+        body += `• Built-in Wi-Fi: ${wifi.label}\n`;
+        body += `• Included Peripherals: ${includedPer.label}\n`;
         body += `• Battery Life: ${comp.battery_hours} hours runtime\n`;
         body += `• Chassis Weight: ${comp.weight_lbs} lbs\n`;
         body += `• Operating System: ${comp.os_edition || comp.os}\n`;
@@ -4703,15 +4858,18 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       }
     }
 
-    function buildCartHtmlEmail(user, pc, m, qty, peripherals) {
+    function buildCartHtmlEmail(user, pc, m, qty, peripherals, keyboardMouseBundle) {
       const totalPc = pc ? pc.price : 0;
       const totalM = m ? m.price * qty : 0;
+      const totalKb = keyboardMouseBundle ? keyboardMouseBundle.price : 0;
       let totalP = 0;
       (peripherals || []).forEach(p => totalP += p.price);
-      const grandTotal = totalPc + totalM + totalP;
+      const grandTotal = totalPc + totalM + totalKb + totalP;
       const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       const pcStores = pc ? (pc.stores || [{ store: pc.retailer || 'Direct OEM', url: pc.purchase_url, badge: 'In Stock', icon: '🏢' }]) : [];
       const mStores = m ? (m.stores || []) : [];
+      const wifi = (typeof getComputerWifiSpec === 'function' && pc) ? getComputerWifiSpec(pc) : { label: "Wi-Fi 6E Built-in" };
+      const includedPer = (typeof getComputerIncludedPeripherals === 'function' && pc) ? getComputerIncludedPeripherals(pc) : { label: "Chassis only" };
 
       return `<!DOCTYPE html>
 <html lang="en">
@@ -4785,8 +4943,16 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
             <td style="color: #f1f5f9; border-bottom: 1px solid #1e293b;"><strong>${pc.storage_gb >= 1000 ? (pc.storage_gb/1000) + 'TB' : pc.storage_gb + 'GB'}</strong> NVMe SSD</td>
           </tr>
           <tr>
-            <td style="color: #64748b; font-weight: 600;">Display Output I/O</td>
-            <td style="color: #34d399; font-weight: 600;">${pc.ports_io || 'DisplayPort + HDMI'}</td>
+            <td style="color: #64748b; font-weight: 600; border-bottom: 1px solid #1e293b;">Display Output I/O</td>
+            <td style="color: #34d399; font-weight: 600; border-bottom: 1px solid #1e293b;">${pc.ports_io || 'DisplayPort + HDMI'}</td>
+          </tr>
+          <tr>
+            <td style="color: #64748b; font-weight: 600; border-bottom: 1px solid #1e293b;">Built-in Wi-Fi</td>
+            <td style="color: #38bdf8; font-weight: 600; border-bottom: 1px solid #1e293b;">${wifi.label}</td>
+          </tr>
+          <tr>
+            <td style="color: #64748b; font-weight: 600;">In-Box Peripherals</td>
+            <td style="color: ${includedPer.has_keyboard ? '#34d399' : '#fbbf24'}; font-weight: 600;">${includedPer.label}</td>
           </tr>
         </table>
 
@@ -4860,6 +5026,52 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       </div>
       ` : ''}
 
+      <!-- KEYBOARD & MOUSE BUNDLE CARD -->
+      ${keyboardMouseBundle ? `
+      <div style="background: #111827; border: 1.5px solid rgba(167, 139, 250, 0.5); border-radius: 8px; padding: 16px; margin-bottom: 18px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 12px;">
+          <tr>
+            <td valign="top">
+              <span style="display: inline-block; background: rgba(167, 139, 250, 0.18); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.4); font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">1x Keyboard &amp; Mouse Bundle (${keyboardMouseBundle.category_label || keyboardMouseBundle.connection_type.toUpperCase()})</span>
+              <h2 style="margin: 6px 0 2px 0; font-size: 17px; font-weight: 800; color: #ffffff;">${keyboardMouseBundle.name}</h2>
+              <div style="font-size: 11px; color: #94a3b8;">${keyboardMouseBundle.badge} • ${keyboardMouseBundle.best_for}</div>
+            </td>
+            <td align="right" valign="top">
+              <div style="font-size: 19px; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', Consolas, monospace;">$${keyboardMouseBundle.price.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Bundle Specs Table -->
+        <table width="100%" cellpadding="6" cellspacing="0" border="0" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 6px; font-size: 11.5px; margin-bottom: 12px;">
+          <tr>
+            <td width="30%" style="color: #64748b; font-weight: 600; border-bottom: 1px solid #1e293b;">Connection Type</td>
+            <td style="color: #c4b5fd; font-weight: 700; border-bottom: 1px solid #1e293b;">${keyboardMouseBundle.connection_badge}</td>
+          </tr>
+          <tr>
+            <td style="color: #64748b; font-weight: 600; border-bottom: 1px solid #1e293b;">Battery &amp; Power</td>
+            <td style="color: #f1f5f9; border-bottom: 1px solid #1e293b;">${keyboardMouseBundle.battery_life}</td>
+          </tr>
+          <tr>
+            <td style="color: #64748b; font-weight: 600;">USB Ports Needed</td>
+            <td style="color: #38bdf8; font-weight: 600;">${keyboardMouseBundle.ports_required}</td>
+          </tr>
+        </table>
+
+        <!-- Stores Row -->
+        <div style="font-size: 11px; color: #fbbf24; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+          🏬 5 Verified Stores to Buy Keyboard &amp; Mouse Bundle:
+        </div>
+        <div>
+          ${(keyboardMouseBundle.stores || []).map(s => `
+            <a href="${s.url}" target="_blank" style="display: inline-block; padding: 7px 12px; margin: 3px 4px 3px 0; background-color: #1e293b; color: #c4b5fd; border: 1px solid #a78bfa; border-radius: 4px; text-decoration: none; font-size: 11.5px; font-weight: 700;">
+              <span>${s.icon || '🛒'}</span> ${s.store} <span style="font-size: 9px; color: #94a3b8; font-weight: normal;">(${s.badge || 'Verified'})</span> &rarr;
+            </a>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
       <!-- COMPANION PERIPHERALS CARD -->
       ${(peripherals && peripherals.length > 0) ? `
       <div style="background: #111827; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 16px; margin-bottom: 18px;">
@@ -4915,6 +5127,11 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
           <tr>
             <td style="color: #cbd5e1; border-bottom: 1px solid rgba(255,255,255,0.08);">${qty}x Workstation Displays (${m.name})</td>
             <td align="right" style="color: #ffffff; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: monospace;">$${totalM.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+          </tr>` : ''}
+          ${totalKb > 0 ? `
+          <tr>
+            <td style="color: #cbd5e1; border-bottom: 1px solid rgba(255,255,255,0.08);">1x Input Bundle (${keyboardMouseBundle ? keyboardMouseBundle.name : 'Keyboard & Mouse'})</td>
+            <td align="right" style="color: #ffffff; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: monospace;">$${totalKb.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
           </tr>` : ''}
           ${totalP > 0 ? `
           <tr>
@@ -5366,11 +5583,13 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
     let currentWizardMonitorQty = 2;
     let currentHuntPcId = null;
     let currentHuntMonitorQty = 2;
+    let currentKbFilter = 'all';
     let workstationCart = {
       pc: null,
       monitor: null,
       monitorQty: 2,
-      peripherals: []
+      peripherals: [],
+      keyboardMouseBundle: null
     };
 
     function onMobilitySelectionChange(val) {
@@ -5492,10 +5711,18 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       const priceEl = document.getElementById("hunt-pc-price");
       const screenBadge = document.getElementById("hunt-badge-screen");
       const kbBadge = document.getElementById("hunt-badge-keyboard");
+      const wifiBadge = document.getElementById("hunt-badge-wifi");
       const gpuBadge = document.getElementById("hunt-gpu-badge");
       const gpuVerdict = document.getElementById("hunt-gpu-verdict");
       const gpuPorts = document.getElementById("hunt-gpu-ports");
       const selector = document.getElementById("hunt-pc-selector");
+
+      const wifiSpec = (typeof getComputerWifiSpec === 'function')
+        ? getComputerWifiSpec(comp)
+        : { has_wifi: true, standard: "Wi-Fi 6E", label: "Wi-Fi 6E Built-in", badgeText: "📶 Wi-Fi 6E" };
+      const includedPer = (typeof getComputerIncludedPeripherals === 'function')
+        ? getComputerIncludedPeripherals(comp)
+        : { has_keyboard: false, has_mouse: false, is_laptop: false, label: "Chassis only — no keyboard or mouse in box", needed: true, badgeText: "⚠️ Bundle Required" };
 
       if (nameEl) nameEl.innerText = `${comp.name} (${comp.form_factor})`;
       if (priceEl) priceEl.innerText = `$${comp.price.toLocaleString()}`;
@@ -5512,10 +5739,31 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
           screenBadge.style.border = "1px solid #10b981";
         }
       }
+      if (wifiBadge) {
+        if (!wifiSpec.has_wifi || wifiSpec.standard === "None") {
+          wifiBadge.innerText = "⚠️ No Wi-Fi (LAN Only)";
+          wifiBadge.style.background = "rgba(239, 68, 68, 0.2)";
+          wifiBadge.style.color = "#fca5a5";
+          wifiBadge.style.border = "1px solid #ef4444";
+        } else {
+          wifiBadge.innerText = wifiSpec.standard.includes('7') ? "🚀 Wi-Fi 7 Built-in" : `📶 ${wifiSpec.standard} Built-in`;
+          wifiBadge.style.background = "rgba(56, 189, 248, 0.2)";
+          wifiBadge.style.color = "#38bdf8";
+          wifiBadge.style.border = "1px solid rgba(56, 189, 248, 0.5)";
+        }
+      }
       if (kbBadge) {
-        kbBadge.innerText = pkg.keyboardMouseIncluded ? "✓ Basic Keyboard/Mouse Included" : "⚠️ No Keyboard/Mouse in Box";
-        kbBadge.style.color = pkg.keyboardMouseIncluded ? "#34d399" : "#fbbf24";
-        kbBadge.style.borderColor = pkg.keyboardMouseIncluded ? "#10b981" : "#f59e0b";
+        if (includedPer.has_keyboard && includedPer.has_mouse) {
+          kbBadge.innerText = "📦 In-Box: Keyboard & Mouse Included";
+          kbBadge.style.color = "#34d399";
+          kbBadge.style.borderColor = "#10b981";
+          kbBadge.style.background = "rgba(16, 185, 129, 0.2)";
+        } else {
+          kbBadge.innerText = "⚠️ Chassis Only: No Keyboard/Mouse";
+          kbBadge.style.color = "#fbbf24";
+          kbBadge.style.borderColor = "#f59e0b";
+          kbBadge.style.background = "rgba(245, 158, 11, 0.2)";
+        }
       }
       if (gpuBadge) {
         gpuBadge.innerText = `✓ Up to ${pkg.maxMonitors} Displays Supported`;
@@ -5652,6 +5900,7 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         `;
       }).join('');
 
+      renderKeyboardMouseBundles();
       renderHuntPeripherals();
     }
 
@@ -5660,6 +5909,183 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       if (el) {
         el.style.display = (el.style.display === "none" || !el.style.display) ? "flex" : "none";
       }
+    }
+
+    function setKbFilter(filter) {
+      playClickBeep();
+      currentKbFilter = filter;
+      const filters = ['all', 'wired', 'dongle', 'bluetooth'];
+      filters.forEach(f => {
+        const btn = document.getElementById(`btn-kb-filter-${f}`);
+        if (btn) {
+          if (f === filter) {
+            btn.className = "win95-btn btn-anime-sunset";
+            btn.style.fontWeight = "800";
+          } else {
+            btn.className = "win95-btn";
+            btn.style.fontWeight = "700";
+          }
+        }
+      });
+      renderKeyboardMouseBundles();
+    }
+
+    function renderKeyboardMouseBundles() {
+      const bannerEl = document.getElementById("hunt-kb-advisory-banner");
+      const gridEl = document.getElementById("hunt-kb-bundles-grid");
+      if (!bannerEl && !gridEl) return;
+
+      const comp = findComputerById(currentHuntPcId) || workstationCart.pc || currentRecommendations[0]?.computer || (typeof COMPUTERS_CATALOG !== 'undefined' ? COMPUTERS_CATALOG[0] : null);
+      const included = (typeof getComputerIncludedPeripherals === 'function' && comp)
+        ? getComputerIncludedPeripherals(comp)
+        : { has_keyboard: false, has_mouse: false, is_laptop: false, label: "Chassis only — no keyboard or mouse included in box", needed: true, badgeText: "⚠️ Input Bundle Required" };
+
+      if (bannerEl) {
+        if (included.has_keyboard && included.has_mouse) {
+          bannerEl.innerHTML = `
+            <div style="background: rgba(16, 185, 129, 0.14); border: 1.5px solid #10b981; border-radius: 6px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 22px;">✅</span>
+                <div>
+                  <strong style="color: #34d399; font-size: 13.5px;">INCLUDED IN BOX: Keyboard &amp; Mouse Provided with Chassis</strong>
+                  <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">
+                    ${included.label}. Extra bundle purchase is <strong>OPTIONAL</strong>. Add a bundle below only if you wish to upgrade to wireless, multi-device Bluetooth, or ergonomic keys.
+                  </div>
+                </div>
+              </div>
+              <span style="font-size: 10.5px; font-weight: 800; background: rgba(16,185,129,0.25); color: #a7f3d0; border: 1px solid #10b981; padding: 3px 8px; border-radius: 4px;">
+                ✓ READY OUT OF BOX
+              </span>
+            </div>
+          `;
+        } else {
+          bannerEl.innerHTML = `
+            <div style="background: rgba(245, 158, 11, 0.16); border: 1.5px solid #f59e0b; border-radius: 6px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 22px;">⚠️</span>
+                <div>
+                  <strong style="color: #fbbf24; font-size: 13.5px;">CHASSIS ONLY: No Keyboard or Mouse in Box</strong>
+                  <div style="font-size: 11.5px; color: #fde68a; margin-top: 2px;">
+                    ${included.label}. You <strong>MUST</strong> select one of the verified bundles below to operate this computer out of the box!
+                  </div>
+                </div>
+              </div>
+              <span style="font-size: 10.5px; font-weight: 800; background: rgba(245,158,11,0.25); color: #fde68a; border: 1px solid #f59e0b; padding: 3px 8px; border-radius: 4px;">
+                ⚠️ BUNDLE REQUIRED
+              </span>
+            </div>
+          `;
+        }
+      }
+
+      if (gridEl) {
+        const pool = (typeof KEYBOARD_MOUSE_BUNDLES !== 'undefined') ? KEYBOARD_MOUSE_BUNDLES : [];
+        const filtered = currentKbFilter === 'all' 
+          ? pool 
+          : pool.filter(b => b.connection_type === currentKbFilter);
+
+        gridEl.innerHTML = filtered.map(b => {
+          const isSelected = workstationCart.keyboardMouseBundle && workstationCart.keyboardMouseBundle.id === b.id;
+          
+          let connBadgeColor = "#38bdf8";
+          let connBadgeBg = "rgba(56, 189, 248, 0.18)";
+          let connBorder = "rgba(56, 189, 248, 0.4)";
+          if (b.connection_type === 'wired') {
+            connBadgeColor = "#94a3b8";
+            connBadgeBg = "rgba(148, 163, 184, 0.18)";
+            connBorder = "rgba(148, 163, 184, 0.4)";
+          } else if (b.connection_type === 'bluetooth') {
+            connBadgeColor = "#a78bfa";
+            connBadgeBg = "rgba(167, 139, 250, 0.18)";
+            connBorder = "rgba(167, 139, 250, 0.4)";
+          }
+
+          return `
+            <div class="win95-box" style="background: rgba(20, 25, 34, 0.95); border: ${isSelected ? '2px solid #34d399' : '1.5px solid rgba(255,255,255,0.18)'}; border-radius: 8px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s ease; ${isSelected ? 'box-shadow: 0 0 16px rgba(52, 211, 153, 0.25);' : ''}">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                  <span style="background: ${connBadgeBg}; color: ${connBadgeColor}; border: 1px solid ${connBorder}; font-size: 10.5px; font-weight: 800; padding: 2px 7px; border-radius: 4px;">
+                    ${b.connection_badge}
+                  </span>
+                  <div style="text-align: right;">
+                    <div style="font-size: 17px; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">
+                      $${b.price.toFixed(2)}
+                    </div>
+                  </div>
+                </div>
+
+                <strong style="font-size: 14.5px; color: #ffffff; font-family: 'Outfit', sans-serif; display: block; margin-bottom: 6px; line-height: 1.3;">
+                  ${b.name}
+                </strong>
+                
+                <div style="font-size: 10.5px; color: #fbbf24; font-weight: 700; margin-bottom: 8px;">
+                  ⭐ ${b.badge}
+                </div>
+
+                <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 5px; padding: 8px 10px; font-size: 11.5px; color: #cbd5e1; margin-bottom: 10px; line-height: 1.45;">
+                  ${b.description}
+                  <div style="margin-top: 6px; font-size: 10.5px; color: #94a3b8;">
+                    <strong>Power:</strong> ${b.battery_life}<br>
+                    <strong>Ports:</strong> ${b.ports_required}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button onclick="${isSelected ? 'removeKeyboardMouseFromCart()' : `addKeyboardMouseToCart('${b.id}')`}" class="win95-btn ${isSelected ? 'btn-anime-mint' : 'btn-anime-sunset'}" style="width: 100%; padding: 8px 12px; font-size: 12px; font-weight: 800; justify-content: center; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                  <span>${isSelected ? '✓' : '⌨️'}</span> ${isSelected ? '✓ Selected in Bundle (Click to Remove)' : `Add to Cart ($${b.price.toFixed(2)})`}
+                </button>
+
+                <div style="margin-top: 8px; text-align: center;">
+                  <button onclick="toggleKbStores('${b.id}')" class="win95-btn" style="font-size: 10.5px; padding: 2px 8px; background: transparent; color: #94a3b8; border: none; cursor: pointer; text-decoration: underline;">
+                    🏬 View 5 Verified Store Options &darr;
+                  </button>
+                  <div id="kb-stores-${b.id}" style="display: none; margin-top: 6px; flex-direction: column; gap: 4px; text-align: left;">
+                    ${(b.stores || []).map(s => `
+                      <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 10.5px; padding: 3px 8px; text-decoration: none; display: flex; justify-content: space-between; align-items: center; background: rgba(30, 41, 59, 0.7); color: #f1f5f9; border-radius: 3px;">
+                        <span>${s.icon || '🛒'} <strong>${s.store}</strong></span>
+                        <span style="font-size: 9.5px; color: #cbd5e1;">${s.badge} &rarr;</span>
+                      </a>
+                    `).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function toggleKbStores(bundleId) {
+      const el = document.getElementById(`kb-stores-${bundleId}`);
+      if (el) {
+        el.style.display = (el.style.display === "none" || !el.style.display) ? "flex" : "none";
+      }
+    }
+
+    function addKeyboardMouseToCart(bundleId) {
+      playClickBeep();
+      const bundle = (typeof findKeyboardMouseBundleById === 'function')
+        ? findKeyboardMouseBundleById(bundleId)
+        : ((typeof KEYBOARD_MOUSE_BUNDLES !== 'undefined') ? KEYBOARD_MOUSE_BUNDLES.find(b => b.id === bundleId) : null);
+      if (!bundle) return;
+
+      if (!workstationCart.pc) {
+        workstationCart.pc = findComputerById(currentHuntPcId) || currentRecommendations[0]?.computer;
+      }
+
+      workstationCart.keyboardMouseBundle = bundle;
+      updateFloatingCartBadge();
+      renderKeyboardMouseBundles();
+      openWorkstationCart();
+    }
+
+    function removeKeyboardMouseFromCart() {
+      playClickBeep();
+      workstationCart.keyboardMouseBundle = null;
+      updateFloatingCartBadge();
+      renderKeyboardMouseBundles();
+      renderWorkstationCart();
     }
 
     function renderHuntPeripherals() {
@@ -5741,7 +6167,7 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       const badge = document.getElementById("floating-workstation-cart");
       if (!badge) return;
 
-      const hasItems = workstationCart.pc || workstationCart.monitor || (workstationCart.peripherals && workstationCart.peripherals.length > 0);
+      const hasItems = workstationCart.pc || workstationCart.monitor || workstationCart.keyboardMouseBundle || (workstationCart.peripherals && workstationCart.peripherals.length > 0);
       if (!hasItems) {
         badge.style.display = "none";
         return;
@@ -5756,6 +6182,10 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       if (workstationCart.monitor) {
         count += workstationCart.monitorQty;
         total += workstationCart.monitor.price * workstationCart.monitorQty;
+      }
+      if (workstationCart.keyboardMouseBundle) {
+        count += 1;
+        total += workstationCart.keyboardMouseBundle.price;
       }
       if (workstationCart.peripherals) {
         count += workstationCart.peripherals.length;
@@ -5784,7 +6214,7 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
 
     function clearWorkstationCart() {
       playClickBeep();
-      workstationCart = { pc: null, monitor: null, monitorQty: 2, peripherals: [] };
+      workstationCart = { pc: null, monitor: null, monitorQty: 2, peripherals: [], keyboardMouseBundle: null };
       updateFloatingCartBadge();
       renderMonitorHunt();
       closeWorkstationCart();
@@ -5794,7 +6224,7 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       const container = document.getElementById("cart-items-container");
       if (!container) return;
 
-      if (!workstationCart.pc && !workstationCart.monitor && (!workstationCart.peripherals || workstationCart.peripherals.length === 0)) {
+      if (!workstationCart.pc && !workstationCart.monitor && !workstationCart.keyboardMouseBundle && (!workstationCart.peripherals || workstationCart.peripherals.length === 0)) {
         container.innerHTML = `
           <div style="text-align: center; padding: 24px; color: #94a3b8;">
             <div style="font-size: 32px; margin-bottom: 8px;">🛒</div>
@@ -5804,6 +6234,10 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         `;
         document.getElementById("cart-subtotal-pc").innerText = "$0.00";
         document.getElementById("cart-subtotal-monitors").innerText = "$0.00";
+        const kbRow = document.getElementById("cart-row-kbmouse");
+        if (kbRow) kbRow.style.display = "none";
+        const kbSub = document.getElementById("cart-subtotal-kbmouse");
+        if (kbSub) kbSub.innerText = "$0.00";
         document.getElementById("cart-subtotal-periph").innerText = "$0.00";
         document.getElementById("cart-grand-total").innerText = "$0.00";
         return;
@@ -5812,6 +6246,7 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       let html = "";
       let totalPc = 0;
       let totalMonitors = 0;
+      let totalKb = 0;
       let totalPeriph = 0;
 
       if (workstationCart.pc) {
@@ -5890,6 +6325,43 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         `;
       }
 
+      if (workstationCart.keyboardMouseBundle) {
+        const kb = workstationCart.keyboardMouseBundle;
+        totalKb = kb.price;
+        const stores = kb.stores || [];
+
+        html += `
+          <div style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(167, 139, 250, 0.45); border-radius: 6px; padding: 12px 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <div>
+                <span style="background: rgba(167, 139, 250, 0.2); color: #c4b5fd; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 3px;">
+                  1x KEYBOARD &amp; MOUSE BUNDLE (${kb.category_label || kb.connection_type.toUpperCase()})
+                </span>
+                <strong style="font-size: 15px; color: #ffffff; display: block; margin-top: 3px;">${kb.name}</strong>
+                <span style="font-size: 11px; color: #cbd5e1;">${kb.badge} • ${kb.ports_required} • Battery: ${kb.battery_life}</span>
+              </div>
+              <div style="text-align: right; display: flex; align-items: center; gap: 8px;">
+                <strong style="font-size: 16px; color: #34d399; font-family: 'JetBrains Mono', monospace;">
+                  $${totalKb.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                </strong>
+                <button onclick="removeKeyboardMouseFromCart()" style="background: transparent; color: #fca5a5; border: none; font-size: 13px; cursor: pointer;" title="Remove bundle">✕</button>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; color: #fbbf24; font-weight: 700; margin: 8px 0 4px 0;">
+              🏬 Verified Multi-Store Purchase Links:
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              ${stores.map(s => `
+                <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="win95-btn" style="font-size: 10px; padding: 2px 7px; text-decoration: none; display: flex; align-items: center; gap: 4px; background: rgba(30, 41, 59, 0.8); color: #e2e8f0;">
+                  <span>${s.icon || '🛒'}</span> ${s.store} &rarr;
+                </a>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
       if (workstationCart.peripherals && workstationCart.peripherals.length > 0) {
         workstationCart.peripherals.forEach(p => {
           totalPeriph += p.price;
@@ -5910,18 +6382,24 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
 
       container.innerHTML = html;
 
-      const grandTotal = totalPc + totalMonitors + totalPeriph;
+      const grandTotal = totalPc + totalMonitors + totalKb + totalPeriph;
       const pcLabel = document.getElementById("cart-label-pc");
       const monLabel = document.getElementById("cart-label-monitors");
+      const kbLabel = document.getElementById("cart-label-kbmouse");
+      const kbRow = document.getElementById("cart-row-kbmouse");
       const pcSub = document.getElementById("cart-subtotal-pc");
       const monSub = document.getElementById("cart-subtotal-monitors");
+      const kbSub = document.getElementById("cart-subtotal-kbmouse");
       const perSub = document.getElementById("cart-subtotal-periph");
       const grandSub = document.getElementById("cart-grand-total");
 
       if (pcLabel && workstationCart.pc) pcLabel.innerText = `${workstationCart.pc.name}:`;
       if (monLabel) monLabel.innerText = `Monitors (${workstationCart.monitorQty || 2}x):`;
+      if (kbRow) kbRow.style.display = totalKb > 0 ? "flex" : "none";
+      if (kbLabel && workstationCart.keyboardMouseBundle) kbLabel.innerText = `KB & Mouse (${workstationCart.keyboardMouseBundle.category_label || 'Bundle'}):`;
       if (pcSub) pcSub.innerText = `$${totalPc.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
       if (monSub) monSub.innerText = `$${totalMonitors.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+      if (kbSub) kbSub.innerText = `$${totalKb.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
       if (perSub) perSub.innerText = `$${totalPeriph.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
       if (grandSub) grandSub.innerText = `$${grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
 

@@ -279,25 +279,38 @@
   <div id="auth-gate-overlay" style="position: fixed; inset: 0; background: rgba(12, 16, 23, 0.94); backdrop-filter: blur(14px); display: none; align-items: center; justify-content: center; z-index: 999999; padding: 16px;">
     <div class="win95-box" style="width: 520px; max-width: 100%; box-shadow: 0 20px 45px rgba(0,0,0,0.7);">
       <div class="win95-titlebar" style="background: #2a3342;">
-        <span>🔒 ComputeMatch — Private Access (Kyle Myers)</span>
+        <span>🔒 ComputeMatch — Private Access (Kyle &amp; Chrissy Myers)</span>
         <span style="font-size: 11px; color: #e9c46a; font-weight: bold;">MULTI-FACTOR VERIFICATION</span>
       </div>
       <div style="padding: 24px 22px; background: rgba(22, 27, 36, 0.98); color: #f7f4ea;">
         
-        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 18px;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
           <div style="font-size: 34px; line-height: 1;">🏮</div>
           <div>
             <h3 style="margin: 0 0 4px 0; font-family: 'Outfit', sans-serif; font-size: 19px; color: #f7f4ea; font-weight: 700;">
-              Kyle's Private Workspace
+              ComputeMatch Private Access
             </h3>
-            <div style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
-              Strict Multi-Factor Security: Mac Biometrics (Factor 1) + Email Verification (Factor 2).
+            <div id="auth-user-subtitle" style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
+              Authorized for <strong>Kyle Myers</strong> (rkyle.myers@gmail.com)
             </div>
           </div>
         </div>
 
         <!-- STAGE 1: FACTOR 1 (TOUCH ID / MASTER KEY) -->
         <div id="auth-stage-1">
+          <!-- USER SELECTION TOGGLE -->
+          <div style="background: rgba(30, 36, 46, 0.7); border: 1.5px solid rgba(255, 255, 255, 0.12); border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+            <span style="font-size: 11px; font-weight: 700; color: #e9c46a; letter-spacing: 0.5px;">SELECT USER:</span>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" id="btn-user-kyle" onclick="selectAuthUser('kyle')" class="win95-btn win95-btn-active" style="padding: 4px 12px; font-size: 12px;">
+                👤 Kyle Myers
+              </button>
+              <button type="button" id="btn-user-chrissy" onclick="selectAuthUser('chrissy')" class="win95-btn" style="padding: 4px 12px; font-size: 12px;">
+                👤 Chrissy Myers
+              </button>
+            </div>
+          </div>
+
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
             <span style="font-size: 11px; font-weight: 700; color: #e9c46a; letter-spacing: 0.5px;">STEP 1 OF 2: VERIFY YOUR IDENTITY</span>
             <span style="font-size: 11px; color: #94a3b8; background: rgba(255,255,255,0.08); padding: 1px 6px; border-radius: 3px;">Factor 1 Required</span>
@@ -305,13 +318,13 @@
 
           <!-- METHOD 1: MAC TOUCH ID / APPLE PASSKEY -->
           <div style="margin-bottom: 14px;">
-            <button type="button" onclick="unlockWithMacPasskey()" class="win95-btn btn-anime-mint" style="width: 100%; padding: 13px; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 10px rgba(52, 211, 153, 0.25);">
-              <span style="font-size: 20px;"></span> Verify with Mac Touch ID / Passkey
+            <button type="button" id="passkey-unlock-btn" onclick="unlockWithMacPasskey()" class="win95-btn btn-anime-mint" style="width: 100%; padding: 13px; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 10px rgba(52, 211, 153, 0.25);">
+              <span style="font-size: 20px;"></span> Verify with Touch ID / Passkey (Kyle)
             </button>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding: 0 2px;">
               <span style="font-size: 10px; color: #64748b;">Apple Secure Enclave Biometrics</span>
-              <button type="button" onclick="pairNewMacWithMasterKey()" style="background: none; border: none; color: #6b9ac4; font-size: 11px; cursor: pointer; text-decoration: underline;">
-                ⚙️ Pair / Re-enroll this Mac
+              <button type="button" id="btn-pair-device" onclick="pairNewDeviceWithMasterKey()" style="background: none; border: none; color: #6b9ac4; font-size: 11px; cursor: pointer; text-decoration: underline;">
+                ⚙️ Pair / Re-enroll this device for Kyle
               </button>
             </div>
           </div>
@@ -334,7 +347,7 @@
               </button>
             </div>
             <div style="font-size: 10px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-              <span>40-character master key generated for Kyle</span>
+              <span>40-character master key</span>
               <button type="button" onclick="toggleKeyVisibility()" style="background: none; border: none; color: #6b9ac4; font-size: 10px; cursor: pointer; text-decoration: underline;">
                 Show / Hide Key
               </button>
@@ -354,7 +367,7 @@
           </div>
 
           <div style="background: rgba(30, 36, 46, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; padding: 16px; margin-bottom: 12px;">
-            <div style="font-size: 12px; color: #cbd5e1; margin-bottom: 10px; line-height: 1.4;">
+            <div id="stage2-email-notice" style="font-size: 12px; color: #cbd5e1; margin-bottom: 10px; line-height: 1.4;">
               A 6-digit MFA security code is being dispatched to <strong>rkyle.myers@gmail.com</strong>.
             </div>
 
@@ -383,6 +396,14 @@
               Need emergency bypass? (Master Key Override)
             </summary>
             <div style="margin-top: 8px; font-size: 11px; color: #94a3b8;">
+              If your email is delayed, enter Kyle's Master Fallback Key to authorize Factor 2:
+              <div style="display: flex; gap: 6px; margin-top: 6px;">
+                <input type="password" id="emergency-factor2-key" class="win95-input" placeholder="KYLE-SEC-..." style="flex: 1; font-size: 11px;" onkeydown="if(event.key==='Enter') attemptEmergencyFactor2Override()">
+                <button type="button" onclick="attemptEmergencyFactor2Override()" class="win95-btn btn-anime-peach" style="font-size: 11px; padding: 3px 10px;">Bypass MFA</button>
+              </div>
+            </div>
+          </details>
+        </div>
               If your email is delayed, enter Kyle's Master Fallback Key to authorize Factor 2:
               <div style="display: flex; gap: 6px; margin-top: 6px;">
                 <input type="password" id="emergency-factor2-key" class="win95-input" placeholder="KYLE-SEC-..." style="flex: 1; font-size: 11px;" onkeydown="if(event.key==='Enter') attemptEmergencyFactor2Override()">
@@ -1215,17 +1236,88 @@
     // =========================================================================
     // MULTI-FACTOR AUTHORIZATION: MAC PASSPORT/TOUCH ID, EMAIL 2FA & MASTER KEY
     // =========================================================================
-    // High-Entropy Unguessable Master Fallback Key (Sent to rkyle.myers@gmail.com)
+    // High-Entropy Unguessable Master Fallback Key
     const MASTER_FALLBACK_KEY = "KYLE-SEC-4TLHFR-RUVVX3-FIJV4J-W9MX1G-3K9KIW";
+
+    const AUTHORIZED_USERS = {
+      kyle: {
+        id: "kyle",
+        name: "Kyle Myers",
+        shortName: "Kyle",
+        email: "rkyle.myers@gmail.com",
+        role: "Admin & Creator",
+        credKey: "compute_match_passkey_cred_id_kyle"
+      },
+      chrissy: {
+        id: "chrissy",
+        name: "Chrissy Myers",
+        shortName: "Chrissy",
+        email: "chrissymyersdesign@gmail.com",
+        role: "Design Lead & Collaborator",
+        credKey: "compute_match_passkey_cred_id_chrissy"
+      }
+    };
+
+    let currentSelectedUserId = localStorage.getItem("compute_match_last_user") || "kyle";
+    if (!AUTHORIZED_USERS[currentSelectedUserId]) currentSelectedUserId = "kyle";
 
     let currentEmailOtp = null;
     let otpExpiresAt = 0;
     let factor1Verified = false;
     let factor1Method = "";
 
+    function selectAuthUser(userId) {
+      if (!AUTHORIZED_USERS[userId]) return;
+      currentSelectedUserId = userId;
+      localStorage.setItem("compute_match_last_user", userId);
+      renderAuthUserSelector();
+      playClickBeep();
+    }
+
+    function renderAuthUserSelector() {
+      const user = AUTHORIZED_USERS[currentSelectedUserId] || AUTHORIZED_USERS.kyle;
+      const btnKyle = document.getElementById("btn-user-kyle");
+      const btnChrissy = document.getElementById("btn-user-chrissy");
+      const passkeyBtn = document.getElementById("passkey-unlock-btn");
+      const subtitle = document.getElementById("auth-user-subtitle");
+      const pairBtn = document.getElementById("btn-pair-device");
+      const emailNotice = document.getElementById("stage2-email-notice");
+
+      if (btnKyle && btnChrissy) {
+        if (currentSelectedUserId === "kyle") {
+          btnKyle.classList.add("win95-btn-active");
+          btnChrissy.classList.remove("win95-btn-active");
+        } else {
+          btnChrissy.classList.add("win95-btn-active");
+          btnKyle.classList.remove("win95-btn-active");
+        }
+      }
+
+      if (passkeyBtn) {
+        passkeyBtn.innerHTML = '<span style="font-size: 20px;"></span> Verify with Touch ID / Passkey (' + user.shortName + ')';
+      }
+      if (subtitle) {
+        subtitle.innerHTML = 'Authorized for <strong>' + user.name + '</strong> (' + user.email + ')';
+      }
+      if (pairBtn) {
+        pairBtn.innerHTML = '⚙️ Pair / Re-enroll this device for ' + user.shortName;
+      }
+      if (emailNotice) {
+        emailNotice.innerHTML = 'A 6-digit MFA security code is being dispatched to <strong>' + user.email + '</strong>.';
+      }
+    }
+
     function isUserAuthenticated() {
       const token = localStorage.getItem("compute_match_auth_token");
-      return !!(token && token.startsWith("kyle_authorized_"));
+      return !!(token && (token.startsWith("kyle_authorized_") || token.startsWith("authorized_")));
+    }
+
+    function getActiveUser() {
+      const activeId = localStorage.getItem("compute_match_active_user");
+      if (activeId && AUTHORIZED_USERS[activeId]) return AUTHORIZED_USERS[activeId];
+      const token = localStorage.getItem("compute_match_auth_token") || "";
+      if (token.includes("chrissy")) return AUTHORIZED_USERS.chrissy;
+      return AUTHORIZED_USERS.kyle;
     }
 
     function checkAuthStatus() {
@@ -1234,17 +1326,20 @@
       const authBtn = document.getElementById("auth-status-btn");
 
       if (isUserAuthenticated()) {
+        const user = getActiveUser();
         if (contentLayer) contentLayer.style.display = "block";
         if (gateOverlay) gateOverlay.style.display = "none";
         if (authBtn) {
-          authBtn.innerHTML = "🔒 Kyle (Unlocked)";
+          authBtn.innerHTML = "🔒 " + user.shortName + " (Unlocked)";
           authBtn.classList.remove("btn-anime-peach");
           authBtn.classList.add("btn-anime-mint");
+          authBtn.title = "Logged in as " + user.name + " (" + user.email + ")";
         }
       } else {
         if (contentLayer) contentLayer.style.display = "none";
         if (gateOverlay) {
           gateOverlay.style.display = "flex";
+          renderAuthUserSelector();
           if (!factor1Verified) {
             backToFactor1();
           }
@@ -1278,7 +1373,7 @@
              (val.startsWith("AQ.") && val.length > 20);
     }
 
-    // 1. MAC PASSPORT / TOUCH ID BIOMETRIC UNLOCK (WebAuthn Platform Authenticator)
+    // 1. MAC TOUCH ID / PASSKEY BIOMETRIC UNLOCK
     async function unlockWithMacPasskey() {
       const errorDiv = document.getElementById("auth-gate-error");
       if (errorDiv) {
@@ -1287,16 +1382,19 @@
       }
 
       if (!window.PublicKeyCredential) {
-        alert("WebAuthn / Mac Touch ID Passkeys are not supported by this browser. Please use the Master Fallback Key.");
+        alert("WebAuthn / Touch ID Passkeys are not supported by this browser. Please use the Master Fallback Key.");
         return;
       }
 
-      const credIdBase64 = localStorage.getItem("compute_match_passkey_cred_id");
+      const user = AUTHORIZED_USERS[currentSelectedUserId] || AUTHORIZED_USERS.kyle;
+      let credIdBase64 = localStorage.getItem(user.credKey);
+      if (!credIdBase64 && user.id === "kyle") {
+        credIdBase64 = localStorage.getItem("compute_match_passkey_cred_id");
+      }
       
       if (!credIdBase64) {
-        // Device is NOT enrolled! Do not allow strangers to self-enroll!
-        if (confirm("This device is not yet paired with Kyle's Mac Touch ID.\n\nWould you like to pair this Mac now using Kyle's Master Fallback Key?")) {
-          await pairNewMacWithMasterKey();
+        if (confirm("This device is not yet paired with Touch ID / Passkey for " + user.name + ".\n\nWould you like to pair this device now using Kyle's Master Fallback Key?")) {
+          await pairNewDeviceWithMasterKey();
         }
         return;
       }
@@ -1322,37 +1420,38 @@
         if (assertion) {
           // Factor 1 succeeded! DO NOT UNLOCK WORKSPACE YET!
           // Advance to Factor 2 (MFA)
-          onFactor1Success("Mac Touch ID / Apple Passkey");
+          onFactor1Success("Touch ID / Passkey");
         }
       } catch (err) {
-        console.warn("Mac Passkey prompt cancelled or unauthorized:", err);
+        console.warn("Passkey prompt cancelled or unauthorized:", err);
         if (errorDiv) {
           if (err.name === "NotAllowedError" || err.name === "AbortError") {
-            errorDiv.textContent = "ℹ️ Touch ID cancelled or unverified.";
+            errorDiv.textContent = "ℹ️ Biometric verification cancelled or unverified.";
           } else {
-            errorDiv.textContent = "⚠️ Touch ID verification failed: " + (err.message || "Credential not recognized on this device.");
+            errorDiv.textContent = "⚠️ Verification failed: " + (err.message || "Credential not recognized on this device.");
           }
           errorDiv.style.display = "block";
         }
       }
     }
 
-    async function pairNewMacWithMasterKey() {
+    async function pairNewDeviceWithMasterKey() {
       const errorDiv = document.getElementById("auth-gate-error");
       if (errorDiv) errorDiv.style.display = "none";
 
-      const pin = prompt("Enter Kyle's Master Fallback Key to enroll this Mac's Touch ID / Apple Passkey:");
+      const user = AUTHORIZED_USERS[currentSelectedUserId] || AUTHORIZED_USERS.kyle;
+      const pin = prompt("Enter Kyle's Master Fallback Key to enroll Touch ID / Face ID for " + user.name + ":");
       if (!pin) return;
 
       if (!isMasterKeyMatch(pin.trim())) {
-        alert("❌ Unauthorized. Invalid Master Key. Only Kyle can pair biometric hardware.");
+        alert("❌ Unauthorized. Invalid Master Key. Only an authorized administrator can pair biometric hardware.");
         return;
       }
 
-      await registerMacPasskey();
+      await registerPasskeyForUser(user);
     }
 
-    async function registerMacPasskey() {
+    async function registerPasskeyForUser(user) {
       const errorDiv = document.getElementById("auth-gate-error");
       try {
         const challenge = new Uint8Array(32);
@@ -1361,18 +1460,18 @@
         const cred = await navigator.credentials.create({
           publicKey: {
             challenge: challenge,
-            rp: { name: "ComputeMatch (Kyle's Mac)" },
+            rp: { name: "ComputeMatch (" + user.name + ")" },
             user: {
-              id: new Uint8Array([107, 121, 108, 101, 50, 48, 50, 54]), // "kyle2026"
-              name: "rkyle.myers@gmail.com",
-              displayName: "Kyle Myers"
+              id: new TextEncoder().encode(user.id + "_" + Date.now()),
+              name: user.email,
+              displayName: user.name
             },
             pubKeyCredParams: [
               { alg: -7, type: "public-key" },  // ES256
               { alg: -257, type: "public-key" } // RS256
             ],
             authenticatorSelection: {
-              authenticatorAttachment: "platform", // Enforces Apple Mac Touch ID / Secure Enclave
+              authenticatorAttachment: "platform", // Apple Secure Enclave / Windows Hello
               userVerification: "required"
             },
             timeout: 60000
@@ -1381,14 +1480,17 @@
 
         if (cred && cred.rawId) {
           const rawIdBase64 = btoa(String.fromCharCode(...new Uint8Array(cred.rawId)));
-          localStorage.setItem("compute_match_passkey_cred_id", rawIdBase64);
-          alert("✓ Mac Touch ID paired successfully! Proceeding to Step 2 (Email MFA).");
-          onFactor1Success("Mac Touch ID (Enrolled)");
+          localStorage.setItem(user.credKey, rawIdBase64);
+          if (user.id === "kyle") {
+            localStorage.setItem("compute_match_passkey_cred_id", rawIdBase64);
+          }
+          alert("✓ Device biometric paired successfully for " + user.name + "! Proceeding to Step 2 (Email MFA).");
+          onFactor1Success("Touch ID Enrolled (" + user.shortName + ")");
         }
       } catch (err) {
         console.error("Passkey registration failed:", err);
         if (errorDiv) {
-          errorDiv.textContent = "⚠️ Mac Passkey registration: " + (err.message || "Cancelled") + ".";
+          errorDiv.textContent = "⚠️ Passkey registration: " + (err.message || "Cancelled") + ".";
           errorDiv.style.display = "block";
         }
       }
@@ -1429,10 +1531,12 @@
     function onFactor1Success(methodName) {
       factor1Verified = true;
       factor1Method = methodName;
+      const user = AUTHORIZED_USERS[currentSelectedUserId] || AUTHORIZED_USERS.kyle;
 
       const stage1 = document.getElementById("auth-stage-1");
       const stage2 = document.getElementById("auth-stage-2");
       const badge = document.getElementById("factor-1-badge");
+      const emailNotice = document.getElementById("stage2-email-notice");
       const err = document.getElementById("auth-gate-error");
 
       if (err) {
@@ -1441,7 +1545,10 @@
       }
       if (stage1) stage1.style.display = "none";
       if (stage2) stage2.style.display = "block";
-      if (badge) badge.innerHTML = "✓ Factor 1 Verified: " + methodName;
+      if (badge) badge.innerHTML = "✓ Factor 1 Verified: " + methodName + " (" + user.shortName + ")";
+      if (emailNotice) {
+        emailNotice.innerHTML = "A 6-digit MFA security code is being dispatched to <strong>" + user.email + "</strong>.";
+      }
 
       playClickBeep();
 
@@ -1468,14 +1575,17 @@
       }
       if (stage1) stage1.style.display = "block";
       if (stage2) stage2.style.display = "none";
+      renderAuthUserSelector();
     }
 
-    // 4. EMAIL 2-FACTOR AUTHENTICATION TO RKYLE.MYERS@GMAIL.COM
+    // 4. EMAIL 2-FACTOR AUTHENTICATION TO USER'S EMAIL
     async function sendEmail2FACode() {
       const btn = document.getElementById("btn-send-2fa-code");
       const statusDiv = document.getElementById("email-2fa-status");
       const errorDiv = document.getElementById("auth-gate-error");
       if (errorDiv) errorDiv.style.display = "none";
+
+      const user = AUTHORIZED_USERS[currentSelectedUserId] || AUTHORIZED_USERS.kyle;
 
       // Generate cryptographically random 6-digit OTP
       const randArr = new Uint32Array(1);
@@ -1490,20 +1600,21 @@
       if (statusDiv) {
         statusDiv.style.display = "block";
         statusDiv.style.color = "#fbbf24";
-        statusDiv.innerHTML = "⏳ Sending 6-digit MFA code to <strong>rkyle.myers@gmail.com</strong>...";
+        statusDiv.innerHTML = "⏳ Sending 6-digit MFA code to <strong>" + user.email + "</strong>...";
       }
 
       try {
         const payload = {
-          _subject: "ComputeMatch MFA Code: " + currentEmailOtp,
-          recipient: "rkyle.myers@gmail.com",
+          _subject: "ComputeMatch MFA Code (" + user.shortName + "): " + currentEmailOtp,
+          recipient: user.email,
+          user_name: user.name,
           verification_code: currentEmailOtp,
           requested_at: new Date().toLocaleTimeString(),
           valid_for: "10 minutes",
-          message: "Your ComputeMatch 2FA verification code is: " + currentEmailOtp + "\n\nFactor 1 was verified on your device. Enter this code into your browser to unlock your personal workspace."
+          message: "Hello " + user.name + ",\n\nYour ComputeMatch 2FA verification code is: " + currentEmailOtp + "\n\nFactor 1 was verified on your device. Enter this code into your browser to unlock your personal workspace."
         };
 
-        const res = await fetch("https://formsubmit.co/ajax/rkyle.myers@gmail.com", {
+        const res = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(user.email), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -1516,10 +1627,10 @@
         
         if (data.message && data.message.includes("needs Activation")) {
           statusDiv.style.color = "#fbbf24";
-          statusDiv.innerHTML = "📩 <strong>Action Needed:</strong> FormSubmit sent an activation email to <strong>rkyle.myers@gmail.com</strong>. Click 'Activate Form' in that email once to enable automatic forwarding, or use the Emergency Master Key bypass below.";
+          statusDiv.innerHTML = "📩 <strong>Action Needed:</strong> FormSubmit sent an activation email to <strong>" + user.email + "</strong>. Click 'Activate Form' in that email once to enable automatic forwarding, or use the Emergency Master Key bypass below.";
         } else {
           statusDiv.style.color = "#34d399";
-          statusDiv.innerHTML = "✓ 6-digit code dispatched to <strong>rkyle.myers@gmail.com</strong>! Check your inbox (or spam) and enter it below.";
+          statusDiv.innerHTML = "✓ 6-digit code dispatched to <strong>" + user.email + "</strong>! Check your inbox (or spam) and enter it below.";
         }
       } catch (err) {
         console.warn("Email dispatch error:", err);
@@ -1565,7 +1676,9 @@
       }
 
       if (currentEmailOtp && code === currentEmailOtp) {
-        localStorage.setItem("compute_match_auth_token", "kyle_authorized_" + Date.now());
+        const user = AUTHORIZED_USERS[currentSelectedUserId] || AUTHORIZED_USERS.kyle;
+        localStorage.setItem("compute_match_auth_token", "authorized_" + user.id + "_" + Date.now());
+        localStorage.setItem("compute_match_active_user", user.id);
         currentEmailOtp = null; // Consume OTP
         if (errorDiv) errorDiv.style.display = "none";
         checkAuthStatus();
@@ -1593,7 +1706,9 @@
       }
 
       if (isMasterKeyMatch(val)) {
-        localStorage.setItem("compute_match_auth_token", "kyle_authorized_" + Date.now());
+        const user = AUTHORIZED_USERS[currentSelectedUserId] || AUTHORIZED_USERS.kyle;
+        localStorage.setItem("compute_match_auth_token", "authorized_" + user.id + "_" + Date.now());
+        localStorage.setItem("compute_match_active_user", user.id);
         if (errorDiv) errorDiv.style.display = "none";
         checkAuthStatus();
         playRetroChime();
@@ -1608,6 +1723,7 @@
 
     function lockWorkspace() {
       localStorage.removeItem("compute_match_auth_token");
+      localStorage.removeItem("compute_match_active_user");
       factor1Verified = false;
       currentEmailOtp = null;
       otpExpiresAt = 0;
@@ -1650,7 +1766,10 @@
 
     // Initialize API Key, Rain Animation and Hit Counter
     document.addEventListener("DOMContentLoaded", () => {
-      // Security Check: enforce Kyle's private authorization
+      // Initialize multi-user profile selector
+      renderAuthUserSelector();
+
+      // Security Check: enforce private authorization
       checkAuthStatus();
 
       // Start the subtle pixel rain

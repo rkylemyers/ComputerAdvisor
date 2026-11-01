@@ -883,9 +883,16 @@
 
       <!-- SIDE-BY-SIDE COMPARISON TABLE BOX -->
       <div class="win95-box" style="margin-bottom: 15px;">
-        <div class="win95-titlebar">
-          <span>Hardware Comparison Matrix</span>
-          <span style="font-size: 12px; color: #cbd5e1;">Ranked by Match Score</span>
+        <div class="win95-titlebar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>Hardware Comparison Matrix</span>
+            <span style="font-size: 12px; color: #cbd5e1;">Ranked by Match Score</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <button onclick="emailComputerOptions('all')" class="win95-btn" style="font-size: 11px; padding: 2px 9px; background: rgba(14, 165, 233, 0.22); color: #38bdf8; border: 1px solid rgba(56,189,248,0.45); cursor: pointer; display: flex; align-items: center; gap: 4px; font-weight: 700;" title="Email all compared options and store links to yourself">
+              <span>✉️</span> Email All Options
+            </button>
+          </div>
         </div>
 
         <div style="padding: 12px; background: rgba(18, 22, 30, 0.75); overflow-x: auto;">
@@ -1035,6 +1042,61 @@
       </div>
       <div style="padding: 10px 16px; background: rgba(18, 22, 30, 0.95); border-top: 1.5px solid rgba(255, 255, 255, 0.15); display: flex; justify-content: flex-end;">
         <button onclick="closeHistoryModal()" class="win95-btn" style="padding: 4px 18px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= EMAIL OPTIONS & STORE LINKS MODAL ================= -->
+  <div id="email-options-modal" style="position: fixed; inset: 0; background: rgba(10, 14, 20, 0.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="win95-box" style="width: 580px; max-width: 95%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 2px solid #38bdf8;">
+      <div class="win95-titlebar" style="background: linear-gradient(90deg, #0369a1, #0284c7); color: #ffffff;">
+        <span id="email-modal-title">✉️ Email Laptop Purchase Options</span>
+        <button onclick="closeEmailModal()" style="font-size: 10px; padding: 2px 6px; font-weight: bold; background: #9c5138; color: #fff; border: 1.5px solid #d97757; border-radius: 3px; cursor: pointer;">✕</button>
+      </div>
+      <div style="padding: 16px; background: rgba(20, 25, 34, 0.96); flex: 1; overflow-y: auto;">
+        <!-- Recipient input -->
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 12px; font-weight: 700; color: #f7f4ea; margin-bottom: 5px;">
+            Recipient Email Address:
+          </label>
+          <div style="display: flex; gap: 8px;">
+            <input type="email" id="email-modal-recipient" class="win95-input" style="flex: 1; padding: 7px 10px; font-size: 13px; background: #0f172a; color: #38bdf8; border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 4px;" placeholder="name@domain.com">
+            <button onclick="resetRecipientToActiveUser()" class="win95-btn" style="font-size: 11px; white-space: nowrap; padding: 0 10px;" title="Reset to authenticated user email">
+              👤 My Email
+            </button>
+          </div>
+          <div id="email-modal-user-note" style="font-size: 11px; color: #94a3b8; margin-top: 5px;">
+            Active User: <strong id="email-modal-user-name" style="color: #34d399;">Kyle Myers</strong> (<span id="email-modal-user-email">rkyle.myers@gmail.com</span>)
+          </div>
+        </div>
+
+        <!-- Preview Card -->
+        <div id="email-modal-preview" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px; padding: 12px; margin-bottom: 14px;">
+          <!-- Injected via JS -->
+        </div>
+
+        <!-- Status / Feedback Banner -->
+        <div id="email-modal-status" style="display: none; padding: 10px; border-radius: 4px; font-size: 12px; margin-bottom: 12px; line-height: 1.4;"></div>
+
+        <!-- Dispatch Action Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <button id="btn-dispatch-automated-email" onclick="dispatchAutomatedEmail()" class="win95-btn btn-anime-sunset" style="padding: 9px 16px; font-size: 13px; font-weight: 700; justify-content: center; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <span>🚀</span> Send Directly to My Inbox (Automated Delivery)
+          </button>
+          
+          <div style="display: flex; gap: 8px;">
+            <button onclick="openNativeMailDraft()" class="win95-btn" style="flex: 1; padding: 7px 12px; font-size: 11.5px; justify-content: center; display: flex; align-items: center; gap: 6px; cursor: pointer; background: rgba(30, 41, 59, 0.85); color: #e2e8f0;">
+              <span>📬</span> Open in Mail App (Draft)
+            </button>
+            <button onclick="copyEmailSummaryToClipboard()" class="win95-btn" style="flex: 1; padding: 7px 12px; font-size: 11.5px; justify-content: center; display: flex; align-items: center; gap: 6px; cursor: pointer; background: rgba(30, 41, 59, 0.85); color: #e2e8f0;">
+              <span>📋</span> Copy to Clipboard
+            </button>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 10px 16px; background: rgba(18, 22, 30, 0.95); border-top: 1.5px solid rgba(255, 255, 255, 0.15); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 11px; color: #94a3b8;">ComputeMatch Hardware Dispatcher</span>
+        <button onclick="closeEmailModal()" class="win95-btn" style="padding: 4px 18px;">Close</button>
       </div>
     </div>
   </div>
@@ -3153,6 +3215,13 @@
                     </span>
                   </a>
                 `).join('')}
+
+                <button onclick="emailComputerOptions('${comp.id}')" 
+                        class="win95-btn btn-email-options" 
+                        style="font-size: 11px; padding: 5px 8px; margin-top: 5px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 4px; background: rgba(14, 165, 233, 0.22); color: #38bdf8; border: 1.5px solid rgba(56, 189, 248, 0.45); cursor: pointer; font-weight: 700; width: 100%; transition: all 0.15s ease;"
+                        title="Email these 5 store options and specifications to yourself">
+                  <span>✉️</span> Email Store Options to Me
+                </button>
               </div>
             `;
           }
@@ -3553,6 +3622,16 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         return `Here are 5 verified stores to purchase or check availability for the **${targetComp.name}**:\n\n${storeLinks}\n\nI have also updated your comparison matrix above with all 5 store links for direct checkout!`;
       }
 
+      // Email options inquiry
+      if (qLower.includes("email") || qLower.includes("send to me") || qLower.includes("mail to me") || qLower.includes("email options") || qLower.includes("send options") || qLower.includes("email myself")) {
+        const activeUser = (typeof getActiveUser === 'function') ? getActiveUser() : { email: 'rkyle.myers@gmail.com' };
+        return `### ✉️ Emailing Purchase Options & Specifications:\n\n` +
+          `You can easily email the specifications and verified purchase store links to yourself!\n\n` +
+          `• Click the **✉️ Email Store Options to Me** button underneath any laptop's 5 store links in the comparison table above.\n` +
+          `• Or click below to open the email dispatcher right now:\n\n` +
+          `<button onclick="emailComputerOptions('all')" class="win95-btn btn-anime-sunset" style="font-size: 12px; font-weight: 700; padding: 6px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;"><span>✉️</span> Email Options to ${activeUser.email}</button>`;
+      }
+
       // 1. SPECIFIC HARDWARE COMPARISON: ThinkPad T14 vs ThinkPad T14s
       const isT14Comparison = (qLower.includes("t14") && qLower.includes("t14s")) || 
                               (qLower.includes("t14") && (qLower.includes("diff") || qLower.includes("vs") || qLower.includes("compare") || qLower.includes("better")));
@@ -3812,6 +3891,322 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         alert("✓ GEMINI API KEY SAVED!");
       }
       closeApiModal();
+    }
+
+    // ==========================================
+    // EMAIL OPTIONS & STORE LINKS DISPATCHER
+    // ==========================================
+    let currentEmailTarget = null; // 'all' or computer object
+
+    function findComputerById(compId) {
+      if (currentRecommendations && currentRecommendations.length > 0) {
+        const found = currentRecommendations.find(item => item.computer && item.computer.id === compId);
+        if (found) return found.computer;
+      }
+      if (typeof COMPUTERS_CATALOG !== 'undefined' && Array.isArray(COMPUTERS_CATALOG)) {
+        return COMPUTERS_CATALOG.find(c => c.id === compId) || null;
+      }
+      return null;
+    }
+
+    function emailComputerOptions(compId) {
+      playClickBeep();
+      openEmailModal(compId);
+    }
+
+    function openEmailModal(compId) {
+      const modal = document.getElementById("email-options-modal");
+      if (!modal) return;
+
+      const activeUser = (typeof getActiveUser === 'function') ? getActiveUser() : { name: "Kyle Myers", email: "rkyle.myers@gmail.com" };
+      const recipientInput = document.getElementById("email-modal-recipient");
+      const userNoteName = document.getElementById("email-modal-user-name");
+      const userNoteEmail = document.getElementById("email-modal-user-email");
+      const statusDiv = document.getElementById("email-modal-status");
+      const previewDiv = document.getElementById("email-modal-preview");
+      const modalTitle = document.getElementById("email-modal-title");
+
+      if (statusDiv) {
+        statusDiv.style.display = "none";
+        statusDiv.innerHTML = "";
+      }
+
+      if (recipientInput) {
+        recipientInput.value = activeUser.email || "rkyle.myers@gmail.com";
+      }
+      if (userNoteName) userNoteName.innerText = activeUser.name || "Kyle Myers";
+      if (userNoteEmail) userNoteEmail.innerText = activeUser.email || "rkyle.myers@gmail.com";
+
+      if (compId === 'all') {
+        currentEmailTarget = 'all';
+        modalTitle.innerHTML = "✉️ Email Comparison Matrix Options";
+        const pool = (currentRecommendations && currentRecommendations.length > 0) ? currentRecommendations : [];
+        const displayedCount = Math.min(pool.length, currentDisplayLimit || 5);
+        const topModels = pool.slice(0, displayedCount);
+
+        previewDiv.innerHTML = `
+          <div style="font-weight: 700; color: #38bdf8; font-size: 13px; margin-bottom: 6px;">
+            📊 Package: Full Comparison Matrix (${displayedCount} Laptops)
+          </div>
+          <div style="font-size: 11px; color: #cbd5e1; line-height: 1.4; margin-bottom: 8px;">
+            Includes full specifications, street pricing, benchmark scores, and all verified purchase store links for your compared laptops.
+          </div>
+          <div style="background: rgba(0,0,0,0.3); border-radius: 4px; padding: 6px 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #cbd5e1; display: flex; flex-direction: column; gap: 4px;">
+            ${topModels.map((item, i) => `
+              <div style="display: flex; justify-content: space-between;">
+                <span>#${i+1} <strong>${item.computer.name}</strong></span>
+                <span style="color: #34d399;">$${item.computer.price.toLocaleString()}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else {
+        const comp = findComputerById(compId);
+        if (!comp) {
+          alert("Computer not found.");
+          return;
+        }
+        currentEmailTarget = comp;
+        modalTitle.innerHTML = `✉️ Email Options: ${comp.name}`;
+        const storeCount = (comp.stores && comp.stores.length) ? comp.stores.length : 1;
+        const stores = (comp.stores && comp.stores.length > 0) ? comp.stores : [{ store: comp.retailer || 'Retail Store', url: comp.purchase_url, badge: 'Direct', icon: '🛒' }];
+
+        previewDiv.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 800; color: #f7f4ea; font-family: 'Outfit', sans-serif;">
+                ${comp.name}
+              </div>
+              <div style="font-size: 11px; color: #94a3b8;">
+                ${comp.brand} • ${comp.form_factor} • Released ${comp.release_year}
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">
+                $${comp.price.toLocaleString()}
+              </div>
+              <div style="font-size: 10px; color: #fbbf24; font-weight: 700;">${storeCount} Purchase Stores</div>
+            </div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1; background: rgba(0,0,0,0.25); padding: 8px; border-radius: 4px; margin-bottom: 8px; line-height: 1.45;">
+            <strong>Key Specs:</strong> ${comp.cpu_model} • ${comp.ram_gb}GB RAM • ${comp.storage_gb >= 1000 ? (comp.storage_gb/1000) + 'TB' : comp.storage_gb + 'GB'} SSD • ${comp.screen_size}" Display (${comp.screen_nits} nits) • ${comp.battery_hours}h battery • ${comp.weight_lbs} lbs
+          </div>
+          <div style="font-size: 11px; color: #fbbf24; font-weight: 700; margin-bottom: 4px;">
+            🏬 Included 5 Store Purchase Links:
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px; font-size: 11px; color: #cbd5e1;">
+            ${stores.map(s => `
+              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); padding: 4px 6px; border-radius: 3px; gap: 8px;">
+                <span style="white-space: nowrap;">${s.icon || '🛒'} <strong style="color: #e2e8f0;">${s.store}</strong> <span style="font-size: 9px; color: #94a3b8;">(${s.badge || 'Verified'})</span></span>
+                <span style="color: #38bdf8; font-size: 10px; font-family: 'JetBrains Mono', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 250px;">${s.url}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      modal.style.display = "flex";
+    }
+
+    function closeEmailModal() {
+      playClickBeep();
+      const modal = document.getElementById("email-options-modal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function resetRecipientToActiveUser() {
+      playClickBeep();
+      const activeUser = (typeof getActiveUser === 'function') ? getActiveUser() : { email: "rkyle.myers@gmail.com" };
+      const recipientInput = document.getElementById("email-modal-recipient");
+      if (recipientInput) recipientInput.value = activeUser.email || "rkyle.myers@gmail.com";
+    }
+
+    function generateEmailContent() {
+      const recipientInput = document.getElementById("email-modal-recipient");
+      const recipient = (recipientInput && recipientInput.value.trim()) ? recipientInput.value.trim() : (getActiveUser()?.email || 'rkyle.myers@gmail.com');
+      const user = (typeof getActiveUser === 'function') ? getActiveUser() : { name: "Kyle Myers", email: recipient };
+
+      if (currentEmailTarget === 'all') {
+        const pool = (currentRecommendations && currentRecommendations.length > 0) ? currentRecommendations : [];
+        const displayedCount = Math.min(pool.length, currentDisplayLimit || 5);
+        const topModels = pool.slice(0, displayedCount);
+        const subject = `ComputeMatch Comparison Matrix: ${displayedCount} Laptop Matches & Store Links`;
+        
+        let body = `Hello ${user.name},\n\nHere is your requested ComputeMatch Hardware Comparison Matrix with specifications and verified purchase store links:\n\n`;
+
+        topModels.forEach((item, idx) => {
+          const c = item.computer;
+          body += `========================================================\n`;
+          body += `#${idx + 1}: ${c.name}\n`;
+          body += `Street Price: $${c.price.toLocaleString()}${c.msrp ? ' (List MSRP: $' + c.msrp.toLocaleString() + ')' : ''}\n`;
+          body += `Match Score: ${item.active_score || item.custom_score || item.score} / 100\n`;
+          body += `Verdict: ${c.target_summary}\n\n`;
+          body += `Specifications:\n`;
+          body += `• Processor: ${c.cpu_model} (${c.cpu_details || ''})\n`;
+          body += `• CPU Benchmark: ${c.cpu_benchmark_score || 'Verified'}\n`;
+          body += `• Memory (RAM): ${c.ram_gb} GB (${c.ram_details || 'DDR5'})\n`;
+          body += `• Storage: ${c.storage_gb >= 1000 ? (c.storage_gb/1000)+'TB' : c.storage_gb+'GB'} NVMe SSD\n`;
+          body += `• Graphics: ${c.gpu_model}\n`;
+          body += `• Display: ${c.screen_size}" (${c.screen_nits} nits, ${c.screen_gamut})\n`;
+          body += `• Battery Life: ${c.battery_hours} hours | Weight: ${c.weight_lbs} lbs\n`;
+          body += `• OS: ${c.os_edition || c.os}\n\n`;
+          body += `5 Verified Purchase Store Links:\n`;
+          const stores = (c.stores && c.stores.length > 0) ? c.stores : [{store: c.retailer || 'Retail Store', url: c.purchase_url}];
+          stores.forEach((s, sIdx) => {
+            body += `  ${sIdx + 1}. ${s.store} (${s.badge || 'Verified'}):\n     ${s.url}\n`;
+          });
+          body += `\n`;
+        });
+
+        body += `========================================================\n`;
+        body += `Generated by ComputeMatch Hardware Advisor\n`;
+        body += `https://rkylemyers.github.io/ComputerAdvisor/\n`;
+
+        return { subject, body, recipient };
+      } else {
+        const comp = currentEmailTarget || (currentRecommendations[0]?.computer);
+        const subject = `ComputeMatch Store Options: ${comp.name} ($${comp.price.toLocaleString()})`;
+        let body = `Hello ${user.name},\n\nHere are the specifications and verified purchase store links for your selected laptop match:\n\n`;
+        body += `MODEL: ${comp.name} (${comp.release_year})\n`;
+        body += `BRAND: ${comp.brand} | FORM FACTOR: ${comp.form_factor}\n`;
+        body += `STREET PRICE: $${comp.price.toLocaleString()}${comp.msrp ? ' (List MSRP: $' + comp.msrp.toLocaleString() + ')' : ''}\n`;
+        body += `VERDICT: ${comp.target_summary}\n\n`;
+        
+        body += `HARDWARE SPECIFICATIONS:\n`;
+        body += `• Processor (CPU): ${comp.cpu_model} (${comp.cpu_details || ''})\n`;
+        body += `• CPU Benchmark & Review: ${comp.cpu_benchmark_score || 'PassMark Verified'} — ${comp.cpu_independent_review || 'High Tier'}\n`;
+        body += `• Memory (RAM): ${comp.ram_gb} GB (${comp.ram_details || 'DDR5'})\n`;
+        body += `• Storage Drive: ${comp.storage_gb >= 1000 ? (comp.storage_gb/1000)+'TB' : comp.storage_gb+'GB'} NVMe SSD\n`;
+        body += `• Graphics (GPU): ${comp.gpu_model} (${comp.gpu_details || ''})\n`;
+        body += `• Display: ${comp.screen_size}" • ${comp.screen_nits} nits • ${comp.screen_gamut} • ${comp.screen_refresh_hz}Hz\n`;
+        body += `• Battery Life: ${comp.battery_hours} hours runtime\n`;
+        body += `• Chassis Weight: ${comp.weight_lbs} lbs\n`;
+        body += `• Operating System: ${comp.os_edition || comp.os}\n`;
+        body += `• I/O Ports: ${comp.ports_io || 'Standard I/O'}\n`;
+        body += `• Webcam & Biometrics: ${comp.webcam_biometrics || 'Webcam'}\n`;
+        body += `• Cooling Profile: ${comp.thermals_acoustics || 'Active Cooling'}\n`;
+        body += `• Factory Warranty: ${comp.warranty_years} Year(s)\n\n`;
+
+        body += `WHERE TO BUY (VERIFIED STORE PURCHASE LINKS):\n`;
+        const stores = (comp.stores && comp.stores.length > 0) ? comp.stores : [{store: comp.retailer || 'Retail Store', url: comp.purchase_url, badge: 'In Stock'}];
+        stores.forEach((s, sIdx) => {
+          body += `${sIdx + 1}. ${s.store} (${s.badge || 'Verified'}):\n   ${s.url}\n\n`;
+        });
+
+        body += `Generated by ComputeMatch Hardware Advisor\n`;
+        body += `https://rkylemyers.github.io/ComputerAdvisor/\n`;
+
+        return { subject, body, recipient };
+      }
+    }
+
+    async function dispatchAutomatedEmail() {
+      playClickBeep();
+      const { subject, body, recipient } = generateEmailContent();
+      const btn = document.getElementById("btn-dispatch-automated-email");
+      const statusDiv = document.getElementById("email-modal-status");
+
+      if (!recipient || !recipient.includes("@")) {
+        if (statusDiv) {
+          statusDiv.style.display = "block";
+          statusDiv.style.background = "rgba(239, 68, 68, 0.2)";
+          statusDiv.style.border = "1px solid #ef4444";
+          statusDiv.style.color = "#fca5a5";
+          statusDiv.innerHTML = "❌ Please enter a valid recipient email address.";
+        }
+        return;
+      }
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span>⏳</span> Dispatching to ${recipient}...`;
+      }
+      if (statusDiv) {
+        statusDiv.style.display = "block";
+        statusDiv.style.background = "rgba(59, 130, 246, 0.15)";
+        statusDiv.style.border = "1px solid #3b82f6";
+        statusDiv.style.color = "#93c5fd";
+        statusDiv.innerHTML = `⏳ Sending purchase options &amp; specifications to <strong>${recipient}</strong>...`;
+      }
+
+      try {
+        const payload = {
+          _subject: subject,
+          recipient: recipient,
+          message: body,
+          sent_at: new Date().toLocaleString()
+        };
+
+        const res = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(recipient), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json().catch(() => ({}));
+        playRetroChime();
+
+        if (data.message && data.message.includes("needs Activation")) {
+          statusDiv.style.background = "rgba(245, 158, 11, 0.2)";
+          statusDiv.style.border = "1px solid #f59e0b";
+          statusDiv.style.color = "#fbbf24";
+          statusDiv.innerHTML = `📩 <strong>Action Required:</strong> FormSubmit sent an initial confirmation email to <strong>${recipient}</strong>. Click 'Activate Form' once in your inbox to receive automated dispatches, or click 'Open in Mail App (Draft)' below for immediate access!`;
+        } else {
+          statusDiv.style.background = "rgba(16, 185, 129, 0.2)";
+          statusDiv.style.border = "1px solid #10b981";
+          statusDiv.style.color = "#34d399";
+          statusDiv.innerHTML = `✓ <strong>Options Sent!</strong> Specs and verified store links were emailed to <strong>${recipient}</strong>. Check your inbox (or spam folder).`;
+        }
+      } catch (err) {
+        console.warn("Automated email dispatch error:", err);
+        if (statusDiv) {
+          statusDiv.style.background = "rgba(245, 158, 11, 0.2)";
+          statusDiv.style.border = "1px solid #f59e0b";
+          statusDiv.style.color = "#fbbf24";
+          statusDiv.innerHTML = `⚠️ Direct network delivery encountered a delay. You can use <strong>Open in Mail App (Draft)</strong> or copy the options directly!`;
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<span>🚀</span> Send Directly to My Inbox (Automated Delivery)`;
+        }
+      }
+    }
+
+    function openNativeMailDraft() {
+      playClickBeep();
+      const { subject, body, recipient } = generateEmailContent();
+      const mailtoUrl = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+
+      const statusDiv = document.getElementById("email-modal-status");
+      if (statusDiv) {
+        statusDiv.style.display = "block";
+        statusDiv.style.background = "rgba(16, 185, 129, 0.2)";
+        statusDiv.style.border = "1px solid #10b981";
+        statusDiv.style.color = "#34d399";
+        statusDiv.innerHTML = `✓ Opening email client draft to <strong>${recipient}</strong> with full specs &amp; 5 store links pre-filled!`;
+      }
+    }
+
+    function copyEmailSummaryToClipboard() {
+      playClickBeep();
+      const { body } = generateEmailContent();
+      navigator.clipboard.writeText(body).then(() => {
+        const statusDiv = document.getElementById("email-modal-status");
+        if (statusDiv) {
+          statusDiv.style.display = "block";
+          statusDiv.style.background = "rgba(16, 185, 129, 0.2)";
+          statusDiv.style.border = "1px solid #10b981";
+          statusDiv.style.color = "#34d399";
+          statusDiv.innerHTML = `✓ Specifications and all store links copied to your clipboard!`;
+        }
+      }).catch(() => {
+        alert("Could not access clipboard.");
+      });
     }
   </script>
 

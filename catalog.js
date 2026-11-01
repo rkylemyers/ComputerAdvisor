@@ -4707,8 +4707,313 @@ const FALLBACK_WILSON_ANALYSIS = {
 
 
 // ==========================================
-// WORKSTATION & DESKTOP PACKAGE INSPECTION HELPER
+// WORKSTATION & VIDEO I/O SPECIFICATION ENGINE
 // ==========================================
+
+function getComputerVideoIOMap(comp) {
+  if (!comp) return { maxDisplays: 1, portsSummary: "1x HDMI / USB-C", portTypes: ["HDMI"], driveVerdict: "Standard display output" };
+
+  const id = comp.id || "";
+  const gpu = (comp.gpu_model || "").toLowerCase();
+  const ff = (comp.form_factor || "").toLowerCase();
+
+  let maxDisplays = 2;
+  let portsSummary = "1x HDMI, 1x USB-C (DisplayPort Alt Mode)";
+  let portTypes = ["HDMI", "DisplayPort over USB-C"];
+  let driveVerdict = "Drives standard dual external monitors at 1080p/1440p/4K.";
+  let hasDedicatedGpu = (comp.gpu_tier || 0) >= 2 || gpu.includes("rtx") || gpu.includes("geforce") || gpu.includes("radeon rx");
+  let native4k60 = true;
+  let native144hz = false;
+
+  if (id === "c-mac-studio-m2-ultra") {
+    maxDisplays = 8;
+    portsSummary = "6x Thunderbolt 4 (USB-C 40Gbps) + 2x HDMI 2.1";
+    portTypes = ["Thunderbolt 4 / USB-C", "HDMI 2.1"];
+    driveVerdict = "Apple M2 Ultra 60-Core GPU drives up to 8x 4K @ 60Hz or 6x 6K displays simultaneously with 800 GB/s bandwidth.";
+    native144hz = true;
+  } else if (id === "c-mac-studio-m2max") {
+    maxDisplays = 5;
+    portsSummary = "4x Thunderbolt 4 (USB-C 40Gbps) + 1x HDMI 2.1";
+    portTypes = ["Thunderbolt 4 / USB-C", "HDMI 2.1"];
+    driveVerdict = "Apple M2 Max 30-Core GPU drives up to 5 displays simultaneously (4x 6K @ 60Hz + 1x 4K @ 240Hz / 8K @ 60Hz).";
+    native144hz = true;
+  } else if (id === "c-lenovo-thinkstation-p3-tiny") {
+    maxDisplays = 6;
+    portsSummary = "4x Mini-DisplayPort 1.4a (NVIDIA RTX A1000) + 1x DisplayPort 1.4 + 1x HDMI 2.1";
+    portTypes = ["Mini-DisplayPort 1.4a", "DisplayPort 1.4", "HDMI 2.1"];
+    driveVerdict = "Dedicated NVIDIA RTX A1000 8GB GPU drives a 6-monitor financial or CAD trading matrix simultaneously.";
+    native144hz = true;
+  } else if (id === "c-desktop-beast-4090" || id === "c-hp-omen-45l") {
+    maxDisplays = 4;
+    portsSummary = "3x DisplayPort 1.4a + 1x HDMI 2.1a (NVIDIA RTX 4090 24GB)";
+    portTypes = ["DisplayPort 1.4a", "HDMI 2.1a"];
+    driveVerdict = "NVIDIA flagship RTX 4090 drives 4x 4K @ 144Hz displays with full ray tracing, HDR10, and G-Sync.";
+    native144hz = true;
+  } else if (id === "c-lenovo-legion-tower-7i") {
+    maxDisplays = 4;
+    portsSummary = "3x DisplayPort 1.4a + 1x HDMI 2.1a (NVIDIA RTX 4080 Super 16GB)";
+    portTypes = ["DisplayPort 1.4a", "HDMI 2.1a"];
+    driveVerdict = "NVIDIA RTX 4080 Super drives 4x 4K/UHD displays with high refresh rates and G-Sync.";
+    native144hz = true;
+  } else if (id === "c-corsair-vengeance-i7500" || id === "c-acer-predator-orion-5000") {
+    maxDisplays = 4;
+    portsSummary = "3x DisplayPort 1.4a + 1x HDMI 2.1a (NVIDIA RTX 4070 Ti / Ti Super 16GB)";
+    portTypes = ["DisplayPort 1.4a", "HDMI 2.1a"];
+    driveVerdict = "NVIDIA RTX 4070 Ti series drives 4x 4K or 1440p high-FPS esports displays simultaneously.";
+    native144hz = true;
+  } else if (id === "c-asus-rog-strix-g16chr") {
+    maxDisplays = 4;
+    portsSummary = "3x DisplayPort 1.4a + 1x HDMI 2.1a (NVIDIA RTX 4070 Super 12GB)";
+    portTypes = ["DisplayPort 1.4a", "HDMI 2.1a"];
+    driveVerdict = "NVIDIA RTX 4070 Super drives up to 4x 4K @ 120Hz/144Hz displays with DLSS 3.";
+    native144hz = true;
+  } else if (id === "c-dell-xps-8960" || id === "c-asus-rog-g22ch" || id === "c-lenovo-legion-tower-5i") {
+    maxDisplays = 4;
+    portsSummary = "3x DisplayPort 1.4a + 1x HDMI 2.1a (NVIDIA RTX 4060 / 4060 Ti 8GB)";
+    portTypes = ["DisplayPort 1.4a", "HDMI 2.1a"];
+    driveVerdict = "NVIDIA GeForce RTX 4060 series drives 4x displays natively with hardware ray tracing.";
+    native144hz = true;
+  } else if (id === "c-hp-z2-mini-g9" || id === "c-dell-precision-3680") {
+    maxDisplays = 4;
+    portsSummary = "4x Mini-DisplayPort 1.4a (NVIDIA Workstation GPU with latching lock)";
+    portTypes = ["Mini-DisplayPort 1.4a"];
+    driveVerdict = "ISV-certified NVIDIA workstation GPU drives 4x 4K/5K CAD/BIM displays with ECC reliability.";
+    native144hz = true;
+  } else if (id === "c-minisforum-um780") {
+    maxDisplays = 4;
+    portsSummary = "2x USB4 40Gbps Type-C + 1x DisplayPort 1.4 + 1x HDMI 2.1";
+    portTypes = ["USB4 / Thunderbolt (Type-C)", "DisplayPort 1.4", "HDMI 2.1"];
+    driveVerdict = "AMD Radeon 780M drives 4x 4K @ 60Hz displays simultaneously across quad outputs.";
+  } else if (id === "c-asus-nuc-14-pro") {
+    maxDisplays = 4;
+    portsSummary = "2x Thunderbolt 4 (40Gbps Type-C) + 2x HDMI 2.1";
+    portTypes = ["Thunderbolt 4 / USB-C", "HDMI 2.1"];
+    driveVerdict = "Intel Arc Graphics drives up to 4x 4K displays simultaneously across dual TB4 and dual HDMI.";
+  } else if (id === "c-apple-mac-mini-m4-pro") {
+    maxDisplays = 3;
+    portsSummary = "3x Thunderbolt 5 (120Gbps Type-C) + 1x HDMI 2.1";
+    portTypes = ["Thunderbolt 5 / USB-C", "HDMI 2.1"];
+    driveVerdict = "Apple M4 Pro drives up to 3x 6K @ 60Hz displays or 1x 8K @ 60Hz / 4K @ 240Hz.";
+    native144hz = true;
+  } else if (id === "c-apple-mac-mini-m4") {
+    maxDisplays = 3;
+    portsSummary = "2x Thunderbolt 4 (40Gbps Type-C) + 1x HDMI 2.1";
+    portTypes = ["Thunderbolt 4 / USB-C", "HDMI 2.1"];
+    driveVerdict = "Apple M4 drives up to 3 displays (2x 6K over TB4 + 1x 5K/4K over HDMI).";
+  } else if (id === "c-dell-optiplex-7020") {
+    maxDisplays = 3;
+    portsSummary = "2x DisplayPort 1.4a + 1x HDMI 1.4b (Intel UHD 770 Triple Output)";
+    portTypes = ["DisplayPort 1.4a", "HDMI 1.4b"];
+    driveVerdict = "Intel UHD 770 drives 3 independent business monitors at 4K @ 60Hz.";
+  } else if (id === "c-lenovo-thinkcentre-m70q") {
+    maxDisplays = 3;
+    portsSummary = "1x DisplayPort 1.4 + 1x HDMI 2.1 TMDS + 1x USB-C 3.2 Gen 2";
+    portTypes = ["DisplayPort 1.4", "HDMI 2.1", "USB-C"];
+    driveVerdict = "Intel UHD 770 drives 3 independent monitors in a 1-liter micro workstation.";
+  } else if (id === "c-minisforum-ms-01") {
+    maxDisplays = 3;
+    portsSummary = "2x USB4 40Gbps Type-C + 1x HDMI 2.1 + PCIe Half-Height GPU Slot";
+    portTypes = ["USB4 / Thunderbolt (Type-C)", "HDMI 2.1"];
+    driveVerdict = "Intel Iris Xe drives 3 displays via dual USB4 and HDMI (plus PCIe slot for discrete GPU).";
+  } else if (id === "c-beelink-ser8") {
+    maxDisplays = 3;
+    portsSummary = "1x USB4 40Gbps Type-C + 1x DisplayPort 1.4 + 1x HDMI 2.1";
+    portTypes = ["USB4 / Thunderbolt (Type-C)", "DisplayPort 1.4", "HDMI 2.1"];
+    driveVerdict = "AMD Radeon 780M drives 3x 4K displays simultaneously across USB4, DP, and HDMI.";
+  } else if (id === "c-lenovo-ideacentre-tower-gen9") {
+    maxDisplays = 3;
+    portsSummary = "1x HDMI 2.1 + 1x DisplayPort 1.4 + 1x VGA / USB-C";
+    portTypes = ["HDMI 2.1", "DisplayPort 1.4", "VGA / USB-C"];
+    driveVerdict = "Radeon 780M on Ryzen 7 APU drives 3 displays across modern and legacy ports.";
+  } else if (id === "c-dell-inspiron-3020") {
+    maxDisplays = 2;
+    portsSummary = "1x DisplayPort 1.4 + 1x HDMI 1.4b";
+    portTypes = ["DisplayPort 1.4", "HDMI 1.4b"];
+    driveVerdict = "Intel UHD 730 drives dual monitors for office, banking, and multitasking.";
+  } else if (id === "c-hp-pavilion-tp01") {
+    maxDisplays = 2;
+    portsSummary = "1x HDMI 1.4b + 1x VGA";
+    portTypes = ["HDMI 1.4b", "VGA"];
+    driveVerdict = "AMD Radeon Vega 8 drives dual displays (1x modern HDMI + 1x legacy VGA).";
+  } else if (id === "c-beelink-eqr6") {
+    maxDisplays = 2;
+    portsSummary = "2x HDMI 2.0 (Dual 4K @ 60Hz)";
+    portTypes = ["HDMI 2.0"];
+    driveVerdict = "AMD Radeon 660M drives dual 4K monitors simultaneously via dual HDMI 2.0 ports.";
+  } else if (id === "c-apple-imac-24-m4") {
+    maxDisplays = 2;
+    portsSummary = "Built-in 24-inch 4.5K Retina + 1x Thunderbolt / USB 4 (up to 6K @ 60Hz)";
+    portTypes = ["Built-in 4.5K Retina", "Thunderbolt 4 / USB-C"];
+    driveVerdict = "Integrated 24-inch 4.5K Retina display plus 1 external pro display up to 6K @ 60Hz.";
+  } else if (id === "c-macbook-pro-16-m4pro") {
+    maxDisplays = 3;
+    portsSummary = "3x Thunderbolt 5 (120Gbps Type-C) + 1x HDMI 2.1 (8K/4K 240Hz)";
+    portTypes = ["Thunderbolt 5 / USB-C", "HDMI 2.1"];
+    driveVerdict = "Drives up to 3 external displays (2x 6K over TB5 + 1x 4K @ 144Hz over HDMI).";
+    native144hz = true;
+  } else if (id === "c-dell-xps-16") {
+    maxDisplays = 3;
+    portsSummary = "3x Thunderbolt 4 (DisplayPort 1.4 Alt Mode & 100W PD)";
+    portTypes = ["Thunderbolt 4 / USB-C"];
+    driveVerdict = "RTX 4070 Laptop GPU drives up to 3 external 4K displays over Thunderbolt 4.";
+    native144hz = true;
+  } else if (id === "c-lenovo-legion-pro-5i") {
+    maxDisplays = 3;
+    portsSummary = "1x Thunderbolt 4 / USB-C (DP 2.1) + 1x USB-C 3.2 Gen 2 (DP 1.4) + 1x HDMI 2.1";
+    portTypes = ["DisplayPort over USB-C", "HDMI 2.1"];
+    driveVerdict = "RTX 5070 Laptop GPU drives up to 3 external displays with high-refresh gaming support.";
+    native144hz = true;
+  } else if (id === "c-thinkpad-t14s-gen6") {
+    maxDisplays = 3;
+    portsSummary = "2x USB4 / Thunderbolt 4 (DP 2.1) + 1x HDMI 2.1";
+    portTypes = ["USB4 / Thunderbolt 4", "HDMI 2.1"];
+    driveVerdict = "Radeon 880M drives up to 3 external displays for dock-connected multi-screen setups.";
+  } else if (id === "c-dell-latitude-rugged-5430" || id === "c-panasonic-toughbook-55") {
+    maxDisplays = 3;
+    portsSummary = "1x Thunderbolt 4 / USB-C + 1x HDMI 2.0 + 1x Native VGA / Serial DB9";
+    portTypes = ["Thunderbolt 4 / USB-C", "HDMI 2.0", "VGA"];
+    driveVerdict = "Drives up to 3 displays across modern digital and legacy industrial field monitors.";
+  } else if (id.includes("macbook-air")) {
+    maxDisplays = (id.includes("m3")) ? 2 : 1;
+    portsSummary = "2x Thunderbolt / USB 4 (DisplayPort over Type-C)";
+    portTypes = ["Thunderbolt / USB-C"];
+    driveVerdict = (id.includes("m3")) 
+      ? "Drives 1 external display with lid open, or up to 2 external displays (4K/5K) with laptop lid closed."
+      : "Drives 1 external display up to 6K @ 60Hz over Thunderbolt.";
+  } else {
+    maxDisplays = hasDedicatedGpu ? 3 : 2;
+    portsSummary = comp.ports_io ? comp.ports_io.split(";")[0] : "1x HDMI + 1x USB-C DisplayPort";
+    portTypes = ["HDMI", "USB-C"];
+    driveVerdict = "Drives up to " + maxDisplays + " external displays.";
+  }
+
+  return {
+    maxDisplays,
+    portsSummary,
+    portTypes,
+    driveVerdict,
+    hasDedicatedGpu,
+    native4k60,
+    native144hz
+  };
+}
+
+function evaluateMonitorPcCompatibility(comp, monitor, quantity) {
+  if (quantity === undefined) quantity = 2;
+  const io = getComputerVideoIOMap(comp);
+  
+  if (!monitor) {
+    return {
+      compatible: true,
+      maxDisplays: io.maxDisplays,
+      requestedQuantity: quantity,
+      badgeText: "🖥️ Supports up to " + io.maxDisplays + " External Displays",
+      badgeColor: "#34d399",
+      badgeBg: "rgba(16, 185, 129, 0.18)",
+      badgeBorder: "#10b981",
+      portsSummary: io.portsSummary,
+      driveVerdict: io.driveVerdict,
+      drivingNote: "Natively drives up to " + io.maxDisplays + " displays.",
+      primaryCable: "DisplayPort 1.4 or HDMI 2.1 cables."
+    };
+  }
+
+  const isQtyOk = quantity <= io.maxDisplays;
+  const monConnStr = (monitor.connector_summary || "") + " " + ((monitor.connector_types || []).join(" "));
+  const monHasUsbC = monConnStr.includes("USB-C") || monConnStr.includes("Thunderbolt");
+  const monHasDp = monConnStr.includes("DisplayPort") || monConnStr.includes("DP");
+  const monHasHdmi = monConnStr.includes("HDMI");
+  const monIs4K = (monitor.resolution_class || "").includes("4K") || (monitor.resolution || "").includes("3840");
+  const monIsHighHz = (monitor.refresh_rate_hz || 60) > 100;
+
+  const pcTypes = io.portTypes.join(" ");
+  const pcHasUsbC = pcTypes.includes("USB-C") || pcTypes.includes("Thunderbolt") || pcTypes.includes("USB4");
+  const pcHasDp = pcTypes.includes("DisplayPort");
+  const pcHasMiniDp = pcTypes.includes("Mini-DisplayPort");
+  const pcHasHdmi = pcTypes.includes("HDMI");
+
+  let primaryCable = "";
+  let portMatchQuality = "direct";
+
+  if (!isQtyOk) {
+    portMatchQuality = "exceeded";
+    primaryCable = "⚠️ Exceeds GPU limit: " + comp.name + " natively drives " + io.maxDisplays + " displays, but " + quantity + " were requested. An external DisplayLink dock or USB adapter is required for display #" + quantity + ".";
+  } else if (pcHasUsbC && monHasUsbC) {
+    primaryCable = "✓ Direct USB-C / Thunderbolt: Connect Monitor 1 via single USB-C cable for 4K video, upstream power delivery, and built-in USB hub.";
+    if (quantity > 1) {
+      if (monitor.daisy_chain_support) {
+        primaryCable += " Daisy-chain Monitor 2 via DP-Out port!";
+      } else if (pcHasDp) {
+        primaryCable += " Connect Monitor 2 via DisplayPort 1.4 port.";
+      } else if (pcHasHdmi) {
+        primaryCable += " Connect Monitor 2 via HDMI port.";
+      } else {
+        primaryCable += " Connect Monitor 2 via 2nd Thunderbolt / USB-C port.";
+      }
+    }
+  } else if (pcHasDp && monHasDp) {
+    primaryCable = "✓ Direct DisplayPort 1.4: Connect using standard DisplayPort cables directly into GPU (supports high refresh rates, G-Sync & full HDR).";
+    if (quantity > 1 && pcHasHdmi && monHasHdmi) {
+      primaryCable += " Connect Monitor 2 via native HDMI port.";
+    }
+  } else if (pcHasMiniDp && monHasDp) {
+    portMatchQuality = "adapter";
+    primaryCable = "✓ Mini-DisplayPort to DisplayPort: Connect using Mini-DP to DP latching workstation cables (supports 4K CAD/BIM resolution).";
+  } else if (pcHasHdmi && monHasHdmi) {
+    primaryCable = "✓ Direct HDMI: Connect using high-speed HDMI 2.0/2.1 cables.";
+  } else if (pcHasUsbC && monHasDp) {
+    portMatchQuality = "adapter";
+    primaryCable = "✓ USB-C to DisplayPort: Connect via USB-C to DP 1.4 bidirectional adapter cables.";
+  } else {
+    primaryCable = "Connect using DisplayPort or HDMI ports on chassis I/O.";
+  }
+
+  let drivingNote = "";
+  if (monIs4K && io.hasDedicatedGpu) {
+    drivingNote = "✓ Dedicated GPU easily drives " + quantity + "x 4K UHD @ 60Hz/120Hz with zero system slowdown.";
+  } else if (monIs4K && !io.hasDedicatedGpu) {
+    drivingNote = "✓ High-tier integrated graphics supports " + quantity + "x 4K @ 60Hz desktop productivity.";
+  } else if (monIsHighHz && io.native144hz) {
+    drivingNote = "✓ Full " + monitor.refresh_rate_hz + "Hz gaming refresh rate supported via DisplayPort.";
+  } else if (monIsHighHz && !io.native144hz) {
+    drivingNote = "⚠️ High refresh (" + monitor.refresh_rate_hz + "Hz) may be capped at 60Hz/120Hz over integrated HDMI. Use DisplayPort/USB-C for maximum FPS.";
+  } else {
+    drivingNote = "✓ Resolution (" + monitor.resolution + ") perfectly matched to GPU bandwidth.";
+  }
+
+  let badgeText = "✓ 100% Port & GPU Match";
+  let badgeColor = "#34d399";
+  let badgeBg = "rgba(16, 185, 129, 0.18)";
+  let badgeBorder = "#10b981";
+
+  if (!isQtyOk) {
+    badgeText = "⚠️ Exceeds Native GPU Ports (Max: " + io.maxDisplays + ")";
+    badgeColor = "#f87171";
+    badgeBg = "rgba(239, 68, 68, 0.18)";
+    badgeBorder = "#ef4444";
+  } else if (portMatchQuality === "adapter") {
+    badgeText = "✓ Compatible (Mini-DP / USB-C Adapter)";
+    badgeColor = "#38bdf8";
+    badgeBg = "rgba(56, 189, 248, 0.18)";
+    badgeBorder = "#38bdf8";
+  }
+
+  return {
+    compatible: isQtyOk,
+    maxDisplays: io.maxDisplays,
+    requestedQuantity: quantity,
+    badgeText,
+    badgeColor,
+    badgeBg,
+    badgeBorder,
+    portsSummary: io.portsSummary,
+    portTypes: io.portTypes,
+    driveVerdict: io.driveVerdict,
+    drivingNote,
+    primaryCable
+  };
+}
+
 function getDesktopPackageDetails(comp) {
   if (!comp) return { isDesktop: false, needsMonitor: false, needsKeyboard: false, needsMouse: false };
   const ff = (comp.form_factor || "").toLowerCase();
@@ -4723,6 +5028,8 @@ function getDesktopPackageDetails(comp) {
       screenSummary: comp.screen_size + '" (' + comp.screen_nits + " nits, " + comp.screen_gamut + ")"
     };
   }
+
+  const io = getComputerVideoIOMap(comp);
 
   let keyboardMouseIncluded = false;
   let keyboardMouseNote = "No keyboard or mouse included in this standalone chassis. External input devices required.";
@@ -4773,72 +5080,6 @@ function getDesktopPackageDetails(comp) {
     keyboardMouseNote = "Ultra-compact mini PC chassis ships with power adapter and VESA bracket. External keyboard & mouse required.";
   }
 
-  let maxMonitors = 4;
-  let portsSummary = comp.ports_io || "DisplayPort + HDMI";
-  let gpuVerdict = "Natively supports multi-monitor output.";
-
-  if (comp.id === "c-apple-imac-24-m4") {
-    maxMonitors = 2; // 1 built-in 4.5K Retina + 1 external up to 6K @ 60Hz
-    gpuVerdict = "Built-in 24-inch 4.5K Retina display plus 1 external 6K display over Thunderbolt 4.";
-  } else if (comp.id === "c-mac-studio-m2-ultra") {
-    maxMonitors = 8;
-    gpuVerdict = "Apple M2 Ultra 60-Core GPU drives up to 8 displays simultaneously (8x 4K @ 60Hz, or 6x 6K @ 60Hz over 6x Thunderbolt 4 + 2x HDMI 2.1).";
-  } else if (comp.id === "c-mac-studio-m2max") {
-    maxMonitors = 5;
-    gpuVerdict = "Apple M2 Max 30-Core GPU drives up to 5 displays simultaneously (4x up to 6K @ 60Hz over Thunderbolt 4 + 1x 4K @ 240Hz or 8K @ 60Hz over HDMI 2.1).";
-  } else if (comp.id === "c-apple-mac-mini-m4-pro") {
-    maxMonitors = 3;
-    gpuVerdict = "Apple M4 Pro 16-Core GPU drives up to 3 displays simultaneously (3x 6K @ 60Hz over Thunderbolt 5 @ 120Gbps, or 1x 8K @ 60Hz + 1x 4K @ 240Hz).";
-  } else if (comp.id === "c-apple-mac-mini-m4") {
-    maxMonitors = 3;
-    gpuVerdict = "Apple M4 10-Core GPU drives up to 3 displays simultaneously (2x up to 6K @ 60Hz over Thunderbolt 4 + 1x 5K @ 60Hz or 4K @ 60Hz over HDMI).";
-  } else if (comp.id === "c-hp-omen-45l" || comp.id === "c-desktop-beast-4090") {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4090 with 24GB VRAM drives up to 4x 4K @ 120Hz/144Hz displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id === "c-lenovo-legion-tower-7i") {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4080 Super with 16GB GDDR6X drives up to 4x 4K/UHD displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id === "c-corsair-vengeance-i7500" || comp.id === "c-acer-predator-orion-5000") {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4070 Ti / Ti Super with 16GB/12GB GDDR6X drives up to 4x 4K displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id === "c-asus-rog-strix-g16chr") {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4070 Super with 12GB VRAM drives up to 4 displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id === "c-dell-xps-8960" || comp.id === "c-asus-rog-g22ch" || comp.id === "c-lenovo-legion-tower-5i") {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4060 / 4060 Ti drives up to 4 displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id === "c-hp-z2-mini-g9") {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA RTX 4000 Ada Generation with 20GB ECC VRAM drives up to 4x 4K/5K CAD/BIM displays via 4x Mini-DisplayPort 1.4a outputs.";
-  } else if (comp.id === "c-dell-precision-3680") {
-    maxMonitors = 4;
-    gpuVerdict = "NVIDIA RTX A2000 12GB ECC workstation GPU drives up to 4 displays simultaneously via 4x Mini-DisplayPort 1.4a.";
-  } else if (comp.id === "c-lenovo-thinkstation-p3-tiny") {
-    maxMonitors = 6;
-    gpuVerdict = "NVIDIA RTX A1000 8GB + Intel UHD 770 drives up to 6 displays simultaneously via 4x Mini-DisplayPort 1.4a, 1x DP, and 1x HDMI.";
-  } else if (comp.id === "c-minisforum-um780") {
-    maxMonitors = 4;
-    gpuVerdict = "AMD Radeon 780M drives up to 4x 4K @ 60Hz displays simultaneously via 2x USB4 (40Gbps Type-C) + 1x DisplayPort 1.4 + 1x HDMI 2.1.";
-  } else if (comp.id === "c-minisforum-ms-01") {
-    maxMonitors = 3;
-    gpuVerdict = "Intel Core i9 Iris Xe drives up to 3 displays via 2x USB4 (40Gbps Type-C) and 1x HDMI 2.1 (supports discrete PCIe half-height card expansion).";
-  } else if (comp.id === "c-asus-nuc-14-pro") {
-    maxMonitors = 4;
-    gpuVerdict = "Intel Arc Graphics drives up to 4 displays simultaneously via 2x Thunderbolt 4 / USB-C and 2x HDMI 2.1.";
-  } else if (comp.id === "c-beelink-ser8" || comp.id === "c-lenovo-thinkcentre-m70q") {
-    maxMonitors = 3;
-    gpuVerdict = "Drives up to 3 independent displays via DisplayPort 1.4, HDMI 2.1, and USB-C.";
-  } else if (comp.id === "c-lenovo-ideacentre-tower-gen9") {
-    maxMonitors = 3;
-    gpuVerdict = "AMD Radeon 780M on Ryzen 7 8700G APU drives up to 3 displays via 1x HDMI 2.1, 1x DisplayPort 1.4, and 1x VGA / USB-C.";
-  } else if (comp.id === "c-dell-inspiron-3020" || comp.id === "c-hp-pavilion-tp01" || comp.id === "c-beelink-eqr6") {
-    maxMonitors = 2;
-    gpuVerdict = "Drives dual displays simultaneously via dual HDMI / DisplayPort outputs.";
-  } else if (comp.id.includes("optiplex")) {
-    maxMonitors = 3;
-    gpuVerdict = "Intel UHD Graphics 770 natively drives up to 3 independent monitors via dual DisplayPort 1.4a and 1x HDMI 1.4b at 4K @ 60Hz without a discrete GPU.";
-  }
-
   const needsMonitor = comp.id !== "c-apple-imac-24-m4";
 
   return {
@@ -4848,9 +5089,9 @@ function getDesktopPackageDetails(comp) {
     needsMouse: !keyboardMouseIncluded,
     keyboardMouseIncluded: keyboardMouseIncluded,
     keyboardMouseNote: keyboardMouseNote,
-    maxMonitors: maxMonitors,
-    portsSummary: portsSummary,
-    gpuVerdict: gpuVerdict,
+    maxMonitors: io.maxDisplays,
+    portsSummary: io.portsSummary,
+    gpuVerdict: io.driveVerdict,
     monitorRequiredMessage: needsMonitor 
       ? "Desktop / Mini PC chassis does not have a built-in screen. At least one external monitor is required."
       : "All-in-one desktop includes a built-in 24-inch 4.5K Retina display. Additional secondary display optional."
@@ -4858,42 +5099,16 @@ function getDesktopPackageDetails(comp) {
 }
 
 function checkGpuMonitorCompatibility(comp, monitor, quantity) {
-  if (quantity === undefined) quantity = 2;
-  if (!comp || !monitor) return { compatible: true, message: "Compatible display connection." };
-  const pkg = getDesktopPackageDetails(comp);
-  
-  const isCompatible = quantity <= pkg.maxMonitors;
-  let connectionMethod = "";
-
-  if (comp.id === "c-apple-imac-24-m4") {
-    connectionMethod = "Connect external monitor directly to rear Thunderbolt / USB 4 port (supports up to 6K @ 60Hz alongside the built-in 4.5K display).";
-  } else if (comp.brand === "Apple") {
-    if (monitor.daisy_chain_support && (monitor.connector_summary || "").includes("USB-C")) {
-      connectionMethod = "Connect Monitor 1 via Thunderbolt / USB-C (video & 90W upstream power). Daisy-chain Monitor 2 via DP-Out or connect to 2nd Thunderbolt / HDMI port.";
-    } else {
-      connectionMethod = "Connect Monitor 1 via Thunderbolt / USB-C to DP/HDMI cable, Monitor 2 via native HDMI 2.1 port.";
-    }
-  } else if (comp.id === "c-hp-z2-mini-g9" || comp.id === "c-lenovo-thinkstation-p3-tiny" || comp.id === "c-dell-precision-3680") {
-    connectionMethod = "Connect via Mini-DisplayPort to DisplayPort/HDMI latching cables (or included mDP adapters) directly into the dedicated NVIDIA workstation GPU.";
-  } else if ((comp.gpu_tier || 0) >= 2 || (comp.gpu_model || "").includes("RTX") || (comp.gpu_model || "").includes("GeForce")) {
-    connectionMethod = "Connect via dedicated DisplayPort 1.4a and HDMI 2.1a ports on the NVIDIA RTX graphics card (supporting G-Sync, high refresh rates & full HDR).";
-  } else if (comp.id.includes("minisforum") || comp.id === "c-beelink-ser8" || comp.id === "c-asus-nuc-14-pro") {
-    connectionMethod = "Connect Monitor 1 via USB4 / Thunderbolt 4 (Type-C), Monitor 2 via native DisplayPort 1.4 or HDMI 2.1.";
-  } else if (comp.id.includes("optiplex") || comp.id === "c-lenovo-ideacentre-tower-gen9" || comp.id === "c-dell-inspiron-3020" || comp.id === "c-hp-pavilion-tp01") {
-    connectionMethod = "Connect Monitor 1 via DisplayPort 1.4a, Monitor 2 via HDMI or 2nd DisplayPort on motherboard I/O.";
-  } else {
-    connectionMethod = "Connect using DisplayPort 1.4 or HDMI ports on the computer chassis.";
-  }
-
+  const evalRes = evaluateMonitorPcCompatibility(comp, monitor, quantity);
   return {
-    compatible: isCompatible,
-    maxMonitors: pkg.maxMonitors,
-    requestedQuantity: quantity,
-    connectionMethod: connectionMethod,
-    badge: isCompatible ? "✓ 100% GPU Compatible" : "⚠️ Exceeds Recommended GPU Ports",
-    summary: isCompatible 
-      ? "✓ " + comp.name + "'s GPU (" + comp.gpu_model + ") effortlessly handles " + quantity + "x " + monitor.name + "."
-      : "⚠️ " + comp.name + " natively supports up to " + pkg.maxMonitors + " displays simultaneously."
+    compatible: evalRes.compatible,
+    maxMonitors: evalRes.maxDisplays,
+    requestedQuantity: evalRes.requestedQuantity,
+    connectionMethod: evalRes.primaryCable,
+    badge: evalRes.badgeText,
+    summary: evalRes.compatible 
+      ? "✓ " + comp.name + "'s GPU (" + comp.gpu_model + ") effortlessly handles " + evalRes.requestedQuantity + "x " + (monitor ? monitor.name : "Display") + ". " + evalRes.drivingNote
+      : "⚠️ " + comp.name + " natively supports up to " + evalRes.maxDisplays + " displays simultaneously."
   };
 }
 

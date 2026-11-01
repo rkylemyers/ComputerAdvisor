@@ -3361,6 +3361,8 @@
         { id: "row-battery", label: "BATTERY RUNTIME", category: "both" },
         { id: "row-weight", label: "CHASSIS WEIGHT", category: "both" },
         { id: "row-screen", label: "DISPLAY / NITS", category: "both" },
+        { id: "row-monitors-support", label: "MONITOR CAPACITY & GPU DRIVE", category: "both" },
+        { id: "row-video-io", label: "VIDEO OUTPUT PORTS & COMPATIBILITY", category: "both" },
         { id: "row-cpu", label: "PROCESSOR (CPU) ARCHITECTURE", category: "both" },
         { id: "row-cpu-rating", label: "CPU BENCHMARK & REVIEW", category: "both" },
         { id: "row-os", label: "OPERATING SYSTEM", category: "normal" },
@@ -3458,7 +3460,63 @@
             html += `<strong>${comp.weight_lbs} lbs</strong>`;
             if (comp.weight_lbs <= 3.0) html += ` <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; font-size: 9px; padding: 1px 4px; border-radius: 3px; font-weight: bold;">ULTRALIGHT</span>`;
           } else if (r.id === "row-screen") {
-            html += comp.screen_size === 0 ? `<span>External Mon. Req.</span>` : `<strong>${comp.screen_size}" • ${comp.screen_nits} nits</strong><br><span style="font-size: 11px; color: #94a3b8;">${comp.screen_gamut} • ${comp.screen_refresh_hz}Hz</span>`;
+            html += comp.screen_size === 0 ? `<span style="color: #38bdf8; font-weight: 700;">🖥️ External Mon. Req. (0" screen)</span>` : `<strong>${comp.screen_size}" • ${comp.screen_nits} nits</strong><br><span style="font-size: 11px; color: #94a3b8;">${comp.screen_gamut} • ${comp.screen_refresh_hz}Hz</span>`;
+          } else if (r.id === "row-monitors-support") {
+            const activeMonitor = (typeof workstationCart !== 'undefined' && workstationCart.monitor) 
+              ? workstationCart.monitor 
+              : ((typeof MONITORS_CATALOG !== 'undefined') ? MONITORS_CATALOG[0] : null);
+            const activeQty = (typeof currentHuntMonitorQty !== 'undefined' && currentHuntMonitorQty) 
+              ? currentHuntMonitorQty 
+              : ((typeof workstationCart !== 'undefined' && workstationCart.monitorQty) ? workstationCart.monitorQty : 2);
+            
+            const evalRes = (typeof evaluateMonitorPcCompatibility === 'function')
+              ? evaluateMonitorPcCompatibility(comp, activeMonitor, activeQty)
+              : { maxDisplays: 2, compatible: true, driveVerdict: "Supports external display output.", drivingNote: "Multi-monitor ready", badgeText: "✓ GPU Ready" };
+
+            html += `
+              <div style="background: rgba(15, 23, 42, 0.78); border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 6px; padding: 8px 10px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 5px;">
+                  <strong style="color: #38bdf8; font-size: 13.5px; font-family: 'Outfit', sans-serif;">
+                    🖥️ ${evalRes.maxDisplays} Display${evalRes.maxDisplays > 1 ? 's' : ''} Max
+                  </strong>
+                  <span style="font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; color: ${evalRes.badgeColor || '#34d399'}; background: ${evalRes.badgeBg || 'rgba(16,185,129,0.18)'}; border: 1px solid ${evalRes.badgeBorder || '#10b981'};">
+                    ${evalRes.compatible ? '✓ GPU Capable' : '⚠️ Limit Exceeded'}
+                  </span>
+                </div>
+                <div style="font-size: 11px; color: #cbd5e1; line-height: 1.4; margin-bottom: 5px;">
+                  ${evalRes.driveVerdict}
+                </div>
+                <div style="font-size: 10.5px; color: #94a3b8; border-top: 1px dashed rgba(255, 255, 255, 0.14); padding-top: 4px;">
+                  ⚡ Driving: <strong style="color: #fbbf24;">${activeQty}x ${activeMonitor ? activeMonitor.name.split('(')[0].trim() : 'Display(s)'}</strong>
+                  <div style="font-size: 10px; color: ${evalRes.compatible ? '#34d399' : '#f87171'}; margin-top: 2px;">${evalRes.drivingNote}</div>
+                </div>
+              </div>
+            `;
+          } else if (r.id === "row-video-io") {
+            const activeMonitor = (typeof workstationCart !== 'undefined' && workstationCart.monitor) 
+              ? workstationCart.monitor 
+              : ((typeof MONITORS_CATALOG !== 'undefined') ? MONITORS_CATALOG[0] : null);
+            const activeQty = (typeof currentHuntMonitorQty !== 'undefined' && currentHuntMonitorQty) 
+              ? currentHuntMonitorQty 
+              : ((typeof workstationCart !== 'undefined' && workstationCart.monitorQty) ? workstationCart.monitorQty : 2);
+            
+            const evalRes = (typeof evaluateMonitorPcCompatibility === 'function')
+              ? evaluateMonitorPcCompatibility(comp, activeMonitor, activeQty)
+              : { portsSummary: "DisplayPort + HDMI", badgeText: "✓ Compatible", primaryCable: "DisplayPort / HDMI" };
+
+            html += `
+              <div style="background: rgba(15, 23, 42, 0.78); border: 1.5px solid ${evalRes.badgeBorder || 'rgba(56,189,248,0.4)'}; border-radius: 6px; padding: 8px 10px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 700; color: #fbbf24; margin-bottom: 5px; line-height: 1.35;">
+                  🔌 ${evalRes.portsSummary}
+                </div>
+                <div style="font-size: 11px; color: ${evalRes.badgeColor || '#34d399'}; font-weight: 700; margin-bottom: 4px;">
+                  ${evalRes.badgeText}
+                </div>
+                <div style="font-size: 10.5px; color: #e2e8f0; line-height: 1.35; background: rgba(0,0,0,0.35); padding: 5px 7px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08);">
+                  <span style="color: #38bdf8; font-weight: 700;">Matching Cable:</span> ${evalRes.primaryCable}
+                </div>
+              </div>
+            `;
           } else if (r.id === "row-os") {
             html += `<strong>${comp.os}</strong>`;
           } else if (r.id === "row-os-edition") {
@@ -4764,6 +4822,9 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       if (comp) workstationCart.pc = comp;
       renderMonitorHunt();
       updateFloatingCartBadge();
+      if (typeof renderComparisonTable === 'function' && currentRecommendations && currentRecommendations.length > 0) {
+        renderComparisonTable();
+      }
     }
 
     function setMonitorHuntQuantity(qty) {
@@ -4786,6 +4847,9 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
 
       renderMonitorHunt();
       updateFloatingCartBadge();
+      if (typeof renderComparisonTable === 'function' && currentRecommendations && currentRecommendations.length > 0) {
+        renderComparisonTable();
+      }
     }
 
     function renderMonitorHunt() {
@@ -5022,6 +5086,9 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
 
       updateFloatingCartBadge();
       renderMonitorHunt();
+      if (typeof renderComparisonTable === 'function' && currentRecommendations && currentRecommendations.length > 0) {
+        renderComparisonTable();
+      }
       openWorkstationCart();
     }
 

@@ -364,6 +364,7 @@
       </div>
       <div style="display: flex; align-items: center; gap: 10px;">
         <span style="color: #84a98c; font-size: 11px; font-weight: 600;">● Gemini Active</span>
+        <button onclick="lockWorkspace()" style="background: rgba(226, 125, 96, 0.2); border: 1px solid #e27d60; color: #f7f4ea; border-radius: 4px; font-size: 10px; font-weight: 700; padding: 2px 7px; cursor: pointer; display: inline-flex; align-items: center; gap: 3px;" title="Lock session & return to security gate">🚪 Log Out</button>
       </div>
     </div>
 
@@ -405,6 +406,9 @@
             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
               <button id="auth-status-btn" onclick="openAuthModal()" class="win95-btn btn-anime-mint" title="Private Security & Access Settings">
                 🔒 Kyle (Unlocked)
+              </button>
+              <button id="logout-btn" onclick="lockWorkspace()" class="win95-btn btn-anime-peach" title="Lock session & return to security gate" style="font-weight: 700;">
+                🚪 Log Out
               </button>
               <button id="rain-ambience-btn" onclick="toggleRainAmbience()" class="win95-btn btn-anime-sky" title="Toggle Gentle Rain Sound">
                 🌧️ Rain Sound: <span style="color: #cbd5e1;">OFF</span>
@@ -1456,6 +1460,13 @@
     function lockWorkspace() {
       localStorage.removeItem("compute_match_auth_token");
       closeApiModal();
+      const err = document.getElementById("auth-gate-error");
+      if (err) {
+        err.style.display = "none";
+        err.innerText = "";
+      }
+      const codeInput = document.getElementById("email-2fa-code-input");
+      if (codeInput) codeInput.value = "";
       checkAuthStatus();
       playClickBeep();
     }

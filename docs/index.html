@@ -470,13 +470,16 @@
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; background: rgba(28, 34, 44, 0.85); color: #f1f5f9; padding: 10px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px;">
             
             <!-- Normal vs Detailed Toggle -->
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
               <span style="font-weight: 700; font-size: 13px; color: #e9c46a;">VIEW MODE:</span>
               <button id="mode-normal-btn" onclick="setViewMode('normal')" class="win95-btn win95-btn-active">
                 Normal
               </button>
               <button id="mode-detailed-btn" onclick="setViewMode('detailed')" class="win95-btn">
                 Detailed (Pro)
+              </button>
+              <button onclick="addMoreOptions()" class="win95-btn btn-anime-sunset" title="Broaden filters & add more alternative options" style="font-weight: 700; font-size: 12px;">
+                ➕ Add More Options
               </button>
             </div>
 
@@ -558,6 +561,12 @@
               </label>
 
               <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="wiz_category" value="Rugged" onclick="playClickBeep()">
+                <strong style="color: #e9c46a; font-size: 15px; margin-left: 4px;">🛡️ Rugged &amp; Manufacturing</strong>
+                <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Plant floor, CNC programming, automotive diagnostics, MIL-STD drops, sunlight readable.</div>
+              </label>
+
+              <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
                 <input type="radio" name="wiz_category" value="Home" onclick="playClickBeep()">
                 <strong style="color: #f4a261; font-size: 15px; margin-left: 4px;">🏡 Everyday &amp; Home</strong>
                 <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Web browsing, streaming, documents, smooth casual use.</div>
@@ -634,6 +643,12 @@
               <input type="radio" name="wiz_mobility" value="convertible_stylus" onclick="playClickBeep()">
               <strong style="color: #e27d60; font-size: 15px; margin-left: 4px;">✍️ 2-in-1 Touchscreen with Stylus</strong>
               <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Handwritten notes, digital drawing, 360-degree folding hinge.</div>
+            </label>
+
+            <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
+              <input type="radio" name="wiz_mobility" value="rugged_field" onclick="playClickBeep()">
+              <strong style="color: #e9c46a; font-size: 15px; margin-left: 4px;">🛡️ Rugged Field &amp; Harsh Outdoor</strong>
+              <div style="font-size: 11px; color: #cbd5e1; margin-top: 5px;">Sealed against water/dust (IP53/IP65), glove-touch, drop protection, hot-swap battery.</div>
             </label>
 
             <label style="background: rgba(30, 36, 46, 0.78); padding: 12px 14px; border: 1.5px solid rgba(255, 255, 255, 0.18); border-radius: 6px; display: block; cursor: pointer; transition: all 0.2s ease;">
@@ -812,6 +827,7 @@
                 <option value="all">All Form Factors</option>
                 <option value="laptop">Laptops / Ultrabooks</option>
                 <option value="2-in-1">2-in-1 Touch &amp; Stylus</option>
+                <option value="rugged">🛡️ Rugged &amp; Manufacturing</option>
                 <option value="desktop">Desktop / Mini PC</option>
               </select>
             </div>
@@ -873,9 +889,19 @@
         </div>
 
         <div style="padding: 12px; background: rgba(18, 22, 30, 0.75); overflow-x: auto;">
+          <!-- Low Options / Alternatives Callout Banner -->
+          <div id="low-options-banner" style="display: none; margin-bottom: 12px;"></div>
+
           <table class="retro-table" id="comparison-table">
             <!-- Dynamic Columns Injected by JavaScript -->
           </table>
+
+          <!-- Expand Columns Button -->
+          <div id="expand-columns-bar" style="display: none; text-align: center; margin-top: 12px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15);">
+            <button onclick="showMoreOptions()" class="win95-btn btn-anime-mint" style="font-size: 12px; font-weight: 700; padding: 6px 18px;">
+              ➕ Show More Candidate Columns (<span id="expand-columns-count"></span>)
+            </button>
+          </div>
         </div>
       </div>
 
@@ -2449,6 +2475,13 @@
         requires_touch_stylus = true;
       }
 
+      // Rugged / Manufacturing / Outdoor Fieldwork
+      if (category === "Rugged" || mobility_need === "rugged_field" || descLower.includes("rugged") || descLower.includes("manufacturing") || descLower.includes("plant") || descLower.includes("factory") || descLower.includes("cnc") || descLower.includes("automotive") || descLower.includes("fieldwork") || descLower.includes("warehouse")) {
+        ideal_cpu_tier = Math.max(ideal_cpu_tier, 4);
+        ideal_ram_gb = Math.max(ideal_ram_gb, 32);
+        min_ram_gb = Math.max(min_ram_gb, 16);
+      }
+
       // Enforce constraints extracted from syllabi
       if (extractedAcademicConstraints) {
         if (extractedAcademicConstraints.min_ram_gb) {
@@ -2798,6 +2831,7 @@
           const ff = (comp.form_factor || "").toLowerCase();
           if ((formFactor === "laptop" || activeChatFilters.nonLaptopOnly) && !ff.includes("laptop") && !ff.includes("2-in-1")) return false;
           if ((formFactor === "2-in-1" || activeChatFilters.convertibleOnly) && !ff.includes("2-in-1") && !comp.touchscreen) return false;
+          if (formFactor === "rugged" && !ff.includes("rugged") && !(comp.target_summary || "").toLowerCase().includes("rugged") && !(comp.ranking_badge || "").toLowerCase().includes("rugged")) return false;
           if ((formFactor === "desktop" || activeChatFilters.desktopOnly) && !ff.includes("desktop") && !ff.includes("mini pc")) return false;
         }
 
@@ -2827,15 +2861,131 @@
       renderComparisonTable(filtered);
     }
 
+    let currentDisplayLimit = 5;
+
+    function showMoreOptions() {
+      playClickBeep();
+      currentDisplayLimit = Math.min((currentDisplayLimit || 5) + 3, currentRecommendations.length);
+      renderComparisonTable(currentRecommendations);
+    }
+
+    function addMoreOptions() {
+      playClickBeep();
+
+      // 1. Relax RAM filter if active (e.g. from 32 to 16, or from 16 to 0)
+      const ramSelect = document.getElementById("filter-ram");
+      if (ramSelect && parseInt(ramSelect.value) > 0) {
+        if (ramSelect.value === "32") ramSelect.value = "16";
+        else ramSelect.value = "0";
+      }
+
+      // 2. Relax OS Edition if it was restricting options
+      const osSelect = document.getElementById("filter-os-edition");
+      if (osSelect && osSelect.value !== "all") {
+        osSelect.value = "all";
+      }
+
+      // 3. Relax Form Factor if filtering
+      const ffSelect = document.getElementById("filter-form-factor");
+      if (ffSelect && ffSelect.value !== "all") {
+        ffSelect.value = "all";
+      }
+
+      // 4. Ensure all OS checkboxes are checked
+      document.getElementById("filter-os-windows").checked = true;
+      document.getElementById("filter-os-macos").checked = true;
+      document.getElementById("filter-os-chrome").checked = true;
+
+      // 5. Clear chat strict filters
+      activeChatFilters.winProOnly = false;
+      activeChatFilters.nonLaptopOnly = false;
+      activeChatFilters.desktopOnly = false;
+      activeChatFilters.convertibleOnly = false;
+      activeChatFilters.macOnly = false;
+      activeChatFilters.winOnly = false;
+      activeChatFilters.maxPrice = null;
+
+      // 6. Increase display limit so user sees more columns side-by-side
+      currentDisplayLimit = Math.max((currentDisplayLimit || 5) + 3, 6);
+
+      // 7. If rawRecommendations itself has <= 2, pull runner-ups from full COMPUTERS_CATALOG
+      if (rawRecommendations.length <= 2) {
+        const existingIds = new Set(rawRecommendations.map(r => r.computer.id));
+        const runnerUps = COMPUTERS_CATALOG
+          .filter(c => !existingIds.has(c.id))
+          .slice(0, 4)
+          .map(c => ({
+            eligible: true,
+            computer: c,
+            active_score: 75,
+            sub_scores: { performance: 80, memory: 80, mobility: 75, display: 75, freshness: 80, budget_fit: 80 }
+          }));
+        rawRecommendations = [...rawRecommendations, ...runnerUps];
+      }
+
+      applyFiltersAndPriorities();
+      playRetroChime();
+    }
+
     // Render Side-by-Side Comparison Matrix
     function renderComparisonTable(models = currentRecommendations) {
       const table = document.getElementById("comparison-table");
+      const lowBanner = document.getElementById("low-options-banner");
+
       if (!models || models.length === 0) {
-        table.innerHTML = `<tr><td style="padding: 20px; text-align: center; color: #cbd5e1;">No models match your selected OS checkboxes.</td></tr>`;
+        if (lowBanner) {
+          lowBanner.style.display = "block";
+          lowBanner.innerHTML = `
+            <div class="win95-box" style="background: rgba(30, 41, 59, 0.95); border: 1.5px solid #ef4444; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-radius: 6px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 24px;">⚠️</span>
+                <div>
+                  <div style="font-size: 14px; font-weight: 700; color: #f87171;">No computers match all current filters!</div>
+                  <div style="font-size: 12px; color: #cbd5e1;">Click below to broaden your search and restore candidate recommendations.</div>
+                </div>
+              </div>
+              <button onclick="addMoreOptions()" class="win95-btn btn-anime-sunset" style="font-size: 13px; font-weight: 700; padding: 6px 16px;">
+                ➕ Add More Options / Restore All
+              </button>
+            </div>
+          `;
+        }
+        table.innerHTML = `<tr><td style="padding: 20px; text-align: center; color: #cbd5e1;">No models match your current filters. Click "Add More Options" above to broaden your search!</td></tr>`;
         return;
       }
 
-      const displayModels = models.slice(0, 5);
+      if (models.length <= 2) {
+        if (lowBanner) {
+          lowBanner.style.display = "block";
+          lowBanner.innerHTML = `
+            <div class="win95-box" style="background: rgba(30, 41, 59, 0.95); border: 1.5px solid #e9c46a; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 26px;">⚡</span>
+                <div>
+                  <div style="font-size: 14px; font-weight: 700; color: #f7f4ea;">
+                    Down to only ${models.length} matching option${models.length === 1 ? '' : 's'}!
+                  </div>
+                  <div style="font-size: 12px; color: #cbd5e1; margin-top: 2px;">
+                    Want to consider more alternatives? Click below to relax strict constraints and pull in adjacent options.
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button onclick="addMoreOptions()" class="win95-btn btn-anime-sunset" style="font-size: 13px; font-weight: 700; padding: 7px 18px; cursor: pointer;">
+                  ➕ Add More Options (Broaden Search)
+                </button>
+                <button onclick="resetAllFilters()" class="win95-btn" style="font-size: 12px; padding: 7px 14px; cursor: pointer;">
+                  ↺ Reset All Filters
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        if (lowBanner) lowBanner.style.display = "none";
+      }
+
+      const displayModels = models.slice(0, currentDisplayLimit || 5);
 
       const rows = [
         { id: "row-header", label: "MODEL / CHASSIS", category: "meta" },
@@ -3015,6 +3165,18 @@
 
       html += "</tbody>";
       table.innerHTML = html;
+
+      // Update Expand Columns Button
+      const expandBar = document.getElementById("expand-columns-bar");
+      const expandCount = document.getElementById("expand-columns-count");
+      if (expandBar && expandCount) {
+        if (models.length > (currentDisplayLimit || 5)) {
+          expandBar.style.display = "block";
+          expandCount.textContent = `Showing ${Math.min(models.length, currentDisplayLimit || 5)} of ${models.length}`;
+        } else {
+          expandBar.style.display = "none";
+        }
+      }
     }
 
     // Render Peripherals Grid
@@ -3425,6 +3587,8 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
           if (qLower.includes("chromebook") && id.includes("chromebook")) return true;
           if (qLower.includes("alienware") && id.includes("beast")) return true;
           if (qLower.includes("minisforum") && id.includes("minisforum")) return true;
+          if (qLower.includes("toughbook") && id.includes("toughbook")) return true;
+          if (qLower.includes("rugged") && id.includes("rugged")) return true;
           return false;
         });
 
@@ -3461,8 +3625,18 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
                (qLower.includes("aspire") && id.includes("aspire")) ||
                (qLower.includes("chromebook") && id.includes("chromebook")) ||
                (qLower.includes("alienware") && id.includes("beast")) ||
+               (qLower.includes("toughbook") && id.includes("toughbook")) ||
+               (qLower.includes("rugged") && id.includes("rugged")) ||
                (qLower.includes("minisforum") && id.includes("minisforum"));
       });
+
+      if (qLower.includes("rugged") || qLower.includes("toughbook") || qLower.includes("manufacturing") || qLower.includes("factory") || qLower.includes("outdoor") || qLower.includes("harsh")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        return `### 🛡️ Rugged & Manufacturing Laptops in ComputeMatch:\n\n` +
+          `• **Dell Latitude 5430 Rugged ($1,899):** Engineered for factory floors, automotive shops, and outdoor fieldwork. Features MIL-STD-810H military drop certification, IP53 sealed dust/liquid protection, an incredible **1,100-nit sunlight-viewable glove-touch screen**, dual hot-swappable batteries (22h continuous runtime), and a native RS-232 serial port for CNC machinery & PLCs.\n` +
+          `• **Panasonic TOUGHBOOK 55 Mk3 ($2,399):** The gold standard in modular semi-rugged computing. Built with a heavy-duty magnesium carry handle, modular xPAK expansion bays, spill-resistant drainage channels, and up to **38 hours** of hot-swappable battery endurance.\n\n` +
+          `Both models are built to withstand drops, vibrations, extreme temperatures, and grease/chemical exposure that would instantly destroy standard consumer ultrabooks!`;
+      }
 
       if (targetQueryModel && (qLower.includes("spec") || qLower.includes("about") || qLower.includes("tell me") || qLower.includes("what is") || qLower.includes("detail") || qLower.includes("good") || qLower.includes("why") || qLower.includes("how is"))) {
         return `### 💻 Overview: **${targetQueryModel.name}** ($${targetQueryModel.price.toLocaleString()})\n\n` +

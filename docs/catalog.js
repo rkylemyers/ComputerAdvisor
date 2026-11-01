@@ -1049,6 +1049,156 @@ const COMPUTERS_CATALOG = [
         "icon": "\ud83c\udf10"
       }
     ]
+  },
+  {
+    "id": "c-dell-latitude-rugged-5430",
+    "name": "Dell Latitude 5430 Rugged Laptop (2025/2026)",
+    "brand": "Dell",
+    "os": "Windows",
+    "form_factor": "Rugged Laptop",
+    "release_year": 2025,
+    "price": 1899.0,
+    "cpu_model": "Intel Core i7-1370H (14C/20T)",
+    "cpu_tier": 4,
+    "cpu_cores": 14,
+    "gpu_model": "Intel Iris Xe Graphics (or Discrete T550)",
+    "gpu_tier": 1,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 22.0,
+    "weight_lbs": 4.35,
+    "screen_size": 14.0,
+    "screen_nits": 1100,
+    "screen_gamut": "100% sRGB",
+    "screen_refresh_hz": 60,
+    "touchscreen": true,
+    "stylus_support": true,
+    "warranty_years": 3,
+    "purchase_url": "https://www.dell.com/en-us/shop/dell-laptops/latitude-5430-rugged-laptop/spd/latitude-14-5430-laptop",
+    "target_summary": "MIL-STD-810H & IP53 certified, drop-tested to 3 ft, dual hot-swap batteries (22h), 1100-nit glove-touch sunlight display.",
+    "user_rating": 4.8,
+    "review_count": 870,
+    "ranking_badge": "Best All-Weather Manufacturing & Field Work Laptop",
+    "os_edition": "Windows 11 Pro (64-bit Edition, BitLocker Full-Disk Encryption, Enterprise Domain Join)",
+    "official_url": "https://www.dell.com/en-us/shop/dell-laptops/latitude-5430-rugged-laptop/spd/latitude-14-5430-laptop",
+    "retailer": "Dell Rugged Store (Direct)",
+    "msrp": 2499.0,
+    "price_notes": "Official Dell Store direct configurator price with 32GB RAM / 1TB SSD / Dual Hot-Swap Batteries.",
+    "cpu_details": "Intel Core i7-1370H (14 Cores / 20 Threads: 6P-Cores @ 5.0 GHz Turbo + 8E-Cores, 24MB Smart Cache, Enterprise vPro)",
+    "cpu_benchmark_score": "PassMark: 28,400 | Geekbench 6: 12,200 Multi / 2,640 Single",
+    "cpu_independent_review": "Grade: A (Industrial Grade Muscle) \u2022 Sealed QuadCool thermal design prevents grease, dust, and metallic shavings from entering the chassis while delivering high sustained multi-core performance.",
+    "gpu_details": "Intel Iris Xe Graphics (96 EUs with hardware acceleration for diagnostics, schematics, and GIS mapping)",
+    "ram_details": "32GB DDR5-4800 MT/s (Dual SO-DIMM Slots, User-Upgradable up to 64GB DDR5)",
+    "ports_io": "2x Thunderbolt 4 / USB-C, 2x USB-A 3.2 Gen 1 (1 PowerShare), 1x Native RS-232 Serial Port (for CNC/PLCs), 2x RJ-45 Gigabit LAN, 1x HDMI 2.0, MicroSD Card Reader, Stylus Slot",
+    "webcam_biometrics": "1080p FHD RGB+IR Webcam with Mechanical Privacy Shutter, Windows Hello Facial Recognition & Touch Fingerprint Reader",
+    "thermals_acoustics": "QuadCool Sealed Dual-Fan Thermal Management (IP53 Ingress Protection from dust, grease, and airborne debris)",
+    "stores": [
+      {
+        "store": "Dell Rugged Store",
+        "url": "https://www.dell.com/en-us/shop/dell-laptops/latitude-5430-rugged-laptop/spd/latitude-14-5430-laptop",
+        "badge": "Direct OEM Configurator",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+Latitude+5430+Rugged",
+        "badge": "Authorized Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+Latitude+Rugged",
+        "badge": "Check Retail Stock",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+Latitude+5430+Rugged",
+        "badge": "Prime Delivery",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Dell+Latitude+5430+Rugged",
+        "badge": "Industrial Verified",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
+  },
+  {
+    "id": "c-panasonic-toughbook-55",
+    "name": "Panasonic TOUGHBOOK 55 Mk3 (2025/2026)",
+    "brand": "Panasonic",
+    "os": "Windows",
+    "form_factor": "Rugged Laptop",
+    "release_year": 2025,
+    "price": 2399.0,
+    "cpu_model": "Intel Core i7-1370P vPro (14C/20T)",
+    "cpu_tier": 4,
+    "cpu_cores": 14,
+    "gpu_model": "Intel Iris Xe Graphics",
+    "gpu_tier": 1,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 38.0,
+    "weight_lbs": 4.6,
+    "screen_size": 14.0,
+    "screen_nits": 1000,
+    "screen_gamut": "100% sRGB",
+    "screen_refresh_hz": 60,
+    "touchscreen": true,
+    "stylus_support": true,
+    "warranty_years": 3,
+    "purchase_url": "https://na.panasonic.com/us/computers-tablets-handhelds/computers/laptops/toughbook-55",
+    "target_summary": "Legendary TOUGHBOOK modular xPAK bays, built-in magnesium handle, MIL-STD-810H, IP53, up to 38-hour hot-swap runtime.",
+    "user_rating": 4.9,
+    "review_count": 1120,
+    "ranking_badge": "Gold Standard Semi-Rugged / Modular Workstation",
+    "os_edition": "Windows 11 Pro (64-bit Edition with vPro Hardware Security & Secured-Core PC)",
+    "official_url": "https://na.panasonic.com/us/computers-tablets-handhelds/computers/laptops/toughbook-55",
+    "retailer": "Panasonic Official Store",
+    "msrp": 2899.0,
+    "price_notes": "Official Panasonic TOUGHBOOK configured with 32GB RAM / 1TB Quick-Release SSD and Dual Hot-Swap Batteries.",
+    "cpu_details": "Intel Core i7-1370P vPro (14 Cores / 20 Threads, up to 5.2 GHz, 24MB Smart Cache, 28W P-Series Architecture)",
+    "cpu_benchmark_score": "PassMark: 26,900 | Geekbench 6: 11,800 Multi / 2,520 Single",
+    "cpu_independent_review": "Grade: A+ (Mission-Critical Field Reliability) \u2022 Built specifically for harsh environmental conditions: manufacturing assembly floors, automotive ECU diagnostic scanning, utility fleets, and outdoor fieldwork.",
+    "gpu_details": "Intel Iris Xe Graphics (with optional modular discrete GPU xPAK module)",
+    "ram_details": "32GB DDR4-3200 MT/s (Modular SO-DIMM, User-Upgradable to 64GB)",
+    "ports_io": "1x Thunderbolt 4 / USB-C, 2x USB-A 3.2 Gen 1, 1x Native DB9 Serial Port, 1x MicroSDXC, 1x HDMI 2.0, 1x Gigabit Ethernet LAN, Modular xPAK expansion bay, Stylus Garage",
+    "webcam_biometrics": "1080p FHD Webcam with Sliding Privacy Cover, Windows Hello IR & Contactless RFID / SmartCard Reader",
+    "thermals_acoustics": "Sealed magnesium-alloy chassis with spill-resistant keyboard, drainage channels, and built-in heavy-duty carrying handle",
+    "stores": [
+      {
+        "store": "Panasonic Official",
+        "url": "https://na.panasonic.com/us/computers-tablets-handhelds/computers/laptops/toughbook-55",
+        "badge": "Direct OEM TOUGHBOOK",
+        "icon": "\ud83c\udfe2"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Panasonic+Toughbook+55",
+        "badge": "Authorized Rugged Dealer",
+        "icon": "\ud83d\udcf7"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Panasonic+Toughbook",
+        "badge": "Enterprise Catalog",
+        "icon": "\ud83c\udff7\ufe0f"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Panasonic+Toughbook+55",
+        "badge": "Prime Verified",
+        "icon": "\ud83d\udce6"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Panasonic+Toughbook+55",
+        "badge": "Marketplace In Stock",
+        "icon": "\ud83d\udcbb"
+      }
+    ]
   }
 ];
 
@@ -1184,6 +1334,9 @@ function clientScoreComputer(comp, persona, currentYear = 2026) {
     }
   } else if (persona.mobility_need === 'convertible_stylus') {
     mobility_score = (comp.touchscreen && comp.stylus_support) ? 20.0 : 5.0;
+  } else if (persona.mobility_need === 'rugged_field' || persona.category === 'Rugged') {
+    const isRugged = comp.form_factor.toLowerCase().includes('rugged') || (comp.target_summary || '').toLowerCase().includes('rugged') || (comp.ranking_badge || '').toLowerCase().includes('rugged');
+    mobility_score = isRugged ? 20.0 : 11.0;
   } else if (persona.mobility_need === 'desk_bound') {
     mobility_score = (comp.form_factor === 'Desktop' || comp.form_factor === 'Mini PC') ? 18.0 : 15.0;
   } else {

@@ -15,6 +15,9 @@ import urllib.request
 import urllib.error
 from urllib.parse import urljoin
 import re
+import subprocess
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from typing import Dict, Any, List, Optional
 from concurrent.futures import ThreadPoolExecutor
 
@@ -506,6 +509,8 @@ class ComputerAdvisorHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_gemini_proxy(req_json)
         elif url_path == "/api/recommend":
             self.handle_recommend(req_json)
+        elif url_path == "/api/send-email":
+            self.handle_send_email(req_json)
         else:
             self.send_error(404, "Endpoint not found")
 
@@ -973,6 +978,55 @@ Return ONLY a valid JSON object with the following exact structure:
             "recommended_peripherals": matched_periphs,
             "all_peripherals": [p.__dict__ for p in PERIPHERALS_CATALOG]
         })
+
+    def handle_send_email(self, req_json: Dict[str, Any]):
+        recipient = (req_json.get("recipient") or "").strip()
+        subject = (req_json.get("subject") or "ComputeMatch Hardware Recommendations").strip()
+        html_body = req_json.get("html", "")
+        text_body = req_json.get("text", "")
+
+        if not recipient or "@" not in recipient:
+            self.send_json(400, {"success": False, "error": "Invalid recipient email address"})
+            return
+
+        try:
+            msg = MIMEMultipart("alternative")
+            msg["Subject"] = subject
+            msg["From"] = "adviser@computematch.internal"
+            msg["To"] = recipient
+
+            if text_body:
+                msg.attach(MIMEText(text_body, "plain", "utf-8"))
+            if html_body:
+                msg.attach(MIMEText(html_body, "html", "utf-8"))
+            elif not text_body:
+                msg.attach(MIMEText("No content provided.", "plain", "utf-8"))
+
+            sendmail_paths = ["/usr/sbin/sendmail", "/usr/bin/sendmail"]
+            sendmail_bin = next((p for p in sendmail_paths if os.path.exists(p) and os.access(p, os.X_OK)), None)
+            
+            if not sendmail_bin:
+                self.send_json(500, {"success": False, "error": "sendmail binary not found on host"})
+                return
+
+            proc = subprocess.Popen([sendmail_bin, "-t", "-oi"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout, stderr = proc.communicate(msg.as_bytes(), timeout=10)
+
+            if proc.returncode == 0:
+                self.send_json(200, {
+                    "success": True,
+                    "method": "sendmail",
+                    "recipient": recipient,
+                    "subject": subject
+                })
+            else:
+                err_text = stderr.decode('utf-8', errors='ignore')
+                self.send_json(500, {
+                    "success": False,
+                    "error": f"sendmail failed with exit code {proc.returncode}: {err_text}"
+                })
+        except Exception as ex:
+            self.send_json(500, {"success": False, "error": str(ex)})
 
 def run_server():
     socketserver.TCPServer.allow_reuse_address = True

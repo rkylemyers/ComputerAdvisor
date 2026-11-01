@@ -3351,6 +3351,90 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
         return `Here are 5 verified stores to purchase or check availability for the **${targetComp.name}**:\n\n${storeLinks}\n\nI have also updated your comparison matrix above with all 5 store links for direct checkout!`;
       }
 
+      // 1. SPECIFIC HARDWARE COMPARISON: ThinkPad T14 vs ThinkPad T14s
+      const isT14Comparison = (qLower.includes("t14") && qLower.includes("t14s")) || 
+                              (qLower.includes("t14") && (qLower.includes("diff") || qLower.includes("vs") || qLower.includes("compare") || qLower.includes("better")));
+      if (isT14Comparison) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-weight");
+        return `### 🔍 Lenovo ThinkPad T14 vs. ThinkPad T14s Breakdown:\n\n` +
+          `• **Weight & Portability:** The **T14s** ('s' stands for Slim/Flagship) is an ultralight executive chassis weighing only **2.76 lbs** (1.25 kg) built with carbon fiber and magnesium alloy. The standard **T14** is thicker and heavier at **3.1 to 3.4 lbs** (1.45 kg).\n` +
+          `• **RAM & Upgradability:** The standard **T14** features **dual SO-DIMM slots** (user-upgradable up to 64GB DDR5). The **T14s** uses **soldered LPDDR5X-7500 RAM**; while not user-swappable, it provides 35% higher memory bandwidth (crucial for its 50 TOPS AI NPU and Radeon 880M graphics) and sips significantly less power.\n` +
+          `• **Battery Runtime:** The **T14s** reaches an extraordinary **17.5+ hours** of battery life on a charge due to low-power LPDDR5X memory and Zen 5 efficiency, compared to ~12–13 hours on the standard T14.\n` +
+          `• **Networking & Ports:** The standard **T14** includes a built-in mechanical RJ-45 Gigabit Ethernet port; the **T14s** omits the Ethernet port to maintain its razor-thin profile, providing dual USB4 / Thunderbolt 4 ports with Wi-Fi 7.\n` +
+          `• **Verdict:** In ComputeMatch, we recommend the **ThinkPad T14s Gen 6 (2025/2026)** because its Zen 5 AMD Ryzen AI 7 PRO chip, 32GB RAM, and 2.76 lb build make it the ultimate business & programming ultrabook!`;
+      }
+
+      // 2. GENERAL MODEL-TO-MODEL COMPARISON (e.g. "Zenbook vs MacBook Air", "XPS vs Legion")
+      const isCompareQuery = qLower.includes("diff") || qLower.includes("vs") || qLower.includes("versus") || qLower.includes("compare") || qLower.includes("comparison") || qLower.includes("better than");
+      if (isCompareQuery) {
+        const allComps = (typeof COMPUTERS_CATALOG !== 'undefined') ? COMPUTERS_CATALOG : currentRecommendations.map(r => r.computer);
+        const matched = allComps.filter(c => {
+          const id = c.id.toLowerCase();
+          if (qLower.includes("zenbook") && id.includes("zenbook")) return true;
+          if (qLower.includes("thinkpad") && id.includes("thinkpad")) return true;
+          if (qLower.includes("t14") && id.includes("thinkpad")) return true;
+          if (qLower.includes("macbook air") && id.includes("macbook-air")) return true;
+          if (qLower.includes("macbook pro") && id.includes("macbook-pro")) return true;
+          if (qLower.includes("mac studio") && id.includes("studio")) return true;
+          if (qLower.includes("xps") && id.includes("xps")) return true;
+          if (qLower.includes("legion") && id.includes("legion")) return true;
+          if (qLower.includes("surface") && id.includes("surface")) return true;
+          if (qLower.includes("envy") && id.includes("envy")) return true;
+          if (qLower.includes("aspire") && id.includes("aspire")) return true;
+          if (qLower.includes("chromebook") && id.includes("chromebook")) return true;
+          if (qLower.includes("alienware") && id.includes("beast")) return true;
+          if (qLower.includes("minisforum") && id.includes("minisforum")) return true;
+          return false;
+        });
+
+        let c1 = matched[0];
+        let c2 = matched[1];
+        if (!c1 && currentRecommendations.length >= 1) c1 = currentRecommendations[0].computer;
+        if (!c2 && currentRecommendations.length >= 2) c2 = currentRecommendations[1].computer;
+
+        if (c1 && c2 && c1.id !== c2.id) {
+          return `### ⚖️ Head-to-Head: **${c1.name}** vs. **${c2.name}**\n\n` +
+            `• **Performance & CPU:** ${c1.name} has ${c1.cpu_model} (${c1.cpu_cores} cores) vs. ${c2.name} with ${c2.cpu_model} (${c2.cpu_cores} cores).\n` +
+            `• **Graphics & GPU:** ${c1.name} features ${c1.gpu_model} vs. ${c2.name} equipped with ${c2.gpu_model}.\n` +
+            `• **Memory & Storage:** ${c1.name} has ${c1.ram_gb}GB RAM / ${c1.storage_gb}GB SSD vs. ${c2.name} with ${c2.ram_gb}GB RAM / ${c2.storage_gb}GB SSD.\n` +
+            `• **Mobility & Battery:** ${c1.name} lasts ~${c1.battery_hours}h (${c1.weight_lbs} lbs) vs. ${c2.name} at ~${c2.battery_hours}h (${c2.weight_lbs} lbs).\n` +
+            `• **Display:** ${c1.name} (${c1.screen_size}" ${c1.screen_nits} nits, ${c1.screen_gamut}) vs. ${c2.name} (${c2.screen_size}" ${c2.screen_nits} nits, ${c2.screen_gamut}).\n` +
+            `• **Price:** $${c1.price.toLocaleString()} vs. $${c2.price.toLocaleString()}.\n\n` +
+            `Both models are compared side-by-side in your comparison table above!`;
+        }
+      }
+
+      // 3. SPECIFIC MODEL INQUIRY (e.g. "tell me about the xps 16", "legion pro specs", "zenbook details")
+      const allComps = (typeof COMPUTERS_CATALOG !== 'undefined') ? COMPUTERS_CATALOG : currentRecommendations.map(r => r.computer);
+      const targetQueryModel = allComps.find(c => {
+        const id = c.id.toLowerCase();
+        return (qLower.includes("zenbook") && id.includes("zenbook")) ||
+               ((qLower.includes("thinkpad") || qLower.includes("t14")) && id.includes("thinkpad")) ||
+               (qLower.includes("macbook air") && id.includes("macbook-air")) ||
+               (qLower.includes("macbook pro") && id.includes("macbook-pro")) ||
+               (qLower.includes("mac studio") && id.includes("studio")) ||
+               (qLower.includes("xps") && id.includes("xps")) ||
+               (qLower.includes("legion") && id.includes("legion")) ||
+               (qLower.includes("surface") && id.includes("surface")) ||
+               (qLower.includes("envy") && id.includes("envy")) ||
+               (qLower.includes("aspire") && id.includes("aspire")) ||
+               (qLower.includes("chromebook") && id.includes("chromebook")) ||
+               (qLower.includes("alienware") && id.includes("beast")) ||
+               (qLower.includes("minisforum") && id.includes("minisforum"));
+      });
+
+      if (targetQueryModel && (qLower.includes("spec") || qLower.includes("about") || qLower.includes("tell me") || qLower.includes("what is") || qLower.includes("detail") || qLower.includes("good") || qLower.includes("why") || qLower.includes("how is"))) {
+        return `### 💻 Overview: **${targetQueryModel.name}** ($${targetQueryModel.price.toLocaleString()})\n\n` +
+          `• **Processor:** ${targetQueryModel.cpu_details || targetQueryModel.cpu_model} (${targetQueryModel.cpu_benchmark_score || 'High Performance'})\n` +
+          `• **Graphics:** ${targetQueryModel.gpu_details || targetQueryModel.gpu_model}\n` +
+          `• **Memory & Storage:** ${targetQueryModel.ram_details || targetQueryModel.ram_gb + 'GB RAM'} with ${targetQueryModel.storage_gb}GB NVMe SSD\n` +
+          `• **Screen & Battery:** ${targetQueryModel.screen_size}" display (${targetQueryModel.screen_nits} nits, ${targetQueryModel.screen_gamut}) with up to ${targetQueryModel.battery_hours}h battery (${targetQueryModel.weight_lbs} lbs)\n` +
+          `• **Highlight:** ${targetQueryModel.target_summary}\n\n` +
+          `Check out the 5 verified store purchasing options in its column in the matrix above!`;
+      }
+
+      // 4. ACTIVE FILTER CONFIRMATION
       const top = currentRecommendations[0]?.computer;
       if (!top) {
         if (filterActionSummary) {
@@ -3360,23 +3444,89 @@ IMPORTANT INSTRUCTIONS FOR PRODUCT PRICING & LINKS:
       }
 
       if (filterActionSummary) {
-        return `${filterActionSummary} Your top recommendation is now the ${top.name} ($${top.price.toLocaleString()}), featuring ${top.os_edition || top.os}, ${top.ram_gb}GB RAM, and ${top.battery_hours > 0 ? top.battery_hours + ' hours of battery life' : 'desktop power'}.`;
+        return `${filterActionSummary} Your top recommendation is now the **${top.name}** ($${top.price.toLocaleString()}), featuring ${top.os_edition || top.os}, ${top.ram_gb}GB RAM, and ${top.battery_hours > 0 ? top.battery_hours + ' hours of battery life' : 'desktop power'}.`;
       }
 
-      if (qLower.includes("bright") || qLower.includes("screen") || qLower.includes("nit")) {
+      // 5. HARDWARE ASPECT QUESTIONS
+      if (qLower.includes("bright") || qLower.includes("screen") || qLower.includes("nit") || qLower.includes("oled") || qLower.includes("display")) {
+        highlightRow("row-screen");
         const sorted = [...currentRecommendations].sort((a,b) => b.computer.screen_nits - a.computer.screen_nits);
         const brightest = sorted[0].computer;
-        return `The brightest screen in your comparison is the ${brightest.name} with ${brightest.screen_nits} nits (${brightest.screen_gamut}). The display row has been highlighted above!`;
+        return `The brightest screen in your comparison is the **${brightest.name}** with **${brightest.screen_nits} nits** (${brightest.screen_gamut}, ${brightest.screen_refresh_hz || 60}Hz). The display row has been highlighted above!`;
       }
-      if (qLower.includes("battery") || qLower.includes("last")) {
+
+      if (qLower.includes("battery") || qLower.includes("last") || qLower.includes("charge") || qLower.includes("endurance")) {
+        highlightRow("row-battery");
         const sorted = [...currentRecommendations].sort((a,b) => b.computer.battery_hours - a.computer.battery_hours);
         const longest = sorted[0].computer;
-        return `The longest battery runtime is offered by the ${longest.name} at ${longest.battery_hours} hours. Battery runtime row highlighted above!`;
+        return `The longest battery runtime is offered by the **${longest.name}** at **${longest.battery_hours} hours** on a single charge. The battery runtime row has been highlighted above!`;
       }
-      if (qLower.includes("os") || qLower.includes("windows") || qLower.includes("pro") || qLower.includes("home") || qLower.includes("edition")) {
-        return `The ${top.name} runs ${top.os_edition || top.os}. Switch to Technical (Pro) view above to see exact OS editions and bitness across all compared machines!`;
+
+      if (qLower.includes("weight") || qLower.includes("light") || qLower.includes("heavy") || qLower.includes("carry") || qLower.includes("portable") || qLower.includes("travel")) {
+        highlightRow("row-weight");
+        const sorted = [...currentRecommendations].sort((a,b) => a.computer.weight_lbs - b.computer.weight_lbs);
+        const lightest = sorted[0].computer;
+        return `The lightest and most portable machine in your comparison is the **${lightest.name}** at just **${lightest.weight_lbs} lbs**! The weight row has been highlighted above.`;
       }
-      return `The ${top.name} ($${top.price.toLocaleString()}) ranks as your #1 match, featuring ${top.cpu_model}, ${top.ram_gb}GB RAM, and ${top.target_summary}`;
+
+      if (qLower.includes("ram") || qLower.includes("memory") || qLower.includes("sodimm") || qLower.includes("upgrade")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-ram");
+        const sorted = [...currentRecommendations].sort((a,b) => b.computer.ram_gb - a.computer.ram_gb);
+        const maxRam = sorted[0].computer;
+        return `**RAM & Memory Breakdown:** The highest memory machine in your comparison is the **${maxRam.name}** with **${maxRam.ram_gb}GB RAM** (${maxRam.ram_details || 'High-speed configuration'}). Dual SO-DIMM slots allow user upgrades, while soldered LPDDR5X (like in the T14s and Zenbook) provides peak bandwidth (up to 7500 MT/s) and energy savings. The memory row is highlighted above!`;
+      }
+
+      if (qLower.includes("cpu") || qLower.includes("processor") || qLower.includes("speed") || qLower.includes("clock") || qLower.includes("benchmark") || qLower.includes("intel") || qLower.includes("amd") || qLower.includes("ryzen")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-cpu");
+        return `**Processor & Architecture Analysis:**\n• **${top.name}:** Powered by the **${top.cpu_model}** (${top.cpu_benchmark_score || 'Tier ' + top.cpu_tier}). ${top.cpu_independent_review || ''}\nSwitch to the Technical (Pro) view above to inspect full CPU PassMark & Geekbench scores across every model!`;
+      }
+
+      if (qLower.includes("gpu") || qLower.includes("graphic") || qLower.includes("video card") || qLower.includes("gaming") || qLower.includes("cuda") || qLower.includes("rtx") || qLower.includes("vram")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-gpu");
+        const topGpu = [...currentRecommendations].sort((a,b) => (b.computer.gpu_tier || 0) - (a.computer.gpu_tier || 0))[0]?.computer || top;
+        return `**Graphics & GPU Analysis:** The top graphics performer in your comparison is the **${topGpu.name}** with **${topGpu.gpu_model}** (${topGpu.gpu_details || 'Dedicated Performance'}). It is ideal for 3D modeling, CUDA workloads, video rendering, and high-FPS gaming!`;
+      }
+
+      if (qLower.includes("port") || qLower.includes("thunderbolt") || qLower.includes("usb") || qLower.includes("hdmi") || qLower.includes("ethernet") || qLower.includes("rj45")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-ports");
+        return `**I/O & Connectivity:** The **${top.name}** features: ${top.ports_io || 'Full complement of modern USB-C and USB-A ports'}. The ports row has been highlighted above!`;
+      }
+
+      if (qLower.includes("thermal") || qLower.includes("fan") || qLower.includes("cooling") || qLower.includes("noise") || qLower.includes("loud") || qLower.includes("quiet") || qLower.includes("hot")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-thermals");
+        return `**Thermals & Acoustic Profile:** The **${top.name}** uses: ${top.thermals_acoustics || 'Active quiet cooling system'}. The thermal row has been highlighted above!`;
+      }
+
+      if (qLower.includes("os") || qLower.includes("windows") || qLower.includes("pro") || qLower.includes("home") || qLower.includes("edition") || qLower.includes("bitlocker")) {
+        if (currentViewMode !== 'detailed') setViewMode('detailed');
+        highlightRow("row-os-edition");
+        return `The **${top.name}** runs **${top.os_edition || top.os}**. Windows 11 Pro includes enterprise security features such as BitLocker full-disk encryption, Windows Sandbox, and Hyper-V virtualization. Switch to Technical (Pro) view above to see exact OS editions across all models!`;
+      }
+
+      // 6. GREETINGS & CASUAL INTERACTION
+      if (qLower === "hi" || qLower === "hello" || qLower === "hey" || qLower.startsWith("hello") || qLower.startsWith("good morning") || qLower.startsWith("howdy")) {
+        return `Hello! I am your ComputeMatch hardware advisor. You can ask me to:\n• ⚖️ **Compare models:** e.g., *"What is the difference between the T14 and T14s?"* or *"Compare XPS 16 vs Legion Pro"*\n• 💻 **Inspect specs:** e.g., *"Why 32GB RAM?"*, *"Which laptop has the best cooling?"*, or *"Which screen is brightest?"*\n• 🔍 **Filter results:** e.g., *"Show only laptops with 32GB RAM"* or *"Filter for Windows 11 Pro"*`;
+      }
+
+      // 7. NONSENSE / UNRECOGNIZED INPUT (Do NOT repeat #1 laptop!)
+      const recognizableKeywords = ["laptop", "computer", "pc", "mac", "price", "cost", "buy", "store", "screen", "battery", "ram", "cpu", "gpu", "t14", "zenbook", "legion", "xps", "apple", "dell", "lenovo", "asus", "hp", "surface", "spec", "help", "recommend"];
+      const hasRecognizableKeyword = recognizableKeywords.some(k => qLower.includes(k));
+
+      if (!hasRecognizableKeyword || qLower.length < 4 || /^[a-z]{1,4}$/.test(qLower) || /^[^a-zA-Z0-9]+$/.test(qLower)) {
+        return `I didn't quite catch that query! As your hardware advisor, here are a few things you can ask me:\n\n` +
+          `• ⚖️ **Comparisons:** *"What is the difference between the ThinkPad T14 and T14s?"* or *"Compare Zenbook 14 vs HP Envy"*\n` +
+          `• 💻 **Hardware Specs:** *"Why do I need 32GB RAM?"*, *"Which laptop has the best battery life?"*, or *"What is the brightest OLED screen?"*\n` +
+          `• 🔍 **Filters:** *"Show only laptops with 32GB RAM"* or *"Filter for Windows 11 Pro only"*\n` +
+          `• 🛒 **Purchasing:** *"Where can I buy the Lenovo Legion Pro 5i?"*`;
+      }
+
+      // 8. DEFAULT REASONABLE ANSWER (Specific to query context)
+      return `Based on your search criteria, the **${top.name}** ($${top.price.toLocaleString()}) ranks as your #1 match, featuring ${top.cpu_model}, ${top.ram_gb}GB RAM, and ${top.target_summary}`;
     }
 
     function formatChatMarkdown(text) {

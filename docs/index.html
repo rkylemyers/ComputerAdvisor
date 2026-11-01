@@ -1351,7 +1351,7 @@
   </div>
 
   <!-- ================= LO-FI GHIBLI AUDIO & APPLICATION SCRIPT ================= -->
-  <script src="catalog.js"></script>
+  <script src="catalog.js?v=20261101_1505"></script>
   <script>
     // State Management
     let currentStep = 1;
@@ -3202,66 +3202,87 @@
       renderComparisonTable(filtered);
     }
 
-    let currentDisplayLimit = 5;
+    let currentDisplayLimit = 8;
 
     function showMoreOptions() {
       playClickBeep();
-      currentDisplayLimit = Math.min((currentDisplayLimit || 5) + 3, currentRecommendations.length);
+      currentDisplayLimit = Math.min((currentDisplayLimit || 8) + 6, currentRecommendations.length);
       renderComparisonTable(currentRecommendations);
     }
 
     function addMoreOptions() {
       playClickBeep();
 
-      // 1. Relax RAM filter if active (e.g. from 32 to 16, or from 16 to 0)
+      // 1. Relax secondary restriction filters (RAM, CPU family, GPU type, Storage, OS Edition)
       const ramSelect = document.getElementById("filter-ram");
-      if (ramSelect && parseInt(ramSelect.value) > 0) {
-        if (ramSelect.value === "32") ramSelect.value = "16";
-        else ramSelect.value = "0";
-      }
+      if (ramSelect) ramSelect.value = "0";
 
-      // 2. Relax OS Edition if it was restricting options
+      const cpuSelect = document.getElementById("filter-cpu-family");
+      if (cpuSelect) cpuSelect.value = "all";
+
+      const gpuSelect = document.getElementById("filter-gpu-type");
+      if (gpuSelect) gpuSelect.value = "all";
+
+      const storageSelect = document.getElementById("filter-storage");
+      if (storageSelect) storageSelect.value = "0";
+
       const osSelect = document.getElementById("filter-os-edition");
-      if (osSelect && osSelect.value !== "all") {
-        osSelect.value = "all";
-      }
+      if (osSelect) osSelect.value = "all";
 
-      // 3. Relax Form Factor if filtering
-      const ffSelect = document.getElementById("filter-form-factor");
-      if (ffSelect && ffSelect.value !== "all") {
-        ffSelect.value = "all";
-      }
+      // 2. Ensure all operating system checkboxes are enabled
+      const winCb = document.getElementById("filter-os-windows");
+      if (winCb) winCb.checked = true;
+      const macCb = document.getElementById("filter-os-macos");
+      if (macCb) macCb.checked = true;
+      const chromeCb = document.getElementById("filter-os-chrome");
+      if (chromeCb) chromeCb.checked = true;
 
-      // 4. Ensure all OS checkboxes are checked
-      document.getElementById("filter-os-windows").checked = true;
-      document.getElementById("filter-os-macos").checked = true;
-      document.getElementById("filter-os-chrome").checked = true;
-
-      // 5. Clear chat strict filters
+      // 3. Clear restrictive chat filters EXCEPT preserve the user's selected form factor!
+      const currentFf = document.getElementById("filter-form-factor") ? document.getElementById("filter-form-factor").value : "all";
       activeChatFilters.winProOnly = false;
       activeChatFilters.nonLaptopOnly = false;
-      activeChatFilters.desktopOnly = false;
       activeChatFilters.convertibleOnly = false;
       activeChatFilters.macOnly = false;
       activeChatFilters.winOnly = false;
       activeChatFilters.maxPrice = null;
+      // CRITICAL: NEVER wipe out desktop selection when the user is explicitly searching for desktops!
+      if (currentFf !== "desktop") {
+        activeChatFilters.desktopOnly = false;
+      }
 
-      // 6. Increase display limit so user sees more columns side-by-side
-      currentDisplayLimit = Math.max((currentDisplayLimit || 5) + 3, 6);
+      // 4. Expand display limit so user sees all available matching columns side-by-side
+      currentDisplayLimit = 35;
 
-      // 7. If rawRecommendations itself has <= 2, pull runner-ups from full COMPUTERS_CATALOG
-      if (rawRecommendations.length <= 2) {
-        const existingIds = new Set(rawRecommendations.map(r => r.computer.id));
-        const runnerUps = COMPUTERS_CATALOG
-          .filter(c => !existingIds.has(c.id))
-          .slice(0, 4)
-          .map(c => ({
-            eligible: true,
-            computer: c,
-            active_score: 75,
-            sub_scores: { performance: 80, memory: 80, mobility: 75, display: 75, freshness: 80, budget_fit: 80 }
-          }));
-        rawRecommendations = [...rawRecommendations, ...runnerUps];
+      // 5. Pull in ALL matching computers from COMPUTERS_CATALOG that match the selected form factor!
+      const existingIds = new Set(rawRecommendations.map(r => r.computer.id));
+      const pool = (typeof COMPUTERS_CATALOG !== 'undefined') ? COMPUTERS_CATALOG : [];
+      
+      const newMatches = pool
+        .filter(c => !existingIds.has(c.id))
+        .filter(c => {
+          if (currentFf === "desktop" || activeChatFilters.desktopOnly) {
+            const ff = (c.form_factor || "").toLowerCase();
+            return ff.includes("desktop") || ff.includes("mini pc") || c.screen_size === 0;
+          } else if (currentFf === "laptop" || activeChatFilters.nonLaptopOnly) {
+            const ff = (c.form_factor || "").toLowerCase();
+            return ff.includes("laptop") || ff.includes("2-in-1");
+          } else if (currentFf === "2-in-1" || activeChatFilters.convertibleOnly) {
+            return (c.form_factor || "").toLowerCase().includes("2-in-1") || c.touchscreen;
+          } else if (currentFf === "rugged") {
+            const ff = (c.form_factor || "").toLowerCase();
+            return ff.includes("rugged") || (c.target_summary || "").toLowerCase().includes("rugged") || (c.ranking_badge || "").toLowerCase().includes("rugged");
+          }
+          return true;
+        })
+        .map(c => ({
+          eligible: true,
+          computer: c,
+          active_score: 82,
+          sub_scores: { performance: 80, memory: 80, mobility: 85, display: 85, freshness: 80, budget_fit: 80 }
+        }));
+
+      if (newMatches.length > 0) {
+        rawRecommendations = [...rawRecommendations, ...newMatches];
       }
 
       applyFiltersAndPriorities();
@@ -3295,27 +3316,29 @@
         return;
       }
 
-      if (models.length <= 2) {
+      if (models.length <= 3) {
         if (lowBanner) {
           lowBanner.style.display = "block";
+          const currentFf = document.getElementById("filter-form-factor") ? document.getElementById("filter-form-factor").value : "all";
+          const ffLabel = currentFf === "desktop" ? "Desktops & Mini PCs" : (currentFf === "rugged" ? "Rugged Models" : "Options");
           lowBanner.innerHTML = `
             <div class="win95-box" style="background: rgba(30, 41, 59, 0.95); border: 1.5px solid #e9c46a; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">
               <div style="display: flex; align-items: center; gap: 12px;">
                 <span style="font-size: 26px;">⚡</span>
                 <div>
                   <div style="font-size: 14px; font-weight: 700; color: #f7f4ea;">
-                    Down to only ${models.length} matching option${models.length === 1 ? '' : 's'}!
+                    Showing ${models.length} matching option${models.length === 1 ? '' : 's'}!
                   </div>
                   <div style="font-size: 12px; color: #cbd5e1; margin-top: 2px;">
-                    Want to consider more alternatives? Click below to relax strict constraints and pull in adjacent options.
+                    Want to explore more choices? Click below to instantly load all ${ffLabel} from the entire catalog.
                   </div>
                 </div>
               </div>
               <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <button onclick="addMoreOptions()" class="win95-btn btn-anime-sunset" style="font-size: 13px; font-weight: 700; padding: 7px 18px; cursor: pointer;">
-                  ➕ Add More Options (Broaden Search)
+                  ➕ Add More Options (Load All ${ffLabel})
                 </button>
-                <button onclick="resetAllFilters()" class="win95-btn" style="font-size: 12px; padding: 7px 14px; cursor: pointer;">
+                <button onclick="resetAllHardwareFilters()" class="win95-btn" style="font-size: 12px; padding: 7px 14px; cursor: pointer;">
                   ↺ Reset All Filters
                 </button>
               </div>

@@ -2248,6 +2248,756 @@ const COMPUTERS_CATALOG = [
         "icon": "💻"
       }
     ]
+  },
+  {
+    "id": "c-dell-inspiron-3020",
+    "name": "Dell Inspiron Small Desktop 3020",
+    "brand": "Dell",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 649.0,
+    "cpu_model": "Intel Core i5-13400 (10C/16T)",
+    "cpu_tier": 3,
+    "cpu_cores": 10,
+    "gpu_model": "Intel UHD Graphics 730",
+    "gpu_tier": 0,
+    "ram_gb": 16,
+    "storage_gb": 512,
+    "battery_hours": 0.0,
+    "weight_lbs": 10.8,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.dell.com/en-us/shop/desktop-computers/inspiron-small-desktop/spd/inspiron-3020-small-desktop",
+    "target_summary": "Space-saving compact small form factor desktop for home office, family multitasking, and dual monitor productivity.",
+    "user_rating": 4.5,
+    "review_count": 820,
+    "ranking_badge": "Best Compact Family Desktop",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://www.dell.com/en-us/shop/desktop-computers/inspiron-small-desktop/spd/inspiron-3020-small-desktop",
+    "retailer": "Dell Direct",
+    "msrp": 729.0,
+    "price_notes": "Dell standard direct sale price with wired Dell multimedia keyboard and mouse included.",
+    "cpu_details": "Intel Core i5-13400 (10 Cores: 6 Performance + 4 Efficient, up to 4.60 GHz, 20MB Cache, 65W base)",
+    "cpu_benchmark_score": "PassMark: 25,600 | Geekbench 6: 11,200 Multi / 2,420 Single",
+    "cpu_independent_review": "Grade: A- • 10 cores handle intense browser multitasking, accounting spreadsheets, and Zoom without noise.",
+    "gpu_details": "Intel UHD Graphics 730 (Shared System Memory, Dual Independent Display Output)",
+    "ram_details": "16GB DDR4-3200 (2x8GB Dual-Channel, Upgradable to 64GB DDR4)",
+    "ports_io": "Front: 2x USB 3.2 Gen 1, 2x USB 2.0, SD Card Reader, 3.5mm; Rear: 1x HDMI 1.4b, 1x DisplayPort 1.4, 2x USB 3.2, 2x USB 2.0, RJ-45 Gigabit LAN",
+    "webcam_biometrics": "External USB webcam recommended (Logitech C920 / Brio)",
+    "thermals_acoustics": "Small Form Factor (SFF) 9.3-liter ventilated chassis, ultra-quiet fan profile (~24 dBA idle)",
+    "stores": [
+      {
+        "store": "Dell Direct",
+        "url": "https://www.dell.com/en-us/shop/desktop-computers/inspiron-small-desktop/spd/inspiron-3020-small-desktop",
+        "badge": "Direct OEM Config",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Dell+Inspiron+Small+Desktop",
+        "badge": "In Store Pickup",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+Inspiron+3020+Desktop+i5",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+Inspiron+3020",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Staples",
+        "url": "https://www.staples.com/dell+inspiron+desktop/directory_dell+inspiron+desktop",
+        "badge": "Business Retailer",
+        "icon": "💼"
+      }
+    ]
+  },
+  {
+    "id": "c-hp-pavilion-tp01",
+    "name": "HP Pavilion Desktop TP01",
+    "brand": "HP",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 599.0,
+    "cpu_model": "AMD Ryzen 7 5700G (8C/16T)",
+    "cpu_tier": 3,
+    "cpu_cores": 8,
+    "gpu_model": "AMD Radeon Vega 8 Graphics",
+    "gpu_tier": 1,
+    "ram_gb": 16,
+    "storage_gb": 512,
+    "battery_hours": 0.0,
+    "weight_lbs": 13.1,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.hp.com/us-en/shop/pdp/hp-pavilion-desktop-tp01",
+    "target_summary": "High-value 8-core desktop tower with fast Radeon graphics and brushed silver aesthetic.",
+    "user_rating": 4.6,
+    "review_count": 1150,
+    "ranking_badge": "Best Value 8-Core Everyday Tower",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://www.hp.com/us-en/shop/pdp/hp-pavilion-desktop-tp01",
+    "retailer": "HP Store",
+    "msrp": 699.0,
+    "price_notes": "HP official store price with USB wired keyboard and optical mouse included.",
+    "cpu_details": "AMD Ryzen 7 5700G (8 Cores / 16 Threads, up to 4.6 GHz Boost, 16MB L3 Cache)",
+    "cpu_benchmark_score": "PassMark: 24,800 | Geekbench 6: 10,400 Multi / 2,150 Single",
+    "cpu_independent_review": "Grade: A • 8 physical Zen 3 cores deliver outstanding responsiveness for heavy office suites and light creator workflows.",
+    "gpu_details": "AMD Radeon Vega 8 (2000 MHz, 8 Compute Units, smooth 4K video playback & esports)",
+    "ram_details": "16GB DDR4-3200 MHz (2x8GB, Upgradable to 32GB)",
+    "ports_io": "Front: 1x USB-C 5Gbps, 4x USB-A 5Gbps, 3.5mm combo; Rear: 4x USB 2.0, 1x HDMI 1.4b, 1x VGA, Gigabit LAN",
+    "webcam_biometrics": "External USB webcam required",
+    "thermals_acoustics": "15-liter tower chassis with front airflow intake slots, quiet ~26 dBA operation",
+    "stores": [
+      {
+        "store": "HP Official Store",
+        "url": "https://www.hp.com/us-en/shop/pdp/hp-pavilion-desktop-tp01",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=HP+Pavilion+Desktop+TP01",
+        "badge": "In Store Today",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=HP+Pavilion+Desktop+TP01+Ryzen+7",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "Walmart",
+        "url": "https://www.walmart.com/search?q=HP+Pavilion+Desktop+TP01",
+        "badge": "Retail Value",
+        "icon": "🛒"
+      },
+      {
+        "store": "Costco",
+        "url": "https://www.costco.com/desktops.html",
+        "badge": "Member Savings",
+        "icon": "🏬"
+      }
+    ]
+  },
+  {
+    "id": "c-lenovo-thinkcentre-m70q",
+    "name": "Lenovo ThinkCentre M70q Gen 4 Tiny",
+    "brand": "Lenovo",
+    "os": "Windows",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 729.0,
+    "cpu_model": "Intel Core i5-13500T (14C/20T vPro)",
+    "cpu_tier": 3,
+    "cpu_cores": 14,
+    "gpu_model": "Intel UHD Graphics 770",
+    "gpu_tier": 0,
+    "ram_gb": 16,
+    "storage_gb": 512,
+    "battery_hours": 0.0,
+    "weight_lbs": 2.8,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 3,
+    "purchase_url": "https://www.lenovo.com/us/en/p/desktops/thinkcentre/m-series-tiny/thinkcentre-m70q-gen-4-intel/len102c0032",
+    "target_summary": "1-Liter military-grade enterprise micro desktop with 14-core Intel vPro security and 3-year warranty.",
+    "user_rating": 4.8,
+    "review_count": 640,
+    "ranking_badge": "Best 1-Liter Enterprise Tiny PC",
+    "os_edition": "Windows 11 Pro 64-bit Edition (Enterprise Ready)",
+    "official_url": "https://www.lenovo.com/us/en/p/desktops/thinkcentre/m-series-tiny/thinkcentre-m70q-gen-4-intel/len102c0032",
+    "retailer": "Lenovo Official Store",
+    "msrp": 849.0,
+    "price_notes": "Lenovo direct business discount including 3-year onsite warranty and USB business keyboard/mouse.",
+    "cpu_details": "Intel Core i5-13500T (14 Cores: 6P + 8E, 20 Threads, up to 4.60 GHz, 35W low-power vPro design)",
+    "cpu_benchmark_score": "PassMark: 28,100 | Geekbench 6: 12,300 Multi / 2,450 Single",
+    "cpu_independent_review": "Grade: S- (Business Reliability) • MIL-STD-810H certified for dust, temperature, and 24/7 reliability.",
+    "gpu_details": "Intel UHD Graphics 770 (Drives up to 3 independent displays natively)",
+    "ram_details": "16GB DDR4-3200 (Dual SODIMM slots, Upgradable to 64GB)",
+    "ports_io": "Front: 1x USB-C 3.2 Gen 2, 1x USB-A 3.2 Gen 2, 3.5mm; Rear: 1x HDMI 2.1 TMDS, 1x DisplayPort 1.4, 2x USB 3.2 Gen 1, 2x USB 2.0, Gigabit LAN",
+    "webcam_biometrics": "Supports Windows Hello via external USB webcam / fingerprint keyboard",
+    "thermals_acoustics": "1-liter metal chassis (7.0 x 7.2 x 1.4 inches), whisper-quiet intelligent cooling (<22 dBA)",
+    "stores": [
+      {
+        "store": "Lenovo Official Store",
+        "url": "https://www.lenovo.com/us/en/p/desktops/thinkcentre/m-series-tiny/thinkcentre-m70q-gen-4-intel/len102c0032",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "CDW",
+        "url": "https://www.cdw.com/search/?key=ThinkCentre+M70q+Gen+4",
+        "badge": "Enterprise Partner",
+        "icon": "💼"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ThinkCentre+M70q",
+        "badge": "Verified In Stock",
+        "icon": "📷"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+ThinkCentre+M70q+Gen+4",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ThinkCentre+M70q",
+        "badge": "Authorized Retailer",
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-lenovo-legion-tower-5i",
+    "name": "Lenovo Legion Tower 5i Gen 8",
+    "brand": "Lenovo",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 1199.0,
+    "cpu_model": "Intel Core i5-14400F (10C/16T)",
+    "cpu_tier": 3,
+    "cpu_cores": 10,
+    "gpu_model": "NVIDIA GeForce RTX 4060 (8GB GDDR6)",
+    "gpu_tier": 2,
+    "ram_gb": 16,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 30.8,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.lenovo.com/us/en/p/desktops/legion-desktops/legion-t-series-towers/legion-tower-5i-gen-8-intel/len102g0005",
+    "target_summary": "Modern gaming and creator mid-tower with RTX 4060, DLSS 3 Frame Generation, and ARGB lighting.",
+    "user_rating": 4.7,
+    "review_count": 890,
+    "ranking_badge": "Best Sub-$1,200 Gaming Tower",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://www.lenovo.com/us/en/p/desktops/legion-desktops/legion-t-series-towers/legion-tower-5i-gen-8-intel/len102g0005",
+    "retailer": "Lenovo Official Store",
+    "msrp": 1299.0,
+    "price_notes": "Lenovo direct price with 500W 80-Plus PSU and Legion USB gaming keyboard & mouse included.",
+    "cpu_details": "Intel Core i5-14400F (10 Cores: 6P + 4E, up to 4.70 GHz, 20MB Cache)",
+    "cpu_benchmark_score": "PassMark: 27,200 | Geekbench 6: 12,800 Multi / 2,480 Single",
+    "cpu_independent_review": "Grade: A • Outstanding mid-range performance paired with dedicated GeForce RTX graphics.",
+    "gpu_details": "NVIDIA GeForce RTX 4060 (8GB GDDR6, Ada Lovelace, DLSS 3, Ray Tracing, 3x DP 1.4a + 1x HDMI 2.1)",
+    "ram_details": "16GB DDR5-5600 MT/s (2x8GB, 4x DIMM Slots, Upgradable to 64GB)",
+    "ports_io": "Front: 2x USB-A 3.2 Gen 1, 3.5mm audio/mic; Rear: 1x USB-C 3.2 Gen 2, 4x USB-A, 1x RJ-45 2.5G LAN, 3x DP 1.4a, 1x HDMI 2.1a",
+    "webcam_biometrics": "Requires external webcam",
+    "thermals_acoustics": "Legion Coldfront 5.0 with 5 ARGB chassis fans, mesh front panel, ~34 dBA gaming load",
+    "stores": [
+      {
+        "store": "Lenovo Official Store",
+        "url": "https://www.lenovo.com/us/en/p/desktops/legion-desktops/legion-t-series-towers/legion-tower-5i-gen-8-intel/len102g0005",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Lenovo+Legion+Tower+5i",
+        "badge": "Verified In Stock",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+Legion+Tower+5i+RTX+4060",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Lenovo+Legion+Tower+5i",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Micro Center",
+        "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Legion+Tower+5i",
+        "badge": "In Store Pick",
+        "icon": "🏬"
+      }
+    ]
+  },
+  {
+    "id": "c-apple-imac-24-m4",
+    "name": "Apple iMac 24-inch (M4, 2024/2025)",
+    "brand": "Apple",
+    "os": "macOS",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 1299.0,
+    "cpu_model": "Apple M4 (8-Core CPU / 8-Core GPU)",
+    "cpu_tier": 4,
+    "cpu_cores": 8,
+    "gpu_model": "Apple 8-Core GPU (Hardware Ray Tracing)",
+    "gpu_tier": 2,
+    "ram_gb": 16,
+    "storage_gb": 256,
+    "battery_hours": 0.0,
+    "weight_lbs": 9.75,
+    "screen_size": 24.0,
+    "screen_nits": 500,
+    "screen_gamut": "100% DCI-P3",
+    "screen_refresh_hz": 60,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.apple.com/imac/",
+    "target_summary": "All-in-one desktop masterpiece with gorgeous 4.5K Retina display, 12MP Center Stage camera, and color-matched Magic Keyboard & Mouse.",
+    "user_rating": 4.9,
+    "review_count": 1420,
+    "ranking_badge": "Best All-In-One Desktop",
+    "os_edition": "macOS Sequoia (UNIX certified workstation)",
+    "official_url": "https://www.apple.com/imac/",
+    "retailer": "Apple Store",
+    "msrp": 1299.0,
+    "price_notes": "Official Apple price including 24-inch 4.5K screen, Magic Keyboard, and Magic Mouse in the box.",
+    "cpu_details": "Apple M4 (8-Core CPU: 4 Performance + 4 Efficiency cores, 16-Core Neural Engine 38 TOPS)",
+    "cpu_benchmark_score": "Geekbench 6: 13,200 Multi / 3,750 Single (Industry leading single-core)",
+    "cpu_independent_review": "Grade: S (Elegance & Power) • Everything built directly into an ultra-thin 11.5mm display chassis with silent acoustic fans.",
+    "gpu_details": "Apple 8-Core GPU with hardware-accelerated ray tracing and mesh shading",
+    "ram_details": "16GB Unified Memory (120 GB/s memory bandwidth)",
+    "ports_io": "2x Thunderbolt / USB 4 (up to 40Gbps), 3.5mm headphone jack with advanced high-impedance support",
+    "webcam_biometrics": "12MP Center Stage Camera with Desk View support & studio-quality 3-mic array",
+    "thermals_acoustics": "Ultra-thin 11.5mm aluminum chassis with near-silent dual fans (<18 dBA)",
+    "stores": [
+      {
+        "store": "Apple Official Store",
+        "url": "https://www.apple.com/imac/",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=iMac+24+inch+M4",
+        "badge": "In Store Today",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Apple+iMac+24+inch+M4",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Apple+iMac+M4",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Adorama",
+        "url": "https://www.adorama.com/l/?searchinfo=apple+imac+m4",
+        "badge": "Pro Creative Retailer",
+        "icon": "🎨"
+      }
+    ]
+  },
+  {
+    "id": "c-asus-rog-g22ch",
+    "name": "ASUS ROG G22CH Compact Gaming Desktop",
+    "brand": "ASUS",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 1399.0,
+    "cpu_model": "Intel Core i7-13700F (16C/24T)",
+    "cpu_tier": 4,
+    "cpu_cores": 16,
+    "gpu_model": "NVIDIA GeForce RTX 4060 Ti (8GB GDDR6)",
+    "gpu_tier": 3,
+    "ram_gb": 16,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 18.5,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://rog.asus.com/desktops/small-form-factor/rog-g22ch-series/",
+    "target_summary": "Ultra-compact 10-liter small form factor gaming desktop with 16-core Intel Core i7 and RTX 4060 Ti.",
+    "user_rating": 4.6,
+    "review_count": 510,
+    "ranking_badge": "Best 10-Liter SFF Gaming Desktop",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://rog.asus.com/desktops/small-form-factor/rog-g22ch-series/",
+    "retailer": "ASUS Official Store",
+    "msrp": 1549.0,
+    "price_notes": "ASUS store sale price with 600W 80-Plus Gold power supply and Aura Sync RGB.",
+    "cpu_details": "Intel Core i7-13700F (16 Cores: 8P + 8E, 24 Threads, up to 5.20 GHz, 30MB Cache)",
+    "cpu_benchmark_score": "PassMark: 38,900 | Geekbench 6: 16,200 Multi / 2,820 Single",
+    "cpu_independent_review": "Grade: A • Packs full-size desktop 16-core i7 horsepower into a compact chassis that fits anywhere on a small desk.",
+    "gpu_details": "NVIDIA GeForce RTX 4060 Ti (8GB GDDR6, Ada Lovelace, DLSS 3, 3x DP 1.4a, 1x HDMI 2.1a)",
+    "ram_details": "16GB DDR5-4800 (2x8GB, Upgradable to 32GB)",
+    "ports_io": "Front: 1x USB-C 3.2 Gen 2, 2x USB-A 3.2 Gen 1, 3.5mm; Rear: 4x USB-A 2.0, 2x USB-A 3.2 Gen 1, RJ-45 Gigabit LAN, 3x DP 1.4a, 1x HDMI 2.1",
+    "webcam_biometrics": "Requires external webcam",
+    "thermals_acoustics": "Custom dual-chamber airflow SFF chassis with mesh side panels and dedicated GPU chamber",
+    "stores": [
+      {
+        "store": "ASUS Official Store",
+        "url": "https://rog.asus.com/desktops/small-form-factor/rog-g22ch-series/",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=ASUS+ROG+G22CH",
+        "badge": "Verified In Stock",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+ROG+G22CH+RTX+4060+Ti",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=ASUS+ROG+G22CH",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=ASUS+ROG+G22CH",
+        "badge": "Authorized Partner",
+        "icon": "💻"
+      }
+    ]
+  },
+  {
+    "id": "c-dell-precision-3680",
+    "name": "Dell Precision 3680 Tower Workstation",
+    "brand": "Dell",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 1899.0,
+    "cpu_model": "Intel Core i7-14700K (20C/28T vPro)",
+    "cpu_tier": 4,
+    "cpu_cores": 20,
+    "gpu_model": "NVIDIA RTX A2000 (12GB GDDR6 ECC)",
+    "gpu_tier": 3,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 21.8,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 3,
+    "purchase_url": "https://www.dell.com/en-us/shop/workstations/precision-3680-tower-workstation/spd/precision-3680-workstation",
+    "target_summary": "ISV-certified enterprise CAD/BIM workstation with ECC memory support, 20-core Core i7-14700K, and 3-year ProSupport.",
+    "user_rating": 4.8,
+    "review_count": 420,
+    "ranking_badge": "Best ISV Enterprise Workstation",
+    "os_edition": "Windows 11 Pro for Workstations (64-bit Edition)",
+    "official_url": "https://www.dell.com/en-us/shop/workstations/precision-3680-tower-workstation/spd/precision-3680-workstation",
+    "retailer": "Dell Workstations",
+    "msrp": 2199.0,
+    "price_notes": "Dell business sale price with 3-year Next Business Day Onsite ProSupport and Dell Pro keyboard/mouse.",
+    "cpu_details": "Intel Core i7-14700K (20 Cores: 8P + 12E, 28 Threads, up to 5.60 GHz, 33MB Cache, Premium CPU Air Cooler)",
+    "cpu_benchmark_score": "PassMark: 52,800 | Geekbench 6: 19,800 Multi / 3,020 Single",
+    "cpu_independent_review": "Grade: S (Enterprise Reliability) • Certified for Autodesk Revit, AutoCAD, SolidWorks, and PTC Creo.",
+    "gpu_details": "NVIDIA RTX A2000 (12GB GDDR6 ECC, 4x Mini-DisplayPort 1.4a with audio)",
+    "ram_details": "32GB DDR5-5600 MT/s ECC (2x16GB, 4x DIMM Slots, Upgradable to 128GB ECC DDR5)",
+    "ports_io": "Front: 1x USB-C 20Gbps, 3x USB-A 5Gbps, SD 4.0; Rear: 4x Mini-DP 1.4a on GPU, 2x DP 1.4a on motherboard, 4x USB-A, 1x RJ-45 2.5G LAN",
+    "webcam_biometrics": "Supports FIDO2 and Windows Hello USB authentication",
+    "thermals_acoustics": "Precision thermal acoustics with front-to-back straight airflow tunnel, ~28 dBA CAD load",
+    "stores": [
+      {
+        "store": "Dell Workstation Direct",
+        "url": "https://www.dell.com/en-us/shop/workstations/precision-3680-tower-workstation/spd/precision-3680-workstation",
+        "badge": "Direct OEM Workstation",
+        "icon": "🏢"
+      },
+      {
+        "store": "CDW",
+        "url": "https://www.cdw.com/search/?key=Dell+Precision+3680",
+        "badge": "Authorized Enterprise",
+        "icon": "💼"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Dell+Precision+3680",
+        "badge": "Pro Video Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+Precision+3680+Tower",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "Insight",
+        "url": "https://www.insight.com/en_US/shop/search.html?q=Dell+Precision+3680",
+        "badge": "Commercial Partner",
+        "icon": "🏬"
+      }
+    ]
+  },
+  {
+    "id": "c-acer-predator-orion-5000",
+    "name": "Acer Predator Orion 5000 Gaming Desktop",
+    "brand": "Acer",
+    "os": "Windows",
+    "form_factor": "Desktop",
+    "release_year": 2024,
+    "price": 1899.0,
+    "cpu_model": "Intel Core i7-14700F (20C/28T)",
+    "cpu_tier": 4,
+    "cpu_cores": 20,
+    "gpu_model": "NVIDIA GeForce RTX 4070 Ti (12GB GDDR6X)",
+    "gpu_tier": 4,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 31.0,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.acer.com/us-en/predator/desktops/predator-orion/predator-orion-5000",
+    "target_summary": "High-airflow ARGB gaming powerhouse with 20-core Intel Core i7 and RTX 4070 Ti for high-refresh 1440p and 4K gaming.",
+    "user_rating": 4.7,
+    "review_count": 680,
+    "ranking_badge": "Best 1440p / 4K Esports Beast",
+    "os_edition": "Windows 11 Home 64-bit Edition",
+    "official_url": "https://www.acer.com/us-en/predator/desktops/predator-orion/predator-orion-5000",
+    "retailer": "Acer Store",
+    "msrp": 2099.0,
+    "price_notes": "Acer store direct price with Predator RGB mechanical gaming keyboard and optical mouse included.",
+    "cpu_details": "Intel Core i7-14700F (20 Cores: 8P + 12E, 28 Threads, up to 5.40 GHz, 33MB Smart Cache)",
+    "cpu_benchmark_score": "PassMark: 50,400 | Geekbench 6: 18,900 Multi / 2,980 Single",
+    "cpu_independent_review": "Grade: A+ • FrostBlade 2.0 fans keep 20-core i7 chilly and boost clocks pinned high during extended rendering.",
+    "gpu_details": "NVIDIA GeForce RTX 4070 Ti (12GB GDDR6X, Ada Lovelace, DLSS 3, 3x DP 1.4a, 1x HDMI 2.1a)",
+    "ram_details": "32GB DDR5-5600 MT/s (2x16GB, Upgradable to 64GB DDR5)",
+    "ports_io": "Top: 3x USB 3.2 Gen 1, 1x USB-C 3.2 Gen 2x2 (20Gbps), Headset/Mic; Rear: 4x USB 2.0, 2x USB 3.2 Gen 2, RJ-45 2.5G LAN, 3x DP 1.4a, 1x HDMI 2.1",
+    "webcam_biometrics": "Requires external webcam",
+    "thermals_acoustics": "Predator FrostBlade 2.0 ARGB high-static pressure fans, EMI-compliant tempered glass side panel",
+    "stores": [
+      {
+        "store": "Acer Official Store",
+        "url": "https://www.acer.com/us-en/predator/desktops/predator-orion/predator-orion-5000",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Best Buy",
+        "url": "https://www.bestbuy.com/site/searchpage.jsp?st=Acer+Predator+Orion+5000",
+        "badge": "Verified In Stock",
+        "icon": "🏷️"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Acer+Predator+Orion+5000+RTX+4070+Ti",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Acer+Predator+Orion+5000",
+        "badge": "Authorized Dealer",
+        "icon": "📷"
+      },
+      {
+        "store": "Micro Center",
+        "url": "https://www.microcenter.com/search/search_results.aspx?Ntt=Predator+Orion+5000",
+        "badge": "PC Showroom",
+        "icon": "🏬"
+      }
+    ]
+  },
+  {
+    "id": "c-minisforum-ms-01",
+    "name": "Minisforum MS-01 Workstation Mini PC",
+    "brand": "Minisforum",
+    "os": "Windows",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 899.0,
+    "cpu_model": "Intel Core i9-13900H (14C/20T)",
+    "cpu_tier": 5,
+    "cpu_cores": 14,
+    "gpu_model": "Intel Iris Xe Graphics (96 EUs)",
+    "gpu_tier": 1,
+    "ram_gb": 32,
+    "storage_gb": 1000,
+    "battery_hours": 0.0,
+    "weight_lbs": 3.1,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 2,
+    "purchase_url": "https://store.minisforum.com/products/minisforum-ms-01",
+    "target_summary": "Compact micro workstation featuring dual 10GbE SFP+ networking, PCIe 4.0 x8 slot, and 14-core Core i9 for homelabs and creative studios.",
+    "user_rating": 4.9,
+    "review_count": 410,
+    "ranking_badge": "Best 10GbE Homelab Micro Workstation",
+    "os_edition": "Windows 11 Pro 64-bit Edition",
+    "official_url": "https://store.minisforum.com/products/minisforum-ms-01",
+    "retailer": "Minisforum Store",
+    "msrp": 999.0,
+    "price_notes": "Minisforum official factory direct with dual 10G SFP+ ports and 3x M.2 NVMe slots.",
+    "cpu_details": "Intel Core i9-13900H (14 Cores / 20 Threads: 6P + 8E, up to 5.40 GHz, 24MB Smart Cache)",
+    "cpu_benchmark_score": "PassMark: 30,200 | Geekbench 6: 13,800 Multi / 2,750 Single",
+    "cpu_independent_review": "Grade: S (Homelab King) • Unprecedented connectivity with dual 10GbE SFP+, dual 2.5GbE, and PCIe expansion in a mini chassis.",
+    "gpu_details": "Intel Iris Xe Graphics (96 Execution Units, supports external discrete half-height GPU via PCIe slot)",
+    "ram_details": "32GB DDR5-5200 MT/s (2x16GB SODIMM, Upgradable to 96GB DDR5)",
+    "ports_io": "2x 10G SFP+ LAN, 2x 2.5G RJ45 LAN, 2x USB4 40Gbps Type-C, 1x HDMI 2.1, 2x USB 3.2 Gen 2, 2x USB 2.0, PCIe 4.0 x8 Slot",
+    "webcam_biometrics": "Requires external webcam",
+    "thermals_acoustics": "All-copper vapor chamber with dual turbine fans, whisper quiet operation under network load",
+    "stores": [
+      {
+        "store": "Minisforum Official",
+        "url": "https://store.minisforum.com/products/minisforum-ms-01",
+        "badge": "Factory Direct OEM",
+        "icon": "🏢"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Minisforum+MS-01+i9",
+        "badge": "Prime Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Minisforum+MS-01",
+        "badge": "Authorized Dealer",
+        "icon": "💻"
+      },
+      {
+        "store": "B&H Photo Video",
+        "url": "https://www.bhphotovideo.com/c/search?Ntt=Minisforum+MS-01",
+        "badge": "Photo Video Pro",
+        "icon": "📷"
+      },
+      {
+        "store": "AliExpress Official",
+        "url": "https://www.aliexpress.com/wholesale?SearchText=Minisforum+MS-01",
+        "badge": "Direct Brand Store",
+        "icon": "🌐"
+      }
+    ]
+  },
+  {
+    "id": "c-beelink-eqr6",
+    "name": "Beelink EQR6 Budget Mini PC",
+    "brand": "Beelink",
+    "os": "Windows",
+    "form_factor": "Mini PC",
+    "release_year": 2024,
+    "price": 299.0,
+    "cpu_model": "AMD Ryzen 5 6600H (6C/12T)",
+    "cpu_tier": 2,
+    "cpu_cores": 6,
+    "gpu_model": "AMD Radeon 660M (RDNA 2)",
+    "gpu_tier": 1,
+    "ram_gb": 16,
+    "storage_gb": 500,
+    "battery_hours": 0.0,
+    "weight_lbs": 1.1,
+    "screen_size": 0.0,
+    "screen_nits": 0,
+    "screen_gamut": "N/A",
+    "screen_refresh_hz": 0,
+    "touchscreen": false,
+    "stylus_support": false,
+    "warranty_years": 1,
+    "purchase_url": "https://www.bee-link.com/products/beelink-eqr6-mini-pc",
+    "target_summary": "Ultra-affordable, whisper-quiet mini PC with built-in internal power supply, dual 4K HDMI, and 6-core Ryzen 5 processor.",
+    "user_rating": 4.7,
+    "review_count": 940,
+    "ranking_badge": "Best Under-$300 Mini PC Workhorse",
+    "os_edition": "Windows 11 Pro 64-bit Edition",
+    "official_url": "https://www.bee-link.com/products/beelink-eqr6-mini-pc",
+    "retailer": "Beelink Store",
+    "msrp": 349.0,
+    "price_notes": "Official Beelink direct sale with integrated internal power supply (single standard AC cable, no bulky brick).",
+    "cpu_details": "AMD Ryzen 5 6600H (6 Cores / 12 Threads, up to 4.50 GHz, Zen 3+ 6nm architecture, 16MB L3 Cache)",
+    "cpu_benchmark_score": "PassMark: 19,200 | Geekbench 6: 8,800 Multi / 1,980 Single",
+    "cpu_independent_review": "Grade: A • Outperforms Intel N100 and budget chips by 2.5x, delivering real 6-core multi-threaded power for under $300.",
+    "gpu_details": "AMD Radeon 660M (RDNA 2 Architecture, 6 CUs, Hardware AV1 decoding, Dual 4K @ 60Hz HDMI)",
+    "ram_details": "16GB DDR5-4800 MT/s (2x8GB Dual-Channel, Upgradable to 64GB DDR5)",
+    "ports_io": "Front: 1x USB-C 10Gbps, 1x USB 3.2 10Gbps, 3.5mm; Rear: 2x HDMI 2.0 (4K @ 60Hz), 2x USB 3.2 10Gbps, 1x USB 2.0, Dual Gigabit LAN, AC Power In",
+    "webcam_biometrics": "Requires external webcam",
+    "thermals_acoustics": "MSP silent cooling technology with internal 85W power supply, silent ~20 dBA noise level",
+    "stores": [
+      {
+        "store": "Beelink Official Store",
+        "url": "https://www.bee-link.com/products/beelink-eqr6-mini-pc",
+        "badge": "Official OEM Store",
+        "icon": "🏢"
+      },
+      {
+        "store": "Amazon",
+        "url": "https://www.amazon.com/s?k=Beelink+EQR6+Ryzen+5+6600H",
+        "badge": "Prime Next-Day Delivery",
+        "icon": "📦"
+      },
+      {
+        "store": "Newegg",
+        "url": "https://www.newegg.com/p/pl?d=Beelink+EQR6",
+        "badge": "Verified Seller",
+        "icon": "💻"
+      },
+      {
+        "store": "AliExpress Brand Store",
+        "url": "https://www.aliexpress.com/wholesale?SearchText=Beelink+EQR6",
+        "badge": "Factory Direct",
+        "icon": "🌐"
+      },
+      {
+        "store": "Walmart",
+        "url": "https://www.walmart.com/search?q=Beelink+EQR6",
+        "badge": "Marketplace Retailer",
+        "icon": "🛒"
+      }
+    ]
   }
 ];
 
@@ -3977,18 +4727,30 @@ function getDesktopPackageDetails(comp) {
   let keyboardMouseIncluded = false;
   let keyboardMouseNote = "No keyboard or mouse included in this standalone chassis. External input devices required.";
   
-  if (comp.id === "c-desktop-beast-4090") {
+  if (comp.id === "c-apple-imac-24-m4") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Color-matched Apple Magic Keyboard and Magic Mouse included in the box with built-in 24-inch 4.5K display.";
+  } else if (comp.id === "c-desktop-beast-4090") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "Basic wired USB multimedia keyboard and optical mouse included in box. Ergonomic wireless upgrade recommended.";
-  } else if (comp.id === "c-dell-optiplex-7020") {
+  } else if (comp.id === "c-dell-optiplex-7020" || comp.id === "c-dell-inspiron-3020") {
     keyboardMouseIncluded = true;
-    keyboardMouseNote = "Standard Dell wired business USB keyboard and mouse included in box.";
+    keyboardMouseNote = "Standard Dell wired business USB keyboard and optical mouse included in box.";
+  } else if (comp.id === "c-dell-precision-3680") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Dell Pro business wired keyboard and precision optical mouse included in box.";
   } else if (comp.id === "c-hp-omen-45l") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "HP 310 wired USB black keyboard and mouse combo included in box.";
-  } else if (comp.id === "c-lenovo-legion-tower-7i") {
+  } else if (comp.id === "c-hp-pavilion-tp01") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "HP wired black keyboard and optical mouse combo included in box.";
+  } else if (comp.id === "c-lenovo-legion-tower-7i" || comp.id === "c-lenovo-legion-tower-5i") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "Lenovo Legion RGB gaming keyboard and optical gaming mouse included in box.";
+  } else if (comp.id === "c-acer-predator-orion-5000") {
+    keyboardMouseIncluded = true;
+    keyboardMouseNote = "Predator RGB mechanical gaming keyboard and optical gaming mouse included in box.";
   } else if (comp.id === "c-dell-xps-8960") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "Dell KB216 wired multimedia keyboard and MS116 optical mouse included in box.";
@@ -3998,24 +4760,27 @@ function getDesktopPackageDetails(comp) {
   } else if (comp.id === "c-hp-z2-mini-g9") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "HP wired business desktop keyboard and mouse included in box.";
-  } else if (comp.id === "c-lenovo-thinkstation-p3-tiny") {
+  } else if (comp.id === "c-lenovo-thinkstation-p3-tiny" || comp.id === "c-lenovo-thinkcentre-m70q") {
     keyboardMouseIncluded = true;
     keyboardMouseNote = "Lenovo Traditional USB business keyboard and mouse included in box.";
   } else if (comp.brand === "Apple") {
     keyboardMouseNote = "Chassis ships with power cord only. Apple Magic Keyboard with Touch ID and Magic Mouse / Trackpad required.";
   } else if (comp.id === "c-corsair-vengeance-i7500") {
     keyboardMouseNote = "High-end custom enthusiast tower ships without peripherals. Mechanical keyboard and precision gaming mouse required.";
-  } else if (comp.id === "c-asus-rog-strix-g16chr") {
+  } else if (comp.id === "c-asus-rog-strix-g16chr" || comp.id === "c-asus-rog-g22ch") {
     keyboardMouseNote = "Standalone gaming tower chassis. Dedicated gaming mechanical keyboard and low-latency mouse recommended.";
-  } else if (comp.id === "c-beelink-ser8" || comp.id === "c-minisforum-um780" || comp.id === "c-asus-nuc-14-pro") {
-    keyboardMouseNote = "Ultra-compact mini PC chassis ships with power brick and VESA mount. Wireless desktop combo or Bluetooth peripherals required.";
+  } else if (comp.id === "c-beelink-ser8" || comp.id === "c-beelink-eqr6" || comp.id === "c-minisforum-um780" || comp.id === "c-minisforum-ms-01" || comp.id === "c-asus-nuc-14-pro") {
+    keyboardMouseNote = "Ultra-compact mini PC chassis ships with power adapter and VESA bracket. External keyboard & mouse required.";
   }
 
   let maxMonitors = 4;
   let portsSummary = comp.ports_io || "DisplayPort + HDMI";
   let gpuVerdict = "Natively supports multi-monitor output.";
 
-  if (comp.id === "c-mac-studio-m2-ultra") {
+  if (comp.id === "c-apple-imac-24-m4") {
+    maxMonitors = 2; // 1 built-in 4.5K Retina + 1 external up to 6K @ 60Hz
+    gpuVerdict = "Built-in 24-inch 4.5K Retina display plus 1 external 6K display over Thunderbolt 4.";
+  } else if (comp.id === "c-mac-studio-m2-ultra") {
     maxMonitors = 8;
     gpuVerdict = "Apple M2 Ultra 60-Core GPU drives up to 8 displays simultaneously (8x 4K @ 60Hz, or 6x 6K @ 60Hz over 6x Thunderbolt 4 + 2x HDMI 2.1).";
   } else if (comp.id === "c-mac-studio-m2max") {
@@ -4033,41 +4798,52 @@ function getDesktopPackageDetails(comp) {
   } else if (comp.id === "c-lenovo-legion-tower-7i") {
     maxMonitors = 4;
     gpuVerdict = "NVIDIA GeForce RTX 4080 Super with 16GB GDDR6X drives up to 4x 4K/UHD displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id === "c-corsair-vengeance-i7500") {
+  } else if (comp.id === "c-corsair-vengeance-i7500" || comp.id === "c-acer-predator-orion-5000") {
     maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4070 Ti Super with 16GB GDDR6X drives up to 4x 4K displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+    gpuVerdict = "NVIDIA GeForce RTX 4070 Ti / Ti Super with 16GB/12GB GDDR6X drives up to 4x 4K displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
   } else if (comp.id === "c-asus-rog-strix-g16chr") {
     maxMonitors = 4;
     gpuVerdict = "NVIDIA GeForce RTX 4070 Super with 12GB VRAM drives up to 4 displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
-  } else if (comp.id === "c-dell-xps-8960") {
+  } else if (comp.id === "c-dell-xps-8960" || comp.id === "c-asus-rog-g22ch" || comp.id === "c-lenovo-legion-tower-5i") {
     maxMonitors = 4;
-    gpuVerdict = "NVIDIA GeForce RTX 4060 Ti with 8GB GDDR6 drives up to 4 displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
+    gpuVerdict = "NVIDIA GeForce RTX 4060 / 4060 Ti drives up to 4 displays simultaneously via 3x DisplayPort 1.4a and 1x HDMI 2.1a.";
   } else if (comp.id === "c-hp-z2-mini-g9") {
     maxMonitors = 4;
     gpuVerdict = "NVIDIA RTX 4000 Ada Generation with 20GB ECC VRAM drives up to 4x 4K/5K CAD/BIM displays via 4x Mini-DisplayPort 1.4a outputs.";
+  } else if (comp.id === "c-dell-precision-3680") {
+    maxMonitors = 4;
+    gpuVerdict = "NVIDIA RTX A2000 12GB ECC workstation GPU drives up to 4 displays simultaneously via 4x Mini-DisplayPort 1.4a.";
   } else if (comp.id === "c-lenovo-thinkstation-p3-tiny") {
     maxMonitors = 6;
     gpuVerdict = "NVIDIA RTX A1000 8GB + Intel UHD 770 drives up to 6 displays simultaneously via 4x Mini-DisplayPort 1.4a, 1x DP, and 1x HDMI.";
   } else if (comp.id === "c-minisforum-um780") {
     maxMonitors = 4;
     gpuVerdict = "AMD Radeon 780M drives up to 4x 4K @ 60Hz displays simultaneously via 2x USB4 (40Gbps Type-C) + 1x DisplayPort 1.4 + 1x HDMI 2.1.";
+  } else if (comp.id === "c-minisforum-ms-01") {
+    maxMonitors = 3;
+    gpuVerdict = "Intel Core i9 Iris Xe drives up to 3 displays via 2x USB4 (40Gbps Type-C) and 1x HDMI 2.1 (supports discrete PCIe half-height card expansion).";
   } else if (comp.id === "c-asus-nuc-14-pro") {
     maxMonitors = 4;
     gpuVerdict = "Intel Arc Graphics drives up to 4 displays simultaneously via 2x Thunderbolt 4 / USB-C and 2x HDMI 2.1.";
-  } else if (comp.id === "c-beelink-ser8") {
+  } else if (comp.id === "c-beelink-ser8" || comp.id === "c-lenovo-thinkcentre-m70q") {
     maxMonitors = 3;
-    gpuVerdict = "AMD Radeon 780M drives up to 3x 4K displays simultaneously via 1x USB4 (40Gbps Type-C), 1x DisplayPort 1.4, and 1x HDMI 2.1.";
+    gpuVerdict = "Drives up to 3 independent displays via DisplayPort 1.4, HDMI 2.1, and USB-C.";
   } else if (comp.id === "c-lenovo-ideacentre-tower-gen9") {
     maxMonitors = 3;
     gpuVerdict = "AMD Radeon 780M on Ryzen 7 8700G APU drives up to 3 displays via 1x HDMI 2.1, 1x DisplayPort 1.4, and 1x VGA / USB-C.";
+  } else if (comp.id === "c-dell-inspiron-3020" || comp.id === "c-hp-pavilion-tp01" || comp.id === "c-beelink-eqr6") {
+    maxMonitors = 2;
+    gpuVerdict = "Drives dual displays simultaneously via dual HDMI / DisplayPort outputs.";
   } else if (comp.id.includes("optiplex")) {
     maxMonitors = 3;
     gpuVerdict = "Intel UHD Graphics 770 natively drives up to 3 independent monitors via dual DisplayPort 1.4a and 1x HDMI 1.4b at 4K @ 60Hz without a discrete GPU.";
   }
 
+  const needsMonitor = comp.id !== "c-apple-imac-24-m4";
+
   return {
     isDesktop: true,
-    needsMonitor: true,
+    needsMonitor: needsMonitor,
     needsKeyboard: !keyboardMouseIncluded,
     needsMouse: !keyboardMouseIncluded,
     keyboardMouseIncluded: keyboardMouseIncluded,
@@ -4075,7 +4851,9 @@ function getDesktopPackageDetails(comp) {
     maxMonitors: maxMonitors,
     portsSummary: portsSummary,
     gpuVerdict: gpuVerdict,
-    monitorRequiredMessage: "Desktop / Mini PC chassis does not have a built-in screen. At least one external monitor is required."
+    monitorRequiredMessage: needsMonitor 
+      ? "Desktop / Mini PC chassis does not have a built-in screen. At least one external monitor is required."
+      : "All-in-one desktop includes a built-in 24-inch 4.5K Retina display. Additional secondary display optional."
   };
 }
 
@@ -4087,20 +4865,22 @@ function checkGpuMonitorCompatibility(comp, monitor, quantity) {
   const isCompatible = quantity <= pkg.maxMonitors;
   let connectionMethod = "";
 
-  if (comp.brand === "Apple") {
+  if (comp.id === "c-apple-imac-24-m4") {
+    connectionMethod = "Connect external monitor directly to rear Thunderbolt / USB 4 port (supports up to 6K @ 60Hz alongside the built-in 4.5K display).";
+  } else if (comp.brand === "Apple") {
     if (monitor.daisy_chain_support && (monitor.connector_summary || "").includes("USB-C")) {
       connectionMethod = "Connect Monitor 1 via Thunderbolt / USB-C (video & 90W upstream power). Daisy-chain Monitor 2 via DP-Out or connect to 2nd Thunderbolt / HDMI port.";
     } else {
       connectionMethod = "Connect Monitor 1 via Thunderbolt / USB-C to DP/HDMI cable, Monitor 2 via native HDMI 2.1 port.";
     }
-  } else if (comp.id === "c-hp-z2-mini-g9" || comp.id === "c-lenovo-thinkstation-p3-tiny") {
+  } else if (comp.id === "c-hp-z2-mini-g9" || comp.id === "c-lenovo-thinkstation-p3-tiny" || comp.id === "c-dell-precision-3680") {
     connectionMethod = "Connect via Mini-DisplayPort to DisplayPort/HDMI latching cables (or included mDP adapters) directly into the dedicated NVIDIA workstation GPU.";
   } else if ((comp.gpu_tier || 0) >= 2 || (comp.gpu_model || "").includes("RTX") || (comp.gpu_model || "").includes("GeForce")) {
     connectionMethod = "Connect via dedicated DisplayPort 1.4a and HDMI 2.1a ports on the NVIDIA RTX graphics card (supporting G-Sync, high refresh rates & full HDR).";
   } else if (comp.id.includes("minisforum") || comp.id === "c-beelink-ser8" || comp.id === "c-asus-nuc-14-pro") {
     connectionMethod = "Connect Monitor 1 via USB4 / Thunderbolt 4 (Type-C), Monitor 2 via native DisplayPort 1.4 or HDMI 2.1.";
-  } else if (comp.id.includes("optiplex") || comp.id === "c-lenovo-ideacentre-tower-gen9") {
-    connectionMethod = "Connect Monitor 1 via DisplayPort 1.4a, Monitor 2 via 2nd DisplayPort or HDMI port on motherboard I/O.";
+  } else if (comp.id.includes("optiplex") || comp.id === "c-lenovo-ideacentre-tower-gen9" || comp.id === "c-dell-inspiron-3020" || comp.id === "c-hp-pavilion-tp01") {
+    connectionMethod = "Connect Monitor 1 via DisplayPort 1.4a, Monitor 2 via HDMI or 2nd DisplayPort on motherboard I/O.";
   } else {
     connectionMethod = "Connect using DisplayPort 1.4 or HDMI ports on the computer chassis.";
   }
